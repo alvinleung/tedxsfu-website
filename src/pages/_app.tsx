@@ -19,16 +19,16 @@ const chiaroscuro = localFont({
 
 const helvetica = localFont({
   src: [
-    // {
-    //   path: '../fonts/helvetica/HelveticaNeue-Roman.woff',
-    //   weight: '400',
-    //   style: 'normal',
-    // },
     {
-      path: '../fonts/helvetica/HelveticaNeue-BD.woff',
-      weight: '600',
+      path: '../fonts/helvetica/HelveticaNeue-Roman.woff',
+      weight: '400',
       style: 'normal',
     },
+    // {
+    //   path: '../fonts/helvetica/HelveticaNeue-BD.woff',
+    //   weight: '600',
+    //   style: 'normal',
+    // },
   ],
 })
 
