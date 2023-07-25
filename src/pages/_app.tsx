@@ -24,11 +24,11 @@ const helvetica = localFont({
       weight: '400',
       style: 'normal',
     },
-    // {
-    //   path: '../fonts/helvetica/HelveticaNeue-BD.woff',
-    //   weight: '600',
-    //   style: 'normal',
-    // },
+    {
+      path: '../fonts/helvetica/HelveticaNeue-Bd.woff',
+      weight: '600',
+      style: 'normal',
+    },
   ],
 })
 
