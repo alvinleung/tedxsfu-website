@@ -54,12 +54,17 @@ const DirectorTeamDisplay = (props: Props) => {
               // className={`h-[${itemScrollHeightVW}vw]`}
               style={{
                 height: `${itemScrollHeightVW}vw`,
+                pointerEvents: isCurrentDirector ? "none" : "all",
               }}
             >
               <motion.div
                 className={`relative`}
                 style={{
                   x: isOdd ? "0px" : "38%",
+                  pointerEvents: isCurrentDirector ? "none" : "all",
+                }}
+                onMouseEnter={() => {
+                  // setCurrentDirector(i);
                 }}
               >
                 <motion.img
@@ -72,9 +77,6 @@ const DirectorTeamDisplay = (props: Props) => {
                   }}
                 />
                 <motion.img
-                  onMouseEnter={() => {
-                    setCurrentDirector(i);
-                  }}
                   className="absolute top-0"
                   style={{
                     width: imageWidth,
