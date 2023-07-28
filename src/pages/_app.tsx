@@ -1,3 +1,5 @@
+import { MousePosContextProvider } from '@/hooks/useMousePosition'
+import { WindowDimensionContextProvider } from '@/hooks/useWindowDimension'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import localFont from 'next/font/local'
@@ -33,5 +35,12 @@ const helvetica = localFont({
 })
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <main className={helvetica.className}><Component {...pageProps} /> </main>
+  
+  return (
+    <WindowDimensionContextProvider>
+      <MousePosContextProvider>
+        <main className={helvetica.className}><Component {...pageProps} /> </main>
+      </MousePosContextProvider>
+    </WindowDimensionContextProvider>
+  )
 }
