@@ -1,5 +1,6 @@
 import DirectorTeamDisplay from "@/component/DirectorTeamDisplay";
 import Nav from "@/component/Nav";
+import PastActivitiesGallery from "@/component/PastActivitiesGallery";
 import { TeamView, TeamMember } from "@/component/TeamView";
 import { teams } from "@/data/teamData";
 import Image from "next/image";
@@ -7,8 +8,13 @@ import React from "react";
 
 type Props = {};
 
-const SectionLayout = ({ children }: { children: React.ReactNode }) => (
-  <section className="px-4 py-4 grid grid-cols-8">{children}</section>
+type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
+
+const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
+  <section className={`px-4 py-4 grid grid-cols-8 ${padding ? "mt-64" : ""}`}>
+    {children}
+    {/* <div className="block h-64"></div> */}
+  </section>
 );
 
 type SectionCopyProps = {
@@ -21,7 +27,7 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
   return (
     <div
       className={`${sticky ? "sticky" : ""} top-4 min-h-[50%] ${
-        left ? "col-start-2 col-span-2" : "col-start-6 col-span-2 h-fit"
+        left ? "col-start-3 col-span-2" : "col-start-6 col-span-2 h-fit"
       }`}
     >
       {children}
@@ -65,7 +71,7 @@ const About = (props: Props) => {
           </div>
         </SectionLayout>
 
-        <SectionLayout>
+        <SectionLayout padding>
           <SectionInfo sticky>
             <h3 className="text-lead mb-2">We punch above our weight</h3>
             <p className="text-lead opacity-50">
@@ -89,16 +95,17 @@ const About = (props: Props) => {
             ))}
           </div>
         </SectionLayout>
-
-        <SectionLayout>
-          <SectionInfo sticky>
+        <SectionLayout padding>
+          <SectionInfo left>
             <h3 className="text-lead mb-2">Stuff we've done this year</h3>
             <p className="text-lead opacity-50">
               We’re opening up new personal and professional connections, one
               step at a time.
             </p>
           </SectionInfo>
-          <div className=""></div>
+          <div className="col-start-1 col-end-9 mt-32 mb-32">
+            <PastActivitiesGallery />
+          </div>
         </SectionLayout>
       </main>
     </>
