@@ -17,7 +17,7 @@
 }
 
 body {
-  text-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
