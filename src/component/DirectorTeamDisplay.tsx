@@ -27,54 +27,89 @@ const DirectorTeamDisplay = (props: Props) => {
       const currentProgress = offset / bound.height;
       const currentDirector = Math.round(currentProgress * totalDirectors);
       setCurrentDirector(currentDirector);
+      // console.log(currentDirector);
     };
+
+    handleMotionChange(scrollY.get());
 
     const cleanupScroll = scrollY.on("change", handleMotionChange);
 
     return () => {
       cleanupScroll();
     };
-  }, [bound]);
+  }, [bound, scrollY]);
 
-  console.log(currentDirector);
+  const itemScrollHeightVW = 15;
 
   return (
-    <div ref={containerRef} className="grid grid-cols-8">
+    <div ref={containerRef} className="grid grid-cols-8 relative">
       <div className="col-start-2 col-span-4 pb-[14vw] flex flex-col">
         {directors.map((director, i) => {
           const isOdd = i % 2 === 0;
           const isCurrentDirector = currentDirector === i;
+
+          const imageWidth = `${itemScrollHeightVW * 2.1}vw`;
           return (
-            <div className="relative h-[10.25vw]">
-              <div
-                className="absolute w-[23vw]"
+            <div
+              // className={`h-[${itemScrollHeightVW}vw]`}
+              style={{
+                height: `${itemScrollHeightVW}vw`,
+              }}
+            >
+              <motion.div
+                className={`relative`}
                 style={{
-                  left: isOdd ? "0px" : "50%",
+                  x: isOdd ? "0px" : "38%",
                 }}
               >
-                {" "}
+                <motion.img
+                  src={director.fill}
+                  style={{
+                    width: imageWidth,
+                  }}
+                  animate={{
+                    y: isCurrentDirector ? 0 : 100,
+                  }}
+                />
                 <motion.img
                   onMouseEnter={() => {
                     setCurrentDirector(i);
                   }}
-                  animate={{
-                    opacity: isCurrentDirector ? 1 : 0.2,
+                  className="absolute top-0"
+                  style={{
+                    width: imageWidth,
                   }}
-                  src={director.image}
+                  animate={{
+                    opacity: isCurrentDirector ? 1 : 0.1,
+                    y: isCurrentDirector ? 0 : 100,
+                  }}
+                  src={director.stroke}
                 />
-              </div>
+              </motion.div>
             </div>
           );
         })}
       </div>
-      <div className="col-start-6 col-span-1  h-fit">
-        <div className="mt-[5vw]">
+      <div className="col-start-6 col-span-1 absolute">
+        <div className="mt-[15vw]">
           {directors.map((director, i) => {
             const isCurrentDirector = currentDirector === i;
+            const isOdd = i % 2 === 0;
+
             return (
               <motion.div
-                animate={{ opacity: isCurrentDirector ? 1 : 0 }}
-                className="h-[10.25vw]"
+                animate={{
+                  opacity: isCurrentDirector ? 1 : 0,
+                  x: isCurrentDirector ? 0 : currentDirector > i ? 0 : -50,
+                  transition: {
+                    ease: [0.22, 1, 0.36, 1],
+                    duration: 0.5,
+                  },
+                }}
+                className={` sticky top-[20vw]`}
+                style={{
+                  height: itemScrollHeightVW + "vw",
+                }}
               >
                 <DirectorInfo director={director} />
               </motion.div>
