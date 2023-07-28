@@ -73,10 +73,12 @@ const About = (props: Props) => {
 
         <SectionLayout padding>
           <SectionInfo sticky>
-            <h3 className="text-lead mb-2">We punch above our weight</h3>
+            <h3 className="text-lead mb-2">
+              Student team, industry experience
+            </h3>
             <p className="text-lead opacity-50">
-              We research, analyze, and explore what it takes to produce a
-              professional and impactful conference.
+              Punching above our weight, we research, analyze, and explore what
+              it takes to produce a professional and impactful conference.
             </p>
           </SectionInfo>
           <div className="col-start-1 col-end-9 mt-32 mb-32">
