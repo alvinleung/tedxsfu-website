@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useMousePosition } from "@/hooks/useMousePosition";
+import { useScroll } from "framer-motion";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 
@@ -14,6 +15,7 @@ const clamp = (num: number, min: number, max: number) =>
 
 
 const AnimatedPath = (props: any) => {
+  const { scrollY } = useScroll();
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
   const [progress, setProgress] = useState(0);
@@ -29,7 +31,7 @@ const AnimatedPath = (props: any) => {
 
   useEffect(() => {
     const maxDistSq = Math.min(70000, viewport.width * 32);
-    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y);
+    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y + scrollY.get());
     const clampedProgress = clamp(distanceSq / maxDistSq, 0, 1);
     setProgress(clampedProgress);
   }, [origin, mousePos]);
