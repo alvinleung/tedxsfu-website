@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main>
-        <section className="min-h-screen flex flex-col justify-center px-4">
-          <div className="flex flex-col lg:flex-row items-center lg: justify-center my-16 gap-8">
+      <main className="min-h-[200vh] lg:min-h-screen">
+        <section className="min-h-screen flex flex-col lg:justify-center px-4">
+          <div className="max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:right-0 max-lg:bottom-0 flex flex-col lg:flex-row items-center justify-center lg:my-16 gap-8">
             <Link 
               className={`uppercase text-center lg:translate-x-full`}
               href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
@@ -22,8 +22,8 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="">
-          <div className="bg-gradient-to-t from-black to-transparent fixed bottom-0 left-0 right-0 p-4 flex flex-row">
+        <section className="bg-gradient-to-t from-black to-transparent fixed bottom-0 left-0 right-0 p-4 flex flex-row">
+          {/* <div className="bg-gradient-to-t from-black to-transparent fixed bottom-0 left-0 right-0 p-4 flex flex-row"> */}
             <Link href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
                 Join our newsletter
             </Link>
@@ -38,7 +38,7 @@ export default function Home() {
                 <Image alt="Instagram" width="24" height="24" src="./img/mdi_instagram.svg"></Image>
               </Link>
             </div>
-          </div>
+          {/* </div> */}
         </section>
       </main>
     </>
