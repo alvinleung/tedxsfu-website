@@ -22,10 +22,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="min-h-screen flex flex-col justify-center px-4">
-          <div className="max-md:fixed max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:p-4 flex flex-row">
-            <h2>@TEDxSFU</h2>
-            <div className="ml-auto flex flex-row gap-6">
+        <section className="">
+          <div className="bg-gradient-to-t from-black to-transparent fixed bottom-0 left-0 right-0 p-4 flex flex-row">
+            <Link href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
+                Join our newsletter
+            </Link>
+            <div className="ml-auto flex flex-row gap-4">
               <Link href="https://linkedin.com/in/tedxsfu" target="_blank">
                 <Image alt="LinkedIn" width="24" height="24" src="./img/mdi_linkedin.svg"></Image>
               </Link>

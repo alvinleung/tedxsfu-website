@@ -65,7 +65,7 @@ const Logo = (props: Props) => {
     <>
       <svg
         style={{
-          maxWidth: 'min(90vw, 40rem)'
+          maxWidth: 'min(90vw, 32rem)'
         }}
         className="fill-white"
         // width="363"
