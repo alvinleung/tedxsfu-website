@@ -1,52 +1,105 @@
 import DirectorTeamDisplay from "@/component/DirectorTeamDisplay";
 import Nav from "@/component/Nav";
+import { TeamView, TeamMember } from "@/component/TeamView";
+import { teams } from "@/data/teamData";
 import Image from "next/image";
 import React from "react";
 
 type Props = {};
+
+const SectionLayout = ({ children }: { children: React.ReactNode }) => (
+  <section className="px-4 py-4 grid grid-cols-8">{children}</section>
+);
+
+type SectionCopyProps = {
+  children: React.ReactNode;
+  sticky?: boolean;
+  left?: boolean;
+};
+
+const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
+  return (
+    <div
+      className={`${sticky ? "sticky" : ""} top-4 min-h-[50%] ${
+        left ? "col-start-2 col-span-2" : "col-start-6 col-span-2 h-fit"
+      }`}
+    >
+      {children}
+    </div>
+  );
+};
 
 const About = (props: Props) => {
   return (
     <>
       <Nav />
       <main className="bg-white text-black font-normal min-h-screen w-full">
-        <section className="px-4 py-4 grid grid-cols-8">
+        <SectionLayout>
           <div className="text-header h-64 col-start-3 col-span-4">
             13 years in the making
           </div>
           <Image
-            className="col-span-full"
+            className="col-span-full w-full"
             src="/about/cover.jpg"
             width={1920}
             height={1080}
             alt="Picture of the author"
           />
-        </section>
+        </SectionLayout>
 
-        <section className="px-4 py-4 grid grid-cols-8 min-h-screen">
-          <div className="sticky top-4 h-[50%] col-start-6 col-end-8">
+        <SectionLayout>
+          <SectionInfo sticky>
             <h3 className="text-lead mb-2">It’s about ideas worth spreading</h3>
             <p className="text-lead opacity-50">
               TED stands for Technology, Entertainment and Design, known
-              worldwide for their TED and TEDx Talks we watch online. The X in
-              TEDx stands for an independent organization, marking TEDxSFU as an
-              initiative driven by passionate people from SFU.
+              worldwide for their TED and TEDx Talks we watch online.
             </p>
-          </div>
-        </section>
+            <p className="text-lead opacity-50">
+              The X in TEDx stands for an independent organization, marking
+              TEDxSFU as an initiative driven by passionate people from SFU.
+            </p>
+          </SectionInfo>
 
-        <section className="px-4 py-4 grid grid-cols-8">
-          <div className="sticky top-4 h-fit col-start-6 col-end-8">
+          <div className="min-h-screen">
+            {/* some media content goes on here */}
+          </div>
+        </SectionLayout>
+
+        <SectionLayout>
+          <SectionInfo sticky>
             <h3 className="text-lead mb-2">We punch above our weight</h3>
             <p className="text-lead opacity-50">
               We research, analyze, and explore what it takes to produce a
               professional and impactful conference.
             </p>
-          </div>
-          <div className="col-start-1 col-end-9">
+          </SectionInfo>
+          <div className="col-start-1 col-end-9 mt-32 mb-32">
             <DirectorTeamDisplay />
           </div>
-        </section>
+          <h3 className="col-start-2 col-span-2 text-lead mb-24">
+            Our larger, proud and hungry team of 24
+          </h3>
+          <div className="col-start-2 col-span-4 grid grid-cols-2 gap-4">
+            {teams.map((team) => (
+              <TeamView name={team.name}>
+                {team.members.map((member) => (
+                  <TeamMember name={member.name} position={member.position} />
+                ))}
+              </TeamView>
+            ))}
+          </div>
+        </SectionLayout>
+
+        <SectionLayout>
+          <SectionInfo sticky>
+            <h3 className="text-lead mb-2">Stuff we've done this year</h3>
+            <p className="text-lead opacity-50">
+              We’re opening up new personal and professional connections, one
+              step at a time.
+            </p>
+          </SectionInfo>
+          <div className=""></div>
+        </SectionLayout>
       </main>
     </>
   );
