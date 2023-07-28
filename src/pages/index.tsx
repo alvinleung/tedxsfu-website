@@ -1,11 +1,10 @@
-import Image from 'next/image'
+import TypeographyTest from "@/component/TypeographyTest";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
-      TEDxSFU
+    <main className="bg-white text-black flex min-h-screen">
+      <TypeographyTest />
     </main>
   );
 }
