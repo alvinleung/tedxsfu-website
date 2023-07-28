@@ -68,7 +68,7 @@ const DirectorTeamDisplay = (props: Props) => {
                     width: imageWidth,
                   }}
                   animate={{
-                    y: isCurrentDirector ? 0 : 100,
+                    y: isCurrentDirector ? 0 : 50,
                   }}
                 />
                 <motion.img
@@ -81,7 +81,7 @@ const DirectorTeamDisplay = (props: Props) => {
                   }}
                   animate={{
                     opacity: isCurrentDirector ? 1 : 0.1,
-                    y: isCurrentDirector ? 0 : 100,
+                    y: isCurrentDirector ? 0 : 50,
                   }}
                   src={director.stroke}
                 />
