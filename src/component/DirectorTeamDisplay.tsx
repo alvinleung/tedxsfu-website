@@ -7,7 +7,8 @@ import React, {
 } from "react";
 import { directors } from "../data/teamData";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useTransform } from "framer-motion";
+import { useContainerScroll } from "./ScrollContainer";
 
 type Props = {};
 
@@ -15,7 +16,7 @@ const DirectorTeamDisplay = (props: Props) => {
   const [containerRef, bound] = useBoundingBox<HTMLDivElement>([]);
 
   const [currentDirector, setCurrentDirector] = useState(0);
-  const { scrollY } = useScroll();
+  const { scrollY } = useContainerScroll();
 
   const scrollOffset = useMemo(() => bound.height * 0, [bound]);
 
@@ -102,7 +103,7 @@ const DirectorTeamDisplay = (props: Props) => {
               <motion.div
                 animate={{
                   opacity: isCurrentDirector ? 1 : 0,
-                  x: isCurrentDirector ? 0 : currentDirector > i ? 0 : -50,
+                  x: isCurrentDirector ? 0 : currentDirector > i ? 0 : -20,
                   transition: {
                     ease: [0.22, 1, 0.36, 1],
                     duration: 0.5,
