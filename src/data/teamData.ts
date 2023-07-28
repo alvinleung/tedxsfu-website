@@ -3,7 +3,8 @@ const directors = [
     name: "Yee Loong Tang",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "about/team-yeeloong.png",
+    stroke: "about/team-yeeloong.png",
+    fill: "about/team-yeeloong-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
@@ -11,7 +12,8 @@ const directors = [
     name: "Josh Ralla",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "about/team-josh.png",
+    stroke: "about/team-josh.png",
+    fill: "about/team-josh-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
@@ -19,7 +21,8 @@ const directors = [
     name: "Kayla You",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "/about/team-kayla.png",
+    stroke: "/about/team-kayla.png",
+    fill: "about/team-kayla-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
@@ -27,7 +30,8 @@ const directors = [
     name: "Paul Falkowski",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "/about/team-paul.png",
+    stroke: "/about/team-paul.png",
+    fill: "about/team-paul-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
@@ -35,7 +39,8 @@ const directors = [
     name: "Youngin Cho",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "/about/team-youngin.png",
+    stroke: "/about/team-youngin.png",
+    fill: "about/team-youngin-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
@@ -43,7 +48,8 @@ const directors = [
     name: "Alvin Leung",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "/about/team-alvin.png",
+    stroke: "/about/team-alvin.png",
+    fill: "about/team-alvin-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
@@ -51,7 +57,8 @@ const directors = [
     name: "Nathan Lew",
     pronouns: "he/him",
     position: "Executive Director",
-    image: "/about/team-nathan.png",
+    stroke: "/about/team-nathan.png",
+    fill: "about/team-nathan-fill.svg",
     description:
       "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },

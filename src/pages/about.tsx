@@ -11,7 +11,9 @@ type Props = {};
 type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
 
 const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
-  <section className={`px-4 py-4 grid grid-cols-8 ${padding ? "mt-64" : ""}`}>
+  <section
+    className={`px-4 py-4 grid grid-cols-8 gap-4 ${padding ? "mt-64" : ""}`}
+  >
     {children}
     {/* <div className="block h-64"></div> */}
   </section>
@@ -27,7 +29,7 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
   return (
     <div
       className={`${sticky ? "sticky" : ""} top-4 min-h-[50%] ${
-        left ? "col-start-3 col-span-2" : "col-start-6 col-span-2 h-fit"
+        left ? "col-start-3 col-span-2" : "col-start-6 col-span-2 h-fit z-10"
       }`}
     >
       {children}
@@ -85,7 +87,7 @@ const About = (props: Props) => {
             <DirectorTeamDisplay />
           </div>
           <h3 className="col-start-2 col-span-2 text-lead mb-24">
-            Our larger, proud and hungry team of 24
+            And our larger, proud and hungry team of 21
           </h3>
           <div className="col-start-2 col-span-4 grid grid-cols-2 gap-4">
             {teams.map((team) => (
