@@ -167,7 +167,7 @@ const Logo = (props: Props) => {
         style={ 
           isBiggerThan2xl ?
           {
-            maxWidth: 'min(65vw, 85vh)',
+            maxWidth: 'min(60vw, 80vh)',
             minWidth: '28rem'
           }
           :
