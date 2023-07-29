@@ -1,3 +1,4 @@
+import Cursor from "@/component/Cursor";
 import { ScrollContainer } from "@/component/ScrollContainer";
 import { MousePosContextProvider } from "@/hooks/useMousePosition";
 import { WindowDimensionContextProvider } from "@/hooks/useWindowDimension";
@@ -39,8 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
+        <Cursor />
         <ScrollContainer>
-          <main className={helvetica.className}>
+          <main className={`${helvetica.className} cursor-none`}>
             <Component {...pageProps} />{" "}
           </main>
         </ScrollContainer>

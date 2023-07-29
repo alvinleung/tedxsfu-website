@@ -21,9 +21,8 @@ const LogoAnimationContext = createContext<MotionValue>(new MotionValue());
 const AnimatedPath = (props: any) => {
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
-  const [progress, setProgress] = useState(0);
-  // const pathRef = useRef<HTMLElement>();
-  const globalProgress = useContext(LogoAnimationContext);
+
+  const globalAnimationProgress = useContext(LogoAnimationContext);
 
   const [pathRef, bounds] = useBoundingBox([]);
   const origin = useMemo(()=> {
@@ -61,11 +60,9 @@ const AnimatedPath = (props: any) => {
     
   }, [origin, mousePos, viewport]);
 
-  const animatedProgress = useTransform(globalProgress,(val:number) => 
+  const animatedProgress = useTransform(globalAnimationProgress,(val:number) => 
     (Math.sin(val*.3 + bounds.y*3/viewport.width + bounds.x*5/viewport.width) + 1)/2  
   );
-
-  // const strokeInteractionProgress = useTransform();
 
   const animtedProgressEase = useTransform(animatedProgress,[0,1],[1,0], {ease: cubicBezier(0.16, 1, 0.3, 1)});
 
@@ -74,40 +71,12 @@ const AnimatedPath = (props: any) => {
     })
     
 
-  // useEffect(()=> {
-  //   const cleanup = globalProgress.on("change", (val)=>{
-  //     const v = (Math.sin(val*.4) + 1)/2;
-  //     console.log(v)
-  //     setProgress(v);
-  //   })
-
-  //   return ()=>{
-  //     cleanup();
-  //   }
-  // },[])
-
-  // reverse
-  // const strokeWidth = (1 - progress) * 2;
-
-  // reverse
-  // const strokeWidth = (1 - (1 - progress)) * 2;
-
 
   return (
-
     <motion.path
       ref={pathRef}
-      // strokeWidth={strokeWidth}
       strokeWidth={animatedStrokeWidth}
       stroke={"black"}
-      style={{
-        // opacity: strokeWidth > 2 ? 0.3 : 1,
-        // transitionProperty: "stroke-width, opacity",
-        // transitionDuration: ".4s",
-        // transitionDuration: ".3s",
-        // transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
-        // strokeWidth: animatedStrokeWidth
-      }}
       {...props}
     />
   );
