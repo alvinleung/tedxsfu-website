@@ -7,8 +7,8 @@ type Props = {};
 const PastActivitiesGallery = (props: Props) => {
   return (
     <div className="grid grid-cols-8 gap-4 align-start">
-      {pastActivities.map((activity) => (
-        <>
+      {pastActivities.map((activity,i) => (
+        <React.Fragment key={i}>
           <motion.div className="col-start-1 col-span-1">
             <div className="sticky top-[20vh] float-left h-[50vh]">
               <div className="text-body">{activity.date}</div>
@@ -34,7 +34,7 @@ const PastActivitiesGallery = (props: Props) => {
               })}
             </div>
           </div>
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

@@ -68,6 +68,7 @@ const DirectorTeamDisplay = (props: Props) => {
 
             return (
               <motion.div
+                key={i}
                 animate={{
                   opacity: isCurrentDirector ? 1 : 0,
                   x: isCurrentDirector ? 0 : currentDirector > i ? 0 : -20,

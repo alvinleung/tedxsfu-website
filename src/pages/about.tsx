@@ -93,10 +93,10 @@ const About = (props: Props) => {
             And our larger, proud and hungry team of 21
           </h3>
           <div className="col-start-2 col-span-4 grid grid-cols-2 gap-4">
-            {teams.map((team) => (
-              <TeamView name={team.name}>
-                {team.members.map((member) => (
-                  <TeamMember name={member.name} position={member.position} />
+            {teams.map((team, i) => (
+              <TeamView name={team.name} key={i}>
+                {team.members.map((member, i) => (
+                  <TeamMember name={member.name} position={member.position} key={i} />
                 ))}
               </TeamView>
             ))}

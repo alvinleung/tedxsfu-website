@@ -7,8 +7,8 @@ type Props = {
 const EmergeTextEffect = ({ children }: Props) => {
   const allText = useMemo(
     () =>
-      children.split("").map((letter) => {
-        return <Letter letter={letter} />;
+      children.split("").map((letter,i) => {
+        return <Letter letter={letter} key={i}/>;
       }),
     [children]
   );
