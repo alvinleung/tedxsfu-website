@@ -99,7 +99,7 @@ const Logo = (props: Props) => {
       prevTouch = currTouch;
       
 
-      const newProgress = touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1));
+      const newProgress = clamp(touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)), 0,1);
       // touchAnimProgress.set(newProgress);
       console.log(newProgress)
       
