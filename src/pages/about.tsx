@@ -1,8 +1,10 @@
 import DirectorTeamDisplay from "@/component/DirectorTeamDisplay";
 import Nav from "@/component/Nav";
 import PastActivitiesGallery from "@/component/PastActivitiesGallery";
+import { useContainerScroll } from "@/component/ScrollContainer";
 import { TeamView, TeamMember } from "@/component/TeamView";
 import { teams } from "@/data/teamData";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
 
@@ -26,26 +28,27 @@ type SectionCopyProps = {
 };
 
 const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
+  const { scrollY } = useContainerScroll();
+
   return (
-    <div
+    <motion.div
       className={`${sticky ? "sticky" : ""} top-4 min-h-[50%] ${
         left ? "col-start-3 col-span-2" : "col-start-6 col-span-2 h-fit z-10"
       }`}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
 const About = (props: Props) => {
   return (
     <>
-      <Nav />
       <main className="bg-white text-black font-normal min-h-screen w-full">
         <SectionLayout>
-          <div className="text-header h-64 col-start-3 col-span-4">
+          <motion.div className="text-header h-64 col-start-3 col-span-4">
             13 years in the making
-          </div>
+          </motion.div>
           <Image
             className="col-span-full w-full"
             src="/about/cover.jpg"

@@ -1,3 +1,4 @@
+import { useContainerScroll } from "@/component/ScrollContainer";
 import {
   MutableRefObject,
   useEffect,
@@ -21,6 +22,9 @@ export function useBoundingBox<T extends HTMLElement>(
   dependency?: any[]
 ): [MutableRefObject<T>, BoundingBoxInfo] {
   const containerRef = useRef<T>() as MutableRefObject<T>;
+
+  const { scrollY } = useContainerScroll();
+
   const [bounds, setBounds] = useState({
     x: 0,
     y: 0,
@@ -38,15 +42,16 @@ export function useBoundingBox<T extends HTMLElement>(
 
       setBounds({
         x: bounds.x,
-        y: bounds.y + window.scrollY,
+        y: bounds.y + scrollY.get(),
         width: bounds.width,
         height: bounds.height,
         left: bounds.left,
         right: bounds.right,
-        top: bounds.top + window.scrollY,
-        bottom: bounds.bottom + window.scrollY,
+        top: bounds.top + scrollY.get(),
+        bottom: bounds.bottom + scrollY.get(),
       });
     };
+
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => {

@@ -1,4 +1,4 @@
-import Cursor from "@/component/Cursor";
+import Nav from "@/component/Nav";
 import { ScrollContainer } from "@/component/ScrollContainer";
 import { MousePosContextProvider } from "@/hooks/useMousePosition";
 import { WindowDimensionContextProvider } from "@/hooks/useWindowDimension";
@@ -40,7 +40,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
-        {/* <Cursor /> */}
+        <Nav />
         <ScrollContainer>
           <main className={`${helvetica.className}`}>
             <Component {...pageProps} />{" "}
