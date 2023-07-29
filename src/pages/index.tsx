@@ -34,7 +34,7 @@ export default function Home() {
                 Join our newsletter
             </a>
             <div className="ml-auto flex flex-row gap-4">
-              <a href="https://linkedin.com/in/tedxsfu" target="_blank">
+              <a href="https://linkedin.com/company/tedxsfu" target="_blank">
                 <Image alt="LinkedIn" width="24" height="24" src="./img/mdi_linkedin.svg"></Image>
               </a>
               <a href="https://twitter.com/tedxsfu" target="_blank">
