@@ -16,13 +16,13 @@ const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max);
 
 
-const LogoAnimationContext = createContext<MotionValue>(new MotionValue());
+const LogoAnimationContext = createContext<any>({touchAnimProgress: new MotionValue(),animProgress: new MotionValue() });
 
 const AnimatedPath = (props: any) => {
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
 
-  const globalAnimationProgress = useContext(LogoAnimationContext);
+  const {touchAnimProgress,animProgress} = useContext(LogoAnimationContext);
 
   const [pathRef, bounds] = useBoundingBox([]);
   const origin = useMemo(()=> {
@@ -60,14 +60,14 @@ const AnimatedPath = (props: any) => {
     
   }, [origin, mousePos, viewport]);
 
-  const animatedProgress = useTransform(globalAnimationProgress,(val:number) => 
+  const animatedProgress = useTransform(animProgress,(val:number) => 
     (Math.sin(val*.3 + bounds.y*3/viewport.width + bounds.x*5/viewport.width) + 1)/2  
   );
 
   const animtedProgressEase = useTransform(animatedProgress,[0,1],[1,0], {ease: cubicBezier(0.16, 1, 0.3, 1)});
 
-  const animatedStrokeWidth = useTransform([animtedProgressEase, cursorProgress], ([val, cursor]:any)=>{
-      return (clamp((cursor) + ((val * .1)), 0,1)) * 10 + "px";
+  const animatedStrokeWidth = useTransform([animtedProgressEase, cursorProgress, touchAnimProgress], ([val, cursor, touch]:any)=>{
+      return ((clamp((cursor) + ((val * .1)), 0,1)) + touch) * 10 + "px";
     })
     
 
@@ -84,21 +84,38 @@ const AnimatedPath = (props: any) => {
 
 const Logo = (props: Props) => {
   const animProgress = useMotionValue(0);
+  const touchAnimProgress = useMotionValue(0);
   const viewport = useWindowDimension();
 
   useEffect(()=>{
     let prevTouch = 0;
     let touchDelta = 0;
 
+    let timeout:any = 0;
+
     const handleTouchMove = (e:TouchEvent) => {
       const currTouch = e.touches[0].clientY;
       touchDelta = currTouch - prevTouch;
       prevTouch = currTouch;
       
-      animProgress.set(animProgress.get() + touchDelta * .1);
+
+      const newProgress = clamp(touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)), 0,1);
+      // touchAnimProgress.set(newProgress);
+      console.log(newProgress)
       
       // e.preventDefault();
       // e.stopPropagation();
+
+      animate(touchAnimProgress, newProgress, {duration: .3, ease: [0.22, 1, 0.36, 1]});
+
+      if(timeout) {
+        clearTimeout(timeout);
+      }
+
+      timeout = setTimeout(()=>{
+        // reset to normal when mouse is not moving
+        animate(touchAnimProgress, 0, {duration: 1, ease: [0.22, 1, 0.36, 1]});
+      }, 500);
     }
 
     let animFrame = 0;
@@ -131,7 +148,7 @@ const Logo = (props: Props) => {
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   return (
-    <LogoAnimationContext.Provider value={animProgress}>
+    <LogoAnimationContext.Provider value={{animProgress,touchAnimProgress}}>
       <svg
         style={ 
           isBiggerThan2xl ?
