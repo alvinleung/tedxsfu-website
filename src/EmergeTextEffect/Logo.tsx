@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useMousePosition } from "@/hooks/useMousePosition";
-import { useScroll } from "framer-motion";
+import { useContainerScroll } from "@/component/ScrollContainer";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
+import { MotionValue, motion, useMotionValue, useTransform } from "framer-motion";
 
 type Props = {};
 
@@ -14,12 +15,14 @@ const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max);
 
 
+const LogoAnimationContext = createContext<MotionValue>(new MotionValue());
+
 const AnimatedPath = (props: any) => {
-  const { scrollY } = useScroll();
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
   const [progress, setProgress] = useState(0);
   // const pathRef = useRef<HTMLElement>();
+  const globalProgress = useContext(LogoAnimationContext);
 
   const [pathRef, bounds] = useBoundingBox([]);
   const origin = useMemo(()=> {
@@ -31,10 +34,31 @@ const AnimatedPath = (props: any) => {
 
   useEffect(() => {
     const maxDistSq = Math.min(70000, viewport.width * 32);
-    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y + scrollY.get());
+    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y);
     const clampedProgress = clamp(distanceSq / maxDistSq, 0, 1);
     setProgress(clampedProgress);
+    // console.log(scrollY.get());
   }, [origin, mousePos]);
+
+  const animatedProgress = useTransform(globalProgress,(val:number) => 
+    (Math.sin(val*.2 + bounds.y*0.01 + bounds.x *0.005) + 1)/2  
+  );
+  const animatedStrokeWidth = useTransform(animatedProgress, (val:number)=>{
+      return (clamp(progress - val, 0,1)) * 8 + "px";
+    })
+
+
+  // useEffect(()=> {
+  //   const cleanup = globalProgress.on("change", (val)=>{
+  //     const v = (Math.sin(val*.4) + 1)/2;
+  //     console.log(v)
+  //     setProgress(v);
+  //   })
+
+  //   return ()=>{
+  //     cleanup();
+  //   }
+  // },[])
 
   // reverse
   const strokeWidth = (1 - progress) * 2;
@@ -42,18 +66,21 @@ const AnimatedPath = (props: any) => {
   // reverse
   // const strokeWidth = (1 - (1 - progress)) * 2;
 
+
   return (
 
-    <path
+    <motion.path
       ref={pathRef}
-      strokeWidth={strokeWidth}
+      // strokeWidth={strokeWidth}
+      strokeWidth={animatedStrokeWidth}
       stroke={"black"}
       style={{
         opacity: strokeWidth > 2 ? 0.3 : 1,
-        transitionProperty: "stroke-width, opacity",
+        // transitionProperty: "stroke-width, opacity",
         // transitionDuration: ".4s",
-        transitionDuration: ".3s",
-        transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+        // transitionDuration: ".3s",
+        // transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+        // strokeWidth: animatedStrokeWidth
       }}
       {...props}
     />
@@ -61,11 +88,55 @@ const AnimatedPath = (props: any) => {
 };
 
 const Logo = (props: Props) => {
+  const animProgress = useMotionValue(0);
+
+  useEffect(()=>{
+    let prevTouch = 0;
+    let touchDelta = 0;
+
+    const handleTouchMove = (e:TouchEvent) => {
+      const currTouch = e.touches[0].clientY;
+      touchDelta = currTouch - prevTouch;
+      prevTouch = currTouch;
+      
+      animProgress.set(animProgress.get() + touchDelta * .1);
+      
+      // e.preventDefault();
+      // e.stopPropagation();
+    }
+
+    let animFrame = 0;
+    function frameUpdate() {
+      animProgress.set(animProgress.get() - .2);
+      animFrame = requestAnimationFrame(frameUpdate)
+    }
+    animFrame = requestAnimationFrame(frameUpdate)
+
+    const handleTouchStart = (e:TouchEvent) => {
+      const currTouch = e.touches[0].clientY;
+      touchDelta = 0;
+      prevTouch = currTouch;
+    }
+    const handleTouchEnd = (e:TouchEvent) => {
+
+    }
+
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+    return ()=>{
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+      cancelAnimationFrame(animFrame);
+    }
+  },[])
+
   return (
-    <>
+    <LogoAnimationContext.Provider value={animProgress}>
       <svg
         style={{
-          maxWidth: 'min(90vw, 32rem)'
+          maxWidth: 'min(90vw, 36rem)'
         }}
         className="fill-white"
         // width="363"
@@ -111,7 +182,7 @@ const Logo = (props: Props) => {
           d="M317.96 208V238H317.46C317.46 233 317.56 229.6 316.96 223.2C315.66 211 315.46 208.9 296.46 208.3L271.96 280.6C267.16 294.8 271.46 297.5 285.46 297.5H286.66C302.06 297.5 302.56 296.2 307.56 282.4L311.86 270.5H312.36L303.46 298H255.46V297.5C260.46 297.5 265.26 294.6 270.26 280.5L295.96 208H317.96Z" 
           />
       </svg>
-    </>
+    </LogoAnimationContext.Provider>
   );
 };
 
