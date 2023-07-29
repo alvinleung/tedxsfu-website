@@ -35,27 +35,42 @@ const AnimatedPath = (props: any) => {
 
 
   const cursorProgress = useMotionValue(0);
+  const lastClampProgress = useRef(0);
+
+  const timeoutRef = useRef<any>();
 
   useEffect(() => {
-    const maxDistSq = Math.min(70000, viewport.width * 32);
-    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y);
-    const clampedProgress = clamp(distanceSq / maxDistSq, 0, 1);
-    // setProgress(clampedProgress);
-    // console.log(scrollY.get());
-    animate(cursorProgress, clampedProgress, {duration: .2, ease: [0.22, 1, 0.36, 1]});
+    const maxDistSqNorm = 150;
+    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y)/viewport.width;
+
+    // ease in expo
+    const ease = cubicBezier(0.22, 1, 0.36, 1);
+    const clampedProgress = 1 - ease(clamp(distanceSq / maxDistSqNorm, 0, 1));
+
+    animate(cursorProgress, clampedProgress, {duration: 2, ease: [0.22, 1, 0.36, 1]});
+    lastClampProgress.current = clampedProgress;
+
+    if(timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(()=>{
+      // reset to normal when mouse is not moving
+      animate(cursorProgress, 0, {duration: 4, ease: [0.22, 1, 0.36, 1]});
+    }, 100);
     
-  }, [origin, mousePos]);
+  }, [origin, mousePos, viewport]);
 
   const animatedProgress = useTransform(globalProgress,(val:number) => 
-    (Math.sin(val*.3 + bounds.y*0.01 + bounds.x *0.005) + 1)/2  
+    (Math.sin(val*.3 + bounds.y*3/viewport.width + bounds.x*5/viewport.width) + 1)/2  
   );
 
   // const strokeInteractionProgress = useTransform();
 
-  const animtedProgressEase = useTransform(animatedProgress,[0,1],[0,1], {ease: cubicBezier(0.7, 0, 0.84, 0)});
+  const animtedProgressEase = useTransform(animatedProgress,[0,1],[1,0], {ease: cubicBezier(0.16, 1, 0.3, 1)});
 
   const animatedStrokeWidth = useTransform([animtedProgressEase, cursorProgress], ([val, cursor]:any)=>{
-      return (clamp(cursor * (val * .15), 0,1)) * 8 + "px";
+      return (clamp((cursor) + ((val * .1)), 0,1)) * 10 + "px";
     })
     
 
@@ -111,7 +126,7 @@ const Logo = (props: Props) => {
       touchDelta = currTouch - prevTouch;
       prevTouch = currTouch;
       
-      animProgress.set(animProgress.get() + touchDelta * .15);
+      animProgress.set(animProgress.get() + touchDelta * .1);
       
       // e.preventDefault();
       // e.stopPropagation();
@@ -152,12 +167,12 @@ const Logo = (props: Props) => {
         style={ 
           isBiggerThan2xl ?
           {
-            maxWidth: 'min(70vw, 72rem, 90vh)',
+            maxWidth: 'min(65vw, 85vh)',
             minWidth: '28rem'
           }
           :
           {
-            maxWidth: 'min(90vw, 28rem)'
+            maxWidth: 'min(85vw, 75vh)'
           }
         }
         className="fill-white"
