@@ -101,7 +101,7 @@ const About = (props: Props) => {
         </SectionLayout>
         <SectionLayout padding>
           <SectionInfo left>
-            <h3 className="text-lead mb-2">Stuff we've done this year</h3>
+            <h3 className="text-lead mb-2">Stuff we&apos;ve done this year</h3>
             <p className="text-lead opacity-50">
               We’re opening up new personal and professional connections, one
               step at a time.

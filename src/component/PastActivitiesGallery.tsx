@@ -27,7 +27,7 @@ const PastActivitiesGallery = (props: Props) => {
                   i === 0 ? "col-span-full" : "col-span-3";
 
                 return (
-                  <div className={`${firstItemStyling}`}>
+                  <div className={`${firstItemStyling}`} key={i}>
                     <img src={media.src} width={1280} height={720} />
                   </div>
                 );
