@@ -52,6 +52,7 @@ const DirectorTeamDisplay = (props: Props) => {
           const imageWidth = `${itemScrollHeightVW * 2.1}vw`;
           return (
             <div
+              key={i}
               // className={`h-[${itemScrollHeightVW}vw]`}
               style={{
                 height: `${itemScrollHeightVW}vw`,
@@ -101,6 +102,7 @@ const DirectorTeamDisplay = (props: Props) => {
 
             return (
               <motion.div
+                key={i}
                 animate={{
                   opacity: isCurrentDirector ? 1 : 0,
                   x: isCurrentDirector ? 0 : currentDirector > i ? 0 : -20,

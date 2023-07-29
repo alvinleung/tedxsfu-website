@@ -15,11 +15,11 @@ export default function Home() {
         <section className="min-h-screen flex flex-col lg:justify-center px-4">
           <div className="max-lg:fixed max-lg:pointer-events-none max-lg:top-0 max-lg:left-0 max-lg:right-0 max-lg:bottom-0 flex flex-col lg:flex-row items-center justify-center lg:my-16 gap-8">
             <a 
-              className={`uppercase text-center pointer-events-auto lg:translate-x-28`}
+              className={`uppercase leading-tight text-center pointer-events-auto lg:translate-x-28`}
               href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
               target="_blank">November 11 {viewport.width >= 1024 && <br/>}2023</a>
             <Logo />
-            <a className={`uppercase text-center pointer-events-auto lg:-translate-x-28`} href="https://goo.gl/maps/yx7ytZ2okDUuF33q7" target="_blank">The Centre for<br/>Performing Arts</a>
+            <a className={`uppercase leading-tight text-center pointer-events-auto lg:-translate-x-28`} href="https://goo.gl/maps/yx7ytZ2okDUuF33q7" target="_blank">The Centre for<br/>Performing Arts</a>
           </div>
         </section>
 
