@@ -101,7 +101,6 @@ const Logo = (props: Props) => {
 
       const newProgress = clamp(touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)), 0,1);
       // touchAnimProgress.set(newProgress);
-      console.log(newProgress)
       
       // e.preventDefault();
       // e.stopPropagation();
@@ -115,7 +114,7 @@ const Logo = (props: Props) => {
       timeout = setTimeout(()=>{
         // reset to normal when mouse is not moving
         animate(touchAnimProgress, 0, {duration: 1, ease: [0.22, 1, 0.36, 1]});
-      }, 500);
+      }, 300);
     }
 
     let animFrame = 0;

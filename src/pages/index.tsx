@@ -4,12 +4,18 @@ import Logo from "@/EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useContainerScroll } from "@/component/ScrollContainer";
 import Nav from "@/component/Nav";
+import Head from 'next/head'
+ 
 
 export default function Home() {
   const viewport = useWindowDimension();
   // console.log(scrollY);
   return (
     <>
+      <Head>
+        <title>TEDxSFU</title>
+        <meta name="description" content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."></meta>
+      </Head>
       <Nav />
       <main className="min-h-screen">
         <section className="min-h-screen flex flex-col lg:justify-center px-4">
