@@ -40,9 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
-        <Cursor />
+        {/* <Cursor /> */}
         <ScrollContainer>
-          <main className={`${helvetica.className} cursor-none`}>
+          <main className={`${helvetica.className}`}>
             <Component {...pageProps} />{" "}
           </main>
         </ScrollContainer>

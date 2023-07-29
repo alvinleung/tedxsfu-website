@@ -131,19 +131,29 @@ useEffect(() => {
     <motion.div 
         className="fixed pointer-events-none" 
         style={{
+          transformOrigin: "50% 50%",
           x: mousePos.x, 
           y: mousePos.y,
           zIndex: 10000000000
         }}
         animate={{
-          opacity: isHidden? 0 : isHovering? 1 : .5,
+          opacity: isHidden? 0 : isHovering? .2 : .2,
           scale: isHidden? 0 : isHovering? 2:1,
+          transition: {
+              duration: .3,
+              ease: [0.16, 1, 0.3, 1]
+            }
         }}
         >
       <motion.div 
-        className="w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2"
+        className="w-4 h-4 rounded-full -translate-x-1/2 -translate-y-1/2"
         animate={{
-            background: isHovering ? "#EB0028" : "#FFFFFF" 
+            // background: isHovering ? "#EB0028" : "#FFFFFF",
+            background: isHovering ? "#FFF" : "#FFFFFF",
+            transition: {
+              duration: .3,
+              ease: [0.16, 1, 0.3, 1]
+            }
         }}
       />
     </motion.div>
