@@ -1,11 +1,12 @@
 import Cursor from "@/component/Cursor";
 import Script from "next/script";
-import { ScrollContainer } from "@/component/ScrollContainer";
 import { MousePosContextProvider } from "@/hooks/useMousePosition";
 import { WindowDimensionContextProvider } from "@/hooks/useWindowDimension";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
+import { ScrollContainer } from "@/component/ScrollContainer/ScrollContainer";
+import Nav from "@/component/Nav";
 
 const chiaroscuro = localFont({
   src: [
@@ -44,17 +45,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <Nav />
         <ScrollContainer>
           <main className={`${helvetica.className}`}>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KYF3KQBR9" />
-          <Script id="google-analytics">
-            {`
+            <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KYF3KQBR9" />
+            <Script id="google-analytics">
+              {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
     
               gtag('config', 'G-4KYF3KQBR9');
             `}
-          </Script>
-
+            </Script>
             <Component {...pageProps} />{" "}
           </main>
         </ScrollContainer>
