@@ -1,11 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import Logo from "@/EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
-import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
 import Nav from "@/component/Nav";
-import Head from 'next/head'
- 
+import Head from "next/head";
 
 export default function Home() {
   const viewport = useWindowDimension();
@@ -14,7 +11,10 @@ export default function Home() {
     <>
       <Head>
         <title>TEDxSFU</title>
-        <meta name="description" content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."></meta>
+        <meta
+          name="description"
+          content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."
+        ></meta>
       </Head>
       <Nav />
       <main className="min-h-screen">
@@ -55,15 +55,31 @@ export default function Home() {
             </a>
             <div className="ml-auto flex flex-row gap-4">
               <a href="https://linkedin.com/company/tedxsfu" target="_blank">
-                <Image alt="LinkedIn" width="24" height="24" src="./img/mdi_linkedin.svg"></Image>
+                <Image
+                  alt="LinkedIn"
+                  width="24"
+                  height="24"
+                  src="./img/mdi_linkedin.svg"
+                ></Image>
               </a>
               <a href="https://twitter.com/tedxsfu" target="_blank">
-                <Image alt="Twitter" width="24" height="24" src="./img/mdi_twitter.svg"></Image>
+                <Image
+                  alt="Twitter"
+                  width="24"
+                  height="24"
+                  src="./img/mdi_twitter.svg"
+                ></Image>
               </a>
               <a href="https://instagram.com/tedxsfu" target="_blank">
-                <Image alt="Instagram" width="24" height="24" src="./img/mdi_instagram.svg"></Image>
+                <Image
+                  alt="Instagram"
+                  width="24"
+                  height="24"
+                  src="./img/mdi_instagram.svg"
+                ></Image>
               </a>
             </div>
+          </div>
         </section>
       </main>
     </>
