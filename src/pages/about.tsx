@@ -63,7 +63,7 @@ const About = (props: Props) => {
         <SectionLayout>
           <SectionInfo sticky>
             <h3 className="text-lead mb-2">
-              It’s about "ideas worth spreading"
+              It&apos;s about &ldquo;ideas worth spreading&rdquo;
             </h3>
             <p className="text-lead opacity-40">
               TED stands for Technology, Entertainment and Design, known
@@ -114,8 +114,8 @@ const About = (props: Props) => {
           <SectionInfo left>
             <h3 className="text-lead mb-2">Stuff we&apos;ve done this year</h3>
             <p className="text-lead opacity-50">
-              We’re opening up new personal and professional connections, one
-              step at a time.
+              We&apos;re opening up new personal and professional connections,
+              one step at a time.
             </p>
           </SectionInfo>
           <div className="col-start-1 col-end-9 mt-32 mb-32">
