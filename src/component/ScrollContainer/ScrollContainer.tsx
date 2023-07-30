@@ -1,4 +1,5 @@
 import { useWindowDimension } from "@/hooks/useWindowDimension";
+import { isMobile } from "@/utils/isMobile";
 import {
   MotionValue,
   clamp,
@@ -16,6 +17,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -57,7 +59,7 @@ export const ScrollContext = createContext<ScrollContextInfo>({
 });
 
 function useSmoothScroll({ container }: { container: MutableRefObject<any> }) {
-  const [isUsingSmoothScroll, setIsUsingSmoothScroll] = useState(false);
+  const [isUsingSmoothScroll, setIsUsingSmoothScroll] = useState(true);
   const windowDimension = useWindowDimension();
   const scrollX = useMotionValue(0);
   const scrollY = useMotionValue(0);
@@ -66,9 +68,31 @@ function useSmoothScroll({ container }: { container: MutableRefObject<any> }) {
 
   const targetScrollY = useRef(0);
 
+  useLayoutEffect(() => {
+    if (isMobile()) {
+      setIsUsingSmoothScroll(false);
+    }
+    const handleTouchStart = () => {
+      setIsUsingSmoothScroll(true);
+    };
+    const handleMouseMove = () => {
+      setIsUsingSmoothScroll(true);
+    };
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchStart);
+    window.addEventListener("mouseenter", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchStart);
+      window.removeEventListener("mouseenter", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseMove);
+    };
+  }, []);
+
   useEffect(() => {
     const handleMouseWheel = (e: WheelEvent) => {
-      setIsUsingSmoothScroll(true);
       const maxScroll = 150;
       const newScrollValue = clamp(
         0,
@@ -190,7 +214,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
       }}
     >
       <motion.div
-        className={`fixed left-0 top-0 right-0 bottom-0 h-screen overflow-x-hidden ${
+        className={`no-scrollbar fixed left-0 top-0 right-0 bottom-0 h-screen overflow-x-hidden ${
           canScroll && !isUsingSmoothScroll
             ? "overflow-y-auto"
             : "overflow-y-hidden"

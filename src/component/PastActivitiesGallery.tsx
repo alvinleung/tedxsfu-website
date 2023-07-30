@@ -26,6 +26,7 @@ const PastActivitiesGallery = (props: Props) => {
               </div>
             </Sticky>
           </StickyContainer>
+
           <div className="col-start-3 col-span-full">
             <div className="grid grid-cols-6 gap-4">
               {activity.media.map((media, i) => {

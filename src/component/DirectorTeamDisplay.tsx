@@ -52,6 +52,7 @@ const DirectorTeamDisplay = (props: Props) => {
           const imageWidth = `${itemScrollHeightVW * 2.1}vw`;
           return (
             <DirectorIllustration
+              key={i}
               isOdd={isOdd}
               isCurrentDirector={isCurrentDirector}
               director={director}

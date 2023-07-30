@@ -1,7 +1,5 @@
 import DirectorTeamDisplay from "@/component/DirectorTeamDisplay";
-import Nav from "@/component/Nav";
 import PastActivitiesGallery from "@/component/PastActivitiesGallery";
-import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
 import Sticky from "@/component/ScrollContainer/Sticky";
 import StickyContainer from "@/component/ScrollContainer/StickyContainer";
 import { TeamView, TeamMember } from "@/component/TeamView";
@@ -32,8 +30,6 @@ type SectionCopyProps = {
 };
 
 const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
-  const { scrollY } = useContainerScroll();
-
   return (
     <motion.div
       className={`${sticky ? "sticky" : ""} top-4 min-h-[50%] ${
@@ -66,12 +62,14 @@ const About = (props: Props) => {
 
         <SectionLayout>
           <SectionInfo sticky>
-            <h3 className="text-lead mb-2">It’s about ideas worth spreading</h3>
-            <p className="text-lead opacity-50">
+            <h3 className="text-lead mb-2">
+              It’s about "ideas worth spreading"
+            </h3>
+            <p className="text-lead opacity-40">
               TED stands for Technology, Entertainment and Design, known
               worldwide for their TED and TEDx Talks we watch online.
             </p>
-            <p className="text-lead opacity-50">
+            <p className="text-lead opacity-40">
               The X in TEDx stands for an independent organization, marking
               TEDxSFU as an initiative driven by passionate people from SFU.
             </p>
@@ -87,7 +85,7 @@ const About = (props: Props) => {
             <h3 className="text-lead mb-2">
               Student team, industry experience
             </h3>
-            <p className="text-lead opacity-50">
+            <p className="text-lead opacity-40">
               Punching above our weight, we research, analyze, and explore what
               it takes to produce a professional and impactful conference.
             </p>
