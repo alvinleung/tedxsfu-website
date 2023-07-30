@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
@@ -16,11 +17,13 @@ const TeamView = (props: Props) => {
   );
 };
 
-const TeamMember = ({ name, position }: { name: string; position: string }) => (
-  <>
-    <div className="leading-snug">{name}</div>
-    <div className="leading-snug opacity-40">{position}</div>
-  </>
+const TeamMember = ({ name, position, linkedin }: { name: string; position: string; linkedin: string; }) => (
+    <>
+      <div className="leading-snug">
+        <motion.a href={linkedin} target="_blank">{name}</motion.a>
+      </div>
+      <div className="leading-snug opacity-40">{position}</div>
+    </>
 );
 
 export { TeamView, TeamMember };

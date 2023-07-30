@@ -103,6 +103,7 @@ const About = (props: Props) => {
                   <TeamMember
                     name={member.name}
                     position={member.position}
+                    linkedin={member.linkedin}
                     key={i}
                   />
                 ))}
