@@ -37,6 +37,7 @@ interface ScrollContextInfo {
   scrollY: MotionValue;
   scrollXProgress: MotionValue;
   scrollYProgress: MotionValue;
+  documentOffsetY: MotionValue;
   scrollDirection: ScrollDirection;
   setCanScroll: Dispatch<SetStateAction<boolean>>;
   scrollContainerRef: MutableRefObject<HTMLDivElement>;
@@ -49,6 +50,7 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   scrollY: new MotionValue(),
   scrollXProgress: new MotionValue(),
   scrollYProgress: new MotionValue(),
+  documentOffsetY: new MotionValue(),
   scrollDirection: ScrollDirection.DOWN,
   scrollContainerRef: undefined as unknown as MutableRefObject<HTMLDivElement>,
   setCanScroll: () => {},
@@ -92,7 +94,6 @@ function useSmoothScroll({ container }: { container: MutableRefObject<any> }) {
       const currentScrollY = scrollY.get();
       const offset = (targetScrollY.current - currentScrollY) * 0.15;
 
-      console.log(Math.abs(offset) > stopThreshold);
       if (Math.abs(offset) > stopThreshold) {
         scrollY.set(currentScrollY + offset);
         animationFrame = requestAnimationFrame(performFrameUpdate);
@@ -147,7 +148,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     container: scrollContainerRef,
   });
 
-  const scrollYOffset = useTransform(scrollY, (v) => -v);
+  const documentOffsetY = useTransform(scrollY, (v) => -v);
 
   const windowDim = useWindowDimension();
   useEffect(() => {
@@ -185,6 +186,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         setCanScroll,
         scrollDirection,
         scrollContainerRef,
+        documentOffsetY,
       }}
     >
       <motion.div
@@ -200,7 +202,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
           pointerEvents: isPresent ? "all" : "none",
         }}
       >
-        <motion.div style={{ y: isUsingSmoothScroll ? scrollYOffset : 0 }}>
+        <motion.div style={{ y: isUsingSmoothScroll ? documentOffsetY : 0 }}>
           {children}
         </motion.div>
       </motion.div>

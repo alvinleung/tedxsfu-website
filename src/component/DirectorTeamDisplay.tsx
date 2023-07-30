@@ -8,12 +8,14 @@ import React, {
 import { directors } from "../data/teamData";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { motion, useInView, useTransform } from "framer-motion";
-import { useContainerScroll } from "./ScrollContainer";
+import { useContainerScroll } from "./ScrollContainer/ScrollContainer";
+import { useWindowDimension } from "@/hooks/useWindowDimension";
 
 type Props = {};
 
 const DirectorTeamDisplay = (props: Props) => {
   const [containerRef, bound] = useBoundingBox<HTMLDivElement>([]);
+  const windowDim = useWindowDimension();
 
   const [currentDirector, setCurrentDirector] = useState(0);
   const { scrollY } = useContainerScroll();
@@ -22,11 +24,11 @@ const DirectorTeamDisplay = (props: Props) => {
     const handleMotionChange = (pos: number) => {
       // decide which one is the current one
       const totalDirectors = directors.length;
-      const offset = pos - bound.top;
+      const offset = pos - bound.top + windowDim.height * 0.35;
       const currentProgress = offset / bound.height;
       const currentDirector = Math.round(currentProgress * totalDirectors);
       setCurrentDirector(currentDirector);
-      console.log(offset);
+      // console.log(offset);
     };
 
     handleMotionChange(scrollY.get());
@@ -36,13 +38,13 @@ const DirectorTeamDisplay = (props: Props) => {
     return () => {
       cleanupScroll();
     };
-  }, [bound, scrollY]);
+  }, [bound, scrollY, windowDim]);
 
   const itemScrollHeightVW = 15;
 
   return (
-    <div ref={containerRef} className="grid grid-cols-8 relative">
-      <div className="col-start-2 col-span-4 pb-[14vw] flex flex-col">
+    <div ref={containerRef} className="grid grid-cols-8 relative mb-[14vw]">
+      <div className="col-start-2 col-span-4  flex flex-col">
         {directors.map((director, i) => {
           const isOdd = i % 2 === 0;
           const isCurrentDirector = currentDirector === i;
@@ -77,7 +79,7 @@ const DirectorTeamDisplay = (props: Props) => {
                     duration: 0.5,
                   },
                 }}
-                className={` sticky top-[20vw]`}
+                className={`sticky top-[20vw]`}
                 style={{
                   height: itemScrollHeightVW + "vw",
                 }}
@@ -141,7 +143,7 @@ const DirectorIllustration = ({
             width: imageWidth,
           }}
           animate={{
-            opacity: isCurrentDirector ? 1 : 0.1,
+            opacity: isCurrentDirector ? 1 : 0.2,
             y: isCurrentDirector ? 0 : 50,
           }}
           src={director.stroke}
@@ -154,7 +156,8 @@ const DirectorIllustration = ({
 const DirectorInfo = ({ director }: any) => (
   <>
     <div className="text-lead mb-4">
-      {director.name}({director.pronouns})
+      {director.name}
+      {"\n"}({director.pronouns})
     </div>
     <div className="text-body">
       {director.position},{" "}

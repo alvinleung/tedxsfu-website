@@ -1,25 +1,31 @@
 import { pastActivities } from "@/data/pastActivitiesData";
 import { motion } from "framer-motion";
 import React from "react";
+import StickyContainer from "./ScrollContainer/StickyContainer";
+import Sticky from "./ScrollContainer/Sticky";
 
 type Props = {};
 
 const PastActivitiesGallery = (props: Props) => {
   return (
     <div className="grid grid-cols-8 gap-4 align-start">
-      {pastActivities.map((activity,i) => (
+      {pastActivities.map((activity, i) => (
         <React.Fragment key={i}>
-          <motion.div className="col-start-1 col-span-1">
-            <div className="sticky top-[20vh] float-left h-[50vh]">
-              <div className="text-body">{activity.date}</div>
-            </div>
-          </motion.div>
-          <motion.div className="col-start-2 col-span-1">
-            <div className="sticky top-[20vh] float-left h-[50vh]">
-              <h4 className="text-body mb-4">{activity.header}</h4>
-              <p className="text-body opacity-50">{activity.description}</p>
-            </div>
-          </motion.div>
+          <StickyContainer>
+            <Sticky top="20vh">
+              <div className="h-[50vh]">
+                <div className="text-body">{activity.date}</div>
+              </div>
+            </Sticky>
+          </StickyContainer>
+          <StickyContainer>
+            <Sticky top="20vh">
+              <div className="h-[50vh]">
+                <h4 className="text-body mb-4">{activity.header}</h4>
+                <p className="text-body opacity-50">{activity.description}</p>
+              </div>
+            </Sticky>
+          </StickyContainer>
           <div className="col-start-3 col-span-full">
             <div className="grid grid-cols-6 gap-4">
               {activity.media.map((media, i) => {

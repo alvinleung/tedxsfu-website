@@ -1,0 +1,34 @@
+import { useBoundingBox } from "@/hooks/useBoundingBox";
+import React, { createContext, useContext } from "react";
+
+type Props = {
+  children: React.ReactNode;
+};
+
+const StickyContainerContext = createContext({
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  height: 0,
+  width: 0,
+  x: 0,
+  y: 0,
+});
+
+const StickyContainer = ({ children }: Props) => {
+  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([]);
+  return (
+    <div ref={containerRef}>
+      <StickyContainerContext.Provider value={bounds}>
+        {children}
+      </StickyContainerContext.Provider>
+    </div>
+  );
+};
+
+export function useStickyContainerBounds() {
+  return useContext(StickyContainerContext);
+}
+
+export default StickyContainer;

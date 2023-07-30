@@ -1,7 +1,9 @@
 import DirectorTeamDisplay from "@/component/DirectorTeamDisplay";
 import Nav from "@/component/Nav";
 import PastActivitiesGallery from "@/component/PastActivitiesGallery";
-import { useContainerScroll } from "@/component/ScrollContainer";
+import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
+import Sticky from "@/component/ScrollContainer/Sticky";
+import StickyContainer from "@/component/ScrollContainer/StickyContainer";
 import { TeamView, TeamMember } from "@/component/TeamView";
 import { teams } from "@/data/teamData";
 import { motion } from "framer-motion";
@@ -13,11 +15,13 @@ type Props = {};
 type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
 
 const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
-  <section
-    className={`px-4 py-4 grid grid-cols-8 gap-4 ${padding ? "mt-64" : ""}`}
-  >
-    {children}
-    {/* <div className="block h-64"></div> */}
+  <section className={`px-4 py-4`}>
+    <StickyContainer>
+      <div className={`grid grid-cols-8 gap-4 ${padding ? "mt-64" : ""}`}>
+        {children}
+      </div>
+      {/* <div className="block h-64"></div> */}
+    </StickyContainer>
   </section>
 );
 
@@ -36,7 +40,9 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
         left ? "col-start-3 col-span-2" : "col-start-6 col-span-2 h-fit z-10"
       }`}
     >
-      {children}
+      {sticky && <Sticky top={16}>{children}</Sticky>}
+      {!sticky && children}
+      {/* {children} */}
     </motion.div>
   );
 };
@@ -86,7 +92,7 @@ const About = (props: Props) => {
               it takes to produce a professional and impactful conference.
             </p>
           </SectionInfo>
-          <div className="col-start-1 col-end-9 mt-32 mb-32">
+          <div className="col-start-1 col-end-9 mt-16 mb-32">
             <DirectorTeamDisplay />
           </div>
           <h3 className="col-start-2 col-span-2 text-lead mb-24">
@@ -96,7 +102,11 @@ const About = (props: Props) => {
             {teams.map((team, i) => (
               <TeamView name={team.name} key={i}>
                 {team.members.map((member, i) => (
-                  <TeamMember name={member.name} position={member.position} key={i} />
+                  <TeamMember
+                    name={member.name}
+                    position={member.position}
+                    key={i}
+                  />
                 ))}
               </TeamView>
             ))}

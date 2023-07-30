@@ -1,5 +1,5 @@
 import Nav from "@/component/Nav";
-import { ScrollContainer } from "@/component/ScrollContainer";
+import { ScrollContainer } from "@/component/ScrollContainer/ScrollContainer";
 import { MousePosContextProvider } from "@/hooks/useMousePosition";
 import { WindowDimensionContextProvider } from "@/hooks/useWindowDimension";
 import "@/styles/globals.css";

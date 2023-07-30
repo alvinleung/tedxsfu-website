@@ -1,9 +1,23 @@
-import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useMousePosition } from "@/hooks/useMousePosition";
-import { useContainerScroll } from "@/component/ScrollContainer";
+import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
-import { MotionValue, motion, useMotionValue, useTransform, animate, cubicBezier } from "framer-motion";
+import {
+  MotionValue,
+  motion,
+  useMotionValue,
+  useTransform,
+  animate,
+  cubicBezier,
+} from "framer-motion";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 
 type Props = {};
@@ -15,23 +29,24 @@ const distSq = (x1: number, y1: number, x2: number, y2: number) => {
 const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max);
 
-
-const LogoAnimationContext = createContext<any>({touchAnimProgress: new MotionValue(),animProgress: new MotionValue() });
+const LogoAnimationContext = createContext<any>({
+  touchAnimProgress: new MotionValue(),
+  animProgress: new MotionValue(),
+});
 
 const AnimatedPath = (props: any) => {
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
 
-  const {touchAnimProgress,animProgress} = useContext(LogoAnimationContext);
+  const { touchAnimProgress, animProgress } = useContext(LogoAnimationContext);
 
   const [pathRef, bounds] = useBoundingBox([]);
-  const origin = useMemo(()=> {
+  const origin = useMemo(() => {
     return {
       x: bounds.x + bounds.width / 2,
       y: bounds.y + bounds.height / 2,
-    }
+    };
   }, [bounds]);
-
 
   const cursorProgress = useMotionValue(0);
   const lastClampProgress = useRef(0);
@@ -40,37 +55,51 @@ const AnimatedPath = (props: any) => {
 
   useEffect(() => {
     const maxDistSqNorm = 150;
-    const distanceSq = distSq(origin.x, origin.y, mousePos.x, mousePos.y)/viewport.width;
+    const distanceSq =
+      distSq(origin.x, origin.y, mousePos.x, mousePos.y) / viewport.width;
 
     // ease in expo
     const ease = cubicBezier(0.22, 1, 0.36, 1);
     const clampedProgress = 1 - ease(clamp(distanceSq / maxDistSqNorm, 0, 1));
 
-    animate(cursorProgress, clampedProgress, {duration: 2, ease: [0.22, 1, 0.36, 1]});
+    animate(cursorProgress, clampedProgress, {
+      duration: 2,
+      ease: [0.22, 1, 0.36, 1],
+    });
     lastClampProgress.current = clampedProgress;
 
-    if(timeoutRef.current) {
+    if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
-    timeoutRef.current = setTimeout(()=>{
+    timeoutRef.current = setTimeout(() => {
       // reset to normal when mouse is not moving
-      animate(cursorProgress, 0, {duration: 4, ease: [0.22, 1, 0.36, 1]});
+      animate(cursorProgress, 0, { duration: 4, ease: [0.22, 1, 0.36, 1] });
     }, 100);
-    
   }, [origin, mousePos, viewport]);
 
-  const animatedProgress = useTransform(animProgress,(val:number) => 
-    (Math.sin(val*.3 + bounds.y*3/viewport.width + bounds.x*5/viewport.width) + 1)/2  
+  const animatedProgress = useTransform(
+    animProgress,
+    (val: number) =>
+      (Math.sin(
+        val * 0.3 +
+          (bounds.y * 3) / viewport.width +
+          (bounds.x * 5) / viewport.width
+      ) +
+        1) /
+      2
   );
 
-  const animtedProgressEase = useTransform(animatedProgress,[0,1],[1,0], {ease: cubicBezier(0.16, 1, 0.3, 1)});
+  const animtedProgressEase = useTransform(animatedProgress, [0, 1], [1, 0], {
+    ease: cubicBezier(0.16, 1, 0.3, 1),
+  });
 
-  const animatedStrokeWidth = useTransform([animtedProgressEase, cursorProgress, touchAnimProgress], ([val, cursor, touch]:any)=>{
-      return ((clamp((cursor) + ((val * .1)), 0,1)) + touch) * 10 + "px";
-    })
-    
-
+  const animatedStrokeWidth = useTransform(
+    [animtedProgressEase, cursorProgress, touchAnimProgress],
+    ([val, cursor, touch]: any) => {
+      return (clamp(cursor + val * 0.1, 0, 1) + touch) * 10 + "px";
+    }
+  );
 
   return (
     <motion.path
@@ -87,79 +116,85 @@ const Logo = (props: Props) => {
   const touchAnimProgress = useMotionValue(0);
   const viewport = useWindowDimension();
 
-  useEffect(()=>{
+  useEffect(() => {
     let prevTouch = 0;
     let touchDelta = 0;
 
-    let timeout:any = 0;
+    let timeout: any = 0;
 
-    const handleTouchMove = (e:TouchEvent) => {
+    const handleTouchMove = (e: TouchEvent) => {
       const currTouch = e.touches[0].clientY;
       touchDelta = currTouch - prevTouch;
       prevTouch = currTouch;
-      
 
-      const newProgress = clamp(touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)), 0,1);
+      const newProgress = clamp(
+        touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)),
+        0,
+        1
+      );
       // touchAnimProgress.set(newProgress);
-      console.log(newProgress)
-      
+      console.log(newProgress);
+
       // e.preventDefault();
       // e.stopPropagation();
 
-      animate(touchAnimProgress, newProgress, {duration: .3, ease: [0.22, 1, 0.36, 1]});
+      animate(touchAnimProgress, newProgress, {
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1],
+      });
 
-      if(timeout) {
+      if (timeout) {
         clearTimeout(timeout);
       }
 
-      timeout = setTimeout(()=>{
+      timeout = setTimeout(() => {
         // reset to normal when mouse is not moving
-        animate(touchAnimProgress, 0, {duration: 1, ease: [0.22, 1, 0.36, 1]});
+        animate(touchAnimProgress, 0, {
+          duration: 1,
+          ease: [0.22, 1, 0.36, 1],
+        });
       }, 500);
-    }
+    };
 
     let animFrame = 0;
     function frameUpdate() {
-      animProgress.set(animProgress.get() - .1);
-      animFrame = requestAnimationFrame(frameUpdate)
+      animProgress.set(animProgress.get() - 0.1);
+      animFrame = requestAnimationFrame(frameUpdate);
     }
-    animFrame = requestAnimationFrame(frameUpdate)
+    animFrame = requestAnimationFrame(frameUpdate);
 
-    const handleTouchStart = (e:TouchEvent) => {
+    const handleTouchStart = (e: TouchEvent) => {
       const currTouch = e.touches[0].clientY;
       touchDelta = 0;
       prevTouch = currTouch;
-    }
-    const handleTouchEnd = (e:TouchEvent) => {
-
-    }
+    };
+    const handleTouchEnd = (e: TouchEvent) => {};
 
     window.addEventListener("touchmove", handleTouchMove);
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchend", handleTouchEnd);
-    return ()=>{
+    return () => {
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animFrame);
-    }
-  },[])
+    };
+  }, []);
 
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   return (
-    <LogoAnimationContext.Provider value={{animProgress,touchAnimProgress}}>
+    <LogoAnimationContext.Provider value={{ animProgress, touchAnimProgress }}>
       <svg
-        style={ 
-          isBiggerThan2xl ?
-          {
-            maxWidth: 'min(55vw, 75vh)',
-            minWidth: '28rem'
-          }
-          :
-          {
-            maxWidth: 'min(85vw, 70vh)'
-          }
+        style={
+          isBiggerThan2xl
+            ? {
+                maxWidth: "min(55vw, 75vh)",
+                minWidth: "28rem",
+              }
+            : {
+                maxWidth: "min(85vw, 70vh)",
+              }
         }
         className="fill-white"
         // width="363"
@@ -179,13 +214,24 @@ const Logo = (props: Props) => {
         <AnimatedPath d="M228.043 202V232H227.543C227.543 227 227.643 223.6 227.043 217.2C225.743 205 225.543 202.9 206.543 202.3L182.043 274.6C177.243 288.8 181.543 291.5 195.543 291.5V292H165.543V291.5C170.543 291.5 175.343 288.6 180.343 274.5L206.043 202H228.043ZM193.043 274.1V273.8L228.043 250.6V284.4H227.643C227.643 271.9 227.443 260.5 224.543 258C220.643 254.7 205.543 267.1 193.043 274.1Z" />
         <AnimatedPath d="M259.214 214.3C261.214 208.8 263.714 203.3 255.514 202.6L254.214 202.5V202H276.014V202.5H275.514C265.414 202.5 263.114 205.1 261.614 209.6L239.514 274.6C234.714 288.8 238.014 291.5 245.514 291.5V292H218.014V291.5C227.414 291.5 232.714 288.7 237.814 274.5L259.214 214.3Z" />
         <AnimatedPath d="M318.473 202V232H317.973C317.973 227 318.073 223.6 317.473 217.2C316.173 205 315.973 202.9 296.973 202.3L272.473 274.6C267.673 288.8 271.973 291.5 285.973 291.5H287.173C302.573 291.5 303.073 290.2 308.073 276.4L312.373 264.5H312.873L303.973 292H255.973V291.5C260.973 291.5 265.773 288.6 270.773 274.5L296.473 202H318.473Z" />
-        <AnimatedPath opacity="0.9" d="M220.313 128.501L229.313 103.301H229.913L221.313 128.501L220.913 129.701L206.013 173.601C201.113 187.801 205.513 190.501 210.513 190.501H231.313C247.413 190.501 247.913 189.201 252.913 175.401L257.213 163.501H257.713L248.813 191.001H189.513V190.501C194.513 190.501 199.213 187.601 204.313 173.501L219.913 129.701L220.313 128.501Z" />
-        <AnimatedPath opacity="0.9" d="M165.505 173.599L180.605 129.199H179.574C179.24 130.189 178.884 131.222 178.505 132.299L163.805 173.499C158.705 187.699 154.005 190.499 149.005 190.499V190.999H170.005V190.499C165.005 190.499 160.705 187.799 165.505 173.599Z" />
-        <AnimatedPath opacity="0.9" d="M221.306 128.5H239.506V142.8H239.206C238.906 139.1 238.606 135.7 237.406 133.5C236.006 131.1 235.306 130.2 220.906 129.7H219.906L180.606 129.2H179.575C179.655 128.964 179.733 128.731 179.81 128.5H180.806H220.306H221.306Z" />
+        <AnimatedPath
+          opacity="0.9"
+          d="M220.313 128.501L229.313 103.301H229.913L221.313 128.501L220.913 129.701L206.013 173.601C201.113 187.801 205.513 190.501 210.513 190.501H231.313C247.413 190.501 247.913 189.201 252.913 175.401L257.213 163.501H257.713L248.813 191.001H189.513V190.501C194.513 190.501 199.213 187.601 204.313 173.501L219.913 129.701L220.313 128.501Z"
+        />
+        <AnimatedPath
+          opacity="0.9"
+          d="M165.505 173.599L180.605 129.199H179.574C179.24 130.189 178.884 131.222 178.505 132.299L163.805 173.499C158.705 187.699 154.005 190.499 149.005 190.499V190.999H170.005V190.499C165.005 190.499 160.705 187.799 165.505 173.599Z"
+        />
+        <AnimatedPath
+          opacity="0.9"
+          d="M221.306 128.5H239.506V142.8H239.206C238.906 139.1 238.606 135.7 237.406 133.5C236.006 131.1 235.306 130.2 220.906 129.7H219.906L180.606 129.2H179.575C179.655 128.964 179.733 128.731 179.81 128.5H180.806H220.306H221.306Z"
+        />
         <AnimatedPath d="M180.813 128.5L190.113 101H114.513V126H115.013C115.013 102.7 119.813 101.5 127.113 101.5H147.513C158.113 101.5 178.113 101.4 181.113 104.4C184.306 106.842 185.999 109.989 179.817 128.5H180.813Z" />
         <AnimatedPath d="M112.013 190.5V191H133.013V190.5C128.013 190.5 123.613 187.8 128.513 173.6L152.413 103.3H151.813L126.813 173.5C121.713 187.6 117.013 190.5 112.013 190.5Z" />
-        <AnimatedPath opacity="0.9" d="M214.52 101V101.3L234.92 101.9C246.12 102.2 249.52 104.2 252.92 108.4C256.52 112.7 256.72 123.2 256.72 126H257.02V101H214.52Z" />
-
+        <AnimatedPath
+          opacity="0.9"
+          d="M214.52 101V101.3L234.92 101.9C246.12 102.2 249.52 104.2 252.92 108.4C256.52 112.7 256.72 123.2 256.72 126H257.02V101H214.52Z"
+        />
       </svg>
     </LogoAnimationContext.Provider>
   );
