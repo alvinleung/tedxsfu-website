@@ -17,7 +17,9 @@ type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
 const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
   <section className={`px-4 py-4`}>
     <StickyContainer>
-      <MainGrid className={`${padding ? "mt-64" : ""}`}>{children}</MainGrid>
+      <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
+        {children}
+      </MainGrid>
       {/* <div className="block h-64"></div> */}
     </StickyContainer>
   </section>
@@ -104,10 +106,10 @@ const About = (props: Props) => {
           <div className="col-start-1 col-span-full mt-16 mb-32">
             <DirectorTeamDisplay />
           </div>
-          <h3 className="col-start-2 col-span-2 text-lead mb-24">
+          <h3 className="col-start-1 col-span-4 md:col-start-2 md:col-span-2 text-lead mb-24">
             And our larger, proud and hungry team of 21
           </h3>
-          <div className="col-start-2 col-span-4 grid grid-cols-2 gap-4">
+          <div className="col-start-1 md:col-start-2 col-span-4 grid md:grid-cols-2 gap-4">
             {teams.map((team, i) => (
               <TeamView name={team.name} key={i}>
                 {team.members.map((member, i) => (
