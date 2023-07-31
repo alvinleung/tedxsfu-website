@@ -1,4 +1,4 @@
-import DirectorTeamDisplay from "@/component/layouts/DirectorTeamDisplay";
+import DirectorTeamDisplay from "@/component/DirectorTeamDisplay/DirectorTeamDisplay";
 import PastActivitiesGallery from "@/component/layouts/PastActivitiesGallery";
 import Sticky from "@/component/ScrollContainer/Sticky";
 import StickyContainer from "@/component/ScrollContainer/StickyContainer";
@@ -7,6 +7,8 @@ import { teams } from "@/data/teamData";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import MainGrid from "@/component/layouts/MainGrid";
+import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 type Props = {};
 
@@ -15,9 +17,7 @@ type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
 const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
   <section className={`px-4 py-4`}>
     <StickyContainer>
-      <div className={`grid grid-cols-8 gap-4 ${padding ? "mt-64" : ""}`}>
-        {children}
-      </div>
+      <MainGrid className={`${padding ? "mt-64" : ""}`}>{children}</MainGrid>
       {/* <div className="block h-64"></div> */}
     </StickyContainer>
   </section>
@@ -30,18 +30,29 @@ type SectionCopyProps = {
 };
 
 const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
+  const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
+
   return (
     <motion.div
-      className={`${sticky ? "sticky" : ""} top-4 min-h-[50%] ${
-        left ? "col-start-3 col-span-2" : "col-start-6 col-span-2 h-fit z-10"
+      className={`${shouldStick ? "sticky" : ""} top-4 min-h-[50%] ${
+        left
+          ? "col-start-1 col-span-full md:col-start-2 md:col-span-2 2xl:col-start-3 2xl:col-span-2"
+          : "col-start-1 col-span-full md:col-start-5 md:col-span-2 2xl:col-start-6 2xl:col-span-2 h-fit z-10"
       }`}
     >
-      {sticky && <Sticky top={16}>{children}</Sticky>}
-      {!sticky && children}
+      {shouldStick && <Sticky top={16}>{children}</Sticky>}
+      {!shouldStick && children}
       {/* {children} */}
     </motion.div>
   );
 };
+
+const SectionInfoHeader = (props: any) => (
+  <h3 className="text-lead mb-2">{props.children}</h3>
+);
+const SectionInfoDescription = (props: any) => (
+  <h3 className="text-lead opacity-50">{props.children}</h3>
+);
 
 const About = (props: Props) => {
   return (
@@ -62,17 +73,17 @@ const About = (props: Props) => {
 
         <SectionLayout>
           <SectionInfo sticky>
-            <h3 className="text-lead mb-2">
+            <SectionInfoHeader>
               It&apos;s about &ldquo;ideas worth spreading&rdquo;
-            </h3>
-            <p className="text-lead opacity-40">
+            </SectionInfoHeader>
+            <SectionInfoDescription>
               TED stands for Technology, Entertainment and Design, known
               worldwide for their TED and TEDx Talks we watch online.
-            </p>
-            <p className="text-lead opacity-40">
+            </SectionInfoDescription>
+            <SectionInfoDescription>
               The X in TEDx stands for an independent organization, marking
               TEDxSFU as an initiative driven by passionate people from SFU.
-            </p>
+            </SectionInfoDescription>
           </SectionInfo>
 
           <div className="min-h-screen">
@@ -82,15 +93,15 @@ const About = (props: Props) => {
 
         <SectionLayout padding>
           <SectionInfo sticky>
-            <h3 className="text-lead mb-2">
+            <SectionInfoHeader>
               Student team, industry experience
-            </h3>
-            <p className="text-lead opacity-40">
+            </SectionInfoHeader>
+            <SectionInfoDescription>
               Punching above our weight, we research, analyze, and explore what
               it takes to produce a professional and impactful conference.
-            </p>
+            </SectionInfoDescription>
           </SectionInfo>
-          <div className="col-start-1 col-end-9 mt-16 mb-32">
+          <div className="col-start-1 col-span-full mt-16 mb-32">
             <DirectorTeamDisplay />
           </div>
           <h3 className="col-start-2 col-span-2 text-lead mb-24">
@@ -113,13 +124,15 @@ const About = (props: Props) => {
         </SectionLayout>
         <SectionLayout padding>
           <SectionInfo left>
-            <h3 className="text-lead mb-2">Stuff we&apos;ve done this year</h3>
-            <p className="text-lead opacity-50">
+            <SectionInfoHeader>
+              Stuff we&apos;ve done this year
+            </SectionInfoHeader>
+            <SectionInfoDescription>
               We&apos;re opening up new personal and professional connections,
               one step at a time.
-            </p>
+            </SectionInfoDescription>
           </SectionInfo>
-          <div className="col-start-1 col-end-9 mt-32 mb-32">
+          <div className="col-start-1 col-span-full mt-32 mb-32">
             <PastActivitiesGallery />
           </div>
         </SectionLayout>

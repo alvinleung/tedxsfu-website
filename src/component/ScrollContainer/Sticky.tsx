@@ -12,6 +12,7 @@ import { motion, useTransform } from "framer-motion";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useStickyContainerBounds } from "./StickyContainer";
+import { useCSSSizingInPixel } from "@/hooks/useCSSSizingInPixel";
 
 type Props = {
   children: React.ReactNode;
@@ -32,21 +33,7 @@ const Sticky = ({ children, top, duration }: Props) => {
     setTimeout(() => setIsDOMReady(true), 10);
   }, [isUsingSmoothScroll]);
 
-  const topOffsetPixel = useMemo<number>(() => {
-    if (typeof top === "string") {
-      if ((top as String).includes("vh")) {
-        return windowDim.height * parseFloat(top) * 0.01;
-      }
-      if ((top as String).includes("vw")) {
-        return windowDim.width * parseFloat(top) * 0.01;
-      }
-      if ((top as String).includes("px")) {
-        return parseFloat(top);
-      }
-      return parseFloat(top);
-    }
-    return top;
-  }, [top, windowDim]);
+  const topOffsetPixel = useCSSSizingInPixel(top);
 
   const stickyDuration = useMemo(() => {
     if (duration) {
