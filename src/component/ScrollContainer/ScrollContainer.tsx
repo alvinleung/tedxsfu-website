@@ -100,7 +100,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     return () => {
       unobserveScrollY();
     };
-  }, []);
+  }, [scrollY]);
 
   const isPresent = useIsPresent();
 

@@ -32,17 +32,18 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   };
   useEffect(() => refreshDocumentMeasurement(), [windowDimension]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isUsingSmoothScroll) {
       // reset smooth scroll when cancel
-      container.current.scrollTop = targetScrollY.current;
+      container.current.scrollTop = 0;
       scrollY.set(0);
       return;
     }
 
-    targetScrollY.current = container.current.scrollTop;
-    container.current.scrollTop = 0;
+    targetScrollY.current = 0;
     scrollY.set(targetScrollY.current);
+    container.current.scrollTop = 0;
+    // refreshDocumentMeasurement();
   }, [isUsingSmoothScroll]);
 
   useLayoutEffect(() => {
@@ -57,14 +58,14 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
     };
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchend", handleTouchStart);
-    window.addEventListener("mouseenter", handleMouseMove);
-    window.addEventListener("mouseleave", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseMove);
+    // window.addEventListener("mouseleave", handleMouseMove);
 
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchStart);
-      window.removeEventListener("mouseenter", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseMove);
+      // window.removeEventListener("mouseleave", handleMouseMove);
     };
   }, []);
 

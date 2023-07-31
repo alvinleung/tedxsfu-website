@@ -20,12 +20,17 @@ type Props = {
 };
 
 const Sticky = ({ children, top, duration }: Props) => {
+  const windowDim = useWindowDimension();
   const [isDOMReady, setIsDOMReady] = useState(false);
   const { documentOffsetY, isUsingSmoothScroll } = useContainerScroll();
   const stickyContainerBounds = useStickyContainerBounds();
   const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([isDOMReady]);
 
-  const windowDim = useWindowDimension();
+  // hack to force re calculate the bounding box once swtiching back from touch
+  useEffect(() => {
+    setIsDOMReady(false);
+    setTimeout(() => setIsDOMReady(true), 10);
+  }, [isUsingSmoothScroll]);
 
   const topOffsetPixel = useMemo<number>(() => {
     if (typeof top === "string") {
@@ -48,7 +53,7 @@ const Sticky = ({ children, top, duration }: Props) => {
       return duration;
     }
     return stickyContainerBounds.height - (bounds.height + topOffsetPixel);
-  }, [bounds, stickyContainerBounds, duration]);
+  }, [bounds, stickyContainerBounds, duration, topOffsetPixel]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -56,7 +61,7 @@ const Sticky = ({ children, top, duration }: Props) => {
     }
   }, []);
 
-  const stickyOffset = useTransform([documentOffsetY], ([y]: any) => {
+  const stickyOffset = useTransform(documentOffsetY, (y: any) => {
     const stickyPos = -bounds.top + topOffsetPixel;
 
     // before sticky
