@@ -21,7 +21,7 @@ type Props = {
 
 const Sticky = ({ children, top, duration }: Props) => {
   const [isDOMReady, setIsDOMReady] = useState(false);
-  const { documentOffsetY } = useContainerScroll();
+  const { documentOffsetY, isUsingSmoothScroll } = useContainerScroll();
   const stickyContainerBounds = useStickyContainerBounds();
   const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([isDOMReady]);
 
@@ -56,8 +56,6 @@ const Sticky = ({ children, top, duration }: Props) => {
     }
   }, []);
 
-  // console.log(documentOffsetY);
-
   const stickyOffset = useTransform([documentOffsetY], ([y]: any) => {
     const stickyPos = -bounds.top + topOffsetPixel;
 
@@ -67,7 +65,6 @@ const Sticky = ({ children, top, duration }: Props) => {
     }
     // after sticky
     if (stickyPos - stickyDuration > y) {
-      // console.log("fdsa");
       return y + stickyDuration;
     }
 
@@ -78,11 +75,15 @@ const Sticky = ({ children, top, duration }: Props) => {
   return (
     <>
       {
-        <div ref={containerRef} className="opacity-0 pointer-events-none">
+        <div
+          ref={containerRef}
+          className={isUsingSmoothScroll ? "opacity-0 pointer-events-none" : ""}
+        >
           {children}
         </div>
       }
       {isDOMReady &&
+        isUsingSmoothScroll &&
         createPortal(
           <motion.div
             style={{

@@ -10,7 +10,7 @@ import {
 } from "react";
 
 type SmoothScrollParams = {
-  container: MutableRefObject<any>;
+  container: MutableRefObject<HTMLDivElement>;
 };
 
 export function useSmoothScroll({ container }: SmoothScrollParams) {
@@ -32,12 +32,25 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   };
   useEffect(() => refreshDocumentMeasurement(), [windowDimension]);
 
+  useEffect(() => {
+    if (!isUsingSmoothScroll) {
+      // reset smooth scroll when cancel
+      container.current.scrollTop = targetScrollY.current;
+      scrollY.set(0);
+      return;
+    }
+
+    targetScrollY.current = container.current.scrollTop;
+    container.current.scrollTop = 0;
+    scrollY.set(targetScrollY.current);
+  }, [isUsingSmoothScroll]);
+
   useLayoutEffect(() => {
     if (isMobile()) {
       setIsUsingSmoothScroll(false);
     }
     const handleTouchStart = () => {
-      setIsUsingSmoothScroll(true);
+      setIsUsingSmoothScroll(false);
     };
     const handleMouseMove = () => {
       setIsUsingSmoothScroll(true);
@@ -56,6 +69,8 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   }, []);
 
   useEffect(() => {
+    if (!isUsingSmoothScroll) return;
+
     const handleMouseWheel = (e: WheelEvent) => {
       const maxScroll = 150;
       const newScrollValue = clamp(
@@ -98,7 +113,7 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
       window.removeEventListener("wheel", handleMouseWheel);
       cancelAnimationFrame(animationFrame);
     };
-  }, [scrollHeight, windowDimension]);
+  }, [scrollHeight, windowDimension, isUsingSmoothScroll]);
 
   // calculating the scrollheight
   useEffect(() => {

@@ -45,6 +45,7 @@ interface ScrollContextInfo {
   setCanScroll: Dispatch<SetStateAction<boolean>>;
   scrollContainerRef: MutableRefObject<HTMLDivElement>;
   refreshDocumentMeasurement: () => void;
+  isUsingSmoothScroll: boolean;
 }
 
 export const ScrollContext = createContext<ScrollContextInfo>({
@@ -59,6 +60,7 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   scrollContainerRef: undefined as unknown as MutableRefObject<HTMLDivElement>,
   setCanScroll: () => {},
   refreshDocumentMeasurement: () => {},
+  isUsingSmoothScroll: true,
 });
 
 export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
@@ -81,7 +83,10 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     container: scrollContainerRef,
   });
 
-  const documentOffsetY = useTransform(scrollY, (v) => -v);
+  const documentOffsetY = useTransform(scrollY, (v) => {
+    if (!isUsingSmoothScroll) return 0;
+    return -v;
+  });
 
   useEffect(() => {
     const unobserveScrollY = scrollY.on("change", (val) => {
@@ -113,6 +118,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         scrollContainerRef,
         documentOffsetY,
         refreshDocumentMeasurement,
+        isUsingSmoothScroll,
       }}
     >
       <motion.div
