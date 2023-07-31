@@ -1,12 +1,15 @@
 import { pastActivities } from "@/data/pastActivitiesData";
 import { motion } from "framer-motion";
 import React from "react";
-import StickyContainer from "./ScrollContainer/StickyContainer";
-import Sticky from "./ScrollContainer/Sticky";
+import StickyContainer from "../ScrollContainer/StickyContainer";
+import Sticky from "../ScrollContainer/Sticky";
+import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 
 type Props = {};
 
 const PastActivitiesGallery = (props: Props) => {
+  const { refreshDocumentMeasurement } = useContainerScroll();
+
   return (
     <div className="grid grid-cols-8 gap-4 align-start">
       {pastActivities.map((activity, i) => (
@@ -35,7 +38,12 @@ const PastActivitiesGallery = (props: Props) => {
 
                 return (
                   <div className={`${firstItemStyling}`} key={i}>
-                    <img src={media.src} width={1280} height={720} />
+                    <img
+                      src={media.src}
+                      width={1280}
+                      height={720}
+                      onLoad={() => refreshDocumentMeasurement()}
+                    />
                   </div>
                 );
               })}

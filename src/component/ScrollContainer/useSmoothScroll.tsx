@@ -9,19 +9,28 @@ import {
   useState,
 } from "react";
 
-export function useSmoothScroll({
-  container,
-}: {
+type SmoothScrollParams = {
   container: MutableRefObject<any>;
-}) {
+};
+
+export function useSmoothScroll({ container }: SmoothScrollParams) {
   const [isUsingSmoothScroll, setIsUsingSmoothScroll] = useState(true);
   const windowDimension = useWindowDimension();
   const scrollX = useMotionValue(0);
   const scrollY = useMotionValue(0);
   const scrollXProgress = useMotionValue(0);
   const scrollYProgress = useMotionValue(0);
+  const [scrollWidth, setScrollWidth] = useState(0);
+  const [scrollHeight, setScrollHeight] = useState(0);
 
   const targetScrollY = useRef(0);
+
+  const refreshDocumentMeasurement = () => {
+    // recalculate the document measurement here
+    setScrollWidth(container.current.scrollWidth);
+    setScrollHeight(container.current.scrollHeight);
+  };
+  useEffect(() => refreshDocumentMeasurement(), [windowDimension]);
 
   useLayoutEffect(() => {
     if (isMobile()) {
@@ -51,7 +60,7 @@ export function useSmoothScroll({
       const maxScroll = 150;
       const newScrollValue = clamp(
         0,
-        container.current.scrollHeight - windowDimension.height,
+        scrollHeight - windowDimension.height,
         targetScrollY.current + clamp(-maxScroll, maxScroll, e.deltaY)
       );
       targetScrollY.current = newScrollValue;
@@ -89,7 +98,15 @@ export function useSmoothScroll({
       window.removeEventListener("wheel", handleMouseWheel);
       cancelAnimationFrame(animationFrame);
     };
-  }, [windowDimension]);
+  }, [scrollHeight, windowDimension]);
+
+  // calculating the scrollheight
+  useEffect(() => {
+    const cleanup = scrollY.on("change", (v) => {
+      scrollYProgress.set(v / scrollHeight);
+    });
+    return () => cleanup();
+  }, [scrollY, scrollHeight]);
 
   const framerMotionScroll = useScroll({
     container: container,
@@ -105,5 +122,8 @@ export function useSmoothScroll({
       ? scrollYProgress
       : framerMotionScroll.scrollYProgress,
     isUsingSmoothScroll,
+    scrollHeight,
+    scrollWidth,
+    refreshDocumentMeasurement,
   };
 }

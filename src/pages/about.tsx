@@ -1,8 +1,8 @@
-import DirectorTeamDisplay from "@/component/DirectorTeamDisplay";
-import PastActivitiesGallery from "@/component/PastActivitiesGallery";
+import DirectorTeamDisplay from "@/component/layouts/DirectorTeamDisplay";
+import PastActivitiesGallery from "@/component/layouts/PastActivitiesGallery";
 import Sticky from "@/component/ScrollContainer/Sticky";
 import StickyContainer from "@/component/ScrollContainer/StickyContainer";
-import { TeamView, TeamMember } from "@/component/TeamView";
+import { TeamView, TeamMember } from "@/component/layouts/TeamView";
 import { teams } from "@/data/teamData";
 import { motion } from "framer-motion";
 import Image from "next/image";

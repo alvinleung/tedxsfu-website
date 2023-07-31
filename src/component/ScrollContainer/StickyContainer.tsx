@@ -1,5 +1,6 @@
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import React, { createContext, useContext } from "react";
+import { useContainerScroll } from "./ScrollContainer";
 
 type Props = {
   children: React.ReactNode;
@@ -17,7 +18,8 @@ const StickyContainerContext = createContext({
 });
 
 const StickyContainer = ({ children }: Props) => {
-  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([]);
+  const { scrollHeight } = useContainerScroll();
+  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([scrollHeight]);
   return (
     <div ref={containerRef}>
       <StickyContainerContext.Provider value={bounds}>

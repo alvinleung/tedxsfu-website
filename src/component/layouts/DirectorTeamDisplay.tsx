@@ -5,10 +5,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { directors } from "../data/teamData";
+import { directors } from "../../data/teamData";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { motion, useInView, useTransform } from "framer-motion";
-import { useContainerScroll } from "./ScrollContainer/ScrollContainer";
+import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 
 type Props = {};

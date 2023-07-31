@@ -44,6 +44,7 @@ interface ScrollContextInfo {
   scrollDirection: ScrollDirection;
   setCanScroll: Dispatch<SetStateAction<boolean>>;
   scrollContainerRef: MutableRefObject<HTMLDivElement>;
+  refreshDocumentMeasurement: () => void;
 }
 
 export const ScrollContext = createContext<ScrollContextInfo>({
@@ -57,13 +58,12 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   scrollDirection: ScrollDirection.DOWN,
   scrollContainerRef: undefined as unknown as MutableRefObject<HTMLDivElement>,
   setCanScroll: () => {},
+  refreshDocumentMeasurement: () => {},
 });
 
 export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const [canScroll, setCanScroll] = useState(true);
-  const [scrollWidth, setScrollWidth] = useState(0);
-  const [scrollHeight, setScrollHeight] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<ScrollDirection>(
     ScrollDirection.DOWN
   );
@@ -74,17 +74,14 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     scrollXProgress,
     scrollYProgress,
     isUsingSmoothScroll,
+    scrollWidth,
+    scrollHeight,
+    refreshDocumentMeasurement,
   } = useSmoothScroll({
     container: scrollContainerRef,
   });
 
   const documentOffsetY = useTransform(scrollY, (v) => -v);
-
-  const windowDim = useWindowDimension();
-  useEffect(() => {
-    setScrollWidth(scrollContainerRef.current.scrollWidth);
-    setScrollHeight(scrollContainerRef.current.scrollHeight);
-  }, [windowDim]);
 
   useEffect(() => {
     const unobserveScrollY = scrollY.on("change", (val) => {
@@ -99,8 +96,6 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
       unobserveScrollY();
     };
   }, []);
-
-  useEffect(() => {}, []);
 
   const isPresent = useIsPresent();
 
@@ -117,6 +112,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         scrollDirection,
         scrollContainerRef,
         documentOffsetY,
+        refreshDocumentMeasurement,
       }}
     >
       <motion.div
