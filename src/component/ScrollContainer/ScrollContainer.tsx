@@ -21,6 +21,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useSmoothScroll } from "./useSmoothScroll";
 
 type Props = {
   children: React.ReactNode;
@@ -57,101 +58,6 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   scrollContainerRef: undefined as unknown as MutableRefObject<HTMLDivElement>,
   setCanScroll: () => {},
 });
-
-function useSmoothScroll({ container }: { container: MutableRefObject<any> }) {
-  const [isUsingSmoothScroll, setIsUsingSmoothScroll] = useState(true);
-  const windowDimension = useWindowDimension();
-  const scrollX = useMotionValue(0);
-  const scrollY = useMotionValue(0);
-  const scrollXProgress = useMotionValue(0);
-  const scrollYProgress = useMotionValue(0);
-
-  const targetScrollY = useRef(0);
-
-  useLayoutEffect(() => {
-    if (isMobile()) {
-      setIsUsingSmoothScroll(false);
-    }
-    const handleTouchStart = () => {
-      setIsUsingSmoothScroll(true);
-    };
-    const handleMouseMove = () => {
-      setIsUsingSmoothScroll(true);
-    };
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchStart);
-    window.addEventListener("mouseenter", handleMouseMove);
-    window.addEventListener("mouseleave", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchStart);
-      window.removeEventListener("mouseenter", handleMouseMove);
-      window.removeEventListener("mouseleave", handleMouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleMouseWheel = (e: WheelEvent) => {
-      const maxScroll = 150;
-      const newScrollValue = clamp(
-        0,
-        container.current.scrollHeight,
-        targetScrollY.current + clamp(-maxScroll, maxScroll, e.deltaY)
-      );
-      targetScrollY.current = newScrollValue;
-
-      beginFrameUpdate();
-    };
-    window.addEventListener("wheel", handleMouseWheel);
-
-    let shouldUpdate = false;
-    let animationFrame: number;
-    const stopThreshold = 0.1;
-
-    function beginFrameUpdate() {
-      if (shouldUpdate) return;
-      shouldUpdate = true;
-      animationFrame = requestAnimationFrame(performFrameUpdate);
-    }
-    function performFrameUpdate() {
-      const currentScrollY = scrollY.get();
-      const offset = (targetScrollY.current - currentScrollY) * 0.15;
-
-      if (Math.abs(offset) > stopThreshold) {
-        scrollY.set(currentScrollY + offset);
-        animationFrame = requestAnimationFrame(performFrameUpdate);
-        return;
-      }
-
-      shouldUpdate = false;
-      scrollY.set(targetScrollY.current);
-    }
-
-    beginFrameUpdate();
-
-    return () => {
-      window.removeEventListener("wheel", handleMouseWheel);
-      cancelAnimationFrame(animationFrame);
-    };
-  }, [windowDimension]);
-
-  const framerMotionScroll = useScroll({
-    container: container,
-  });
-
-  return {
-    scrollX: isUsingSmoothScroll ? scrollX : framerMotionScroll.scrollX,
-    scrollY: isUsingSmoothScroll ? scrollY : framerMotionScroll.scrollY,
-    scrollXProgress: isUsingSmoothScroll
-      ? scrollXProgress
-      : framerMotionScroll.scrollXProgress,
-    scrollYProgress: isUsingSmoothScroll
-      ? scrollYProgress
-      : framerMotionScroll.scrollYProgress,
-    isUsingSmoothScroll,
-  };
-}
 
 export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
