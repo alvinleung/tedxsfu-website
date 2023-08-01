@@ -6,7 +6,7 @@ const directors = [
     stroke: "about/team-yeeloong.png",
     fill: "about/team-yeeloong-fill.svg",
     description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+      " designer at Reap, previously at Live Nation and Ticketmaster.",
   },
   {
     name: "Josh Ralla",
@@ -15,16 +15,16 @@ const directors = [
     stroke: "about/team-josh.png",
     fill: "about/team-josh-fill.svg",
     description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+      " coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
   },
   {
     name: "Kayla You",
-    pronouns: "he/him",
+    pronouns: "she/her",
     position: "Operations director",
     stroke: "/about/team-kayla.png",
     fill: "about/team-kayla-fill.svg",
     description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+      " risk analyst at Deloitte, previously at Canadian International Arts & Music Society.",
   },
   {
     name: "Paul Falkowski",
@@ -32,17 +32,16 @@ const directors = [
     position: "Principal director, content + PR",
     stroke: "/about/team-paul.png",
     fill: "about/team-paul-fill.svg",
-    description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+    description: " drama educator and entertainer, previously at Bell Media.",
   },
   {
     name: "Youngin Cho",
-    pronouns: "he/him",
+    pronouns: "she/her",
     position: "Marketing director",
     stroke: "/about/team-youngin.png",
     fill: "about/team-youngin-fill.svg",
     description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+      " founder and co-executive director at Sän Illustration, previously at Brother Korea Ltd.",
   },
   {
     name: "Alvin Leung",
@@ -51,7 +50,7 @@ const directors = [
     stroke: "/about/team-alvin.png",
     fill: "about/team-alvin-fill.svg",
     description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+      " previously a designer at Daybreak Studio and Dossier Creative.",
   },
   {
     name: "Nathan Lew",
@@ -60,7 +59,7 @@ const directors = [
     stroke: "/about/team-nathan.png",
     fill: "about/team-nathan-fill.svg",
     description:
-      "coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+      " previously a designer at Touchpoint IxD Conference and Guusto.",
   },
 ];
 

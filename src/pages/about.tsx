@@ -44,7 +44,6 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
     >
       {shouldStick && <Sticky top={16}>{children}</Sticky>}
       {!shouldStick && children}
-      {/* {children} */}
     </motion.div>
   );
 };
