@@ -61,10 +61,21 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
     window.addEventListener("mouseover", handleMouseMove);
     // window.addEventListener("mouseleave", handleMouseMove);
 
+    const cancelTab = (e: KeyboardEvent) => {
+      if (e.key === "Tab") {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    };
+    window.addEventListener("keyup", cancelTab);
+    window.addEventListener("keydown", cancelTab);
+
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchStart);
       window.removeEventListener("mouseover", handleMouseMove);
+      window.removeEventListener("keyup", cancelTab);
+      window.removeEventListener("keydown", cancelTab);
       // window.removeEventListener("mouseleave", handleMouseMove);
     };
   }, []);

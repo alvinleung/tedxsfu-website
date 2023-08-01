@@ -4,6 +4,7 @@ import React from "react";
 import StickyContainer from "../ScrollContainer/StickyContainer";
 import Sticky from "../ScrollContainer/Sticky";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
+import MainGrid from "./MainGrid";
 
 type Props = {};
 
@@ -11,7 +12,7 @@ const PastActivitiesGallery = (props: Props) => {
   const { refreshDocumentMeasurement } = useContainerScroll();
 
   return (
-    <div className="grid grid-cols-8 gap-4 align-start">
+    <MainGrid>
       {pastActivities.map((activity, i) => (
         <React.Fragment key={i}>
           <StickyContainer>
@@ -51,7 +52,7 @@ const PastActivitiesGallery = (props: Props) => {
           </div>
         </React.Fragment>
       ))}
-    </div>
+    </MainGrid>
   );
 };
 

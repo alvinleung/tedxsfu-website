@@ -1,5 +1,6 @@
 import React, {
   MutableRefObject,
+  createContext,
   useCallback,
   useEffect,
   useMemo,
@@ -21,9 +22,10 @@ type Props = {
 };
 
 const Sticky = ({ children, top, duration }: Props) => {
-  const windowDim = useWindowDimension();
+  // const windowDim = useWindowDimension();
   const [isDOMReady, setIsDOMReady] = useState(false);
-  const { documentOffsetY, isUsingSmoothScroll } = useContainerScroll();
+  const { documentOffsetY, isUsingSmoothScroll, scrollY } =
+    useContainerScroll();
   const stickyContainerBounds = useStickyContainerBounds();
   const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([isDOMReady]);
 
@@ -62,6 +64,16 @@ const Sticky = ({ children, top, duration }: Props) => {
 
     // during sticky
     return stickyPos;
+  });
+
+  const stickyPixelOffset = useTransform(documentOffsetY, (y: any) => {
+    const stickyPos = -bounds.top + topOffsetPixel;
+    return stickyPos - y;
+  });
+
+  const stickyProgress = useTransform([stickyPixelOffset], ([offsetY]: any) => {
+    console.log(offsetY / bounds.height);
+    return -offsetY / bounds.height;
   });
 
   return (
