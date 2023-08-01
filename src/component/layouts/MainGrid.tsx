@@ -18,5 +18,6 @@ const MainGrid = React.forwardRef((props: Props, ref) => {
     </div>
   );
 });
+MainGrid.displayName = "MainGrid";
 
 export default MainGrid;
