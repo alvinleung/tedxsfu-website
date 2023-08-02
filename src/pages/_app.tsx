@@ -6,7 +6,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import { ScrollContainer } from "@/component/ScrollContainer/ScrollContainer";
-import Nav from "@/component/Nav";
+import Nav from "@/component/Nav/Nav";
 
 const chiaroscuro = localFont({
   src: [
