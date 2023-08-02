@@ -114,7 +114,7 @@ const AnimatedPath = (props: any) => {
 const Logo = (props: Props) => {
   const animProgress = useMotionValue(0);
   const touchAnimProgress = useMotionValue(0);
-  const viewport = useWindowDimension();
+  // const viewport = useWindowDimension();
 
   useEffect(() => {
     let prevTouch = 0;
@@ -133,7 +133,7 @@ const Logo = (props: Props) => {
         1
       );
       // touchAnimProgress.set(newProgress);
-      
+
       // e.preventDefault();
       // e.stopPropagation();
 
@@ -148,9 +148,12 @@ const Logo = (props: Props) => {
 
       timeout = setTimeout(() => {
         // reset to normal when mouse is not moving
-        animate(touchAnimProgress, 0, {duration: 1, ease: [0.22, 1, 0.36, 1]});
+        animate(touchAnimProgress, 0, {
+          duration: 1,
+          ease: [0.22, 1, 0.36, 1],
+        });
       }, 300);
-    }
+    };
 
     let animFrame = 0;
     function frameUpdate() {

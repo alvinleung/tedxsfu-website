@@ -28,7 +28,12 @@ const NavToggle = (props: Props) => {
   return (
     <motion.button
       onClick={handleToggleClick}
-      className="flex items-center border mr-4 mt-4 px-2  overflow-hidden uppercase"
+      className="flex items-center border mr-4 mt-4 px-2  overflow-hidden"
+      initial={{
+        backgroundColor: isAboutPage ? "#FFF" : "#000",
+        color: isAboutPage ? "#000" : "#FFF",
+        borderColor: isAboutPage ? "#CCC" : "#444",
+      }}
       animate={{
         backgroundColor: isAboutPage ? "#FFF" : "#000",
         color: isAboutPage ? "#000" : "#FFF",
@@ -40,7 +45,7 @@ const NavToggle = (props: Props) => {
       }}
     >
       <motion.span
-        className="flex flex-row justify-end relative py-2 pr-2"
+        className="flex flex-row justify-end relative py-1 pr-2"
         animate={{
           width: isAboutPage ? 24 : aboutTextBounds.width + 12,
           transition: {
@@ -60,7 +65,7 @@ const NavToggle = (props: Props) => {
             },
           }}
         >
-          About Us
+          Our Story
         </motion.span>
         <motion.img
           className=" top-0 left-0"
@@ -77,7 +82,7 @@ const NavToggle = (props: Props) => {
         />
       </motion.span>
       <motion.span
-        className="flex flex-row border-l border-l-[inherit] relative py-2 pl-2"
+        className="flex flex-row border-l border-l-[inherit] relative py-1 pl-2"
         animate={{
           width: isAboutPage ? conferenceTextBounds.width + 12 : 24,
           transition: {
@@ -110,7 +115,7 @@ const NavToggle = (props: Props) => {
             },
           }}
         >
-          Conference
+          Event Info
         </motion.span>
       </motion.span>
     </motion.button>
