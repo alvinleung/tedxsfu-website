@@ -32,6 +32,11 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   };
   useEffect(() => refreshDocumentMeasurement(), [windowDimension]);
 
+  const scrollTo = (target: number) => {
+    targetScrollY.current = target;
+    scrollY.set(target);
+  };
+
   useLayoutEffect(() => {
     if (!isUsingSmoothScroll) {
       // reset smooth scroll when cancel
@@ -152,5 +157,6 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
     scrollHeight,
     scrollWidth,
     refreshDocumentMeasurement,
+    scrollTo,
   };
 }

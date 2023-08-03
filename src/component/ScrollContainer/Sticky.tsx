@@ -72,7 +72,6 @@ const Sticky = ({ children, top, duration }: Props) => {
   });
 
   const stickyProgress = useTransform([stickyPixelOffset], ([offsetY]: any) => {
-    console.log(offsetY / bounds.height);
     return -offsetY / bounds.height;
   });
 
