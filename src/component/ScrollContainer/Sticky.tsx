@@ -26,10 +26,13 @@ type Props = {
 const Sticky = ({ children, top, duration }: Props) => {
   // const windowDim = useWindowDimension();
   const [isDOMReady, setIsDOMReady] = useState(false);
-  const { documentOffsetY, isUsingSmoothScroll, scrollY } =
+  const { documentOffsetY, isUsingSmoothScroll, scrollY, scrollHeight } =
     useContainerScroll();
   const stickyContainerBounds = useStickyContainerBounds();
-  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([isDOMReady]);
+  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([
+    isDOMReady,
+    scrollHeight,
+  ]);
   const windowDim = useWindowDimension();
 
   // hack to force re calculate the bounding box once swtiching back from touch
