@@ -14,6 +14,8 @@ import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useStickyContainerBounds } from "./StickyContainer";
 import { useCSSSizingInPixel } from "@/hooks/useCSSSizingInPixel";
+import { useRouter } from "next/router";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   children: React.ReactNode;
@@ -28,6 +30,7 @@ const Sticky = ({ children, top, duration }: Props) => {
     useContainerScroll();
   const stickyContainerBounds = useStickyContainerBounds();
   const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([isDOMReady]);
+  const windowDim = useWindowDimension();
 
   // hack to force re calculate the bounding box once swtiching back from touch
   useEffect(() => {
@@ -72,9 +75,10 @@ const Sticky = ({ children, top, duration }: Props) => {
   });
 
   const stickyProgress = useTransform([stickyPixelOffset], ([offsetY]: any) => {
-    console.log(offsetY / bounds.height);
     return -offsetY / bounds.height;
   });
+
+  const router = useRouter();
 
   return (
     <>
@@ -98,6 +102,26 @@ const Sticky = ({ children, top, duration }: Props) => {
               width: bounds && bounds.width,
               bottom: bounds && bounds.bottom,
               left: bounds && bounds.left,
+            }}
+            initial={{
+              x:
+                router.pathname === "/about"
+                  ? -windowDim.width
+                  : windowDim.width,
+            }}
+            animate={{
+              x: 0,
+            }}
+            exit={{
+              x:
+                router.pathname === "/about"
+                  ? -windowDim.width
+                  : windowDim.width,
+              opacity: 0,
+            }}
+            transition={{
+              duration: AnimationConfig.VERY_SLOW,
+              ease: AnimationConfig.EASING_IN_OUT,
             }}
             className="text-black"
           >

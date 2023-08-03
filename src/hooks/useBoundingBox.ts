@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import { useWindowDimension } from "./useWindowDimension";
+import { useTransitionContext } from "@/component/transition/TransitionEffect";
 
 type BoundingBoxInfo = {
   x: number;
@@ -26,6 +27,7 @@ export function useBoundingBox<T extends HTMLElement>(
 
   const { scrollY } = useContainerScroll();
   const windowDim = useWindowDimension();
+  const { isTransitionDone } = useTransitionContext();
 
   const [bounds, setBounds] = useState({
     x: 0,
@@ -77,7 +79,7 @@ export function useBoundingBox<T extends HTMLElement>(
       top: bounds.top + scrollY.get(),
       bottom: bounds.bottom + scrollY.get(),
     });
-  }, [windowDim, ...dependency]);
+  }, [windowDim, isTransitionDone, ...dependency]);
 
   return [containerRef, bounds];
 }

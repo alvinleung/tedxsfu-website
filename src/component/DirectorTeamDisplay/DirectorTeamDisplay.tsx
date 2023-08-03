@@ -79,7 +79,7 @@ const DirectorTeamDisplay = (props: Props) => {
         <div className="mt-[15vw]">
           {directors.map((director, i) => {
             return (
-              <>
+              <React.Fragment key={i}>
                 {!isDesktop && (
                   <Fixed bottom="0px" top={"auto"} key={i} pointerEvents="none">
                     <DirectorInfo
@@ -99,7 +99,7 @@ const DirectorTeamDisplay = (props: Props) => {
                     key={i}
                   />
                 )}
-              </>
+              </React.Fragment>
             );
           })}{" "}
         </div>

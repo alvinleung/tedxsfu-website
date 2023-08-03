@@ -22,6 +22,7 @@ import {
   useState,
 } from "react";
 import { useSmoothScroll } from "./useSmoothScroll";
+import { useRouter } from "next/router";
 
 type Props = {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ interface ScrollContextInfo {
   scrollContainerRef: MutableRefObject<HTMLDivElement>;
   refreshDocumentMeasurement: () => void;
   isUsingSmoothScroll: boolean;
+  scrollTo: (target: number) => void;
 }
 
 export const ScrollContext = createContext<ScrollContextInfo>({
@@ -61,6 +63,7 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   setCanScroll: () => {},
   refreshDocumentMeasurement: () => {},
   isUsingSmoothScroll: true,
+  scrollTo: () => {},
 });
 
 export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
@@ -79,6 +82,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     scrollWidth,
     scrollHeight,
     refreshDocumentMeasurement,
+    scrollTo,
   } = useSmoothScroll({
     container: scrollContainerRef,
   });
@@ -119,6 +123,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         documentOffsetY,
         refreshDocumentMeasurement,
         isUsingSmoothScroll,
+        scrollTo,
       }}
     >
       <motion.div

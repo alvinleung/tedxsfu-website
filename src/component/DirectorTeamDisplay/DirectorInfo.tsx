@@ -43,7 +43,7 @@ export const DirectorInfo = ({
           : "linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%)",
       }}
     >
-      <div className="text-micro uppercase tracking-wide mb-2 border-b border-b-[#AAA] opacity-50 pb-1">
+      <div className="text-lead mb-2 pb-1">
         {director.name}
         {"\n"}({director.pronouns})
       </div>
