@@ -88,7 +88,7 @@ const About = (props: Props) => {
             </SectionInfoDescription>
           </SectionInfo>
 
-          <div className="col-start-1 col-span-full min-h-[300vh]">
+          <div className="col-start-1 col-span-full min-h-[600vh]">
             <Sticky top={"0px"}>
               {/* some media content goes on here */}
               <ScrollVideo />
