@@ -118,12 +118,15 @@ const About = (props: Props) => {
             {teams.map((team, i) => (
               <TeamView name={team.name} key={i}>
                 {team.members.map((member, i) => (
-                  <TeamMember
-                    name={member.name}
-                    position={member.position}
-                    linkedin={member.linkedin}
-                    key={i}
-                  />
+                  <>
+                    <TeamMember
+                      name={member.name}
+                      position={member.position}
+                      linkedin={member.linkedin}
+                      image={member.image}
+                      key={i}
+                    />
+                  </>
                 ))}
               </TeamView>
             ))}

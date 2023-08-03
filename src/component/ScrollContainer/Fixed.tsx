@@ -60,6 +60,7 @@ const Fixed = ({
             style={{
               position: "fixed",
               zIndex: 1000,
+              width: 200,
               top: top || 0,
               right: right || 0,
               // width: bounds && bounds.width,
