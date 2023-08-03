@@ -43,16 +43,29 @@ const ScrollVideo = (props: Props) => {
     if (!isScrubbingVideo) return;
 
     let animFrame = 0;
+    let prevFrameRounded = 0;
+
     const updateFrame = () => {
       // videoRef.current.fastSeek(videoFrame.current);
-      console.log(videoFrame.current);
-      videoRef.current.currentTime = videoFrame.current;
+
+      // round current frame to 0.0
+      const currentFrameRounded = Math.round(videoFrame.current * 10) / 10;
+      const updateThreshold = 0.1;
+
+      // only update frame when it is more than a specific delta
+      if (Math.abs(currentFrameRounded - prevFrameRounded) > updateThreshold) {
+        videoRef.current.currentTime = currentFrameRounded;
+      }
+      prevFrameRounded = currentFrameRounded;
+
       animFrame = requestAnimationFrame(updateFrame);
     };
     animFrame = requestAnimationFrame(updateFrame);
 
     return () => cancelAnimationFrame(animFrame);
   }, [isScrubbingVideo]);
+
+  useEffect(() => {}, [videoRef.current]);
 
   return (
     <>
