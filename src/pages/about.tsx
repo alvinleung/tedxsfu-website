@@ -5,11 +5,11 @@ import StickyContainer from "@/component/ScrollContainer/StickyContainer";
 import { TeamView, TeamMember } from "@/component/layouts/TeamView";
 import { teams } from "@/data/teamData";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import React from "react";
 import MainGrid from "@/component/layouts/MainGrid";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
+import StickyGallery from "@/component/StickyGallery/StickyGallery";
 
 type Props = {};
 
@@ -64,13 +64,14 @@ const About = (props: Props) => {
           <motion.div className="text-header h-64 col-start-3 col-span-4">
             13 years in the making
           </motion.div>
-          <Image
+          <StickyGallery />
+          {/* <Image
             src="/about/cover.jpg"
             className="col-span-full w-full"
             width={1920}
             height={1080}
             alt="Picture of the author"
-          />
+          /> */}
         </SectionLayout>
 
         <SectionLayout>
@@ -88,11 +89,9 @@ const About = (props: Props) => {
             </SectionInfoDescription>
           </SectionInfo>
 
-          <div className="col-start-1 col-span-full min-h-[600vh]">
-            <Sticky top={"0px"}>
-              {/* some media content goes on here */}
-              <ScrollVideo />
-            </Sticky>
+          <div className="col-start-1 col-span-full">
+            {/* some media content goes on here */}
+            <ScrollVideo src={"./about/about-intro-video.mp4"} />
           </div>
         </SectionLayout>
 

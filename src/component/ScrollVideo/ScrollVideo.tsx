@@ -4,18 +4,22 @@ import { useStickyContainerBounds } from "../ScrollContainer/StickyContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { clamp } from "framer-motion";
+import Sticky from "../ScrollContainer/Sticky";
 
-type Props = {};
+type Props = {
+  playbackConst?: number;
+  src: string;
+};
 
-const ScrollVideo = (props: Props) => {
-  const { scrollY } = useContainerScroll();
+const ScrollVideo = ({ playbackConst = 300, src }: Props) => {
+  const { scrollY, refreshDocumentMeasurement } = useContainerScroll();
+  const [scrollHeight, setScrollHeight] = useState(0);
 
   // const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
   const containerBound = useStickyContainerBounds();
   const [videoRef, videoBounds] = useBoundingBox<HTMLVideoElement>([]);
   const videoFrame = useRef(0);
   const [isScrubbingVideo, setIsScrubbingVideo] = useState(false);
-
   const windowDim = useWindowDimension();
 
   useEffect(() => {
@@ -40,11 +44,8 @@ const ScrollVideo = (props: Props) => {
   }, [videoRef, videoBounds, containerBound, windowDim.height]);
 
   useEffect(() => {
-    if (!isScrubbingVideo) return;
-
     let animFrame = 0;
     let prevFrameRounded = 0;
-
     const updateFrame = () => {
       // videoRef.current.fastSeek(videoFrame.current);
 
@@ -60,42 +61,59 @@ const ScrollVideo = (props: Props) => {
 
       animFrame = requestAnimationFrame(updateFrame);
     };
+
+    // only update to the last or first frame
+    if (!isScrubbingVideo) {
+      updateFrame();
+      return;
+    }
+
     animFrame = requestAnimationFrame(updateFrame);
 
     return () => cancelAnimationFrame(animFrame);
   }, [isScrubbingVideo]);
 
-  // useEffect(() => {
-  //   videoRef.current.addEventListener("")
-  // }, [videoRef.current]);
+  const handleMetaDataLoaded = () => {
+    setScrollHeight(Math.floor(videoRef.current.duration) * playbackConst);
+  };
+  useEffect(() => {
+    refreshDocumentMeasurement();
+  }, [scrollHeight]);
 
   return (
-    <>
-      <video
-        // onLoad={()=}
-        //@ts-ignore
-        autobuffer="autobuffer"
-        preload="preload"
-        ref={videoRef}
-        // src="./about/about-intro-video.mp4"
-        loop
-        muted
-        // autoPlay
-        className="h-[100vh]"
-        style={{
-          zIndex: -1000,
-        }}
-      >
-        {/* <source
+    <div
+      style={{
+        height: scrollHeight,
+      }}
+    >
+      <Sticky top={"0px"}>
+        <video
+          onLoadedMetadata={handleMetaDataLoaded}
+          //@ts-ignore
+          autobuffer="autobuffer"
+          preload="preload"
+          ref={videoRef}
+          // src="./about/about-intro-video.mp4"
+          loop
+          muted
+          // autoPlay
+          className="h-[100vh]"
+          style={{
+            zIndex: -1000,
+          }}
+        >
+          {/* <source
           type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
           src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"
         ></source> */}
-        <source
-          type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-          src="./about/about-intro-video.mp4"
-        ></source>
-      </video>
-    </>
+          <source
+            type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+            // src="./about/about-intro-video.mp4"
+            src={src}
+          ></source>
+        </video>
+      </Sticky>
+    </div>
   );
 };
 
