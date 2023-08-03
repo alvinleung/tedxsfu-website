@@ -38,7 +38,7 @@ const Fixed = ({
   return (
     <>
       {
-        <div
+        <motion.div
           className={isUsingSmoothScroll ? "opacity-0 pointer-events-none" : ""}
           style={{
             position: "fixed",
@@ -51,7 +51,7 @@ const Fixed = ({
           }}
         >
           {children}
-        </div>
+        </motion.div>
       }
       {isDOMReady &&
         isUsingSmoothScroll &&

@@ -22,6 +22,7 @@ const TransitionEffect = ({ children }: Props) => {
 
   const [highestIndex, setHighestIndex] = useState(0);
   const [isTransitionDone, setIsTransitionDone] = useState(false);
+  // const [pageOffsetX, setPageOffsetX] = useState(0);
 
   useEffect(() => {
     setHighestIndex(highestIndex + 1);

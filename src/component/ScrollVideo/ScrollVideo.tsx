@@ -16,14 +16,17 @@ const ScrollVideo = (props: Props) => {
   const videoFrame = useRef(0);
   const [isScrubbingVideo, setIsScrubbingVideo] = useState(false);
 
+  const windowDim = useWindowDimension();
+
   useEffect(() => {
     const scrollStartPosition = containerBound.top;
     const scrollHeight =
-      containerBound.bottom - scrollStartPosition - videoBounds.height;
+      containerBound.bottom - scrollStartPosition + windowDim.height;
 
     const cancel = scrollY.on("change", (v) => {
       const timeProgress = (v - scrollStartPosition) / scrollHeight;
       const timeProgressClamped = clamp(0, 1, timeProgress);
+
       videoFrame.current = timeProgressClamped * videoRef.current.duration;
 
       if (timeProgress > 0 && timeProgress < 1) {
@@ -33,7 +36,7 @@ const ScrollVideo = (props: Props) => {
       }
     });
     return () => cancel();
-  }, [videoRef, videoBounds, containerBound]);
+  }, [videoRef, videoBounds, containerBound, windowDim.height]);
 
   useEffect(() => {
     if (!isScrubbingVideo) return;
@@ -51,6 +54,9 @@ const ScrollVideo = (props: Props) => {
   return (
     <>
       <video
+        //@ts-ignore
+        autobuffer="autobuffer"
+        preload="preload"
         ref={videoRef}
         src="./about/about-intro-video.mp4"
         loop
@@ -60,7 +66,12 @@ const ScrollVideo = (props: Props) => {
         style={{
           zIndex: -1000,
         }}
-      />
+      >
+        <source
+          type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+          src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"
+        ></source>
+      </video>
     </>
   );
 };
