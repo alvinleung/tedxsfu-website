@@ -65,11 +65,14 @@ const ScrollVideo = (props: Props) => {
     return () => cancelAnimationFrame(animFrame);
   }, [isScrubbingVideo]);
 
-  useEffect(() => {}, [videoRef.current]);
+  // useEffect(() => {
+  //   videoRef.current.addEventListener("")
+  // }, [videoRef.current]);
 
   return (
     <>
       <video
+        // onLoad={()=}
         //@ts-ignore
         autobuffer="autobuffer"
         preload="preload"
