@@ -71,21 +71,25 @@ const teams = [
         name: "Josh Ralla",
         position: "Event director",
         linkedin: "https://linkedin.com/in/joshralla",
+        image: "profilePictures/joshrProfile.jpeg",
       },
       {
         name: "Josh Chang",
         position: "Event coordinator",
         linkedin: "https://linkedin.com/in/jcchang2",
+        image: "profilePictures/joshcProfile.jpeg",
       },
       {
         name: "Andrea Choi",
         position: "Event coordinator",
         linkedin: "https://linkedin.com/in/choiandrea",
+        image: "profilePictures/andreacProfile.jpeg",
       },
       {
         name: "Merry Chowdhury",
         position: "Event doordinator",
         linkedin: "https://linkedin.com/in/merrychowdhury",
+        image: "TEDxSFU_logo_black.svg"
       },
     ],
   },
@@ -96,21 +100,25 @@ const teams = [
         name: "Kayla You",
         position: "Operations director",
         linkedin: "https://linkedin.com/in/kayla-you",
+        image: "profilePictures/kaylayProfile.jpeg",
       },
       {
         name: "Jessica Kan",
         position: "Internal coordinator",
         linkedin: "https://linkedin.com/in/jessicataokan",
+        image: "profilePictures/jessicakProfile.jpeg",
       },
       {
         name: "Vanshita Sethi",
         position: "Internal coordinator",
         linkedin: "https://linkedin.com/in/vanshita-sethi-5072271a9",
+        image: "profilePictures/vanshitasProfile.jpeg",
       },
       {
         name: "Matthias Ting",
         position: "Accountant",
         linkedin: "https://linkedin.com/in/matthiasting",
+        image: "TEDxSFU_logo_black.svg"
       },
     ],
   },
@@ -121,31 +129,37 @@ const teams = [
         name: "Alvin Leung",
         position: "Creative director",
         linkedin: "https://linkedin.com/in/1234alvin",
+        image: "profilePictures/alvinlProfile.jpeg",
       },
       {
         name: "Nathan Lew",
         position: "Creative director",
         linkedin: "https://linkedin.com/in/nlew",
+        image: "profilePictures/nathanlProfile.jpeg",
       },
       {
         name: "Kelly Hady",
         position: "Visual designer",
         linkedin: "https://linkedin.com/in/kelly-hady",
+        image: "profilePictures/kellyhProfile.jpeg"
       },
       {
         name: "Emily Xu",
         position: "Visual designer",
         linkedin: "https://linkedin.com/in/emily-xu-89a3661a7",
+        image: "profilePictures/emilyxProfile.jpeg"
       },
       {
         name: "Abbey Perley",
         position: "Motion designer",
         linkedin: "https://linkedin.com/in/abbey-perley-141063255/",
+        image: "profilePictures/abbeypProfile.jpeg"
       },
       {
         name: "Chris Thomas",
         position: "Designer + developer",
         linkedin: "https://linkedin.com/in/chrisvthomas/",
+        image: "profilePictures/christProfile.jpeg"
       },
     ],
   },
@@ -156,11 +170,13 @@ const teams = [
         name: "Kazuki Clark",
         position: "PR coordinator",
         linkedin: "https://linkedin.com/in/kazuki-clark-0a10611b1",
+        image: "profilePictures/kazukicProfile.jpeg"
       },
       {
         name: "Jasleen Kaur",
         position: "PR coordinator",
         linkedin: "https://linkedin.com/in/jasleen-k-s-rai",
+        image: "profilePictures/jasleenkProfile.jpeg"
       },
     ],
   },
@@ -171,16 +187,19 @@ const teams = [
         name: "Paul Falkowski",
         position: "Content dev. director",
         linkedin: "https://linkedin.com/in/paulfa",
+        image: "profilePictures/paulfProfile.jpeg"
       },
       {
         name: "Jerrica Zabala",
         position: "Content dev. coordinator",
         linkedin: "https://linkedin.com/in/jerricazabala",
+        image: "profilePictures/jerricazProfile.jpeg"
       },
       {
         name: "Elizabeth Phan",
         position: "Content dev. coordinator",
         linkedin: "https://linkedin.com/in/elizabeth-phan-01828a277",
+        image: "profilePictures/lizziepProfile.jpeg"
       },
     ],
   },
@@ -191,11 +210,13 @@ const teams = [
         name: "Youngin Cho",
         position: "Marketing director",
         linkedin: "https://linkedin.com/in/young-in-cho",
+        image: "TEDxSFU_logo_black.svg"
       },
       {
         name: "Emily Le",
         position: "Marketing coordinator",
         linkedin: "https://linkedin.com/in/emily-le-7b46861ba",
+        image: "profilePictures/emilylProfile.jpeg"
       },
     ],
   },

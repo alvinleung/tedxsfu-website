@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import ProfilePicture from "../ProfilePicture";
 
 type Props = {
   children: React.ReactNode;
@@ -17,13 +18,16 @@ const TeamView = (props: Props) => {
   );
 };
 
-const TeamMember = ({ name, position, linkedin }: { name: string; position: string; linkedin: string; }) => (
-    <>
-      <div className="leading-snug">
+const TeamMember = ({ name, image, position, linkedin }: {image:string, name: string; position: string; linkedin: string; }) => {
+  const [isHovering,setIsHovering] = useState(false);
+
+    return <>
+      <div className="leading-snug" onMouseEnter={()=> setIsHovering(true)} onMouseLeave={()=> setIsHovering(false)}>
         <motion.a href={linkedin} target="_blank">{name}</motion.a>
       </div>
       <div className="leading-snug opacity-40">{position}</div>
+      <ProfilePicture src={image} isShowing={isHovering}/>
     </>
-);
+};
 
 export { TeamView, TeamMember };
