@@ -25,7 +25,7 @@ export function useBoundingBox<T extends HTMLElement>(
 ): [MutableRefObject<T>, BoundingBoxInfo] {
   const containerRef = useRef<T>() as MutableRefObject<T>;
 
-  const { scrollY } = useContainerScroll();
+  const { scrollY, scrollHeight } = useContainerScroll();
   const windowDim = useWindowDimension();
   const { isTransitionDone } = useTransitionContext();
 
@@ -79,7 +79,7 @@ export function useBoundingBox<T extends HTMLElement>(
       top: bounds.top + scrollY.get(),
       bottom: bounds.bottom + scrollY.get(),
     });
-  }, [windowDim, isTransitionDone, ...dependency]);
+  }, [windowDim, isTransitionDone, scrollHeight, ...dependency]);
 
   return [containerRef, bounds];
 }

@@ -19,7 +19,7 @@ const StickyContainerContext = createContext({
 
 const StickyContainer = ({ children }: Props) => {
   const { scrollHeight, isUsingSmoothScroll } = useContainerScroll();
-  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([scrollHeight]);
+  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([]);
 
   return (
     <div ref={containerRef}>
