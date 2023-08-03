@@ -108,12 +108,6 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
 
   const isPresent = useIsPresent();
 
-  const router = useRouter();
-  useEffect(() => {
-    scrollTo(0);
-    refreshDocumentMeasurement();
-  }, [router.pathname]);
-
   return (
     <ScrollContext.Provider
       value={{
