@@ -9,6 +9,7 @@ import Image from "next/image";
 import React from "react";
 import MainGrid from "@/component/layouts/MainGrid";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
+import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
 
 type Props = {};
 
@@ -64,8 +65,8 @@ const About = (props: Props) => {
             13 years in the making
           </motion.div>
           <Image
-            className="col-span-full w-full"
             src="/about/cover.jpg"
+            className="col-span-full w-full"
             width={1920}
             height={1080}
             alt="Picture of the author"
@@ -87,8 +88,11 @@ const About = (props: Props) => {
             </SectionInfoDescription>
           </SectionInfo>
 
-          <div className="min-h-screen">
-            {/* some media content goes on here */}
+          <div className="col-start-1 col-span-full min-h-[200vh]">
+            <Sticky top={"0px"}>
+              {/* some media content goes on here */}
+              <ScrollVideo />
+            </Sticky>
           </div>
         </SectionLayout>
 
