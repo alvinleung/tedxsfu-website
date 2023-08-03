@@ -9,7 +9,7 @@ import React from "react";
 import MainGrid from "@/component/layouts/MainGrid";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
-// import StickyGallery from "@/component/StickyGallery/StickyGallery";
+import StickyGallery from "@/component/StickyGallery/StickyGallery";
 
 type Props = {};
 
