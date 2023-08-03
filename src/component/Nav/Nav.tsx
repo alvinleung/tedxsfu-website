@@ -69,7 +69,7 @@ const Nav = (props: Props) => {
           )}
         </AnimatePresence>
       </Link>
-      <div className="fixed right-0 top-0 bottom-0 uppercase">
+      <div className="fixed right-0 top-0 uppercase">
         {/* <NavToggle path={path.pathname} /> */}
         <NavToggle2 path={path.pathname} />
       </div>
