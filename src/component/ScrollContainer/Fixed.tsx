@@ -81,7 +81,7 @@ const Fixed = ({
                 router.pathname === "/about"
                   ? -windowDim.width
                   : windowDim.width,
-              opacity: 0,
+              opacity: 0.5,
             }}
             transition={{
               duration: AnimationConfig.VERY_SLOW,
