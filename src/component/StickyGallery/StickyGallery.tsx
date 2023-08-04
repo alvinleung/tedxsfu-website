@@ -105,9 +105,9 @@ const StickyGallery = (props: Props) => {
               y: contentOffsetY,
             }}
           >
-            {imgData.map((image) => {
+            {imgData.map((image, i) => {
               return (
-                <div className="h-[100vh] overflow-hidden relative">
+                <div className="h-[100vh] overflow-hidden relative" key={i}>
                   <ImageSlide src={image.src} />
                   <MainGrid className="absolute bottom-8 text-white">
                     <div className="lg:col-start-2 lg:col-span-1  text-micro opacity-50">
