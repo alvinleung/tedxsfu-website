@@ -11,7 +11,7 @@ type Props = {
   src: string;
 };
 
-const ScrollVideo = ({ playbackConst = 300, src }: Props) => {
+const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
   const { scrollY, refreshDocumentMeasurement } = useContainerScroll();
   const [scrollHeight, setScrollHeight] = useState(0);
 
@@ -97,7 +97,7 @@ const ScrollVideo = ({ playbackConst = 300, src }: Props) => {
           loop
           muted
           // autoPlay
-          className="h-[100vh]"
+          className="h-[100vh] w-[100vw]"
           style={{
             zIndex: -1000,
           }}
