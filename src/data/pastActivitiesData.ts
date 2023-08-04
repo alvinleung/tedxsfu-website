@@ -6,23 +6,18 @@ const pastActivities = [
       "An initial venture in building physical experiences and truly understanding, the value of community.",
     media: [
       {
-        src: "https://source.unsplash.com/random/?x=" + Math.random(),
+        src: "/about/activities/tedxsfu-live-2.jpg",
         format: "landscape",
         type: "image",
       },
       {
-        src: "https://source.unsplash.com/random/?x=" + Math.random(),
+        src: "/about/activities/tedxsfu-live-1.jpg",
         format: "square",
         type: "image",
       },
       {
-        src: "https://source.unsplash.com/random/?x=" + Math.random(),
+        src: "/about/activities/tedxsfu-live-3.jpg",
         format: "landscape",
-        type: "image",
-      },
-      {
-        src: "https://source.unsplash.com/random/?x=" + Math.random(),
-        format: "portrait",
         type: "image",
       },
     ],
