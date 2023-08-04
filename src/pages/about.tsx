@@ -50,7 +50,7 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
 };
 
 const SectionInfoHeader = (props: any) => (
-  <h3 className="text-lead mb-2">{props.children}</h3>
+  <h3 className="text-lead mb-1">{props.children}</h3>
 );
 const SectionInfoDescription = (props: any) => (
   <h3 className="text-lead opacity-50">{props.children}</h3>
