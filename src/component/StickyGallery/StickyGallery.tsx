@@ -65,8 +65,8 @@ const StickyGallery = (props: Props) => {
     ],
     [
       1,
-      1 + 1 - bounds.width / windowDim.width,
-      1 + 1 - bounds.width / windowDim.width,
+      1 + 1 - bounds.width / windowDim.width + 0.01,
+      1 + 1 - bounds.width / windowDim.width + 0.01,
       1,
     ]
   );
@@ -83,7 +83,7 @@ const StickyGallery = (props: Props) => {
     return -v;
   });
 
-  const inverseScale = useTransform(scale, (v) => -v);
+  // const inverseScale = useTransform(scale, (v) => -v);
 
   return (
     <motion.div
@@ -92,37 +92,35 @@ const StickyGallery = (props: Props) => {
       onViewportEnter={() => setIsSectionVisible(true)}
       ref={boundsRef}
     >
-      <motion.div>
+      <motion.div
+        className="overflow-hidden h-[100vh] bg-black"
+        style={{
+          y: containerOffset,
+          scale: scale,
+        }}
+      >
         <motion.div
-          className="overflow-hidden h-[100vh] bg-black"
           style={{
-            y: containerOffset,
-            scale: scale,
+            y: contentOffsetY,
           }}
         >
-          <motion.div
-            style={{
-              y: contentOffsetY,
-            }}
-          >
-            {imgData.map((image, i) => {
-              return (
-                <div className="h-[100vh] overflow-hidden relative" key={i}>
-                  <ImageSlide src={image.src} />
-                  <MainGrid className="absolute bottom-8 text-white">
-                    <div className="lg:col-start-2 lg:col-span-1  text-micro opacity-50">
-                      <div>{image.date}</div>
-                      <div>{image.year}</div>
-                    </div>
-                    <div className="lg:col-span-1 border-l border-l-[rgba(255,255,255,.5)] pl-2 text-micro">
-                      {" "}
-                      {image.description}
-                    </div>
-                  </MainGrid>
-                </div>
-              );
-            })}
-          </motion.div>
+          {imgData.map((image, i) => {
+            return (
+              <div className="h-[100vh] overflow-hidden relative" key={i}>
+                <ImageSlide src={image.src} />
+                <MainGrid className="absolute bottom-8 text-white">
+                  <div className="lg:col-start-2 lg:col-span-1  text-micro opacity-50">
+                    <div>{image.date}</div>
+                    <div>{image.year}</div>
+                  </div>
+                  <div className="lg:col-span-1 border-l border-l-[rgba(255,255,255,.5)] pl-2 text-micro">
+                    {" "}
+                    {image.description}
+                  </div>
+                </MainGrid>
+              </div>
+            );
+          })}
         </motion.div>
       </motion.div>
     </motion.div>

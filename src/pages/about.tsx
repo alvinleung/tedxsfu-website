@@ -61,17 +61,10 @@ const About = (props: Props) => {
     <>
       <main className="bg-white text-black font-normal min-h-screen w-full">
         <SectionLayout>
-          <motion.div className="text-header h-64 col-start-3 col-span-4">
+          <motion.div className="text-header h-64 col-start-3 col-span-full">
             13 years in the making
           </motion.div>
           <StickyGallery />
-          {/* <Image
-            src="/about/cover.jpg"
-            className="col-span-full w-full"
-            width={1920}
-            height={1080}
-            alt="Picture of the author"
-          /> */}
         </SectionLayout>
 
         <SectionLayout>
