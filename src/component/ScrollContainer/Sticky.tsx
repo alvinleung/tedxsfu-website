@@ -90,7 +90,7 @@ const Sticky = ({ children, top, duration }: Props) => {
           ref={containerRef}
           className={
             isUsingSmoothScroll
-              ? "opacity-0 pointer-events-none"
+              ? "pointer-events-none opacity-0"
               : "sticky top-0"
           }
         >
@@ -134,7 +134,7 @@ const Sticky = ({ children, top, duration }: Props) => {
           >
             {children}
           </motion.div>,
-          document.body
+          document.body,
         )}
     </>
   );

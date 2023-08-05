@@ -3,7 +3,7 @@ import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useStickyContainerBounds } from "../ScrollContainer/StickyContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
-import { clamp } from "framer-motion";
+import { clamp, motion } from "framer-motion";
 import Sticky from "../ScrollContainer/Sticky";
 
 type Props = {
@@ -95,7 +95,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
       }}
     >
       <Sticky top={"0px"}>
-        <video
+        <motion.video
           onLoadedMetadata={handleMetaDataLoaded}
           //@ts-ignore
           autobuffer="autobuffer"
@@ -108,6 +108,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           className="h-[100vh] w-[100vw] object-cover"
           style={{
             zIndex: -1000,
+            scale: 1.07,
           }}
         >
           {/* <source
@@ -119,7 +120,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
             // src="./about/about-intro-video.mp4"
             src={src}
           ></source>
-        </video>
+        </motion.video>
       </Sticky>
     </div>
   );

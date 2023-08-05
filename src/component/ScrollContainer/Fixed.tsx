@@ -39,7 +39,7 @@ const Fixed = ({
     <>
       {
         <motion.div
-          className={isUsingSmoothScroll ? "opacity-0 pointer-events-none" : ""}
+          className={isUsingSmoothScroll ? "pointer-events-none opacity-0" : ""}
           style={{
             position: "fixed",
             top: top,
@@ -60,7 +60,6 @@ const Fixed = ({
             style={{
               position: "fixed",
               zIndex: 1000,
-              width: 200,
               top: top || 0,
               right: right || 0,
               // width: bounds && bounds.width,
@@ -92,7 +91,7 @@ const Fixed = ({
           >
             {children}
           </motion.div>,
-          document.body
+          document.body,
         )}
     </>
   );
