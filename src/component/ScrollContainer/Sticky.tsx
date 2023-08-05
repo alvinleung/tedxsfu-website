@@ -88,7 +88,11 @@ const Sticky = ({ children, top, duration }: Props) => {
       {
         <div
           ref={containerRef}
-          className={isUsingSmoothScroll ? "opacity-0 pointer-events-none" : ""}
+          className={
+            isUsingSmoothScroll
+              ? "opacity-0 pointer-events-none"
+              : "sticky top-0"
+          }
         >
           {children}
         </div>
