@@ -47,6 +47,10 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
     let animFrame = 0;
     let prevFrameRounded = 0;
     const updateFrame = () => {
+      if (!videoFrame.current) {
+        animFrame = requestAnimationFrame(updateFrame);
+        return;
+      }
       // videoRef.current.fastSeek(videoFrame.current);
 
       // round current frame to 0.0
@@ -76,6 +80,10 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
   const handleMetaDataLoaded = () => {
     setScrollHeight(Math.floor(videoRef.current.duration) * playbackConst);
   };
+
+  useEffect(() => {
+    videoRef.current.load();
+  }, [videoRef]);
   useEffect(() => {
     refreshDocumentMeasurement();
   }, [scrollHeight]);
