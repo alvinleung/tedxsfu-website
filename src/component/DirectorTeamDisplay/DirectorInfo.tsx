@@ -26,6 +26,7 @@ export const DirectorInfo = ({
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
       animate={{
         opacity: isCurrentDirector ? 1 : 0,
         x: xOffset,
