@@ -56,7 +56,7 @@ const DirectorTeamDisplay = (props: Props) => {
         marginBottom: `${itemScrollHeightVW}vw`,
       }}
     >
-      <div className="col-start-1 col-span-full md:col-start-2 md:col-span-3 2xl:col-start-2 2xl:col-span-4 flex flex-col">
+      <div className="col-start-1 col-span-full md:col-start-4 md:col-span-3 2xl:col-start-4 2xl:col-span-4 flex flex-col">
         {directors.map((director, i) => {
           const isOdd = i % 2 === 0;
           const isCurrentDirector = currentDirector === i;
@@ -75,7 +75,7 @@ const DirectorTeamDisplay = (props: Props) => {
           );
         })}
       </div>
-      <div className="md:col-start-5 md:col-span-1 2xl:col-start-6 2xl:col-span-1 absolute">
+      <div className="md:col-start-2 md:col-span-1 2xl:col-start-2 2xl:col-span-1 absolute">
         <div className="mt-[15vw]">
           {directors.map((director, i) => {
             return (

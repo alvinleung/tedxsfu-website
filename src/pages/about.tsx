@@ -39,8 +39,8 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
     <motion.div
       className={`${shouldStick ? "sticky" : ""} top-4 min-h-[50%] ${
         left
-          ? "col-start-1 col-span-full md:col-start-2 md:col-span-2 2xl:col-start-3 2xl:col-span-2"
-          : "col-start-1 col-span-full md:col-start-5 md:col-span-2 2xl:col-start-6 2xl:col-span-2 h-fit z-10"
+          ? "col-span-full col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-3"
+          : "z-10 col-span-full col-start-1 h-fit md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2"
       }`}
     >
       {shouldStick && <Sticky top={16}>{children}</Sticky>}
@@ -50,7 +50,7 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
 };
 
 const SectionInfoHeader = (props: any) => (
-  <h3 className="text-lead mb-1">{props.children}</h3>
+  <h3 className="mb-1 text-lead">{props.children}</h3>
 );
 const SectionInfoDescription = (props: any) => (
   <h3 className="text-lead opacity-50">{props.children}</h3>
@@ -59,9 +59,9 @@ const SectionInfoDescription = (props: any) => (
 const About = (props: Props) => {
   return (
     <>
-      <main className="bg-white text-black font-normal min-h-screen w-full">
+      <main className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout>
-          <motion.div className="text-header h-64 col-start-3 col-span-full">
+          <motion.div className="col-span-full col-start-2 h-64 text-header">
             13 years in the making
           </motion.div>
           <StickyGallery />
@@ -82,7 +82,7 @@ const About = (props: Props) => {
             </SectionInfoDescription>
           </SectionInfo>
 
-          <div className="col-start-1 col-span-full">
+          <div className="col-span-full col-start-1">
             {/* some media content goes on here */}
             <ScrollVideo src={"./about/about-intro-video.mp4"} />
           </div>
@@ -98,15 +98,15 @@ const About = (props: Props) => {
               it takes to produce a professional and impactful conference.
             </SectionInfoDescription>
           </SectionInfo>
-          <div className="col-start-1 col-span-full mt-16 mb-32">
+          <div className="col-span-full col-start-1 mb-32 mt-16">
             <DirectorTeamDisplay />
           </div>
         </SectionLayout>
         <SectionLayout>
-          <h3 className="col-start-1 col-span-4 md:col-start-3 xl:col-start-2 md:col-span-2 text-lead mb-24">
+          <h3 className="col-span-4 col-start-1 mb-24 text-lead md:col-span-2 md:col-start-2 xl:col-start-4">
             And our larger, proud and hungry team of 21
           </h3>
-          <div className="col-start-1 md:col-start-2 xl:col-start-2 col-span-4 grid md:grid-cols-2 gap-4">
+          <div className="col-span-4 col-start-1 grid gap-4 md:col-start-2 md:grid-cols-2 xl:col-start-4">
             {teams.map((team, i) => (
               <TeamView name={team.name} key={i}>
                 {team.members.map((member, i) => (
@@ -125,7 +125,7 @@ const About = (props: Props) => {
           </div>
         </SectionLayout>
         <SectionLayout padding>
-          <SectionInfo left>
+          <SectionInfo>
             <SectionInfoHeader>
               Stuff we&apos;ve done this year
             </SectionInfoHeader>
@@ -134,7 +134,7 @@ const About = (props: Props) => {
               one step at a time.
             </SectionInfoDescription>
           </SectionInfo>
-          <div className="col-start-1 col-span-full mt-32 mb-32">
+          <div className="col-span-full col-start-1 mb-32 mt-32">
             <PastActivitiesGallery />
           </div>
         </SectionLayout>
