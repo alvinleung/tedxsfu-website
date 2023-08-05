@@ -105,7 +105,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           loop
           muted
           // autoPlay
-          className="h-[100vh] w-[100vw]"
+          className="h-[100vh] w-[100vw] object-cover"
           style={{
             zIndex: -1000,
           }}
