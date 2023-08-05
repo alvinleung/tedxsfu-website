@@ -3,6 +3,8 @@ import Logo from "@/EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import Nav from "@/component/Nav/Nav";
 import Head from "next/head";
+import { motion } from "framer-motion";
+import { AnimationConfig } from "@/component/AnimationConfig";
 
 export default function Home() {
   const viewport = useWindowDimension();
@@ -20,9 +22,9 @@ export default function Home() {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <div className="max-w-screen min-h-screen bg-black">
-        <section className="max-w-screen flex min-h-screen flex-col px-4 lg:justify-center">
-          <div className="flex max-w-[100vw] flex-col items-center justify-center gap-8 max-lg:pointer-events-none max-lg:fixed max-lg:bottom-0 max-lg:left-0 max-lg:right-0 max-lg:top-0 lg:my-16 lg:flex-row">
+      <div className="max-w-screen relative h-[100dvh] bg-black">
+        <section className="max-w-screen flex h-[100dvh] flex-col px-4 lg:justify-center">
+          <div className="my-auto flex flex-col items-center justify-center gap-8 max-lg:pointer-events-none lg:my-16 lg:flex-row">
             <a
               className={`pointer-events-auto text-center uppercase leading-tight lg:translate-x-28`}
               href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
@@ -43,7 +45,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="fixed bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
+        <section className="absolute bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
           <a href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
             Join our newsletter
           </a>
