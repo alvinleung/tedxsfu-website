@@ -9,13 +9,19 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 import { useContainerScroll } from "./ScrollContainer";
-import { motion, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useIsPresent,
+  useTransform,
+} from "framer-motion";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { useStickyContainerBounds } from "./StickyContainer";
 import { useCSSSizingInPixel } from "@/hooks/useCSSSizingInPixel";
 import { useRouter } from "next/router";
 import { AnimationConfig } from "../AnimationConfig";
+import { useTransitionContext } from "../transition/TransitionEffect";
 
 type Props = {
   children: React.ReactNode;
@@ -82,6 +88,8 @@ const Sticky = ({ children, top, duration }: Props) => {
   });
 
   const router = useRouter();
+  const { highestZIndex } = useTransitionContext();
+  const isPresent = useIsPresent();
 
   return (
     <>
@@ -91,7 +99,7 @@ const Sticky = ({ children, top, duration }: Props) => {
           className={
             isUsingSmoothScroll
               ? "pointer-events-none opacity-0"
-              : "sticky top-0"
+              : "sticky top-0 h-fit"
           }
         >
           {children}
@@ -100,40 +108,47 @@ const Sticky = ({ children, top, duration }: Props) => {
       {isDOMReady &&
         isUsingSmoothScroll &&
         createPortal(
-          <motion.div
-            style={{
-              y: stickyOffset,
-              position: "fixed",
-              top: bounds && bounds.top,
-              right: bounds && bounds.right,
-              width: bounds && bounds.width,
-              bottom: bounds && bounds.bottom,
-              left: bounds && bounds.left,
-            }}
-            initial={{
-              x:
-                router.pathname === "/about"
-                  ? -windowDim.width
-                  : windowDim.width,
-            }}
-            animate={{
-              x: 0,
-            }}
-            exit={{
-              x:
-                router.pathname === "/about"
-                  ? -windowDim.width
-                  : windowDim.width,
-              opacity: 0,
-            }}
-            transition={{
-              duration: AnimationConfig.VERY_SLOW,
-              ease: AnimationConfig.EASING_IN_OUT,
-            }}
-            className="text-black"
-          >
-            {children}
-          </motion.div>,
+          <AnimatePresence>
+            {isPresent && (
+              <motion.div
+                style={{
+                  y: stickyOffset,
+                  position: "fixed",
+                  top: bounds && bounds.top,
+                  right: bounds && bounds.right,
+                  width: bounds && bounds.width,
+                  height: bounds && bounds.height,
+                  bottom: bounds && bounds.bottom,
+                  left: bounds && bounds.left,
+                  // make the sticky element above the page
+                  zIndex: highestZIndex + 1,
+                }}
+                initial={{
+                  x:
+                    router.pathname === "/about"
+                      ? -windowDim.width
+                      : windowDim.width,
+                }}
+                animate={{
+                  x: 0,
+                }}
+                exit={{
+                  x:
+                    router.pathname === "/about"
+                      ? windowDim.width
+                      : -windowDim.width,
+                  opacity: 0,
+                }}
+                transition={{
+                  duration: AnimationConfig.VERY_SLOW,
+                  ease: AnimationConfig.EASING_IN_OUT,
+                }}
+                className="text-black"
+              >
+                {children}
+              </motion.div>
+            )}
+          </AnimatePresence>,
           document.body,
         )}
     </>

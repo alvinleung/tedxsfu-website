@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useContainerScroll } from "./ScrollContainer";
 import { createPortal } from "react-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { useRouter } from "next/router";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { AnimationConfig } from "../AnimationConfig";
@@ -34,11 +34,12 @@ const Fixed = ({
 
   const router = useRouter();
   const windowDim = useWindowDimension();
+  const isPresent = useIsPresent();
 
   return (
     <>
       {
-        <motion.div
+        <div
           className={isUsingSmoothScroll ? "pointer-events-none opacity-0" : ""}
           style={{
             position: "fixed",
@@ -51,46 +52,50 @@ const Fixed = ({
           }}
         >
           {children}
-        </motion.div>
+        </div>
       }
       {isDOMReady &&
         isUsingSmoothScroll &&
         createPortal(
-          <motion.div
-            style={{
-              position: "fixed",
-              zIndex: 1000,
-              top: top || 0,
-              right: right || 0,
-              // width: bounds && bounds.width,
-              bottom: bottom || 0,
-              left: left || 0,
-              pointerEvents: pointerEvents,
-            }}
-            initial={{
-              x:
-                router.pathname === "/about"
-                  ? windowDim.width
-                  : -windowDim.width,
-            }}
-            animate={{
-              x: 0,
-            }}
-            exit={{
-              x:
-                router.pathname === "/about"
-                  ? -windowDim.width
-                  : windowDim.width,
-              opacity: 0.5,
-            }}
-            transition={{
-              duration: AnimationConfig.VERY_SLOW,
-              ease: AnimationConfig.EASING_IN_OUT,
-            }}
-            className="text-black"
-          >
-            {children}
-          </motion.div>,
+          <AnimatePresence>
+            {isPresent && (
+              <motion.div
+                style={{
+                  position: "fixed",
+                  zIndex: 1000,
+                  top: top || 0,
+                  right: right || 0,
+                  // width: bounds && bounds.width,
+                  bottom: bottom || 0,
+                  left: left || 0,
+                  pointerEvents: pointerEvents,
+                }}
+                initial={{
+                  x:
+                    router.pathname === "/about"
+                      ? windowDim.width
+                      : -windowDim.width,
+                }}
+                animate={{
+                  x: 0,
+                }}
+                exit={{
+                  x:
+                    router.pathname === "/about"
+                      ? -windowDim.width
+                      : windowDim.width,
+                  opacity: 0.5,
+                }}
+                transition={{
+                  duration: AnimationConfig.VERY_SLOW,
+                  ease: AnimationConfig.EASING_IN_OUT,
+                }}
+                className="text-black"
+              >
+                {children}
+              </motion.div>
+            )}
+          </AnimatePresence>,
           document.body,
         )}
     </>

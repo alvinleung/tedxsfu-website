@@ -15,12 +15,16 @@ export default function Home() {
           name="description"
           content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."
         ></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
       </Head>
-      <main className="min-h-screen bg-black">
-        <section className="min-h-screen flex flex-col lg:justify-center px-4">
-          <div className="max-lg:fixed max-lg:pointer-events-none max-lg:top-0 max-lg:left-0 max-lg:right-0 max-lg:bottom-0 flex flex-col lg:flex-row items-center justify-center lg:my-16 gap-8">
+      <main className="max-w-screen min-h-screen bg-black">
+        <section className="flex min-h-screen flex-col px-4 lg:justify-center">
+          <div className="flex max-w-[100vw] flex-col items-center justify-center gap-8 max-lg:pointer-events-none max-lg:fixed max-lg:bottom-0 max-lg:left-0 max-lg:right-0 max-lg:top-0 lg:my-16 lg:flex-row">
             <a
-              className={`uppercase leading-tight text-center pointer-events-auto lg:translate-x-28`}
+              className={`pointer-events-auto text-center uppercase leading-tight lg:translate-x-28`}
               href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
               target="_blank"
             >
@@ -28,7 +32,7 @@ export default function Home() {
             </a>
             <Logo />
             <a
-              className={`uppercase leading-tight text-center pointer-events-auto lg:-translate-x-28`}
+              className={`pointer-events-auto text-center uppercase leading-tight lg:-translate-x-28`}
               href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
               target="_blank"
             >
@@ -39,7 +43,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-gradient-to-t from-black to-transparent fixed bottom-0 left-0 right-0 p-4 flex flex-row">
+        <section className="fixed bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
           <a href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
             Join our newsletter
           </a>

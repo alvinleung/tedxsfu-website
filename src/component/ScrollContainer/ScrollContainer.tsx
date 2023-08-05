@@ -70,7 +70,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const [canScroll, setCanScroll] = useState(true);
   const [scrollDirection, setScrollDirection] = useState<ScrollDirection>(
-    ScrollDirection.DOWN
+    ScrollDirection.DOWN,
   );
 
   const {
@@ -127,7 +127,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
       }}
     >
       <motion.div
-        className={`no-scrollbar fixed left-0 top-0 right-0 bottom-0 h-screen overflow-x-hidden ${
+        className={`no-scrollbar fixed bottom-0 left-0 right-0 top-0 h-screen w-screen overflow-x-hidden ${
           canScroll && !isUsingSmoothScroll
             ? "overflow-y-auto"
             : "overflow-y-hidden"

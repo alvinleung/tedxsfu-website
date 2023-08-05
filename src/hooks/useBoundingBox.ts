@@ -8,6 +8,7 @@ import {
 } from "react";
 import { useWindowDimension } from "./useWindowDimension";
 import { useTransitionContext } from "@/component/transition/TransitionEffect";
+import { useIsPresent } from "framer-motion";
 
 type BoundingBoxInfo = {
   x: number;
@@ -21,13 +22,14 @@ type BoundingBoxInfo = {
 };
 
 export function useBoundingBox<T extends HTMLElement>(
-  dependency: any[]
+  dependency: any[],
 ): [MutableRefObject<T>, BoundingBoxInfo] {
   const containerRef = useRef<T>() as MutableRefObject<T>;
 
   const { scrollY, scrollHeight } = useContainerScroll();
   const windowDim = useWindowDimension();
   const { isTransitionDone } = useTransitionContext();
+  // const isPresent = useIsPresent();
 
   const [bounds, setBounds] = useState({
     x: 0,
@@ -68,6 +70,9 @@ export function useBoundingBox<T extends HTMLElement>(
   // const dep = dependency;
 
   useLayoutEffect(() => {
+    // don't update layout when it is transitioning away
+    // if (!isPresent) return;
+
     const bounds = containerRef.current.getBoundingClientRect();
     setBounds({
       x: bounds.x,

@@ -10,6 +10,7 @@ import MainGrid from "@/component/layouts/MainGrid";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
 import StickyGallery from "@/component/StickyGallery/StickyGallery";
+import Head from "next/head";
 
 type Props = {};
 
@@ -21,7 +22,6 @@ const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
       <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
         {children}
       </MainGrid>
-      {/* <div className="block h-64"></div> */}
     </StickyContainer>
   </section>
 );
@@ -59,6 +59,17 @@ const SectionInfoDescription = (props: any) => (
 const About = (props: Props) => {
   return (
     <>
+      <Head>
+        <title>About TEDxSFU</title>
+        <meta
+          name="description"
+          content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."
+        ></meta>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+      </Head>
       <main className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout>
           <motion.div className="col-span-full col-start-2 h-64 text-header">

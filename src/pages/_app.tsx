@@ -42,6 +42,8 @@ const helvetica = localFont({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  // const router = useRouter();
+
   return (
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
