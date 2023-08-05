@@ -109,11 +109,11 @@ const StickyGallery = (props: Props) => {
               <div className="h-[100vh] overflow-hidden relative" key={i}>
                 <ImageSlide src={image.src} />
                 <MainGrid className="absolute bottom-8 text-white">
-                  <div className="lg:col-start-2 lg:col-span-1  text-micro opacity-50">
+                  <div className="px-4 md:px-0 md:col-start-2 lg:col-start-2 lg:col-span-1  text-micro opacity-50">
                     <div>{image.date}</div>
                     <div>{image.year}</div>
                   </div>
-                  <div className="lg:col-span-1 border-l border-l-[rgba(255,255,255,.5)] pl-2 text-micro">
+                  <div className="col-start-2 col-span-3 pr-4 md:pr-0 md:col-span-2 lg:col-span-1 border-l border-l-[rgba(255,255,255,.5)] pl-2 text-micro">
                     {" "}
                     {image.description}
                   </div>
