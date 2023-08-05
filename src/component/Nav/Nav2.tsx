@@ -32,7 +32,7 @@ const Nav2 = (props: Props) => {
                 ease: AnimationConfig.EASING_INVERTED,
               }}>
               <motion.path 
-              // fill="#EE0028"
+              
               animate={{fill: isAboutPage ? "#000000" : "#FFFFFF"}}
               // style={{mixBlendMode: "difference"}}
               transition={{
@@ -48,7 +48,7 @@ const Nav2 = (props: Props) => {
                 l-17.5-5.1c-11.5-3.4-20.4-8.2-26.7-14.2s-9.5-13.7-9.5-23.1c0-7.8,2.1-14.8,6.3-20.7c4.2-6,9.9-10.6,17.1-14c7.2-3.4,15.3-5,24.3-5
                 c9.1,0,17.1,1.7,24.1,5c7,3.3,12.5,7.9,16.7,13.7c4.1,5.8,6.3,12.5,6.6,19.9h-12.8V182.3z"/>
               <motion.path 
-              // fill="#EE0028"
+              
               animate={{fill: isAboutPage ? "#000000" : "#FFFFFF"}}
               // style={{mixBlendMode: "difference"}}
               transition={{
@@ -57,7 +57,7 @@ const Nav2 = (props: Props) => {
               }}
               d="M804.1,291.9V145.7h84.5v12h-71.2v55H882v12h-64.6v67.1L804.1,291.9L804.1,291.9z"/>
               <motion.path 
-              fill="#EE0028"
+              
               animate={{fill: isAboutPage ? "#000000" : "#FFFFFF"}}
               transition={{
                 duration: AnimationConfig.VERY_SLOW,
