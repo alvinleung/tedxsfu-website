@@ -20,8 +20,8 @@ export default function Home() {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <main className="max-w-screen min-h-screen bg-black">
-        <section className="flex min-h-screen flex-col px-4 lg:justify-center">
+      <div className="max-w-screen min-h-screen bg-black">
+        <section className="max-w-screen flex min-h-screen flex-col px-4 lg:justify-center">
           <div className="flex max-w-[100vw] flex-col items-center justify-center gap-8 max-lg:pointer-events-none max-lg:fixed max-lg:bottom-0 max-lg:left-0 max-lg:right-0 max-lg:top-0 lg:my-16 lg:flex-row">
             <a
               className={`pointer-events-auto text-center uppercase leading-tight lg:translate-x-28`}
@@ -74,7 +74,7 @@ export default function Home() {
             </a>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

@@ -15,15 +15,15 @@ const Nav2 = (props: Props) => {
 
   return (
     <nav
-      className="block fixed left-0 right-0 top-0 h-8 z-50"
+      className="fixed left-0 right-0 top-0 z-50 block h-8"
       style={{
         color: isAboutPage ? "#000" : "#FFF",
       }}
     >
-      <Link href={"/"} className="inline-block h-16 w-36 relative">
+      <Link href={"/"} className="relative inline-block h-16 w-36">
         <AnimatePresence>
           <motion.svg
-            className="block h-16 w-fit absolute top-0 left-0"
+            className="absolute left-0 top-0 block h-16"
             aria-label="TEDxSFU"
             key="logo"
             viewBox="0 0 1168 438"
