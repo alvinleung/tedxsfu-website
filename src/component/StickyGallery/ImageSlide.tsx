@@ -14,22 +14,25 @@ const ImageSlide = ({ src }: Props) => {
   const offset = useTransform(
     scrollY,
     [imgBounds.top, imgBounds.bottom],
-    [-100, 100]
+    [-100, 100],
   );
 
   return (
-    <motion.img
-      ref={imgRef}
-      src={src}
-      className="h-[100vh] object-cover"
-      width={2560}
-      height={1440}
-      alt="Picture of the author"
+    <motion.div
       style={{
         y: offset,
         scale: 1.1,
       }}
-    />
+    >
+      <Image
+        ref={imgRef}
+        src={src}
+        className="h-[100vh] object-cover"
+        width={2560}
+        height={1440}
+        alt="Picture of the author"
+      />
+    </motion.div>
   );
 };
 

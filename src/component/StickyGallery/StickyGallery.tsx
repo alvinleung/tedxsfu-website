@@ -68,7 +68,7 @@ const StickyGallery = (props: Props) => {
       1 + 1 - bounds.width / windowDim.width + 0.01,
       1 + 1 - bounds.width / windowDim.width + 0.01,
       1,
-    ]
+    ],
   );
 
   const containerOffset = useTransform(scrollY, (v) => {
@@ -87,13 +87,13 @@ const StickyGallery = (props: Props) => {
 
   return (
     <motion.div
-      className="col-start-1 col-span-full h-[400vh]"
+      className="col-span-full col-start-1 h-[400vh]"
       onViewportLeave={() => setIsSectionVisible(false)}
       onViewportEnter={() => setIsSectionVisible(true)}
       ref={boundsRef}
     >
       <motion.div
-        className="overflow-hidden h-[100vh] bg-black"
+        className="h-[100vh] overflow-hidden bg-black"
         style={{
           y: containerOffset,
           scale: scale,
@@ -106,14 +106,14 @@ const StickyGallery = (props: Props) => {
         >
           {imgData.map((image, i) => {
             return (
-              <div className="h-[100vh] overflow-hidden relative" key={i}>
+              <div className="relative h-[100vh] overflow-hidden" key={i}>
                 <ImageSlide src={image.src} />
                 <MainGrid className="absolute bottom-8 text-white">
-                  <div className="px-4 md:px-0 md:col-start-2 lg:col-start-2 lg:col-span-1  text-micro opacity-50">
+                  <div className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2">
                     <div>{image.date}</div>
                     <div>{image.year}</div>
                   </div>
-                  <div className="col-start-2 col-span-3 pr-4 md:pr-0 md:col-span-2 lg:col-span-1 border-l border-l-[rgba(255,255,255,.5)] pl-2 text-micro">
+                  <div className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro md:col-span-2 md:pr-0 lg:col-span-1">
                     {" "}
                     {image.description}
                   </div>
