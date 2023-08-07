@@ -37,13 +37,17 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
 
   return (
     <motion.div
-      className={`${shouldStick ? "sticky" : ""} top-4 min-h-[50%] ${
+      className={`${shouldStick ? "sticky" : ""} top-4 z-40 min-h-[50%] ${
         left
-          ? "col-span-full col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-3"
-          : "z-10 col-span-full col-start-1 h-fit md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2"
+          ? "col-span-full col-start-1 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
+          : "z-10 col-span-full col-start-1 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
       }`}
     >
-      {shouldStick && <Sticky top={16}>{children}</Sticky>}
+      {shouldStick && (
+        <Sticky top={16} fadeOut>
+          {children}
+        </Sticky>
+      )}
       {!shouldStick && children}
     </motion.div>
   );

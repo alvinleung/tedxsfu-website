@@ -44,13 +44,8 @@ const imgData = [
 const StickyGallery = (props: Props) => {
   const { scrollY } = useContainerScroll();
 
-  const [isSectionVisible, setIsSectionVisible] = useState(false);
   const windowDim = useWindowDimension();
   const [boundsRef, bounds] = useBoundingBox<HTMLDivElement>([]);
-
-  useEffect(() => {
-    if (!isSectionVisible) return;
-  }, [isSectionVisible]);
 
   const zoomLockStartPosition = bounds.top;
   const zoomLockEndPosition = bounds.bottom - windowDim.height;
@@ -86,12 +81,7 @@ const StickyGallery = (props: Props) => {
   // const inverseScale = useTransform(scale, (v) => -v);
 
   return (
-    <motion.div
-      className="col-span-full col-start-1 h-[400vh]"
-      onViewportLeave={() => setIsSectionVisible(false)}
-      onViewportEnter={() => setIsSectionVisible(true)}
-      ref={boundsRef}
-    >
+    <motion.div className="col-span-full col-start-1 h-[400vh]" ref={boundsRef}>
       <motion.div
         className="h-[100vh] overflow-hidden bg-black"
         style={{

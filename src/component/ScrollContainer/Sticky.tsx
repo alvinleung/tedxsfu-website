@@ -27,19 +27,15 @@ type Props = {
   children: React.ReactNode;
   top: number | string;
   duration?: number;
+  fadeOut?: boolean;
 };
 
-const Sticky = ({ children, top, duration }: Props) => {
+const Sticky = ({ children, top, duration, fadeOut }: Props) => {
   // const windowDim = useWindowDimension();
   const [isDOMReady, setIsDOMReady] = useState(false);
-  const { documentOffsetY, isUsingSmoothScroll, scrollY, scrollHeight } =
-    useContainerScroll();
+  const { scrollY, isUsingSmoothScroll } = useContainerScroll();
   const stickyContainerBounds = useStickyContainerBounds();
-  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([
-    isDOMReady,
-    scrollHeight,
-  ]);
-  const windowDim = useWindowDimension();
+  const [containerRef, bounds] = useBoundingBox<HTMLDivElement>([isDOMReady]);
 
   // hack to force re calculate the bounding box once swtiching back from touch
   useEffect(() => {
@@ -48,7 +44,6 @@ const Sticky = ({ children, top, duration }: Props) => {
   }, [isUsingSmoothScroll]);
 
   const topOffsetPixel = useCSSSizingInPixel(top);
-
   const stickyDuration = useMemo(() => {
     if (duration) {
       return duration;
@@ -62,95 +57,37 @@ const Sticky = ({ children, top, duration }: Props) => {
     }
   }, []);
 
-  const stickyOffset = useTransform(documentOffsetY, (y: any) => {
-    const stickyPos = -bounds.top + topOffsetPixel;
+  const containerAndStickyOfffset = stickyContainerBounds.top - bounds.top;
+  const stickyStartPos = bounds.top - topOffsetPixel;
+  const stickyEndPos = stickyStartPos + stickyDuration;
 
-    // before sticky
-    if (stickyPos < y) {
-      return y;
-    }
-    // after sticky
-    if (stickyPos - stickyDuration > y) {
-      return y + stickyDuration;
-    }
+  const stickyOffset = useTransform(
+    scrollY,
+    [stickyStartPos, stickyEndPos],
+    [0, stickyDuration],
+  );
 
-    // during sticky
-    return stickyPos;
-  });
-
-  const stickyPixelOffset = useTransform(documentOffsetY, (y: any) => {
-    const stickyPos = -bounds.top + topOffsetPixel;
-    return stickyPos - y;
-  });
-
-  const stickyProgress = useTransform([stickyPixelOffset], ([offsetY]: any) => {
-    return -offsetY / bounds.height;
-  });
-
-  const router = useRouter();
-  const { highestZIndex } = useTransitionContext();
-  const isPresent = useIsPresent();
+  const stikcyOpacity = useTransform(
+    scrollY,
+    [stickyEndPos - bounds.height, stickyEndPos],
+    [1, 0],
+  );
 
   return (
     <>
-      {
-        <div
-          ref={containerRef}
-          className={
-            isUsingSmoothScroll
-              ? "pointer-events-none opacity-0"
-              : "sticky top-0 h-fit"
-          }
+      <motion.div
+        ref={containerRef}
+        className={isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"}
+      >
+        <motion.div
+          style={{
+            y: isUsingSmoothScroll ? stickyOffset : 0,
+            opacity: fadeOut ? stikcyOpacity : 1,
+          }}
         >
           {children}
-        </div>
-      }
-      {isDOMReady &&
-        isUsingSmoothScroll &&
-        createPortal(
-          <AnimatePresence>
-            {isPresent && (
-              <motion.div
-                style={{
-                  y: stickyOffset,
-                  position: "fixed",
-                  top: bounds && bounds.top,
-                  right: bounds && bounds.right,
-                  width: bounds && bounds.width,
-                  height: bounds && bounds.height,
-                  bottom: bounds && bounds.bottom,
-                  left: bounds && bounds.left,
-                  // make the sticky element above the page
-                  zIndex: highestZIndex + 1,
-                }}
-                initial={{
-                  x:
-                    router.pathname === "/about"
-                      ? -windowDim.width
-                      : windowDim.width,
-                }}
-                animate={{
-                  x: 0,
-                }}
-                exit={{
-                  x:
-                    router.pathname === "/about"
-                      ? windowDim.width
-                      : -windowDim.width,
-                  opacity: 0,
-                }}
-                transition={{
-                  duration: AnimationConfig.VERY_SLOW,
-                  ease: AnimationConfig.EASING_IN_OUT,
-                }}
-                className="text-black"
-              >
-                {children}
-              </motion.div>
-            )}
-          </AnimatePresence>,
-          document.body,
-        )}
+        </motion.div>
+      </motion.div>
     </>
   );
 };

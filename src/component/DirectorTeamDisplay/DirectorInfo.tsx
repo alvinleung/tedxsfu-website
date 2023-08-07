@@ -13,7 +13,7 @@ export const DirectorInfo = ({
 
   const xOffset = useMemo(() => {
     if (isDesktop) {
-      return isCurrentDirector ? 0 : currentDirector > index ? 0 : -20;
+      return isCurrentDirector ? 0 : currentDirector > index ? 0 : 20;
     }
     return 0;
   }, [isDesktop, isCurrentDirector, currentDirector, index]);
@@ -36,7 +36,7 @@ export const DirectorInfo = ({
           duration: 0.5,
         },
       }}
-      className={isDesktop ? "" : "px-4 pt-32 pb-8"}
+      className={isDesktop ? "" : "px-4 pb-8 pt-32"}
       style={{
         height: isDesktop ? itemScrollHeightVW + "vw" : "auto",
         background: isDesktop
@@ -44,7 +44,7 @@ export const DirectorInfo = ({
           : "linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%)",
       }}
     >
-      <div className="text-lead mb-2 pb-1">
+      <div className="mb-2 pb-1 text-lead">
         {director.name}
         {"\n"}({director.pronouns})
       </div>

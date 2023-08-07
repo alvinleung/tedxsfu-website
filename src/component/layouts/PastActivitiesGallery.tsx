@@ -16,22 +16,22 @@ const PastActivitiesGallery = (props: Props) => {
       {pastActivities.map((activity, i) => (
         <React.Fragment key={i}>
           <StickyContainer>
-            <Sticky top="20vh">
+            <Sticky top="20vh" fadeOut>
               <div className="h-[20vh]">
                 <div className="text-body">{activity.date}</div>
               </div>
             </Sticky>
           </StickyContainer>
           <StickyContainer>
-            <Sticky top="20vh">
+            <Sticky top="20vh" fadeOut>
               <div className="h-[20vh]">
-                <h4 className="text-body mb-4">{activity.header}</h4>
+                <h4 className="mb-4 text-body">{activity.header}</h4>
                 <p className="text-body opacity-50">{activity.description}</p>
               </div>
             </Sticky>
           </StickyContainer>
 
-          <div className="col-start-4 col-span-full">
+          <div className="col-span-full col-start-4">
             <div className="grid grid-cols-6 gap-4">
               {activity.media.map((media, i) => {
                 const firstItemStyling =

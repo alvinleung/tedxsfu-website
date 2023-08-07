@@ -53,7 +53,6 @@ export const DirectorIllustration = ({
           style={{
             width: imageWidth,
           }}
-          animate={{}}
         />
         <motion.img
           className="absolute top-0"

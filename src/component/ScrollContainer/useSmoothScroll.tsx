@@ -93,7 +93,7 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
       const newScrollValue = clamp(
         0,
         scrollHeight - windowDimension.height,
-        targetScrollY.current + clamp(-maxScroll, maxScroll, e.deltaY)
+        targetScrollY.current + clamp(-maxScroll, maxScroll, e.deltaY),
       );
       targetScrollY.current = newScrollValue;
 

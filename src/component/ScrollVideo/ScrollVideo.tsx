@@ -1,6 +1,8 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
-import { useStickyContainerBounds } from "../ScrollContainer/StickyContainer";
+import StickyContainer, {
+  useStickyContainerBounds,
+} from "../ScrollContainer/StickyContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { clamp, motion } from "framer-motion";
@@ -12,22 +14,24 @@ type Props = {
 };
 
 const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
-  const { scrollY, refreshDocumentMeasurement } = useContainerScroll();
-  const [scrollHeight, setScrollHeight] = useState(0);
+  const { scrollY, refreshDocumentMeasurement, scrollHeight } =
+    useContainerScroll();
+  const [videoScrollDistance, setVideoScrollDistance] = useState(0);
 
   // const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
   const containerBound = useStickyContainerBounds();
-  const [videoRef, videoBounds] = useBoundingBox<HTMLVideoElement>([]);
+  const videoRef = useRef() as MutableRefObject<HTMLVideoElement>;
+  // const [videoRef, videoBounds] = useBoundingBox<HTMLVideoElement>([]);
   const videoFrame = useRef(0);
   const [isScrubbingVideo, setIsScrubbingVideo] = useState(false);
   const windowDim = useWindowDimension();
 
   useEffect(() => {
     const scrollStartPosition = containerBound.top;
-    const scrollHeight = containerBound.bottom - scrollStartPosition;
+    const videoScrollDistance = containerBound.bottom - scrollStartPosition;
 
     const cancel = scrollY.on("change", (v) => {
-      const timeProgress = (v - scrollStartPosition) / scrollHeight;
+      const timeProgress = (v - scrollStartPosition) / videoScrollDistance;
 
       const timeProgressClamped = clamp(0, 1, timeProgress);
 
@@ -41,7 +45,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
       }
     });
     return () => cancel();
-  }, [videoRef, videoBounds, containerBound, windowDim.height]);
+  }, [containerBound, windowDim.height]);
 
   useEffect(() => {
     let animFrame = 0;
@@ -78,21 +82,25 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
   }, [isScrubbingVideo]);
 
   const handleMetaDataLoaded = () => {
-    setScrollHeight(Math.floor(videoRef.current.duration) * playbackConst);
+    setVideoScrollDistance(
+      Math.floor(videoRef.current.duration) * playbackConst,
+    );
   };
 
   useEffect(() => {
     videoRef.current.load();
   }, [videoRef]);
+
   useEffect(() => {
     refreshDocumentMeasurement();
-  }, [scrollHeight]);
+  }, [videoScrollDistance]);
 
   return (
     <div
       style={{
-        height: scrollHeight,
+        height: videoScrollDistance,
       }}
+      className="flex flex-col items-start"
     >
       <Sticky top={"0px"}>
         <motion.video
