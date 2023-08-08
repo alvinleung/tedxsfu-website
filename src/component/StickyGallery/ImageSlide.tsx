@@ -27,7 +27,7 @@ const ImageSlide = ({ src }: Props) => {
       <Image
         ref={imgRef}
         src={src}
-        className="h-[100vh] object-cover"
+        className="h-[100dvh] object-cover"
         width={2560}
         height={1440}
         alt="Picture of the author"

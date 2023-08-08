@@ -13,27 +13,27 @@ import MainGrid from "../layouts/MainGrid";
 type Props = {};
 
 const imgData = [
+  // {
+  //   src: "/about/about-5.jpg",
+  //   date: "Conference",
+  //   year: "2017",
+  //   description: "Conversation with john. (temp copy)",
+  // },
   {
-    src: "/about/about-5.jpg",
-    date: "Conference",
-    year: "2017",
-    description: "Conversation with john. (temp copy)",
-  },
-  {
-    src: "/about/about-6.jpg",
+    src: "/about/clubs-day-1.jpg",
     date: "Conference",
     year: "2019",
     description:
       'Tom delivering "Thriving Through Turbulent Times". (temp copy)',
   },
   {
-    src: "/about/about-3.jpg",
+    src: "/about/about-4.jpg",
     date: "Conference",
     year: "2021",
     description: "Conversation with john. (temp copy)",
   },
   {
-    src: "/about/about-4.jpg",
+    src: "/about/about-6.jpg",
     date: "Conference",
     year: "2021",
     description:
@@ -81,9 +81,12 @@ const StickyGallery = (props: Props) => {
   // const inverseScale = useTransform(scale, (v) => -v);
 
   return (
-    <motion.div className="col-span-full col-start-1 h-[400vh]" ref={boundsRef}>
+    <motion.div
+      className="col-span-full col-start-1 h-[300dvh]"
+      ref={boundsRef}
+    >
       <motion.div
-        className="h-[100vh] overflow-hidden bg-black"
+        className="h-[100dvh] overflow-hidden bg-black"
         style={{
           y: containerOffset,
           scale: scale,
@@ -96,7 +99,7 @@ const StickyGallery = (props: Props) => {
         >
           {imgData.map((image, i) => {
             return (
-              <div className="relative h-[100vh] overflow-hidden" key={i}>
+              <div className="relative h-[100dvh] overflow-hidden" key={i}>
                 <ImageSlide src={image.src} />
                 <MainGrid className="absolute bottom-8 text-white">
                   <div className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2">
