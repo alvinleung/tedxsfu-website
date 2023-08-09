@@ -34,7 +34,7 @@ const Nav3 = ({children}: Props) => {
         className="fixed mx-auto left-4 right-4 bottom-4 z-50 block h-12 bg-black text-white border border-white border-opacity-20 overflow-hidden"
         initial={{ width: "auto" }}
         animate={{
-          width: scrollState == NavScrollState.DEFAULT ? "auto" :  "50%",
+          width: scrollState == NavScrollState.DEFAULT ? "auto" :  "calc(((100vw - 5rem) / 2) + 1rem)",
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
         }}
         style={{
