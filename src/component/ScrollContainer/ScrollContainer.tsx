@@ -23,6 +23,7 @@ import {
 } from "react";
 import { useSmoothScroll } from "./useSmoothScroll";
 import { useRouter } from "next/router";
+import { NavScrollState, useNavContext } from "../Nav/Nav3";
 
 type Props = {
   children: React.ReactNode;
@@ -32,6 +33,7 @@ type Props = {
 export enum ScrollDirection {
   DOWN,
   UP,
+  UNKNOWN
 }
 
 interface ScrollContextInfo {
@@ -70,7 +72,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const scrollContainerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const [canScroll, setCanScroll] = useState(true);
   const [scrollDirection, setScrollDirection] = useState<ScrollDirection>(
-    ScrollDirection.DOWN,
+    ScrollDirection.UNKNOWN,
   );
 
   const {
@@ -105,6 +107,16 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
       unobserveScrollY();
     };
   }, [scrollY]);
+
+  const navContext = useNavContext();
+  useEffect(()=>{
+    if(scrollDirection == ScrollDirection.DOWN) {
+      navContext.setScrollState(NavScrollState.SCROLLED);
+    } else {
+      // console.log("default");
+      navContext.setScrollState(NavScrollState.DEFAULT);
+    }
+  },[scrollDirection])
 
   const isPresent = useIsPresent();
 
