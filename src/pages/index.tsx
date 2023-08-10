@@ -45,7 +45,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="absolute bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
+        {/* <section className="absolute bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
           <a href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
             Join our newsletter
           </a>
@@ -75,7 +75,7 @@ export default function Home() {
               ></Image>
             </a>
           </div>
-        </section>
+        </section> */}
       </div>
     </>
   );
