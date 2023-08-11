@@ -64,7 +64,7 @@ const Nav3 = ({children}: Props) => {
           ease: AnimationConfig.EASING_INVERTED,
         }}
         >
-            <motion.div className="w-[calc(100vw-2rem)] md:w-[calc((4*(100vw-7rem)/5)+4rem)] lg:w-[calc((5*(100vw-8rem)/6)+5rem)] flex flex-shrink-0 justify-center">
+            <motion.div className="w-[calc(100vw-2rem)] md:w-[calc((4*(100vw-7rem)/5)+4rem)] lg:w-[calc((5*(100vw-8rem)/6)+5rem)] 2xl:w-[calc((7*(100vw-10rem)/8)+7rem)] flex flex-shrink-0 justify-center">
               <motion.a
               key="logo"
               href={"/"}
