@@ -30,6 +30,10 @@ const ProfilePicture = ({src, isShowing}:Props) => {
             y: mousePos.y,
             zIndex:1000,
             
+        }}
+        style={{
+          height: 200,
+          width: 200
         }}>
             <img src={src} />
         </motion.div>
