@@ -28,7 +28,7 @@ const NavToggle = (props: Props) => {
   return (
     <motion.button
       onClick={handleToggleClick}
-      className="flex items-center my-2 px-2  overflow-hidden"
+      className="flex items-center my-2 px-2 overflow-hidden"
       animate={{
         // backgroundColor: isAboutPage ? "#FFF" : "#000",
         // color: isAboutPage ? "#000" : "#FFF",
@@ -63,7 +63,7 @@ const NavToggle = (props: Props) => {
           Our Story
         </motion.span>
         <motion.img
-          className=" top-0 left-0"
+          className={`top-0 left-0 md:invert`}
           src="../icon/arrow-white.svg"
           animate={{
             opacity: isAboutPage ? 1 : 0,
@@ -87,7 +87,7 @@ const NavToggle = (props: Props) => {
         }}
       >
         <motion.img
-          className=" top-0 left-0"
+          className={` top-0 left-0 `}
           src="../icon/arrow-white.svg"
           animate={{
             width: !isAboutPage ? 24 : 0,
@@ -100,7 +100,7 @@ const NavToggle = (props: Props) => {
           }}
         />
         <motion.span
-          className="whitespace-nowrap pl-2"
+          className="whitespace-nowrap pl-2 md:text-black"
           ref={conferenceTextRef}
           animate={{
             opacity: !isAboutPage ? 0 : 1,
