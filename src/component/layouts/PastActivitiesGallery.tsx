@@ -20,23 +20,23 @@ const PastActivitiesGallery = (props: Props) => {
           {!isDesktop && (
             <>
           <StickyContainer>
-            <Sticky top="20vh" fadeOut>
-              <div className="h-[20vh]">
-                <div className="text-body">{activity.date}</div>
+            <Sticky top="0vh" fadeOut>
+              <div className="h-[12vh] ">
+                <div className="body-mobile">{activity.date}</div>
               </div>
             </Sticky>
           </StickyContainer>
           <StickyContainer>
-            <Sticky top="20vh" fadeOut>
-              <div className="h-[20vh]">
-                <h4 className="mb-4 text-body">{activity.header}</h4>
-                <p className="text-body opacity-50">{activity.description}</p>
+            <Sticky top="0vh" fadeOut>
+              <div className="h-[12vh] w-[25vh]">
+                <h4 className="mb-4 body-mobile">{activity.header}</h4>
+                <p className="body-mobile opacity-50">{activity.description}</p>
               </div>
             </Sticky>
           </StickyContainer>
 
-          <div className="col-span-full col-start-4">
-            <div className="grid grid-cols-6 gap-4">
+          <div className="col-span-full ">
+            <div className="grid grid-cols-6 gap-2">
               {activity.media.map((media, i) => {
                 const firstItemStyling =
                   i === 0 ? "col-span-full" : "col-span-3";
