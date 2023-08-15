@@ -20,7 +20,7 @@ const imgData = [
   //   description: "Conversation with john. (temp copy)",
   // },
   {
-    src: "/about/clubs-day-1.jpg",
+    src: "/about/about-2.jpg",
     date: "Conference",
     year: "2019",
     description:
@@ -50,21 +50,31 @@ const StickyGallery = (props: Props) => {
   const zoomLockStartPosition = bounds.top;
   const zoomLockEndPosition = bounds.bottom - windowDim.height;
 
+  const fullScreenScale = 1 + 1 - bounds.width / windowDim.width + 0.015;
+
   const scale = useTransform(
     scrollY,
     [
       0,
       zoomLockStartPosition,
-      zoomLockEndPosition - zoomLockStartPosition,
       zoomLockEndPosition,
+      zoomLockEndPosition + windowDim.height / 3,
     ],
-    [
-      1,
-      1 + 1 - bounds.width / windowDim.width + 0.01,
-      1 + 1 - bounds.width / windowDim.width + 0.01,
-      1,
-    ],
+    [fullScreenScale, fullScreenScale, fullScreenScale, 1],
   );
+
+  //  const wideScale = 1 + 1 - bounds.width / windowDim.width + 0.01;
+
+  //  const scale = useTransform(
+  //    scrollY,
+  //    [
+  //      0,
+  //      zoomLockStartPosition,
+  //      zoomLockEndPosition - zoomLockStartPosition,
+  //      zoomLockEndPosition,
+  //    ],
+  //    [1, wideScale, wideScale, 1],
+  //  );
 
   const containerOffset = useTransform(scrollY, (v) => {
     if (v < zoomLockStartPosition) return 0;

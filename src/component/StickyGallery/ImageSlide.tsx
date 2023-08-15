@@ -21,7 +21,7 @@ const ImageSlide = ({ src }: Props) => {
     <motion.div
       style={{
         y: offset,
-        scale: 1.1,
+        scale: 1.125,
       }}
     >
       <Image

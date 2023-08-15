@@ -17,7 +17,7 @@ type Props = {};
 type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
 
 const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
-  <section className={`px-4 py-4`}>
+  <section className={`px-4 pb-8`}>
     <StickyContainer>
       <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
         {children}
@@ -76,7 +76,7 @@ const About = (props: Props) => {
       </Head>
       <main className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout>
-          <motion.div className="col-span-full col-start-2 h-64 text-header">
+          <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl text-white">
             13 years in the making
           </motion.div>
           <StickyGallery />
