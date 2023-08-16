@@ -72,7 +72,7 @@ export function useBoundingBox<T extends HTMLElement>(
   useLayoutEffect(() => {
     // don't update layout when it is transitioning away
     // if (!isPresent) return;
-
+    if(containerRef.current === null) return;
     const bounds = containerRef.current.getBoundingClientRect();
     setBounds({
       x: bounds.x,

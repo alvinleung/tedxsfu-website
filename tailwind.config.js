@@ -27,6 +27,9 @@ module.exports = {
         "body-mobile": ["16px", "1.2em"],
         "micro-mobile": ["13px", "1.11em"],
       },
+      colors: {
+        ted: "#EB0028"
+      }
     },
   },
   plugins: [],
