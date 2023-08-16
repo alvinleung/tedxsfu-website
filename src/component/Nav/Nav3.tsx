@@ -7,7 +7,6 @@ import NavToggle from "./NavToggle";
 import NavToggle3 from "./NavToggle3";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
-import Nav from "./Nav";
 
 type Props = {children:React.ReactNode};
 
@@ -33,12 +32,12 @@ const Nav3 = ({children}: Props) => {
   return (
     <NavContext.Provider value={{setScrollState}}>
       <motion.nav
-        className="fixed mx-auto left-4 right-4 max-md:bottom-4 md:top-4 z-50 block h-12 max-md:bg-black bg-opacity-90 max-md:text-white max-md:border border-white border-opacity-20 max-md:overflow-hidden md:flex md:gap-x-4 md:justify-center"
+        className="fixed mx-auto left-4 right-4 max-md:bottom-4 md:top-0 z-50 block h-12 max-md:bg-black bg-opacity-90 max-md:text-white max-md:border border-white border-opacity-20 max-md:overflow-hidden md:flex md:gap-x-4 md:justify-center md:mix-blend-exclusion"
         initial={{ width: "auto" }}
         animate={{
           width: scrollState == NavScrollState.DEFAULT || viewport.width >= 768 ? "auto" :  "calc(((100vw - 5rem) / 2) + 1rem)",
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
-          background: scrollState == NavScrollState.DEFAULT && viewport.width >= 768 ? (isAboutPage ? "#FFFFFFFF" : "#000000FF") : (isAboutPage ? "#FFFFFF00" : "#00000000"),
+          background: viewport.width < 768 ? "#000000FF" : "#00000000",
         }}
         style={{
           whiteSpace: "nowrap"
@@ -47,12 +46,9 @@ const Nav3 = ({children}: Props) => {
         <motion.div 
         className="max-md:w-0 max-md:mx-auto flex justify-center" 
         key="topGroup"
-        initial={{
-          y: "-100%",
-          // opacity: 0,
-        }}
+        initial={false}
         animate={{
-          y: scrollState == NavScrollState.DEFAULT ? 0 : "-100%",
+          y: viewport.width < 768 ? (scrollState == NavScrollState.DEFAULT ? 0 : "-100%") : 0,
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
         }}
         exit={{
@@ -68,14 +64,14 @@ const Nav3 = ({children}: Props) => {
               <motion.a
               key="logo"
               href={"/"}
-              className="block w-32 h-12"
+              className="block w-32 h-12 md:mt-4"
               onClick={(e) => {
                 e.preventDefault();
                 path.push("/");
               }}
               >
                 <motion.svg
-            className="max-w-none block w-32 h-12 px-4"
+            className="max-w-none block w-32 h-12 max-md:px-4"
             aria-label="TEDxSFU"
             key="logo"
             viewBox="0 0 877 152"
@@ -86,7 +82,8 @@ const Nav3 = ({children}: Props) => {
           >
 
             <motion.path
-              animate={{ fill: isAboutPage && viewport.width >= 768 ? "#000000" : "#FFFFFF" }}
+              // animate={{ fill: isAboutPage && viewport.width >= 768 ? "#000000" : "#FFFFFF" }}
+              fill={"#FFFFFF"}
               // style={{mixBlendMode: "difference"}}
               transition={{
                 duration: AnimationConfig.VERY_SLOW,
@@ -95,7 +92,8 @@ const Nav3 = ({children}: Props) => {
               d="M618.12 39.2697C617.31 31.1397 613.73 24.6697 607.36 19.8597C600.99 15.0597 592.99 12.6497 583.35 12.6497C576.56 12.6497 570.58 13.8197 565.43 16.1497C560.28 18.4797 556.24 21.6997 553.32 25.8197C550.4 29.9297 548.94 34.6097 548.94 39.8397C548.94 43.6897 549.77 47.0697 551.43 49.9697C553.09 52.8697 555.34 55.3597 558.16 57.4297C560.98 59.4997 564.12 61.2697 567.57 62.7497C571.01 64.2197 574.49 65.4597 578.01 66.4597L593.4 70.8797C598.06 72.1597 602.71 73.7997 607.37 75.7997C612.03 77.7997 616.29 80.3097 620.16 83.3297C624.03 86.3497 627.14 90.0397 629.49 94.3897C631.84 98.7397 633.02 103.96 633.02 110.05C633.02 117.85 631 124.87 626.96 131.1C622.92 137.33 617.13 142.27 609.57 145.9C602.01 149.53 592.97 151.36 582.42 151.36C572.49 151.36 563.87 149.71 556.56 146.4C549.24 143.1 543.5 138.52 539.32 132.67C535.14 126.82 532.79 120.04 532.27 112.34H545.95C546.42 118.1 548.33 122.97 551.65 126.97C554.97 130.97 559.3 134 564.62 136.07C569.94 138.14 575.88 139.17 582.43 139.17C589.7 139.17 596.17 137.95 601.85 135.5C607.53 133.05 611.99 129.63 615.25 125.23C618.5 120.83 620.13 115.7 620.13 109.85C620.13 104.9 618.85 100.75 616.28 97.3997C613.72 94.0497 610.14 91.2297 605.56 88.9397C600.98 86.6597 595.67 84.6397 589.63 82.8797L572.17 77.7397C560.72 74.3197 551.84 69.5797 545.52 63.5397C539.2 57.4997 536.04 49.7897 536.04 40.4197C536.04 32.5697 538.14 25.6597 542.35 19.6897C546.55 13.7197 552.25 9.0597 559.45 5.7097C566.65 2.3597 574.73 0.679688 583.71 0.679688C592.69 0.679688 600.81 2.34969 607.79 5.67969C614.77 9.00969 620.32 13.5897 624.43 19.4097C628.54 25.2397 630.74 31.8597 631.02 39.2797H618.12V39.2697Z"
             />
             <motion.path
-              animate={{ fill: isAboutPage && viewport.width >= 768 ? "#000000" : "#FFFFFF" }}
+              // animate={{ fill: isAboutPage && viewport.width >= 768 ? "#000000" : "#FFFFFF" }}
+              fill={"#FFFFFF"}
               // style={{mixBlendMode: "difference"}}
               transition={{
                 duration: AnimationConfig.VERY_SLOW,
@@ -104,7 +102,8 @@ const Nav3 = ({children}: Props) => {
               d="M658.84 148.86V2.74023H743.27V14.7302H672.16V69.7402H736.64V81.7302H672.16V148.87H658.84V148.86Z"
             />
             <motion.path
-              animate={{ fill: isAboutPage && viewport.width >= 768 ? "#000000" : "#FFFFFF" }}
+              // animate={{ fill: isAboutPage && viewport.width >= 768 ? "#000000" : "#FFFFFF" }}
+              fill={"#FFFFFF"}
               transition={{
                 duration: AnimationConfig.VERY_SLOW,
                 ease: AnimationConfig.EASING_INVERTED,
@@ -142,15 +141,13 @@ const Nav3 = ({children}: Props) => {
           key="partnerCTA"
           href={"https://google.com"}
           target="_blank" 
-          className="h-12 max-md:w-full flex justify-center items-center text-center md:w-[min(auto,calc((100vw-8rem)/6))] md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50"
+          className="h-12 max-md:w-full flex justify-center items-center text-center md:w-[min(auto,calc((100vw-8rem)/6))] md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50 md:mt-4"
           initial={{ 
             y: "100%",
             // opacity: 0
           }}
           animate={{
             y: scrollState == NavScrollState.SCROLLED && viewport.width < 768 ? "-100%" : 0,
-            background: isAboutPage ? "#000000" : "#FFFFFF",
-            color: isAboutPage ? "#FFFFFF" : "#000000"
             // opacity: scrollState == NavScrollState.SCROLLED ? 1 : 0,
           }}
           exit={{

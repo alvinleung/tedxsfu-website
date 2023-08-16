@@ -3,15 +3,16 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { AnimationConfig } from "../AnimationConfig";
+import { useWindowDimension } from "../../hooks/useWindowDimension"
+import Link from "next/link";
 
 type Props = { path: string };
 
 const NavToggle = (props: Props) => {
   const router = useRouter();
-
   const [conferenceTextRef, conferenceTextBounds] = useBoundingBox([]);
   const [aboutTextRef, aboutTextBounds] = useBoundingBox([]);
-
+  
   const isAboutPage = useMemo(
     () => router.pathname === "/about",
     [router.pathname]
@@ -25,8 +26,59 @@ const NavToggle = (props: Props) => {
     router.push("/about");
   };
 
+  const push = (path : string) => {
+    router.push(path);
+    return;
+  }
+
+  const viewport = useWindowDimension();
   return (
-    <motion.button
+    viewport.width >= 768 ?
+    <motion.div className="flex w-[calc((2*(100vw-7rem)/5)+1rem)] lg:w-[calc((2*(100vw-8rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-10rem)/8)+1rem)] gap-4">
+      <motion.div 
+      className="absolute w-[calc((100vw-7rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-7rem)/8)] bg-ted h-0.5"
+      animate={{
+        x: isAboutPage ? "calc(100% + 1rem)" : 0,
+        transition: {
+          duration: AnimationConfig.SLOW,
+          ease: AnimationConfig.EASING_IN_OUT,
+        },
+      }}
+
+      />
+      <Link className="w-full flex flex-col mt-4" href="/">
+        <motion.div 
+          className="flex flex-col"
+          animate={{
+            opacity: isAboutPage ? 0.5 : 1,
+            transition: {
+              duration: AnimationConfig.SLOW,
+              ease: AnimationConfig.EASING_IN_OUT,
+            },
+          }}>
+          Conference 
+        <span>1</span>
+        </motion.div>
+      </Link>
+      <Link 
+       href="/about"
+        className="w-full flex flex-col mt-4">
+        <motion.div 
+          className="flex flex-col"
+          animate={{
+            opacity: !isAboutPage ? 0.5 : 1,
+            transition: {
+              duration: AnimationConfig.SLOW,
+              ease: AnimationConfig.EASING_IN_OUT,
+            },
+          }}>
+        About us
+        <span>2</span>
+        </motion.div>
+      </Link>
+    </motion.div>
+    :
+    (<motion.button
       onClick={handleToggleClick}
       className="flex items-center my-2 px-2 overflow-hidden"
       animate={{
@@ -114,7 +166,7 @@ const NavToggle = (props: Props) => {
         </motion.span>
       </motion.span>
     </motion.button>
-  );
+  ));
 };
 
 {
