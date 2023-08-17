@@ -34,9 +34,9 @@ const NavToggle = (props: Props) => {
   const viewport = useWindowDimension();
   return (
     viewport.width >= 768 ?
-    <motion.div className="flex w-[calc((2*(100vw-7rem)/5)+1rem)] lg:w-[calc((2*(100vw-8rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-10rem)/8)+1rem)] gap-4">
+    <motion.div className="md:mix-blend-exclusion flex w-[calc((2*(100vw-7rem)/5)+1rem)] lg:w-[calc((2*(100vw-8rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-10rem)/8)+1rem)] gap-4 uppercase text-micro">
       <motion.div 
-      className="absolute w-[calc((100vw-7rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-7rem)/8)] bg-ted h-0.5"
+      className="absolute w-[calc((100vw-7rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-7rem)/8)] bg-ted h-0.5 -top-4"
       animate={{
         x: isAboutPage ? "calc(100% + 1rem)" : 0,
         transition: {
@@ -46,7 +46,7 @@ const NavToggle = (props: Props) => {
       }}
 
       />
-      <Link className="w-full flex flex-col mt-4" href="/">
+      <Link className="w-full flex flex-col" href="/">
         <motion.div 
           className="flex flex-col"
           animate={{
@@ -62,7 +62,7 @@ const NavToggle = (props: Props) => {
       </Link>
       <Link 
        href="/about"
-        className="w-full flex flex-col mt-4">
+        className="w-full flex flex-col">
         <motion.div 
           className="flex flex-col"
           animate={{
@@ -80,7 +80,7 @@ const NavToggle = (props: Props) => {
     :
     (<motion.button
       onClick={handleToggleClick}
-      className="flex items-center my-2 px-2 overflow-hidden"
+      className="flex items-center my-2 px-2 overflow-hidden uppercase text-micro"
       animate={{
         // backgroundColor: isAboutPage ? "#FFF" : "#000",
         // color: isAboutPage ? "#000" : "#FFF",
