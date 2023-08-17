@@ -140,7 +140,7 @@ const Nav3 = ({ children }: Props) => {
             </motion.a>
             <motion.div key="toggle" className="ml-auto uppercase">
               {/* <NavToggle path={path.pathname} /> */}
-              <NavToggle3 path={path.pathname} />
+              <NavToggle path={path.pathname} />
             </motion.div>
           </motion.div>
         </motion.div>
