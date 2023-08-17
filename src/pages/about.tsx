@@ -76,7 +76,7 @@ const About = (props: Props) => {
       </Head>
       <main className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout>
-          <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl text-white">
+          <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl font-light text-white">
             13 years in the making
           </motion.div>
           <StickyGallery />
