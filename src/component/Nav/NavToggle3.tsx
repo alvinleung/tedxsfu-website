@@ -34,9 +34,12 @@ const NavToggle = (props: Props) => {
   const viewport = useWindowDimension();
   return (
     viewport.width >= 768 ?
-    <motion.div className="md:mix-blend-exclusion flex w-[calc((2*(100vw-6rem)/5)+1rem)] lg:w-[calc((2*(100vw-7rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-9rem)/8)+1rem)] gap-4 uppercase text-micro">
+    <motion.div className="flex w-[calc((2*(100vw-6rem)/5)+1rem)] lg:w-[calc((2*(100vw-7rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-9rem)/8)+1rem)] gap-4 uppercase text-micro">
       <motion.div 
-      className="absolute w-[calc((100vw-6rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-9rem)/8)] bg-ted h-0.5 -top-4"
+      className="
+      bg-ted h-0.5 top-0
+      w-[calc((100vw-6rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-9rem)/8)]
+      md:fixed md:z-10 md:right-[calc(2*((100vw-6rem)/5)+3rem)] lg:right-[calc(2*((100vw-7rem)/6)+3rem)] 2xl:right-[calc(2*((100vw-9rem)/8)+3rem)]"
       animate={{
         x: isAboutPage ? "calc(100% + 1rem)" : 0,
         transition: {
@@ -48,7 +51,11 @@ const NavToggle = (props: Props) => {
       />
       <Link className="w-full flex flex-col" href="/">
         <motion.div 
-          className="flex flex-col"
+          className="
+          flex flex-col md:mix-blend-exclusion 
+          w-[calc((100vw-6rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-9rem)/8)]
+          md:fixed md:z-10 md:top-4 md:right-[calc(2*((100vw-6rem)/5)+3rem)] lg:right-[calc(2*((100vw-7rem)/6)+3rem)] 2xl:right-[calc(2*((100vw-9rem)/8)+3rem)] 
+          "
           animate={{
             opacity: isAboutPage ? 0.5 : 1,
             transition: {
@@ -64,7 +71,10 @@ const NavToggle = (props: Props) => {
        href="/about"
         className="w-full flex flex-col">
         <motion.div 
-          className="flex flex-col"
+          className="
+          flex flex-col md:mix-blend-exclusion 
+          w-[calc((100vw-6rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-9rem)/8)]
+          md:fixed md:z-10 md:top-4 md:right-[calc(((100vw-6rem)/5)+2rem)] lg:right-[calc(((100vw-7rem)/6)+2rem)] 2xl:right-[calc(((100vw-9rem)/8)+2rem)] "
           animate={{
             opacity: !isAboutPage ? 0.5 : 1,
             transition: {
