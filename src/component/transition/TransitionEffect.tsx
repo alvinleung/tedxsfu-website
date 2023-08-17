@@ -43,6 +43,7 @@ const TransitionEffect = ({ children }: Props) => {
       // mode="popLayout"
       onExitComplete={() => {
         setIsTransitionDone(true);
+        setHighestZIndex(0);
       }}
     >
       <motion.div
@@ -59,7 +60,7 @@ const TransitionEffect = ({ children }: Props) => {
           x: isAboutPage
             ? windowDimension.width / 1.7
             : -windowDimension.width / 1.7,
-          opacity: 0.5,
+          opacity: 0,
         }}
         transition={{
           duration: AnimationConfig.VERY_SLOW,

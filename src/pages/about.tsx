@@ -4,7 +4,7 @@ import Sticky from "@/component/ScrollContainer/Sticky";
 import StickyContainer from "@/component/ScrollContainer/StickyContainer";
 import { TeamView, TeamMember } from "@/component/layouts/TeamView";
 import { teams } from "@/data/teamData";
-import { motion } from "framer-motion";
+import { motion, usePresence } from "framer-motion";
 import React from "react";
 import MainGrid from "@/component/layouts/MainGrid";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";

@@ -1,7 +1,7 @@
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { AnimationConfig } from "../AnimationConfig";
 import { useWindowDimension } from "../../hooks/useWindowDimension"
 import Link from "next/link";
@@ -32,6 +32,7 @@ const NavToggle = (props: Props) => {
   }
 
   const viewport = useWindowDimension();
+
   return (
     viewport.width >= 768 ?
     <motion.div className="flex w-[calc((2*(100vw-6rem)/5)+1rem)] lg:w-[calc((2*(100vw-7rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-9rem)/8)+1rem)] gap-4 uppercase text-micro">
@@ -49,7 +50,7 @@ const NavToggle = (props: Props) => {
       }}
 
       />
-      <Link className="w-full flex flex-col" href="/">
+      <Link className={`w-full flex flex-col`} href="/">
         <motion.div 
           className="
           flex flex-col md:mix-blend-exclusion 

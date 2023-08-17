@@ -30,7 +30,7 @@ const Nav3 = ({ children }: Props) => {
   return (
     <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="relative left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
+        className="max-md:fixed left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
         initial={{ width: "auto" }}
         animate={{
           width:
