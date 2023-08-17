@@ -2,75 +2,82 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
-import { useWindowDimension } from "../../hooks/useWindowDimension"
+import { useWindowDimension } from "../../hooks/useWindowDimension";
 import NavToggle from "./NavToggle";
 import NavToggle3 from "./NavToggle3";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
 
-type Props = {children:React.ReactNode};
+type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
-  setScrollState: (scrolledState:NavScrollState)=>void
+  setScrollState: (scrolledState: NavScrollState) => void;
 }
 
 export const NavContext = createContext<NavContextInterface>({
-  setScrollState: (scrolledState:NavScrollState)=>{}
-})
+  setScrollState: (scrolledState: NavScrollState) => {},
+});
 export enum NavScrollState {
   SCROLLED,
-  DEFAULT
+  DEFAULT,
 }
 
-
-const Nav3 = ({children}: Props) => {
+const Nav3 = ({ children }: Props) => {
   const path = useRouter();
   const isAboutPage = path.pathname != "/";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
   return (
-    <NavContext.Provider value={{setScrollState}}>
+    <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="max-md:fixed mx-auto left-4 right-4 max-md:bottom-4 md:top-4 z-50 block h-12 max-md:bg-black bg-opacity-90 max-md:text-white max-md:border border-white border-opacity-20 max-md:overflow-hidden md:flex md:gap-x-4 md:justify-center before:bg-white"
+        className="relative left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
         initial={{ width: "auto" }}
         animate={{
-          width: scrollState == NavScrollState.DEFAULT || viewport.width >= 768 ? "auto" :  "calc(((100vw - 5rem) / 2) + 1rem)",
+          width:
+            scrollState == NavScrollState.DEFAULT || viewport.width >= 768
+              ? "auto"
+              : "calc(((100vw - 5rem) / 2) + 1rem)",
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
           background: viewport.width < 768 ? "#000000FF" : "#00000000",
         }}
         style={{
-          whiteSpace: "nowrap"
+          whiteSpace: "nowrap",
         }}
       >
-        <motion.div 
-        className="max-md:w-0 max-md:mx-auto flex justify-center" 
-        key="topGroup"
-        initial={false}
-        animate={{
-          y: viewport.width < 768 ? (scrollState == NavScrollState.DEFAULT ? 0 : "-100%") : 0,
-          // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
-        }}
-        exit={{
-          y: "-100%",
-          // opacity: 0,
-        }}
-        transition={{
-          duration: AnimationConfig.FAST,
-          ease: AnimationConfig.EASING_INVERTED,
-        }}
+        <motion.div
+          className="flex justify-center max-md:mx-auto max-md:w-0"
+          key="topGroup"
+          initial={false}
+          animate={{
+            y:
+              viewport.width < 768
+                ? scrollState == NavScrollState.DEFAULT
+                  ? 0
+                  : "-100%"
+                : 0,
+            // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
+          }}
+          exit={{
+            y: "-100%",
+            // opacity: 0,
+          }}
+          transition={{
+            duration: AnimationConfig.FAST,
+            ease: AnimationConfig.EASING_INVERTED,
+          }}
         >
-            <motion.div className="w-[calc(100vw-2rem)] md:w-[calc((4*(100vw-7rem)/5)+4rem)] lg:w-[calc((5*(100vw-8rem)/6)+5rem)] 2xl:w-[calc((7*(100vw-10rem)/8)+7rem)] flex flex-shrink-0 justify-center">
-              <motion.a
+          <motion.div className="flex w-[calc(100vw-2rem)] flex-shrink-0 justify-center md:w-[calc((4*(100vw-7rem)/5)+4rem)] lg:w-[calc((5*(100vw-8rem)/6)+5rem)] 2xl:w-[calc((7*(100vw-10rem)/8)+7rem)]">
+            <motion.a
               key="logo"
               href={"/"}
-              className="block w-32 h-12 max-md:px-4 flex flex-row-reverse"
+              className="block flex h-12 w-32 flex-row-reverse max-md:px-4"
               onClick={(e) => {
                 e.preventDefault();
                 path.push("/");
               }}
-              >
-                {/* <motion.svg
+            >
+              {/* <motion.svg
                   className="max-w-none block w-32 h-12 max-md:px-4"
                   aria-label="TEDxSFU"
                   key="logo"
@@ -98,12 +105,12 @@ const Nav3 = ({children}: Props) => {
                 0h73.7c48.6 0 65.8 36 65.8 72.8C403.5 120.4 379.8 148.8 329 148.8h-65V2.7998ZM308.9 111.3h17.6c28 0 32.1-22.7002 32.1-36.4002 
                 0-9.2-2.9-34.7-35.3-34.7H309V111.3h-.1ZM468 92.7998l-13.7-22.8-13.4 22.8H408l31.2-46-30.1-44H442l12.2 21.8 12.5-21.8h32.9l-30.1 44 31.2 46H468Z"/>
               </motion.svg> */}
-              <motion.svg 
+              <motion.svg
                 viewBox="0 0 375 151"
-                className="md:fixed md:z-10 md:mix-blend-exclusion md:top-4 md:left-[6rem] md:h-6"
+                className="md:fixed md:left-[6rem] md:top-4 md:z-10 md:h-6 md:mix-blend-exclusion"
               >
-                <motion.path 
-                  fill="#FFFFFF" 
+                <motion.path
+                  fill="#FFFFFF"
                   d="M116.299 38.4947c-.8-8.057-4.4-14.5226-10.8-19.2971-6.3998-4.7745-14.3998-7.1618-23.9998-7.1618-6.8 0-12.8 1.1936-17.9 3.4814-5.2 2.2878-9.2 
                   5.5703-12.1 9.6486-2.9 4.0782-4.4 8.7533-4.4 13.9257 0 3.8793.8 7.1618 2.5 10.0464s3.9 5.3714 6.7 7.4602c2.8 2.0889 6 3.7799 9.4 5.2719 3.4 1.4921 
                   6.9 2.6857 10.5 3.6804l15.4 4.3767c4.7 1.2931 9.2998 2.8846 13.9998 4.874 4.7 1.9894 8.9 4.4761 12.8 7.4602 3.9 2.9841 7 6.6644 9.3 11.0411 2.4 4.3766 
@@ -114,44 +121,48 @@ const Nav3 = ({children}: Props) => {
                   2.1-14.7215 6.3-20.5902 4.2-5.9682 9.9-10.54376 17.1-13.92572C64.5992 1.59151 72.6992 0 81.6992 0c9.1 0 17.1 1.69098 24.0998 4.97348 7 3.28249 12.5 7.85812 16.7 13.62732 4.1 5.7692 6.3 12.4337 6.6 
                   19.7944h-12.8v.0995ZM157.1 147.513V2.08887h84.5V14.0252h-71.2v54.7082H235v11.9364h-64.6v66.7442h-13.3v.099ZM361.5 2.08872h13.3V98.3752c0 9.8478-2.3 18.6998-7 26.4588s-11.1 13.926-19.4 18.402c-8.3 4.476-17.9 
                   6.664-28.9 6.664-10.9 0-20.6-2.287-28.9-6.764-8.3-4.476-14.8-10.643-19.5-18.401-4.7-7.759-7-16.612-7-26.4593V1.98926h13.3V97.281c0 7.759 1.7 14.622 5.2 20.59 3.5 6.068 8.4 10.743 14.7 14.224 6.3 3.482 13.7 
-                  5.173 22.2 5.173s15.9-1.691 22.2-5.173c6.3-3.481 11.2-8.156 14.7-14.224 3.4-6.067 5.2-12.931 5.2-20.59l-.1-95.19228Z"/>
+                  5.173 22.2 5.173s15.9-1.691 22.2-5.173c6.3-3.481 11.2-8.156 14.7-14.224 3.4-6.067 5.2-12.931 5.2-20.59l-.1-95.19228Z"
+                />
               </motion.svg>
-              <motion.svg 
+              <motion.svg
                 viewBox="0 0 501 151"
-                className="md:fixed md:z-10 md:top-4 md:left-4 md:h-6"
-                >
-                <motion.path 
+                className="md:fixed md:left-4 md:top-4 md:z-10 md:h-6"
+              >
+                <motion.path
                   fill="#EB0028"
                   d="M40.8 39.6522H0V2.20264h126.6V39.6522H85.7V148.396H40.8V39.6522Zm92.7-37.44956h122.9V39.6522h-78v18.2242h78v34.8461h-78v18.2245h78v37.449H133.5V2.20264Zm130.5 
                   0h73.7c48.6 0 65.8 36.04776 65.8 72.89656 0 44.8598-23.7 73.2968-74.5 73.2968h-65V2.20264ZM308.9 110.847h17.6c28 0 32.1-22.7306 
                   32.1-36.4487 0-9.2122-2.9-34.7461-35.3-34.7461H309v71.1948h-.1ZM468 92.322l-13.7-22.8302-13.4 22.8302H408l31.2-46.061-30.1-44.05836H442l12.2 21.82896 
-                  12.5-21.82896h32.9L469.5 46.261l31.2 46.061H468Z"/>
+                  12.5-21.82896h32.9L469.5 46.261l31.2 46.061H468Z"
+                />
               </motion.svg>
-              </motion.a>
-              <motion.div
-                key="toggle"
-                className="ml-auto uppercase"
-                >
-                  {/* <NavToggle path={path.pathname} /> */}
-                  <NavToggle3 path={path.pathname} />
-              </motion.div>
+            </motion.a>
+            <motion.div key="toggle" className="ml-auto uppercase">
+              {/* <NavToggle path={path.pathname} /> */}
+              <NavToggle3 path={path.pathname} />
             </motion.div>
+          </motion.div>
         </motion.div>
-        <motion.a 
+        <motion.a
           key="partnerCTA"
           href={"mailto:yeeloong.tang@tedxsfu.com"}
-          target="_blank" 
+          target="_blank"
           className="
-          h-12 max-md:w-full flex justify-center items-center text-center uppercase text-micro
-          md:w-[min(auto,calc((100vw-7rem)/5))] lg:w-[min(auto,calc((100vw-8rem)/6))] 2xl:w-[min(auto,calc((100vw-10rem)/8))] 
-          md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50
-          md:fixed md:z-10 md:top-4 md:right-4"
-          initial={{ 
+          flex h-12 items-center justify-center text-center text-micro uppercase max-md:w-full
+          md:fixed md:right-4 md:top-4 
+          md:z-10 md:ml-auto md:w-[min(auto,calc((100vw-7rem)/5))] md:border md:border-white
+          md:border-opacity-50 md:px-2 lg:w-[min(auto,calc((100vw-8rem)/6))] 2xl:w-[min(auto,calc((100vw-10rem)/8))]"
+          initial={{
             y: "100%",
             // opacity: 0
           }}
           animate={{
-            y: viewport.width < 768 ? (scrollState == NavScrollState.SCROLLED ? "-100%" : 0) : 0,
+            y:
+              viewport.width < 768
+                ? scrollState == NavScrollState.SCROLLED
+                  ? "-100%"
+                  : 0
+                : 0,
             // opacity: scrollState == NavScrollState.SCROLLED ? 1 : 0,
           }}
           exit={{
@@ -162,17 +173,17 @@ const Nav3 = ({children}: Props) => {
             duration: AnimationConfig.FAST,
             ease: AnimationConfig.EASING_INVERTED,
           }}
-          >
-            Partner with us
-          </motion.a>
+        >
+          Partner with us
+        </motion.a>
       </motion.nav>
       {children}
     </NavContext.Provider>
   );
 };
 
-export const useNavContext = ()=>{
+export const useNavContext = () => {
   return useContext(NavContext);
-}
+};
 
 export default Nav3;
