@@ -34,9 +34,9 @@ const NavToggle = (props: Props) => {
   const viewport = useWindowDimension();
   return (
     viewport.width >= 768 ?
-    <motion.div className="md:mix-blend-exclusion flex w-[calc((2*(100vw-7rem)/5)+1rem)] lg:w-[calc((2*(100vw-8rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-10rem)/8)+1rem)] gap-4 uppercase text-micro">
+    <motion.div className="md:mix-blend-exclusion flex w-[calc((2*(100vw-6rem)/5)+1rem)] lg:w-[calc((2*(100vw-7rem)/6)+1rem)] 2xl:w-[calc((2*(100vw-9rem)/8)+1rem)] gap-4 uppercase text-micro">
       <motion.div 
-      className="absolute w-[calc((100vw-7rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-7rem)/8)] bg-ted h-0.5 -top-4"
+      className="absolute w-[calc((100vw-6rem)/5)] lg:w-[calc((100vw-7rem)/6)] 2xl:w-[calc((100vw-9rem)/8)] bg-ted h-0.5 -top-4"
       animate={{
         x: isAboutPage ? "calc(100% + 1rem)" : 0,
         transition: {

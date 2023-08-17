@@ -130,7 +130,7 @@ const Nav3 = ({children}: Props) => {
               </motion.a>
               <motion.div
                 key="toggle"
-                className="ml-auto uppercase md:fixed md:z-10 md:top-4"
+                className="ml-auto uppercase md:fixed md:z-10 md:top-4 md:right-[calc(((100vw-6rem)/5)+2rem)] lg:right-[calc(((100vw-7rem)/6)+2rem)] 2xl:right-[calc(((100vw-9rem)/8)+2rem)]"
                 >
                   {/* <NavToggle path={path.pathname} /> */}
                   <NavToggle3 path={path.pathname} />
@@ -139,7 +139,7 @@ const Nav3 = ({children}: Props) => {
         </motion.div>
         <motion.a 
           key="partnerCTA"
-          href={"https://google.com"}
+          href={"mailto:yeeloong.tang@tedxsfu.com"}
           target="_blank" 
           className="
           h-12 max-md:w-full flex justify-center items-center text-center uppercase text-micro
