@@ -23,7 +23,7 @@ import {
 } from "react";
 import { useSmoothScroll } from "./useSmoothScroll";
 import { useRouter } from "next/router";
-import { NavScrollState, useNavContext } from "../Nav/Nav3";
+import { NavScrollState, useNavContext } from "../Nav/Nav";
 
 type Props = {
   children: React.ReactNode;

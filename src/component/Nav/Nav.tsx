@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useWindowDimension } from "../../hooks/useWindowDimension"
-import NavToggle from "./NavToggle";
-import NavToggle3 from "./NavToggle3";
+import NavToggle3 from "./NavToggle";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
 
@@ -99,8 +98,9 @@ const Nav3 = ({children}: Props) => {
                 0-9.2-2.9-34.7-35.3-34.7H309V111.3h-.1ZM468 92.7998l-13.7-22.8-13.4 22.8H408l31.2-46-30.1-44H442l12.2 21.8 12.5-21.8h32.9l-30.1 44 31.2 46H468Z"/>
               </motion.svg> */}
               <motion.svg 
+                key="SFU"
                 viewBox="0 0 375 151"
-                className="md:fixed md:z-10 md:mix-blend-exclusion md:top-4 md:left-[6rem] md:h-6"
+                className="md:fixed md:z-50 md:mix-blend-exclusion md:top-4 md:left-[6rem] md:h-6"
               >
                 <motion.path 
                   fill="#FFFFFF" 
@@ -117,8 +117,9 @@ const Nav3 = ({children}: Props) => {
                   5.173 22.2 5.173s15.9-1.691 22.2-5.173c6.3-3.481 11.2-8.156 14.7-14.224 3.4-6.067 5.2-12.931 5.2-20.59l-.1-95.19228Z"/>
               </motion.svg>
               <motion.svg 
+                key="TEDx"
                 viewBox="0 0 501 151"
-                className="md:fixed md:z-10 md:top-4 md:left-4 md:h-6"
+                className="md:fixed md:z-50 md:top-4 md:left-4 md:h-6"
                 >
                 <motion.path 
                   fill="#EB0028"
@@ -145,7 +146,7 @@ const Nav3 = ({children}: Props) => {
           h-12 max-md:w-full flex justify-center items-center text-center uppercase text-micro
           md:w-[min(auto,calc((100vw-7rem)/5))] lg:w-[min(auto,calc((100vw-8rem)/6))] 2xl:w-[min(auto,calc((100vw-10rem)/8))] 
           md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50
-          md:fixed md:z-10 md:top-4 md:right-4"
+          md:fixed md:z-50 md:top-4 md:right-4"
           initial={{ 
             y: "100%",
             // opacity: 0

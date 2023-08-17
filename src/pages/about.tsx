@@ -11,7 +11,6 @@ import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
 import StickyGallery from "@/component/StickyGallery/StickyGallery";
 import Head from "next/head";
-import Grid from "@/component/Grid"
 
 type Props = {};
 
@@ -75,7 +74,6 @@ const About = (props: Props) => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      {/* <Grid/> */}
       <main className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout>
           <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl text-white">

@@ -6,11 +6,10 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import { ScrollContainer } from "@/component/ScrollContainer/ScrollContainer";
-import Nav from "@/component/Nav/Nav";
 import { useRouter } from "next/router";
 import TransitionEffect from "@/component/transition/TransitionEffect";
-import Nav2 from "@/component/Nav/Nav2";
-import Nav3 from "@/component/Nav/Nav3";
+import Nav3 from "@/component/Nav/Nav";
+import Grid from "@/component/Grid"
 
 const chiaroscuro = localFont({
   src: [
@@ -54,6 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
         <Nav3>
+        {/* <Grid/> */}
         <TransitionEffect>
           <ScrollContainer>
             <main className={`${helvetica.className}`}>
