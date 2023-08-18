@@ -150,9 +150,9 @@ const Nav3 = ({ children }: Props) => {
           target="_blank"
           className="
           h-12 max-md:w-full flex justify-center items-center text-center uppercase text-micro
-          md:w-[min(auto,calc((100vw-7rem)/5))] lg:w-[min(auto,calc((100vw-8rem)/6))] 2xl:w-[min(auto,calc((100vw-10rem)/8))] 
+          md:max-w-[calc((100vw-7rem)/5)] lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)] 
           md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50
-          md:fixed md:z-50 md:top-4 md:right-4"
+          md:fixed md:z-50 md:top-4 md:right-4 md:mix-blend-exclusion"
           initial={{ 
             y: "100%",
             // opacity: 0
