@@ -29,14 +29,14 @@ export const DirectorInfo = ({
       initial={{ opacity: 0 }}
       animate={{
         opacity: isCurrentDirector ? 1 : 0,
-        x: xOffset,
-        y: yOffset,
+        x: isDesktop ? xOffset : 0,
+        y: isDesktop ? yOffset : 0,
         transition: {
           ease: [0.22, 1, 0.36, 1],
-          duration: 0.5,
+          duration: 0.3,
         },
       }}
-      className={isDesktop ? "" : "px-4 pb-8 pt-32"}
+      className={isDesktop ? "" : "px-4 pb-24 pt-32"}
       style={{
         height: isDesktop ? itemScrollHeightVW + "vw" : "auto",
         background: isDesktop

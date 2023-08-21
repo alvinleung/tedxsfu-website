@@ -62,7 +62,7 @@ const Fixed = ({
               <motion.div
                 style={{
                   position: "fixed",
-                  zIndex: 1000,
+                  zIndex: 30,
                   top: top || 0,
                   right: right || 0,
                   // width: bounds && bounds.width,

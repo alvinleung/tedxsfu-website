@@ -21,6 +21,7 @@ type Props = {};
 const DirectorTeamDisplay = (props: Props) => {
   const [containerRef, bound] = useBoundingBox<HTMLDivElement>([]);
   const windowDim = useWindowDimension();
+  const isDesktop = useBreakpoint(breakpoints.md);
 
   const [currentDirector, setCurrentDirector] = useState(0);
   const { scrollY } = useContainerScroll();
@@ -29,7 +30,9 @@ const DirectorTeamDisplay = (props: Props) => {
     const handleMotionChange = (pos: number) => {
       // decide which one is the current one
       const totalDirectors = directors.length;
-      const offset = pos - bound.top + windowDim.height * 0.35;
+
+      const offsetVH = isDesktop ? 0.3 : 0.2;
+      const offset = pos - bound.top + windowDim.height * offsetVH;
       const currentProgress = offset / bound.height;
       const currentDirector = Math.round(currentProgress * totalDirectors);
       setCurrentDirector(currentDirector);
@@ -43,9 +46,8 @@ const DirectorTeamDisplay = (props: Props) => {
     return () => {
       cleanupScroll();
     };
-  }, [bound, scrollY, windowDim]);
+  }, [bound, scrollY, windowDim, isDesktop]);
 
-  const isDesktop = useBreakpoint(breakpoints.md);
   const itemScrollHeightVW = isDesktop ? 15 : 40;
 
   return (
