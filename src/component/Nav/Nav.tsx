@@ -45,7 +45,7 @@ const Nav3 = ({ children }: Props) => {
         }}
       >
         <motion.div
-          className="flex justify-center max-md:mx-auto max-md:w-0"
+          className="flex justify-center max-md:mx-auto max-md:w-0 md:!transform-none"
           key="topGroup"
           initial={false}
           animate={{
@@ -55,6 +55,7 @@ const Nav3 = ({ children }: Props) => {
                   ? 0
                   : "-100%"
                 : 0,
+            // transform: "none",
             // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
           }}
           exit={{
@@ -107,7 +108,7 @@ const Nav3 = ({ children }: Props) => {
               <motion.svg 
                 key="SFU"
                 viewBox="0 0 375 151"
-                className="md:fixed md:z-50 md:mix-blend-exclusion md:top-4 md:left-[6rem] md:h-6"
+                className="md:fixed z-50 md:mix-blend-exclusion md:top-4 md:left-[6rem] md:h-6"
               >
                 <motion.path
                   fill="#FFFFFF"
@@ -127,7 +128,7 @@ const Nav3 = ({ children }: Props) => {
               <motion.svg 
                 key="TEDx"
                 viewBox="0 0 501 151"
-                className="md:fixed md:z-50 md:top-4 md:left-4 md:h-6"
+                className="md:fixed z-50 md:top-4 md:left-4 md:h-6"
                 >
                 <motion.path 
                   fill="#EB0028"
@@ -152,12 +153,13 @@ const Nav3 = ({ children }: Props) => {
           h-12 max-md:w-full flex justify-center items-center text-center uppercase text-micro
           md:max-w-[calc((100vw-7rem)/5)] lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)] 
           md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50
-          md:fixed md:z-50 md:top-4 md:right-4 md:mix-blend-exclusion"
+          md:fixed z-50 md:top-4 md:right-4 md:mix-blend-exclusion"
           initial={{ 
             y: "100%",
             // opacity: 0
           }}
           animate={{
+
             y:
               viewport.width < 768
                 ? scrollState == NavScrollState.SCROLLED

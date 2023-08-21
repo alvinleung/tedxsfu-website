@@ -125,15 +125,15 @@ const About = (props: Props) => {
             {teams.map((team, i) => (
               <TeamView name={team.name} key={i}>
                 {team.members.map((member, i) => (
-                  <>
+                  <React.Fragment key={i}>
                     <TeamMember
                       name={member.name}
                       position={member.position}
                       linkedin={member.linkedin}
                       image={member.image}
-                      key={i}
+                      // key={i}
                     />
-                  </>
+                  </React.Fragment>
                 ))}
               </TeamView>
             ))}

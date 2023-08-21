@@ -110,12 +110,12 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
 
   const navContext = useNavContext();
   useEffect(()=>{
-    if(scrollDirection == ScrollDirection.DOWN) {
-      navContext.setScrollState(NavScrollState.SCROLLED);
-    } else {
-      // console.log("default");
-      navContext.setScrollState(NavScrollState.DEFAULT);
-    }
+      if(scrollDirection == ScrollDirection.DOWN) {
+        navContext.setScrollState(NavScrollState.SCROLLED);
+      } else {
+        // console.log("default");
+        navContext.setScrollState(NavScrollState.DEFAULT);
+      }
   },[scrollDirection])
 
   const isPresent = useIsPresent();
