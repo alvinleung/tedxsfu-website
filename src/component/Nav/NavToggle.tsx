@@ -89,7 +89,7 @@ const NavToggle = (props: Props) => {
   ) : (
     <motion.button
       onClick={handleToggleClick}
-      className="my-2 flex items-center overflow-hidden px-2 text-micro uppercase"
+      className="my-2 h-8 flex items-center overflow-hidden px-2 text-micro uppercase"
       animate={{
         // backgroundColor: isAboutPage ? "#FFF" : "#000",
         // color: isAboutPage ? "#000" : "#FFF",
