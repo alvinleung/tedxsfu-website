@@ -64,7 +64,7 @@ const NavToggle = (props: Props) => {
               ease: AnimationConfig.EASING_IN_OUT,
             },
           }}>
-          Conference 
+        <span className="h-6">Conference</span>
         <span>1</span>
         </motion.div>
       </Link>
@@ -83,7 +83,7 @@ const NavToggle = (props: Props) => {
               ease: AnimationConfig.EASING_IN_OUT,
             },
           }}>
-        About us
+        <span className="h-6">About us</span>
         <span>2</span>
         </motion.div>
       </Link>

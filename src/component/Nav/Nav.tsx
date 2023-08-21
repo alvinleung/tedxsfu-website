@@ -139,10 +139,11 @@ const Nav3 = ({ children }: Props) => {
                 />
               </motion.svg>
             </motion.a>
+
             <motion.div key="toggle" className="ml-auto uppercase">
-              {/* <NavToggle path={path.pathname} /> */}
               <NavToggle path={path.pathname} />
             </motion.div>
+
           </motion.div>
         </motion.div>
         <motion.a
@@ -150,7 +151,7 @@ const Nav3 = ({ children }: Props) => {
           href={"mailto:yeeloong.tang@tedxsfu.com"}
           target="_blank"
           className="
-          h-12 max-md:w-full flex justify-center items-center text-center uppercase text-micro
+          h-10 max-md:w-full flex justify-center items-center text-center uppercase text-micro
           md:max-w-[calc((100vw-7rem)/5)] lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)] 
           md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50
           md:fixed z-50 md:top-4 md:right-4 md:mix-blend-exclusion"
