@@ -72,17 +72,23 @@ export function useBoundingBox<T extends HTMLElement>(
   useLayoutEffect(() => {
     // don't update layout when it is transitioning away
     // if (!isPresent) return;
-    if(containerRef.current === null) return;
+    if (containerRef.current === null) return;
     const bounds = containerRef.current.getBoundingClientRect();
+
+    // use previous position in framer motion to catch
+    // a more accurate offset. the current value is not the one that will
+    // match the bounding box value for some reason
+    const scrollOffset = scrollY.getPrevious();
+
     setBounds({
       x: bounds.x,
-      y: bounds.y + scrollY.get(),
+      y: bounds.y + scrollOffset,
       width: bounds.width,
       height: bounds.height,
       left: bounds.left,
       right: bounds.right,
-      top: bounds.top + scrollY.get(),
-      bottom: bounds.bottom + scrollY.get(),
+      top: bounds.top + scrollOffset,
+      bottom: bounds.bottom + scrollOffset,
     });
   }, [windowDim, isTransitionDone, scrollHeight, ...dependency]);
 
