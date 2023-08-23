@@ -33,7 +33,7 @@ type Props = {
 export enum ScrollDirection {
   DOWN,
   UP,
-  UNKNOWN
+  UNKNOWN,
 }
 
 interface ScrollContextInfo {
@@ -109,16 +109,50 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   }, [scrollY]);
 
   const navContext = useNavContext();
-  useEffect(()=>{
-      if(scrollDirection == ScrollDirection.DOWN) {
-        navContext.setScrollState(NavScrollState.SCROLLED);
-      } else {
-        // console.log("default");
-        navContext.setScrollState(NavScrollState.DEFAULT);
-      }
-  },[scrollDirection])
+  useEffect(() => {
+    if (scrollDirection == ScrollDirection.DOWN) {
+      navContext.setScrollState(NavScrollState.SCROLLED);
+    } else {
+      // console.log("default");
+      navContext.setScrollState(NavScrollState.DEFAULT);
+    }
+  }, [scrollDirection]);
 
   const isPresent = useIsPresent();
+  const windowDim = useWindowDimension();
+
+  const scrollBarY = useTransform(
+    scrollY,
+    [0, scrollHeight],
+    [0, windowDim.height],
+  );
+
+  const [shouldShowScrollbar, setShouldShowScrollBar] = useState(true);
+
+  useEffect(() => {
+    let time: any;
+    const attemptHide = () => {
+      if (time) {
+        clearTimeout(time);
+      }
+      time = setTimeout(() => {
+        setShouldShowScrollBar(false);
+      }, 100);
+    };
+
+    const cancel = scrollBarY.on("change", (v) => {
+      setShouldShowScrollBar(true);
+      attemptHide();
+    });
+
+    attemptHide();
+
+    return () => {
+      setShouldShowScrollBar(false);
+      clearTimeout(time);
+      cancel();
+    };
+  }, [scrollBarY]);
 
   return (
     <ScrollContext.Provider
@@ -154,6 +188,18 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         <motion.div style={{ y: isUsingSmoothScroll ? documentOffsetY : 0 }}>
           {children}
         </motion.div>
+        <div className="fixed bottom-0 right-0 top-0 w-1 rounded-full mix-blend-exclusion">
+          <motion.div
+            className="w-1 bg-white"
+            style={{
+              height: (windowDim.height / scrollHeight) * windowDim.height,
+              y: scrollBarY,
+            }}
+            animate={{
+              opacity: isUsingSmoothScroll && shouldShowScrollbar ? 1 : 0,
+            }}
+          />
+        </div>
       </motion.div>
     </ScrollContext.Provider>
   );

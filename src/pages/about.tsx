@@ -99,7 +99,7 @@ const About = (props: Props) => {
 
           <div className="col-span-full col-start-1">
             {/* some media content goes on here */}
-            <ScrollVideo src={"./about/about-intro-video.mp4"} />
+            <ScrollVideo src={"./about/about-intro-video.webm"} />
           </div>
         </SectionLayout>
 
@@ -118,10 +118,10 @@ const About = (props: Props) => {
           </div>
         </SectionLayout>
         <SectionLayout>
-          <h3 className="col-span-3 2xl:col-span-4 col-start-1 mb-24 text-lead md:col-span-2 md:col-start-2 xl:col-start-4 2xl:col-start-4">
+          <h3 className="col-span-3 col-start-1 mb-24 text-lead md:col-span-2 md:col-start-2 xl:col-start-4 2xl:col-span-4 2xl:col-start-4">
             And our larger, proud and hungry team of 21
           </h3>
-          <div className="col-span-3 2xl:col-span-4 col-start-1 grid gap-4 md:col-start-2 md:grid-cols-2 xl:col-start-4 2xl:col-start-4">
+          <div className="col-span-3 col-start-1 grid gap-4 md:col-start-2 md:grid-cols-2 xl:col-start-4 2xl:col-span-4 2xl:col-start-4">
             {teams.map((team, i) => (
               <TeamView name={team.name} key={i}>
                 {team.members.map((member, i) => (

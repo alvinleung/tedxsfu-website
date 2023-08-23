@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
-import { useWindowDimension } from "../../hooks/useWindowDimension"
+import { useWindowDimension } from "../../hooks/useWindowDimension";
 import NavToggle from "./NavToggle";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
@@ -30,7 +30,7 @@ const Nav3 = ({ children }: Props) => {
   return (
     <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="max-md:fixed left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
+        className="left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
         initial={{ width: "auto" }}
         animate={{
           width:
@@ -105,10 +105,10 @@ const Nav3 = ({ children }: Props) => {
                 0h73.7c48.6 0 65.8 36 65.8 72.8C403.5 120.4 379.8 148.8 329 148.8h-65V2.7998ZM308.9 111.3h17.6c28 0 32.1-22.7002 32.1-36.4002 
                 0-9.2-2.9-34.7-35.3-34.7H309V111.3h-.1ZM468 92.7998l-13.7-22.8-13.4 22.8H408l31.2-46-30.1-44H442l12.2 21.8 12.5-21.8h32.9l-30.1 44 31.2 46H468Z"/>
               </motion.svg> */}
-              <motion.svg 
+              <motion.svg
                 key="SFU"
                 viewBox="0 0 375 151"
-                className="md:fixed z-50 md:mix-blend-exclusion md:top-4 md:left-[6rem] md:h-6"
+                className="z-50 md:fixed md:left-[6rem] md:top-4 md:h-6 md:mix-blend-exclusion"
               >
                 <motion.path
                   fill="#FFFFFF"
@@ -125,12 +125,12 @@ const Nav3 = ({ children }: Props) => {
                   5.173 22.2 5.173s15.9-1.691 22.2-5.173c6.3-3.481 11.2-8.156 14.7-14.224 3.4-6.067 5.2-12.931 5.2-20.59l-.1-95.19228Z"
                 />
               </motion.svg>
-              <motion.svg 
+              <motion.svg
                 key="TEDx"
                 viewBox="0 0 501 151"
-                className="md:fixed z-50 md:top-4 md:left-4 md:h-6"
-                >
-                <motion.path 
+                className="z-50 md:fixed md:left-4 md:top-4 md:h-6"
+              >
+                <motion.path
                   fill="#EB0028"
                   d="M40.8 39.6522H0V2.20264h126.6V39.6522H85.7V148.396H40.8V39.6522Zm92.7-37.44956h122.9V39.6522h-78v18.2242h78v34.8461h-78v18.2245h78v37.449H133.5V2.20264Zm130.5 
                   0h73.7c48.6 0 65.8 36.04776 65.8 72.89656 0 44.8598-23.7 73.2968-74.5 73.2968h-65V2.20264ZM308.9 110.847h17.6c28 0 32.1-22.7306 
@@ -143,7 +143,6 @@ const Nav3 = ({ children }: Props) => {
             <motion.div key="toggle" className="ml-auto uppercase">
               <NavToggle path={path.pathname} />
             </motion.div>
-
           </motion.div>
         </motion.div>
         <motion.a
@@ -151,16 +150,15 @@ const Nav3 = ({ children }: Props) => {
           href={"mailto:yeeloong.tang@tedxsfu.com"}
           target="_blank"
           className="
-          h-12 md:h-10 max-md:w-full flex justify-center items-center text-center uppercase text-micro
-          md:max-w-[calc((100vw-7rem)/5)] lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)] 
-          md:px-2 md:ml-auto md:border md:border-white md:border-opacity-50
-          md:fixed z-50 md:top-4 md:right-4 md:mix-blend-exclusion"
-          initial={{ 
+          z-50 flex h-12 items-center justify-center rounded-full bg-white text-center text-micro uppercase text-black
+          max-md:w-full md:fixed md:right-4 
+          md:top-4 md:ml-auto md:h-10 md:max-w-[calc((100vw-7rem)/5)] md:border
+          md:border-white md:border-opacity-50 md:px-4 md:mix-blend-exclusion lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)]"
+          initial={{
             y: "100%",
             // opacity: 0
           }}
           animate={{
-
             y:
               viewport.width < 768
                 ? scrollState == NavScrollState.SCROLLED
