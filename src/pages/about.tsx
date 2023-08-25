@@ -11,6 +11,7 @@ import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
 import StickyGallery from "@/component/StickyGallery/StickyGallery";
 import Head from "next/head";
+import Footer from "@/component/Footer/Footer";
 
 type Props = {};
 
@@ -74,7 +75,7 @@ const About = (props: Props) => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <main className="min-h-screen w-full bg-white font-normal text-black">
+      <div className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout>
           <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl font-light text-white">
             13 years in the making
@@ -153,7 +154,15 @@ const About = (props: Props) => {
             <PastActivitiesGallery />
           </div>
         </SectionLayout>
-      </main>
+        <Footer
+          pageNumber="2"
+          targetPageHref={"/"}
+          bgImageSrc={"/about/about-2.jpg"}
+          mode="light"
+          arrowDirection="reverse"
+          targetPageName={"Event Info"}
+        />
+      </div>
     </>
   );
 };

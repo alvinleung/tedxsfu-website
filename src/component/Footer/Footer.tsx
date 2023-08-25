@@ -15,13 +15,31 @@ import {
 import { motion, useTransform } from "framer-motion";
 import { useRouter } from "next/router";
 
-type Props = {};
+type Props = {
+  mode?: "dark" | "light";
+  arrowDirection?: "normal" | "reverse";
+  targetPageName: string;
+  targetPageHref: string;
+  bgImageSrc: string;
+  pageNumber: string;
+};
 
-const Footer = (props: Props) => {
+const Footer = ({
+  mode = "dark",
+  targetPageHref: href,
+  arrowDirection = "normal",
+  bgImageSrc,
+  targetPageName,
+  pageNumber,
+}: Props) => {
   const { isOverscrollComplete, isOverscrollStarted, overscrollProgress } =
     useOverscroll(OverscrollDirection.DOWN, 100);
 
-  const offset = useTransform(overscrollProgress, [0, 1], [0, 10]);
+  const offset = useTransform(
+    overscrollProgress,
+    [0, 1],
+    [0, arrowDirection === "normal" ? 10 : -10],
+  );
   const bgScale = useTransform(overscrollProgress, [0, 1], [1.4, 1.4]);
   const bgOffset = useTransform(overscrollProgress, [0, 1], [0, -30]);
 
@@ -30,42 +48,66 @@ const Footer = (props: Props) => {
   const router = useRouter();
   useEffect(() => {
     if (isOverscrollComplete) {
-      router.push("/about");
+      router.push(href);
     }
   }, [isOverscrollComplete]);
 
   const handleClick = () => {
-    router.push("/about");
+    router.push(href);
   };
+
+  const isDarkMode = mode === "dark";
 
   return (
     <>
-      <footer className="mt-12 px-4">
+      <footer
+        className="px-4 pt-12"
+        style={{
+          backgroundColor: isDarkMode ? "black" : "white",
+          color: isDarkMode ? "white" : "black",
+        }}
+      >
         <MainGrid>
-          <div className="col-span-full mb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
+          <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
             <div className="mb-6 text-lead">
               Early bird ticket sale and exclusive content — right to your
               inbox.
             </div>
-            <EmailForm />
+            <EmailForm isDarkMode={isDarkMode} />
           </div>
 
           <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 2xl:col-span-2 2xl:col-start-6">
-            <div className="mb-6 text-body md:text-lead">
+            <div className="pb-6 text-body md:text-lead">
               This independent TEDx event is operated under license from TED.
             </div>
             <div className="mb-6 flex flex-row gap-2">
               <a>
-                <Image src={iconFacebook} alt="" />
+                <Image
+                  src={iconFacebook}
+                  alt=""
+                  className={isDarkMode ? "" : "invert"}
+                />
               </a>
               <a>
-                <Image src={iconInstagram} alt="" />
+                <Image
+                  src={iconInstagram}
+                  alt=""
+                  className={isDarkMode ? "" : "invert"}
+                />
               </a>
               <a>
-                <Image src={iconTwitter} alt="" />
+                <Image
+                  src={iconTwitter}
+                  alt=""
+                  className={isDarkMode ? "" : "invert"}
+                />
               </a>
               <a>
-                <Image src={iconLinkedin} alt="" />
+                <Image
+                  src={iconLinkedin}
+                  alt=""
+                  className={isDarkMode ? "" : "invert"}
+                />
               </a>
             </div>
             <div className="text-body opacity-50">
@@ -90,29 +132,28 @@ const Footer = (props: Props) => {
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}
         >
-          2
+          {pageNumber}
         </motion.div>
         <motion.div
           className="col-span-1 mt-4 uppercase max-md:ml-2 md:col-start-2"
-          // style={{ x: offset }}
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.4,
           }}
         >
-          Our Story
+          {targetPageName}
         </motion.div>
         <motion.img
-          className={`mt-4`}
+          className={`z-10 mt-4 ${isDarkMode ? "" : "invert"}`}
           src="../icon/arrow-white.svg"
-          style={{ x: offset }}
+          style={{ x: offset, rotate: arrowDirection == "normal" ? 0 : 180 }}
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}
         />
 
-        <div className="absolute -z-10 h-full w-full overflow-hidden">
+        <div className="absolute z-0 h-full w-full overflow-hidden">
           <motion.img
-            src={"/about/about-2.jpg"}
+            src={bgImageSrc}
             className="h-full object-cover"
             width={2560}
             height={1440}

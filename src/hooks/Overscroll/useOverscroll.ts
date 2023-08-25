@@ -54,8 +54,6 @@ export function useOverscroll(
   useEffect(() => {
     if (!isOverscrollReady) return;
     const unobserve = scrollYProgress.on("change", (val) => {
-      console.log(val);
-
       if (direction === OverscrollDirection.UP && val <= 0) {
         setIsActive(true);
         return;

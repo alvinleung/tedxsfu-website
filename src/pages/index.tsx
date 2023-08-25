@@ -78,7 +78,12 @@ export default function Home() {
           </div>
         </section> */}
       </div>
-      <Footer />
+      <Footer
+        pageNumber="1"
+        targetPageHref={"/about"}
+        bgImageSrc={"/about/about-2.jpg"}
+        targetPageName={"Event Info"}
+      />
     </>
   );
 }
