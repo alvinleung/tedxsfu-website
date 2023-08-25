@@ -135,10 +135,10 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   // calculating the scrollheight
   useEffect(() => {
     const cleanup = scrollY.on("change", (v) => {
-      scrollYProgress.set(v / scrollHeight);
+      scrollYProgress.set(v / (scrollHeight - windowDimension.height));
     });
     return () => cleanup();
-  }, [scrollY, scrollHeight]);
+  }, [scrollY, scrollHeight, windowDimension.height]);
 
   const framerMotionScroll = useScroll({
     container: container,
