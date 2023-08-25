@@ -133,6 +133,7 @@ const ActivityGallery = (props: Props) => {
           </div>
         </Sticky>
         <div
+          className=""
           style={{
             height: galleryTotalScrollHeight,
           }}
@@ -150,6 +151,7 @@ const ActivityGallery = (props: Props) => {
                   src={media.src}
                   currentSlideIndex={currentSlideIndexClamped}
                   slideIndex={index}
+                  key={index}
                 />
               );
             })}
@@ -157,7 +159,7 @@ const ActivityGallery = (props: Props) => {
         </Sticky>
       </div>
       <motion.div
-        className="col-span-1 2xl:col-start-8"
+        className=" col-span-1 hidden md:block 2xl:col-start-8"
         animate={{
           opacity: isSectionActive ? 1 : 0,
         }}
