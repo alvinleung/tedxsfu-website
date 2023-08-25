@@ -19,7 +19,7 @@ type Props = {};
 
 const Footer = (props: Props) => {
   const { isOverscrollComplete, isOverscrollStarted, overscrollProgress } =
-    useOverscroll(OverscrollDirection.DOWN, 150);
+    useOverscroll(OverscrollDirection.DOWN, 100);
 
   const offset = useTransform(overscrollProgress, [0, 1], [0, 10]);
   const bgScale = useTransform(overscrollProgress, [0, 1], [1.4, 1.4]);
