@@ -5,6 +5,7 @@ import Nav from "@/component/Nav/Nav";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { AnimationConfig } from "@/component/AnimationConfig";
+import Footer from "@/component/Footer/Footer";
 
 export default function Home() {
   const viewport = useWindowDimension();
@@ -77,6 +78,7 @@ export default function Home() {
           </div>
         </section> */}
       </div>
+      <Footer />
     </>
   );
 }
