@@ -25,7 +25,6 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   const [scrollHeight, setScrollHeight] = useState(0);
 
   const targetScrollY = useRef(0);
-  const { isTransitionDone } = useTransitionContext();
 
   const refreshDocumentMeasurement = () => {
     // recalculate the document measurement here
@@ -101,7 +100,13 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
 
       beginFrameUpdate();
     };
-    window.addEventListener("wheel", handleMouseWheel);
+
+    // HACK: small delay before scroll to prevent
+    // instant scrolling for transition
+    const timer = setTimeout(
+      () => window.addEventListener("wheel", handleMouseWheel),
+      100,
+    );
 
     let shouldUpdate = false;
     let animationFrame: number;
@@ -131,8 +136,9 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
     return () => {
       window.removeEventListener("wheel", handleMouseWheel);
       cancelAnimationFrame(animationFrame);
+      clearTimeout(timer);
     };
-  }, [scrollHeight, windowDimension, isUsingSmoothScroll, isTransitionDone]);
+  }, [scrollHeight, windowDimension, isUsingSmoothScroll]);
 
   // calculating the scrollheight
   useEffect(() => {

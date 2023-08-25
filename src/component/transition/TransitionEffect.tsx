@@ -55,16 +55,20 @@ const TransitionEffect = ({ children }: Props) => {
         animate={{
           x: 0,
           opacity: 1,
+          transition: {
+            duration: AnimationConfig.VERY_SLOW,
+            ease: AnimationConfig.EASING_IN_OUT,
+          },
         }}
         exit={{
           x: isAboutPage
             ? windowDimension.width / 1.7
             : -windowDimension.width / 1.7,
           opacity: 0,
-        }}
-        transition={{
-          duration: AnimationConfig.VERY_SLOW,
-          ease: AnimationConfig.EASING_IN_OUT,
+          transition: {
+            duration: AnimationConfig.VERY_SLOW,
+            ease: AnimationConfig.EASING_IN_OUT,
+          },
         }}
         key={router.pathname}
       >
