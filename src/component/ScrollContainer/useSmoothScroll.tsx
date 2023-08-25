@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useTransitionContext } from "../transition/TransitionEffect";
 
 type SmoothScrollParams = {
   container: MutableRefObject<HTMLDivElement>;
@@ -24,6 +25,7 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   const [scrollHeight, setScrollHeight] = useState(0);
 
   const targetScrollY = useRef(0);
+  const { isTransitionDone } = useTransitionContext();
 
   const refreshDocumentMeasurement = () => {
     // recalculate the document measurement here
@@ -130,7 +132,7 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
       window.removeEventListener("wheel", handleMouseWheel);
       cancelAnimationFrame(animationFrame);
     };
-  }, [scrollHeight, windowDimension, isUsingSmoothScroll]);
+  }, [scrollHeight, windowDimension, isUsingSmoothScroll, isTransitionDone]);
 
   // calculating the scrollheight
   useEffect(() => {
