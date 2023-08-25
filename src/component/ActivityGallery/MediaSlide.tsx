@@ -9,7 +9,7 @@ type Props = {
 };
 
 const MediaSlide = ({ src, currentSlideIndex, slideIndex }: Props) => {
-  const variation = 5;
+  const variation = 7;
   const rotation = useMemo(() => variation / 2 - Math.random() * variation, []);
 
   const isShowing = currentSlideIndex >= slideIndex;

@@ -118,11 +118,9 @@ const ActivityGallery = (props: Props) => {
     };
   }, [bounds, allMedia, windowDim]);
 
-  console.log(currentSlideIndexClamped);
-
   return (
     <MainGrid ref={containerRef}>
-      <div className="col-start-2">
+      <div className="col-start-1 hidden md:block 2xl:col-start-2">
         <Sticky top={"20vh"} fadeOut>
           <div
             className="pt-[20vh]"
@@ -140,10 +138,10 @@ const ActivityGallery = (props: Props) => {
           }}
         ></div>
       </div>
-      <div className="col-span-4 col-start-3">
+      <div className="col-span-4 2xl:col-start-3">
         <Sticky top={"20vh"}>
           <div
-            className="relative col-span-2"
+            className="relative"
             style={{ height: windowDim.height * perItemScrollVH }}
           >
             {allMedia.map((media, index) => {
@@ -159,7 +157,7 @@ const ActivityGallery = (props: Props) => {
         </Sticky>
       </div>
       <motion.div
-        className="col-span-1 col-start-8"
+        className="col-span-1 2xl:col-start-8"
         animate={{
           opacity: isSectionActive ? 1 : 0,
         }}

@@ -1,8 +1,8 @@
 const pastActivities = [
   {
-    month: "may",
+    month: "apr",
     day: "7",
-    date: "5/7",
+    date: "4/7",
     header: "TEDxSFU Live",
     description:
       "An initial venture in building physical experiences and truly understanding, the value of community.",
@@ -25,9 +25,9 @@ const pastActivities = [
     ],
   },
   {
-    month: "apr",
+    month: "may",
     day: "7",
-    date: "4/7",
+    date: "5/7",
     header: "TEDxSFU Live 2",
     description:
       "An initial venture in building physical experiences and truly understanding, the value of community.",

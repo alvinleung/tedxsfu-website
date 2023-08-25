@@ -82,7 +82,7 @@ export default function Home() {
         pageNumber="1"
         targetPageHref={"/about"}
         bgImageSrc={"/about/about-2.jpg"}
-        targetPageName={"Event Info"}
+        targetPageName={"Our Story"}
       />
     </>
   );
