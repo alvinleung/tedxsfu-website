@@ -22,22 +22,22 @@ const imgData = [
   {
     src: "/about/about-2.jpg",
     date: "Conference",
-    year: "2019",
+    year: "2016",
     description:
-      'Tom delivering "Thriving Through Turbulent Times". (temp copy)',
+      'Excitement and anticipation during the intermission',
   },
   {
     src: "/about/about-4.jpg",
     date: "Conference",
-    year: "2021",
-    description: "Conversation with john. (temp copy)",
+    year: "2019",
+    description: "Energizing the crowd with local dancer, Bettina Rothe",
   },
   {
     src: "/about/about-6.jpg",
     date: "Conference",
-    year: "2021",
+    year: "2015",
     description:
-      "Engaging with SFU’s community at clubs day, summer 2023. (temp copy)",
+      "Unpacking hope in health with neuroscientist, Ryan D’Arcy",
   },
 ];
 
