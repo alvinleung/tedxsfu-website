@@ -127,8 +127,10 @@ const ActivityGallery = (props: Props) => {
             style={{ height: windowDim.height * perItemScrollVH }}
           >
             <div className="mb-4">2023</div>
-            {activitiesByMonth.map((month) => (
-              <div className="text-body uppercase">{month.month}</div>
+            {activitiesByMonth.map((month, index) => (
+              <div className="text-body uppercase" key={index}>
+                {month.month}
+              </div>
             ))}
           </div>
         </Sticky>
