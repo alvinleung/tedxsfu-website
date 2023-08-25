@@ -1,6 +1,6 @@
 import React, { MutableRefObject } from "react";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLDivElement> {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 

@@ -23,14 +23,14 @@ import { useRouter } from "next/router";
 import { AnimationConfig } from "../AnimationConfig";
 import { useTransitionContext } from "../transition/TransitionEffect";
 
-type Props = {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   top: number | string;
   duration?: number;
   fadeOut?: boolean;
-};
+}
 
-const Sticky = ({ children, top, duration, fadeOut }: Props) => {
+const Sticky = ({ children, top, duration, fadeOut, ...htmlProps }: Props) => {
   // const windowDim = useWindowDimension();
   const [isDOMReady, setIsDOMReady] = useState(false);
   const { scrollY, isUsingSmoothScroll } = useContainerScroll();
@@ -78,6 +78,7 @@ const Sticky = ({ children, top, duration, fadeOut }: Props) => {
       <motion.div
         ref={containerRef}
         className={isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"}
+        {...(htmlProps as any)}
       >
         <motion.div
           style={{

@@ -12,6 +12,7 @@ import ScrollVideo from "@/component/ScrollVideo/ScrollVideo";
 import StickyGallery from "@/component/StickyGallery/StickyGallery";
 import Head from "next/head";
 import Footer from "@/component/Footer/Footer";
+import ActivityGallery from "@/component/ActivityGallery/ActivityGallery";
 
 type Props = {};
 
@@ -140,7 +141,7 @@ const About = (props: Props) => {
             ))}
           </div>
         </SectionLayout>
-        <SectionLayout padding>
+        {/* <SectionLayout padding>
           <SectionInfo>
             <SectionInfoHeader>
               Stuff we&apos;ve done this year
@@ -152,6 +153,20 @@ const About = (props: Props) => {
           </SectionInfo>
           <div className="col-span-full col-start-1 mb-32 mt-32">
             <PastActivitiesGallery />
+          </div>
+        </SectionLayout> */}
+        <SectionLayout padding>
+          <SectionInfo sticky>
+            <SectionInfoHeader>
+              Stuff we&apos;ve done this year
+            </SectionInfoHeader>
+            <SectionInfoDescription>
+              We&apos;re opening up new personal and professional connections,
+              one step at a time.
+            </SectionInfoDescription>
+          </SectionInfo>
+          <div className="col-span-full col-start-1 mb-32 mt-32">
+            <ActivityGallery />
           </div>
         </SectionLayout>
         <Footer
