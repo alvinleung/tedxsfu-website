@@ -101,7 +101,7 @@ const About = (props: Props) => {
 
           <div className="col-span-full col-start-1">
             {/* some media content goes on here */}
-            <ScrollVideo src={"./about/about-intro-video.webm"} />
+            <ScrollVideo src={"./about/about-intro-video-more-frames.webm"} />
           </div>
         </SectionLayout>
 

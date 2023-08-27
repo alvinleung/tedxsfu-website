@@ -124,7 +124,18 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"
         ></source> */}
           <source
-            type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+            // webm command
+            // ffmpeg -i about-intro-video.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus output.webm
+            // ffmpeg -i about-intro-video.mp4 -keyint_min 30 -g 30 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus output.webm
+
+            // how to make webm to play smoothly
+            // https://forum.videohelp.com/threads/389787-Using-ffmpeg-to-make-an-html5-webm-video-scroll-smoothly
+            // type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+
+            // more resource on a vue component
+            // https://github.com/diracleo/vue-scrubbable-video
+
+            // type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
             // src="./about/about-intro-video.mp4"
             src={src}
           ></source>
