@@ -40,12 +40,14 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
 
   useLayoutEffect(() => {
     if (!isUsingSmoothScroll) {
+      console.log("not using smooth scroll");
       // reset smooth scroll when cancel
       container.current.scrollTop = 0;
       scrollY.set(0);
       return;
     }
 
+    console.log("using smooth scroll");
     targetScrollY.current = 0;
     scrollY.set(targetScrollY.current);
     container.current.scrollTop = 0;
@@ -56,16 +58,22 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
     if (isMobile()) {
       setIsUsingSmoothScroll(false);
     }
-    const handleTouchStart = () => {
-      setIsUsingSmoothScroll(false);
-    };
-    const handleMouseMove = () => {
+
+    const handleWheel = () => {
       setIsUsingSmoothScroll(true);
     };
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchStart);
-    window.addEventListener("mouseover", handleMouseMove);
-    // window.addEventListener("mouseleave", handleMouseMove);
+
+    const handlePointerDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") {
+        setIsUsingSmoothScroll(true);
+        return;
+      }
+      // for touch or pen
+      setIsUsingSmoothScroll(false);
+    };
+
+    window.addEventListener("wheel", handleWheel);
+    window.addEventListener("pointerdown", handlePointerDown);
 
     const cancelTab = (e: KeyboardEvent) => {
       if (e.key === "Tab") {
@@ -77,12 +85,10 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
     window.addEventListener("keydown", cancelTab);
 
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchStart);
-      window.removeEventListener("mouseover", handleMouseMove);
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("keyup", cancelTab);
       window.removeEventListener("keydown", cancelTab);
-      // window.removeEventListener("mouseleave", handleMouseMove);
     };
   }, []);
 
