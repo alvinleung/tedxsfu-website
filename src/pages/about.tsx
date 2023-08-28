@@ -16,17 +16,24 @@ import ActivityGallery from "@/component/ActivityGallery/ActivityGallery";
 
 type Props = {};
 
-type SectionLayoutProps = { children: React.ReactNode; padding?: boolean };
+type SectionLayoutProps = {
+  children: React.ReactNode;
+  padding?: boolean;
+  hero?: boolean;
+};
 
-const SectionLayout = ({ children, padding }: SectionLayoutProps) => (
-  <section className={`px-4 pb-8`}>
-    <StickyContainer>
-      <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
-        {children}
-      </MainGrid>
-    </StickyContainer>
-  </section>
-);
+const SectionLayout = ({ children, padding, hero }: SectionLayoutProps) => {
+  //TODO: Implement lazy loading states for the page content for optimisation
+  return (
+    <section className={`px-4 pb-8`}>
+      <StickyContainer>
+        <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
+          {children}
+        </MainGrid>
+      </StickyContainer>
+    </section>
+  );
+};
 
 type SectionCopyProps = {
   children: React.ReactNode;
@@ -35,14 +42,15 @@ type SectionCopyProps = {
 };
 
 const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
-  const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
+  // const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
+  const shouldStick = true;
 
   return (
     <motion.div
-      className={`${shouldStick ? "sticky" : ""} top-4 z-40 min-h-[50%] ${
+      className={`${
         left
-          ? "col-span-full col-start-1 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
-          : "z-10 col-span-full col-start-1 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
+          ? "sticky top-4 col-span-full col-start-1 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
+          : "sticky top-4 z-10 col-span-full col-start-1 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
       }`}
     >
       {shouldStick && (
@@ -56,10 +64,10 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
 };
 
 const SectionInfoHeader = (props: any) => (
-  <h3 className="mb-1 text-lead">{props.children}</h3>
+  <h3 className="mb-1 text-lead-mobile sm:text-lead">{props.children}</h3>
 );
 const SectionInfoDescription = (props: any) => (
-  <h3 className="text-lead opacity-50">{props.children}</h3>
+  <h3 className="text-lead-mobile opacity-50 sm:text-lead">{props.children}</h3>
 );
 
 const About = (props: Props) => {
@@ -77,7 +85,7 @@ const About = (props: Props) => {
         ></meta>
       </Head>
       <div className="min-h-screen w-full bg-white font-normal text-black">
-        <SectionLayout>
+        <SectionLayout hero>
           <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl font-light text-white">
             13 years in the making
           </motion.div>
@@ -105,6 +113,7 @@ const About = (props: Props) => {
               src={{
                 webm: "./about/about-intro-video.webm",
                 mp4: "./about/about-intro-video.mp4",
+                webmVp9: "./about/about-intro-video-vp9.webm",
               }}
             />
           </div>

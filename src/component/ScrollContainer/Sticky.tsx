@@ -77,17 +77,29 @@ const Sticky = ({ children, top, duration, fadeOut, ...htmlProps }: Props) => {
     <>
       <motion.div
         ref={containerRef}
-        className={isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"}
+        className={`${isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"}`}
         {...(htmlProps as any)}
       >
-        <motion.div
-          style={{
-            y: isUsingSmoothScroll ? stickyOffset : 0,
-            opacity: fadeOut ? stikcyOpacity : 1,
-          }}
-        >
-          {children}
-        </motion.div>
+        {isUsingSmoothScroll && (
+          <motion.div
+            style={{
+              y: stickyOffset,
+              opacity: fadeOut ? stikcyOpacity : 1,
+            }}
+          >
+            {children}
+          </motion.div>
+        )}
+        {!isUsingSmoothScroll && (
+          <motion.div
+            style={{
+              y: 0,
+              opacity: fadeOut ? stikcyOpacity : 1,
+            }}
+          >
+            {children}
+          </motion.div>
+        )}
       </motion.div>
     </>
   );
