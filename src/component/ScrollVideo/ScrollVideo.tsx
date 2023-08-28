@@ -136,6 +136,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
             // https://github.com/diracleo/vue-scrubbable-video
 
             // type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+            type='video/webm; codecs="vp9, opus"'
             // src="./about/about-intro-video.mp4"
             src={src}
           ></source>
