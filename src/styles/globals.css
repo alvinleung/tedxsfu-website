@@ -38,3 +38,22 @@ img {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill::first-line,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover
+input:-webkit-autofill:active {
+  font-size: inherit;
+  font-family: Helvetica;
+  background-color: transparent;
+  transition: background-color 0s 600000s, color 0s 600000s;
+}
+
+&:-webkit-autofill::first-line,
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        font-family: Times, "Times New Roman", serif !important;
+      }

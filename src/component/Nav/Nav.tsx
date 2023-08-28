@@ -30,7 +30,7 @@ const Nav3 = ({ children }: Props) => {
   return (
     <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
+        className="left-4 right-4 z-50 mx-auto block h-12 before:bg-white max-md:fixed max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4 box-content"
         initial={{ width: "auto" }}
         animate={{
           width:
@@ -38,7 +38,8 @@ const Nav3 = ({ children }: Props) => {
               ? "auto"
               : "calc(((100vw - 5rem) / 2) + 1rem)",
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
-          background: viewport.width < 768 ? "#000000FF" : "#00000000",
+          background: viewport.width < 768 ? (scrollState == NavScrollState.DEFAULT ? "#000000EE" : "#00000000") : "#000000EE",
+          borderColor: viewport.width < 768 ? (scrollState == NavScrollState.DEFAULT ? "#FFFFFF33" : "#FFFFFF00") : "#FFFFFF33",
         }}
         style={{
           whiteSpace: "nowrap",
@@ -152,7 +153,7 @@ const Nav3 = ({ children }: Props) => {
           className="
           z-50 flex h-12 items-center justify-center rounded-full bg-white text-center text-micro uppercase text-black
           max-md:w-full md:fixed md:right-4 
-          md:top-4 md:ml-auto md:h-10 md:max-w-[calc((100vw-7rem)/5)] md:border
+          md:top-4 md:ml-auto md:h-10 md:max-w-[calc((100vw-7rem)/5)] border border-black max-md:border-opacity-20
           md:border-white md:border-opacity-50 md:px-4 md:mix-blend-exclusion lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)]"
           initial={{
             y: "100%",
