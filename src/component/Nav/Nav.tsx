@@ -33,10 +33,10 @@ const Nav3 = ({ children }: Props) => {
         className="left-4 right-4 z-50 mx-auto block h-12 border-white border-opacity-20 bg-opacity-90 before:bg-white max-md:fixed max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4"
         initial={{ width: "auto" }}
         animate={{
-          width:
-            scrollState == NavScrollState.DEFAULT || viewport.width >= 768
-              ? "auto"
-              : "calc(((100vw - 5rem) / 2) + 1rem)",
+          // width:
+          //   scrollState == NavScrollState.DEFAULT || viewport.width >= 768
+          //     ? "auto"
+          //     : "calc(((100vw - 5rem) / 2) + 1rem)",
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
           background: viewport.width < 768 ? "#000000FF" : "#00000000",
         }}
@@ -71,7 +71,7 @@ const Nav3 = ({ children }: Props) => {
             <motion.a
               key="logo"
               href={"/"}
-              className="block flex h-12 w-32 flex-row-reverse max-md:px-4"
+              className="flex h-12 w-32 flex-row-reverse max-md:px-4"
               onClick={(e) => {
                 e.preventDefault();
                 path.push("/");
@@ -150,7 +150,7 @@ const Nav3 = ({ children }: Props) => {
           href={"mailto:yeeloong.tang@tedxsfu.com"}
           target="_blank"
           className="
-          z-50 flex h-12 items-center justify-center rounded-full text-center text-micro uppercase max-md:w-full md:fixed
+          z-50 flex h-12 items-center justify-center rounded-md text-center text-micro uppercase max-md:w-full md:fixed
           md:right-4 md:top-4 md:ml-auto 
           md:h-10 md:max-w-[calc((100vw-7rem)/5)] md:border md:border-white md:border-opacity-50
           md:bg-white md:px-4 md:text-black md:mix-blend-exclusion lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)]"
