@@ -40,7 +40,7 @@ const TransitionEffect = ({ children }: Props) => {
 
   return (
     <AnimatePresence
-      // mode="popLayout"
+      mode="wait"
       onExitComplete={() => {
         setIsTransitionDone(true);
         setHighestZIndex(0);
@@ -49,7 +49,10 @@ const TransitionEffect = ({ children }: Props) => {
       <motion.div
         className="fixed bottom-0 left-0 right-0 top-0 flex h-screen w-screen"
         initial={{
-          x: isAboutPage ? windowDimension.width : -windowDimension.width,
+          opacity: 0,
+          x: isAboutPage
+            ? windowDimension.width * 0.05
+            : -windowDimension.width * 0.05,
           zIndex: highestZIndex,
         }}
         animate={{
@@ -57,17 +60,17 @@ const TransitionEffect = ({ children }: Props) => {
           opacity: 1,
           transition: {
             duration: AnimationConfig.VERY_SLOW,
-            ease: AnimationConfig.EASING_IN_OUT,
+            ease: [0.22, 1, 0.36, 1],
           },
         }}
         exit={{
           x: isAboutPage
-            ? windowDimension.width / 1.7
-            : -windowDimension.width / 1.7,
+            ? windowDimension.width * 0.05
+            : -windowDimension.width * 0.05,
           opacity: 0,
           transition: {
             duration: AnimationConfig.VERY_SLOW,
-            ease: AnimationConfig.EASING_IN_OUT,
+            ease: [0.64, 0, 0.78, 0],
           },
         }}
         key={router.pathname}
