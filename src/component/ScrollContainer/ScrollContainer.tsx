@@ -188,7 +188,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         <motion.div style={{ y: isUsingSmoothScroll ? documentOffsetY : 0 }}>
           {children}
         </motion.div>
-        <div className="fixed bottom-0 right-0 top-0 w-1 rounded-full mix-blend-exclusion">
+        <div className="pointer-events-none fixed bottom-0 right-0 top-0 w-1 rounded-full mix-blend-exclusion">
           <motion.div
             className="w-1 bg-white"
             style={{
