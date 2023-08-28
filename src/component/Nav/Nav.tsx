@@ -150,10 +150,10 @@ const Nav3 = ({ children }: Props) => {
           href={"mailto:yeeloong.tang@tedxsfu.com"}
           target="_blank"
           className="
-          z-50 flex h-12 items-center justify-center rounded-full bg-white text-center text-micro uppercase text-black
-          max-md:w-full md:fixed md:right-4 
-          md:top-4 md:ml-auto md:h-10 md:max-w-[calc((100vw-7rem)/5)] md:border
-          md:border-white md:border-opacity-50 md:px-4 md:mix-blend-exclusion lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)]"
+          z-50 flex h-12 items-center justify-center rounded-full text-center text-micro uppercase max-md:w-full md:fixed
+          md:right-4 md:top-4 md:ml-auto 
+          md:h-10 md:max-w-[calc((100vw-7rem)/5)] md:border md:border-white md:border-opacity-50
+          md:bg-white md:px-4 md:text-black md:mix-blend-exclusion lg:max-w-[calc((100vw-8rem)/6)] 2xl:max-w-[calc((100vw-10rem)/8)]"
           initial={{
             y: "100%",
             // opacity: 0
