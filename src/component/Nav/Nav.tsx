@@ -33,10 +33,10 @@ const Nav3 = ({ children }: Props) => {
         className="left-4 right-4 z-50 mx-auto block h-12 before:bg-white max-md:fixed max-md:fixed max-md:bottom-4 max-md:overflow-hidden max-md:border max-md:bg-black max-md:text-white md:top-4 md:flex md:justify-center md:gap-x-4 box-content"
         initial={{ width: "auto" }}
         animate={{
-          width:
-            scrollState == NavScrollState.DEFAULT || viewport.width >= 768
-              ? "auto"
-              : "calc(((100vw - 5rem) / 2) + 1rem)",
+          // width:
+          //   scrollState == NavScrollState.DEFAULT || viewport.width >= 768
+          //     ? "auto"
+          //     : "calc(((100vw - 5rem) / 2) + 1rem)",
           // opacity: scrollState == NavScrollState.DEFAULT ? 1 : 0,
           background: viewport.width < 768 ? (scrollState == NavScrollState.DEFAULT ? "#000000EE" : "#00000000") : "#000000EE",
           borderColor: viewport.width < 768 ? (scrollState == NavScrollState.DEFAULT ? "#FFFFFF33" : "#FFFFFF00") : "#FFFFFF33",
@@ -72,7 +72,7 @@ const Nav3 = ({ children }: Props) => {
             <motion.a
               key="logo"
               href={"/"}
-              className="block flex h-12 w-32 flex-row-reverse max-md:px-4"
+              className="flex h-12 w-32 flex-row-reverse max-md:px-4"
               onClick={(e) => {
                 e.preventDefault();
                 path.push("/");
