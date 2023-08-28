@@ -122,7 +122,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           loop
           muted
           // autoPlay
-          className="h-[100vh] w-[100vw] object-cover"
+          className="h-[100vh] w-[100vw] object-contain xl:object-cover"
           style={{
             zIndex: -1000,
             scale: 1.07,
@@ -132,10 +132,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
           src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"
         ></source> */}
-          <source
-            type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-            src={src.mp4}
-          ></source>
+
           <source
             // webm command
             // ffmpeg -i about-intro-video.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus output.webm
@@ -150,6 +147,11 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
             type='video/webm; codecs="vp9, opus"'
             // src="./about/about-intro-video.mp4"
             src={src.webm}
+          ></source>
+          {/* mp4 as fallback */}
+          <source
+            type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+            src={src.mp4}
           ></source>
         </motion.video>
       </Sticky>
