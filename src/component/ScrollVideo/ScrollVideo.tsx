@@ -11,8 +11,9 @@ import StickyContainer, {
 } from "../ScrollContainer/StickyContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
-import { clamp, motion } from "framer-motion";
+import { clamp, motion, useMotionValue, useTransform } from "framer-motion";
 import Sticky from "../ScrollContainer/Sticky";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   playbackConst?: number;
@@ -36,12 +37,15 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
   const [isScrubbingVideo, setIsScrubbingVideo] = useState(false);
   const windowDim = useWindowDimension();
 
+  const scrollProgress = useMotionValue(0);
+
   useEffect(() => {
     const scrollStartPosition = containerBound.top;
     const videoScrollDistance = containerBound.bottom - scrollStartPosition;
 
     const cancel = scrollY.on("change", (v) => {
       const timeProgress = (v - scrollStartPosition) / videoScrollDistance;
+      scrollProgress.set(timeProgress);
 
       const timeProgressClamped = clamp(0, 1, timeProgress);
 
@@ -55,7 +59,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
       }
     });
     return () => cancel();
-  }, [containerBound, windowDim.height]);
+  }, [containerBound, windowDim.height, scrollProgress]);
 
   useEffect(() => {
     let animFrame = 0;
@@ -105,6 +109,32 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
     refreshDocumentMeasurement();
   }, [videoScrollDistance]);
 
+  const scale = useTransform(scrollProgress, [0, 1], [2, 2]);
+  const pos = useTransform(
+    scrollProgress,
+    [0, 0.5, 1],
+    [-windowDim.width / 3, -windowDim.width / 4, 0],
+  );
+
+  const isLandscape = useMemo(
+    () => windowDim.width > windowDim.height,
+    [windowDim],
+  );
+
+  const videoScale = useTransform(scale, (latest) => {
+    if (isLandscape) {
+      return 1.05;
+    }
+    return latest;
+  });
+
+  const videoPos = useTransform(pos, (latest) => {
+    if (isLandscape) {
+      return 0;
+    }
+    return latest;
+  });
+
   return (
     <div
       style={{
@@ -123,10 +153,13 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           loop
           muted
           // autoPlay
-          className="h-[100vh] w-[100vw] object-contain xl:object-cover"
+          className="h-[100vh] w-[100vw]"
           style={{
             zIndex: -1000,
-            scale: 1.07,
+            scale: videoScale,
+            x: videoPos,
+            objectFit: isLandscape ? "cover" : "contain",
+            objectPosition: isLandscape ? "center bottom" : "",
           }}
         >
           {/* <source
