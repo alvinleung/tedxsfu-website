@@ -68,7 +68,7 @@ const Footer = ({
         }}
       >
         <MainGrid>
-          <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
+          <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 md:col-span-2 2xl:col-span-2 2xl:col-start-2">
             <div className="mb-6 text-lead">
               Early bird ticket sale and exclusive content — right to your
               inbox.
@@ -81,28 +81,28 @@ const Footer = ({
               This independent TEDx event is operated under license from TED.
             </div>
             <div className="mb-6 flex flex-row gap-2">
-              <a>
+              <a href="https://" target="_blank">
                 <Image
                   src={iconFacebook}
                   alt=""
                   className={isDarkMode ? "" : "invert"}
                 />
               </a>
-              <a>
+              <a href="https://instagram.com/tedxsfu" target="_blank">
                 <Image
                   src={iconInstagram}
                   alt=""
                   className={isDarkMode ? "" : "invert"}
                 />
               </a>
-              <a>
+              <a href="https://twitter.com/tedxsfu">
                 <Image
                   src={iconTwitter}
                   alt=""
                   className={isDarkMode ? "" : "invert"}
                 />
               </a>
-              <a>
+              <a href="https://linkedin.com/company/tedxsfu" target="_blank">
                 <Image
                   src={iconLinkedin}
                   alt=""

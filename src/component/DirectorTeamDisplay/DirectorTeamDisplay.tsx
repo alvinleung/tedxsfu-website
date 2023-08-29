@@ -58,7 +58,7 @@ const DirectorTeamDisplay = (props: Props) => {
         marginBottom: `${itemScrollHeightVW}vw`,
       }}
     >
-      <div className="col-span-full col-start-1 flex flex-col md:col-span-3 md:col-start-4 2xl:col-span-4 2xl:col-start-4">
+      <div className="col-span-full col-start-1 flex flex-col md:col-span-3 md:col-start-3 2xl:col-span-4 2xl:col-start-4">
         {directors.map((director, i) => {
           const isOdd = i % 2 === 0;
           const isCurrentDirector = currentDirector === i;
@@ -77,7 +77,7 @@ const DirectorTeamDisplay = (props: Props) => {
           );
         })}
       </div>
-      <div className="absolute md:col-span-1 md:col-start-2 2xl:col-span-1 2xl:col-start-2">
+      <div className="absolute md:col-span-1 md:col-start-1 lg:col-span-1 lg:col-start-2 2xl:col-span-1 2xl:col-start-2">
         <div className="mt-[15vw]">
           {directors.map((director, i) => {
             return (
@@ -85,6 +85,7 @@ const DirectorTeamDisplay = (props: Props) => {
                 {!isDesktop && (
                   <Fixed
                     bottom="0px"
+                    left="0"
                     top={"auto"}
                     right="0px"
                     key={i}

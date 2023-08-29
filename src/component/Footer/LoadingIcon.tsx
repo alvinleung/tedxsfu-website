@@ -65,7 +65,9 @@ const LoadingIcon= () => {
   return (
     <motion.div className="flex gap-x-1"
       variants={demoVariants as any}
+      initial="initial"
       animate="animate"
+      exit="exit"
       >
       <motion.div 
         className="h-2 w-2 bg-white mix-blend-exclusion rounded"

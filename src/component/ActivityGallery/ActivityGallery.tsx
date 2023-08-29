@@ -141,7 +141,7 @@ const ActivityGallery = (props: Props) => {
           }}
         ></div>
       </div>
-      <div className="col-span-4 2xl:col-start-3">
+      <div className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3">
         <Sticky top={"20vh"}>
           <div
             className="relative"
