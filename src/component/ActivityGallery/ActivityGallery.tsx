@@ -7,6 +7,7 @@ import MediaSlide from "./MediaSlide";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { clamp, motion } from "framer-motion";
+import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 type Props = {};
 
@@ -116,11 +117,13 @@ const ActivityGallery = (props: Props) => {
     return () => {
       cleanup();
     };
-  }, [bounds, allMedia, windowDim]);
+  }, [bounds, allMedia, windowDim, scrollY]);
+
+  const isDesktopView = useBreakpoint(breakpoints.md);
 
   return (
-    <MainGrid ref={containerRef}>
-      <div className="col-start-1 hidden md:block 2xl:col-start-2">
+    <MainGrid ref={containerRef} className="relative">
+      <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
         <Sticky top={"20vh"} fadeOut>
           <div
             className="pt-[20vh]"
@@ -134,14 +137,13 @@ const ActivityGallery = (props: Props) => {
             ))}
           </div>
         </Sticky>
-        <div
-          className=""
-          style={{
-            height: galleryTotalScrollHeight,
-          }}
-        ></div>
       </div>
-      <div className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3">
+      <div
+        className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3"
+        style={{
+          height: galleryTotalScrollHeight,
+        }}
+      >
         <Sticky top={"20vh"}>
           <div
             className="relative"
@@ -161,28 +163,29 @@ const ActivityGallery = (props: Props) => {
         </Sticky>
       </div>
       <motion.div
-        className=" col-span-1 hidden md:block 2xl:col-start-8"
+        className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8"
         animate={{
           opacity: isSectionActive ? 1 : 0,
         }}
       >
-        <Sticky top={"40vh"}>
-          <div className="mt-[20vh] flex h-[30vh] flex-col">
-            <div className="mb-4  text-body">
-              {allMedia[currentSlideIndexClamped].header}
-            </div>
-            <div className="text-body opacity-50">
-              {allMedia[currentSlideIndexClamped].description}
-            </div>
-            <div className="mt-auto text-body capitalize opacity-50">
-              {allMedia[currentSlideIndexClamped].month}{" "}
-              {allMedia[currentSlideIndexClamped].day}
-            </div>
-          </div>
-        </Sticky>
+        {isDesktopView && (
+          <Sticky top={"40vh"}>
+            <SlideInfo slide={allMedia[currentSlideIndexClamped]} />
+          </Sticky>
+        )}
       </motion.div>
     </MainGrid>
   );
 };
+
+const SlideInfo = ({ slide }: { slide: any }) => (
+  <div className="mt-[20vh] flex h-[30vh] flex-col">
+    <div className="mb-4 text-body">{slide.header}</div>
+    <div className="text-body opacity-50">{slide.description}</div>
+    <div className="mt-auto text-body capitalize opacity-50">
+      {slide.month} {slide.day}
+    </div>
+  </div>
+);
 
 export default ActivityGallery;
