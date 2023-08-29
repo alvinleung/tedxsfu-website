@@ -139,7 +139,7 @@ const ActivityGallery = (props: Props) => {
         </Sticky>
       </div>
       <div
-        className="col-span-4 2xl:col-start-3"
+        className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3"
         style={{
           height: galleryTotalScrollHeight,
         }}
