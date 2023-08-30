@@ -12,6 +12,7 @@ const fullConfig = resolveConfig(tailwindConfig);
 
 interface BreakpointValues {
   default: number | string | Function;
+  xs?: number | string | Function;
   sm?: number | string | Function;
   md?: number | string | Function;
   lg?: number | string | Function;
@@ -112,6 +113,8 @@ interface BreakpointTable {
   [key: string]: number;
 }
 export const breakpoints: BreakpointTable = {
+  //@ts-ignore
+  xs: parseInt(fullConfig.theme.screens.xs),
   //@ts-ignore
   sm: parseInt(fullConfig.theme.screens.sm),
   //@ts-ignore
