@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+  MutableRefObject,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import MainGrid from "../layouts/MainGrid";
 import { pastActivities } from "@/data/pastActivitiesData";
 import Sticky from "../ScrollContainer/Sticky";
@@ -6,7 +12,7 @@ import { useWindowDimension } from "@/hooks/useWindowDimension";
 import MediaSlide from "./MediaSlide";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
-import { clamp, motion } from "framer-motion";
+import { AnimateSharedLayout, LayoutGroup, clamp, motion } from "framer-motion";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 type Props = {};
@@ -96,6 +102,18 @@ const ActivityGallery = (props: Props) => {
     () => clamp(0, allMedia.length - 1, currentSlideIndex),
     [currentSlideIndex],
   );
+  const currentSlideMonth = useMemo(
+    () => allMedia[currentSlideIndexClamped].month,
+    [currentSlideIndexClamped],
+  );
+  const currentSlideMonthIndex = useMemo(
+    () =>
+      activitiesByMonth.findIndex(
+        (activityInMonth) => activityInMonth.month === currentSlideMonth,
+      ),
+    [currentSlideMonth, activitiesByMonth],
+  );
+
   const isSectionActive = useMemo(
     () => currentSlideIndex == currentSlideIndexClamped,
     [currentSlideIndex],
@@ -120,6 +138,8 @@ const ActivityGallery = (props: Props) => {
   }, [bounds, allMedia, windowDim, scrollY]);
 
   const isDesktopView = useBreakpoint(breakpoints.md);
+  const [monthContainerRef, monthContainerBound] =
+    useBoundingBox<HTMLDivElement>([]);
 
   return (
     <MainGrid ref={containerRef} className="relative">
@@ -130,11 +150,28 @@ const ActivityGallery = (props: Props) => {
             style={{ height: windowDim.height * perItemScrollVH }}
           >
             <div className="mb-4">2023</div>
-            {activitiesByMonth.map((month, index) => (
-              <div className="text-body uppercase" key={index}>
-                {month.month}
-              </div>
-            ))}
+            <div className="relative flex flex-col" ref={monthContainerRef}>
+              <motion.div
+                className="absolute -left-3 top-2 h-1 w-1 bg-black"
+                animate={{
+                  y:
+                    currentSlideMonthIndex *
+                    (monthContainerBound.height / activitiesByMonth.length),
+                }}
+              />
+              {activitiesByMonth.map((monthActivity, index) => (
+                <motion.div
+                  className="text-body uppercase"
+                  key={index}
+                  animate={{
+                    opacity:
+                      currentSlideMonth === monthActivity.month ? 1 : 0.5,
+                  }}
+                >
+                  {monthActivity.month}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </Sticky>
       </div>
@@ -154,6 +191,7 @@ const ActivityGallery = (props: Props) => {
                 <MediaSlide
                   src={media.src}
                   currentSlideIndex={currentSlideIndexClamped}
+                  slideCount={allMedia.length}
                   slideIndex={index}
                   key={index}
                 />
