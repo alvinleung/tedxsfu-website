@@ -49,8 +49,8 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
     <motion.div
       className={`${
         left
-          ? "sticky top-4 col-span-full col-start-1 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
-          : "sticky top-4 z-10 col-span-full col-start-1 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
+          ? "sticky top-4 md:top-20 lg:top-4 col-span-full col-start-1 md:col-start-1 md:col-span-2 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
+          : "sticky top-4 md:top-20 lg:top-4 z-10 col-span-full col-start-1 md:col-start-1 md:col-span-2 h-fit lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
       }`}
     >
       {shouldStick && (
@@ -64,10 +64,10 @@ const SectionInfo = ({ children, sticky, left }: SectionCopyProps) => {
 };
 
 const SectionInfoHeader = (props: any) => (
-  <h3 className="mb-1 text-lead-mobile sm:text-lead">{props.children}</h3>
+  <h3 className="mb-1 text-lead-mobile sm:text-lead-tablet lg:text-lead">{props.children}</h3>
 );
 const SectionInfoDescription = (props: any) => (
-  <h3 className="text-lead-mobile opacity-50 sm:text-lead">{props.children}</h3>
+  <h3 className="text-lead-mobile opacity-50 sm:text-lead-tablet lg:text-lead">{props.children}</h3>
 );
 
 const About = (props: Props) => {

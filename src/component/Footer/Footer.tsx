@@ -70,8 +70,7 @@ const Footer = ({
         <MainGrid>
           <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 md:col-span-2 2xl:col-span-2 2xl:col-start-2">
             <div className="mb-6 text-lead">
-              Early bird ticket sale and exclusive content — right to your
-              inbox.
+              Early bird ticket sale and exclusive content — right to your inbox.
             </div>
             <EmailForm isDarkMode={isDarkMode} />
           </div>
