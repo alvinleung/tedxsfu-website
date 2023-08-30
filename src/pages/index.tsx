@@ -102,7 +102,7 @@ export default function Home() {
       <SectionLayout>
         <div className="
         text-lead-mobile lg:text-lead
-        my-32 col-span-4 col-start-1 sm:col-span-2 sm:col-start-3 md:col-start-4 lg:col-start-5 xl:col-start-4 2xl:col-start-6">
+        my-32 sm:my-48 md:my-64 col-span-4 col-start-1 sm:col-span-2 sm:col-start-3 md:col-start-4 lg:col-start-5 xl:col-start-4 2xl:col-start-6">
         <h2
         >A notice for Remembrance Day</h2>
         <p className="opacity-50"
