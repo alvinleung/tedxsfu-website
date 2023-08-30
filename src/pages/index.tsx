@@ -6,9 +6,30 @@ import Head from "next/head";
 import { motion } from "framer-motion";
 import { AnimationConfig } from "@/component/AnimationConfig";
 import Footer from "@/component/Footer/Footer";
+import StickyContainer from "@/component/ScrollContainer/StickyContainer";
+import MainGrid from "@/component/layouts/MainGrid";
 
 export default function Home() {
   const viewport = useWindowDimension();
+
+  type SectionLayoutProps = {
+    children: React.ReactNode;
+    padding?: boolean;
+    hero?: boolean;
+  };
+  
+  const SectionLayout = ({ children, padding, hero }: SectionLayoutProps) => {
+    //TODO: Implement lazy loading states for the page content for optimisation
+    return (
+      <section className={`px-4 pb-8`}>
+        <StickyContainer>
+          <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
+            {children}
+          </MainGrid>
+        </StickyContainer>
+      </section>
+    );
+  };
   // console.log(scrollY);
   return (
     <>
@@ -78,6 +99,16 @@ export default function Home() {
           </div>
         </section> */}
       </div>
+      <SectionLayout>
+        <div className="
+        text-lead-mobile lg:text-lead
+        my-32 col-span-4 col-start-1 sm:col-span-2 sm:col-start-3 md:col-start-4 lg:col-start-5 xl:col-start-4 2xl:col-start-6">
+        <h2
+        >A notice for Remembrance Day</h2>
+        <p className="opacity-50"
+        >As our event will be held on November 11, we will be dedicating 20 minutes of our program acknowledging Canadian veterans, past and present.</p>
+        </div>
+      </SectionLayout>
       <Footer
         pageNumber="1"
         targetPageHref={"/about"}
