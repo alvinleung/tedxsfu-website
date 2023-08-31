@@ -22,7 +22,6 @@ import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   mode?: "dark" | "light";
-  arrowDirection?: "normal" | "reverse";
   targetPageName: string;
   targetPageHref: string;
   bgImageSrc: string;
@@ -32,7 +31,6 @@ type Props = {
 const Footer = ({
   mode = "dark",
   targetPageHref: href,
-  arrowDirection = "normal",
   bgImageSrc,
   targetPageName,
   pageNumber,
@@ -42,11 +40,7 @@ const Footer = ({
   const { scrollHeight, scrollY } = useContainerScroll();
   const windowDim = useWindowDimension();
 
-  const offset = useTransform(
-    overscrollProgress,
-    [0, 1],
-    [0, arrowDirection === "normal" ? 10 : -10],
-  );
+  const offset = useTransform(overscrollProgress, [0, 1], [0, 20]);
 
   const exitTransitionProgress = useTransform(
     scrollY,
@@ -179,7 +173,7 @@ const Footer = ({
         <motion.img
           className={`relative z-10 mt-4`}
           src="../icon/arrow-white.svg"
-          style={{ x: offset, rotate: arrowDirection == "normal" ? 0 : 180 }}
+          style={{ x: offset }}
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}
