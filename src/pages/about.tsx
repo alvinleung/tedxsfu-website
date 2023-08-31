@@ -55,9 +55,9 @@ const SectionInfo = ({
     <motion.div
       className={`${
         left
-          ? "sticky top-4 col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
-          : "sticky top-4 z-10 col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
-      }`}
+          ? "col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
+          : "z-10 col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
+      } ${shouldStick ? "sticky top-4" : ""}`}
     >
       {shouldStick && (
         <Sticky top={16} fadeOut>
@@ -189,7 +189,7 @@ const About = (props: Props) => {
               one step at a time.
             </SectionInfoDescription>
           </SectionInfo>
-          <div className="col-span-full col-start-1 mb-32 mt-32">
+          <div className="col-span-full col-start-1 mb-0 mt-4">
             <ActivityGallery />
           </div>
         </SectionLayout>

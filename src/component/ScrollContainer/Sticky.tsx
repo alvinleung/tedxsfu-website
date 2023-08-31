@@ -78,6 +78,9 @@ const Sticky = ({ children, top, duration, fadeOut, ...htmlProps }: Props) => {
       <motion.div
         ref={containerRef}
         className={`${isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"}`}
+        style={{
+          top: top,
+        }}
         {...(htmlProps as any)}
       >
         {isUsingSmoothScroll && (

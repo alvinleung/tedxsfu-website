@@ -145,30 +145,28 @@ const ActivityGallery = (props: Props) => {
   return (
     <>
       {!isDesktopView && (
-        <div className="h-0">
-          <Sticky top={"10vh"}>
-            <motion.div
-              className="flex h-0 flex-col text-micro-mobile"
-              animate={{
-                opacity:
-                  currentSlideIndex >= 0 && currentSlideIndex < allMedia.length
-                    ? 1
-                    : 0,
-              }}
-            >
-              <div className="mx-auto mb-1 w-2/4 flex-shrink-0 text-center text-body-mobile">
-                {allMedia[currentSlideIndexClamped].header}
-              </div>
-              <div className="mx-auto mb-2 w-2/4 text-center opacity-50">
-                {allMedia[currentSlideIndexClamped].description}
-              </div>
-              <div className="mx-auto w-2/4 text-center capitalize opacity-50">
-                {allMedia[currentSlideIndexClamped].month}{" "}
-                {allMedia[currentSlideIndexClamped].day}
-              </div>
-            </motion.div>
-          </Sticky>
-        </div>
+        <Sticky top={"15vh"}>
+          <motion.div
+            className="flex h-0 flex-col text-micro-mobile"
+            animate={{
+              opacity:
+                currentSlideIndex >= 0 && currentSlideIndex < allMedia.length
+                  ? 1
+                  : 0,
+            }}
+          >
+            <div className="mx-auto mb-1 w-2/4 flex-shrink-0 text-center text-body-mobile">
+              {allMedia[currentSlideIndexClamped].header}
+            </div>
+            <div className="mx-auto mb-2 w-2/4 text-center opacity-50">
+              {allMedia[currentSlideIndexClamped].description}
+            </div>
+            <div className="mx-auto w-2/4 text-center capitalize opacity-50">
+              {allMedia[currentSlideIndexClamped].month}{" "}
+              {allMedia[currentSlideIndexClamped].day}
+            </div>
+          </motion.div>
+        </Sticky>
       )}
       <MainGrid ref={containerRef} className="relative">
         <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
@@ -212,7 +210,7 @@ const ActivityGallery = (props: Props) => {
           <Sticky top={"20vh"}>
             <div
               className="relative"
-              style={{ height: windowDim.height * perItemScrollVH }}
+              style={{ height: windowDim.height * 0.8 * perItemScrollVH }}
             >
               {allMedia.map((media, index) => {
                 return (
