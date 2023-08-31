@@ -80,7 +80,7 @@ const ActivityGallery = (props: Props) => {
   const windowDim = useWindowDimension();
 
   const perItemScrollVH = useMemo(
-    () => (isDesktopView ? 1 : 0.6),
+    () => (isDesktopView ? 1 : 0.8),
     [isDesktopView],
   ); // 0.5 vh
 
