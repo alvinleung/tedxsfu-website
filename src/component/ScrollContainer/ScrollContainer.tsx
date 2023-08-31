@@ -75,6 +75,8 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     ScrollDirection.UNKNOWN,
   );
 
+  const isPresent = useIsPresent();
+
   const {
     scrollX,
     scrollY,
@@ -87,6 +89,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     scrollTo,
   } = useSmoothScroll({
     container: scrollContainerRef,
+    canScroll: isPresent,
   });
 
   const documentOffsetY = useTransform(scrollY, (v) => {
@@ -118,7 +121,6 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     }
   }, [scrollDirection]);
 
-  const isPresent = useIsPresent();
   const windowDim = useWindowDimension();
 
   const scrollBarY = useTransform(

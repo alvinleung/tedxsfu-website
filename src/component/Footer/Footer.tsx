@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import MainGrid from "../layouts/MainGrid";
 
 import iconFacebook from "../../../public/img/ic_baseline-facebook.svg";
@@ -67,14 +67,27 @@ const Footer = ({
   const [isHovering, setIsHovering] = useState(false);
 
   const router = useRouter();
+
+  const transitionImageContainerRef =
+    useRef() as MutableRefObject<HTMLDivElement>;
+  const [transitionInitialY, setTransitionInitialY] = useState(0);
+
+  // beginPageTransition
+  const beginPageTransition = () => {
+    const bounds = transitionImageContainerRef.current.getBoundingClientRect();
+    // transitionInitialY.current = ;
+    setTransitionInitialY(bounds.top - windowDim.height * 0.2);
+    requestAnimationFrame(() => router.push(href));
+  };
+
   useEffect(() => {
     if (isOverscrollComplete) {
-      router.push(href);
+      beginPageTransition();
     }
-  }, [isOverscrollComplete]);
+  }, [isOverscrollComplete, windowDim.height]);
 
   const handleClick = () => {
-    router.push(href);
+    beginPageTransition();
   };
 
   const isDarkMode = mode === "dark";
@@ -186,11 +199,13 @@ const Footer = ({
           className="absolute bottom-0 z-0 h-full w-full overflow-hidden"
           exit={{
             height: windowDim.height,
+            y: -transitionInitialY,
             transition: {
               duration: AnimationConfig.VERY_SLOW,
               ease: AnimationConfig.EASING_IN_OUT,
             },
           }}
+          ref={transitionImageContainerRef}
         >
           <motion.div
             className="origin-top"
@@ -204,6 +219,7 @@ const Footer = ({
             exit={{
               scale: 1.125,
               opacity: 1,
+              y: 0,
               transition: {
                 duration: AnimationConfig.VERY_SLOW,
                 ease: AnimationConfig.EASING_IN_OUT,

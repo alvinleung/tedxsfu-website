@@ -1,6 +1,6 @@
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { isMobile } from "@/utils/isMobile";
-import { clamp, useMotionValue, useScroll } from "framer-motion";
+import { clamp, useIsPresent, useMotionValue, useScroll } from "framer-motion";
 import {
   MutableRefObject,
   useEffect,
@@ -12,9 +12,10 @@ import { useTransitionContext } from "../transition/TransitionEffect";
 
 type SmoothScrollParams = {
   container: MutableRefObject<HTMLDivElement>;
+  canScroll: boolean;
 };
 
-export function useSmoothScroll({ container }: SmoothScrollParams) {
+export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
   const [isUsingSmoothScroll, setIsUsingSmoothScroll] = useState(true);
   const windowDimension = useWindowDimension();
   const scrollX = useMotionValue(0);
@@ -93,7 +94,7 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
   }, []);
 
   useEffect(() => {
-    if (!isUsingSmoothScroll) return;
+    if (!isUsingSmoothScroll || !canScroll) return;
 
     const handleMouseWheel = (e: WheelEvent) => {
       const maxScroll = 150;
@@ -144,7 +145,7 @@ export function useSmoothScroll({ container }: SmoothScrollParams) {
       cancelAnimationFrame(animationFrame);
       clearTimeout(timer);
     };
-  }, [scrollHeight, windowDimension, isUsingSmoothScroll]);
+  }, [scrollHeight, windowDimension, isUsingSmoothScroll, canScroll]);
 
   // calculating the scrollheight
   useEffect(() => {
