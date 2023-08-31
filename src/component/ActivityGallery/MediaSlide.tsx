@@ -1,28 +1,33 @@
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { motion } from "framer-motion";
 import React, { useMemo } from "react";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   src: string;
   currentSlideIndex: number;
+  slideCount: number;
   slideIndex: number;
 };
 
-const MediaSlide = ({ src, currentSlideIndex, slideIndex }: Props) => {
+const MediaSlide = ({
+  src,
+  currentSlideIndex,
+  slideIndex,
+  slideCount,
+}: Props) => {
   const variation = 7;
   const rotation = useMemo(() => variation / 2 - Math.random() * variation, []);
 
   const isShowing = currentSlideIndex >= slideIndex;
 
   const windowDim = useWindowDimension();
-  const posVariationX = windowDim.width;
-  const posVariationY = windowDim.height;
-  const originalX = useMemo(
-    () => (posVariationX / 2 - Math.random() * posVariationX) * 2,
-    [],
-  );
-  const originalY = useMemo(
-    () => (posVariationY / 2 - Math.random() * posVariationY) * 2,
+  const originalX = useMemo(() => 0, []);
+  const originalY = useMemo(() => windowDim.height * 1.2, []);
+
+  const rotVariation = 180;
+  const originalRotation = useMemo(
+    () => Math.random() * rotVariation - rotVariation / 2,
     [],
   );
 
@@ -31,20 +36,24 @@ const MediaSlide = ({ src, currentSlideIndex, slideIndex }: Props) => {
       <motion.img
         src={src}
         className="mx-auto h-full w-full object-contain"
-        style={{
-          opacity: isShowing ? 1 : 0,
-          rotate: rotation,
+        // style={{
+        //   opacity: isShowing ? 1 : 0,
+        //   rotate: rotation,
+        // }}
+        animate={{
+          scale:
+            currentSlideIndex >= slideIndex
+              ? 1 - (currentSlideIndex - slideIndex) * 0.05
+              : 1,
+          // opacity: currentSlideIndex < slideIndex ? 1 : 0,
+          x: isShowing ? 0 : originalX,
+          y: isShowing ? 0 : originalY,
+          rotate: currentSlideIndex >= slideIndex ? rotation : originalRotation,
+          transition: {
+            duration: AnimationConfig.SLOW,
+            ease: AnimationConfig.EASING_IN_OUT,
+          },
         }}
-        animate={
-          {
-            // x: isShowing ? 0 : originalX,
-            // y: isShowing ? 0 : originalY,
-            // rotate: isShowing ? rotation : 0,
-            // transition: {
-            //   bounceDamping: 40,
-            // },
-          }
-        }
       />
     </div>
   );

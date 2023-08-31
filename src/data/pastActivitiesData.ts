@@ -33,17 +33,17 @@ const pastActivities = [
       "An initial venture in building physical experiences and truly understanding, the value of community.",
     media: [
       {
-        src: "/about/activities/tedxsfu-live-2.jpg",
+        src: "/about/about-1.jpg",
         format: "landscape",
         type: "image",
       },
       {
-        src: "/about/activities/tedxsfu-live-1.jpg",
+        src: "/about/about-2.jpg",
         format: "square",
         type: "image",
       },
       {
-        src: "/about/activities/tedxsfu-live-3.jpg",
+        src: "/about/about-3.jpg",
         format: "landscape",
         type: "image",
       },
