@@ -14,14 +14,17 @@ const ImageSlide = ({ src }: Props) => {
   const offset = useTransform(
     scrollY,
     [imgBounds.top, imgBounds.bottom],
-    [-100, 100],
+    [0, 200],
   );
 
   return (
     <motion.div
+      className="origin-top bg-black"
+      initial={{
+        scale: 1.125,
+      }}
       style={{
         y: offset,
-        scale: 1.125,
       }}
     >
       <Image

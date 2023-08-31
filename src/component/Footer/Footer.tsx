@@ -18,6 +18,7 @@ import Sticky from "../ScrollContainer/Sticky";
 import StickyContainer from "../ScrollContainer/StickyContainer";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   mode?: "dark" | "light";
@@ -56,7 +57,7 @@ const Footer = ({
     [0, 1],
   );
 
-  const bgScale = useTransform(exitTransitionProgress, [0, 1], [1.2, 1.4]);
+  const bgScale = useTransform(exitTransitionProgress, [0, 1], [1, 1.125]);
   const footerOpacity = useTransform(
     exitTransitionProgress,
     [0.7, 1],
@@ -148,7 +149,7 @@ const Footer = ({
         </MainGrid>
       </motion.footer>
       <MainGrid
-        className={`relative z-0 h-[80vh] cursor-pointer bg-black px-4 text-white`}
+        className={`relative z-0 h-[80vh] cursor-pointer bg-black text-white`}
         onClick={handleClick}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
@@ -158,6 +159,9 @@ const Footer = ({
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}
+          exit={{
+            opacity: 0,
+          }}
         >
           {pageNumber}
         </motion.div>
@@ -165,6 +169,9 @@ const Footer = ({
           className="relative z-10 col-span-1 mt-4 uppercase max-md:ml-2 md:col-start-2"
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.4,
+          }}
+          exit={{
+            opacity: 0,
           }}
         >
           {targetPageName}
@@ -176,21 +183,48 @@ const Footer = ({
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}
+          exit={{
+            opacity: 0,
+          }}
         />
 
-        <div className="absolute z-0 h-full w-full overflow-hidden">
-          <motion.img
-            src={bgImageSrc}
-            className="h-full object-cover"
-            width={2560}
-            height={1440}
-            alt="Picture of the author"
-            style={{ y: bgOverscrollOffset, scale: bgScale }}
+        <motion.div
+          className="absolute bottom-0 z-0 h-full w-full overflow-hidden"
+          exit={{
+            height: windowDim.height,
+            transition: {
+              duration: AnimationConfig.VERY_SLOW,
+              ease: AnimationConfig.EASING_IN_OUT,
+            },
+          }}
+        >
+          <motion.div
+            className="origin-top"
+            style={{
+              y: bgOverscrollOffset,
+              scale: bgScale,
+            }}
             animate={{
               opacity: isHovering || isOverscrollStarted ? 1 : 0.9,
             }}
-          />
-        </div>
+            exit={{
+              scale: 1.125,
+              opacity: 1,
+              transition: {
+                duration: AnimationConfig.VERY_SLOW,
+                ease: AnimationConfig.EASING_IN_OUT,
+              },
+            }}
+          >
+            <Image
+              src={bgImageSrc}
+              className="h-[100dvh] object-cover"
+              width={2560}
+              height={1440}
+              alt="Picture of the author"
+            />
+          </motion.div>
+        </motion.div>
       </MainGrid>
     </>
   );

@@ -23,8 +23,7 @@ const imgData = [
     src: "/about/about-2.jpg",
     date: "Conference",
     year: "2016",
-    description:
-      'Excitement and anticipation during the intermission',
+    description: "Excitement and anticipation during the intermission",
   },
   {
     src: "/about/about-4.jpg",
@@ -36,8 +35,7 @@ const imgData = [
     src: "/about/about-6.jpg",
     date: "Conference",
     year: "2015",
-    description:
-      "Unpacking hope in health with neuroscientist, Ryan D’Arcy",
+    description: "Unpacking hope in health with neuroscientist, Ryan D’Arcy",
   },
 ];
 
@@ -50,7 +48,10 @@ const StickyGallery = (props: Props) => {
   const zoomLockStartPosition = bounds.top;
   const zoomLockEndPosition = bounds.bottom - windowDim.height;
 
-  const fullScreenScale = 1 + 1 - bounds.width / windowDim.width + 0.015;
+  const fullScreenScale = 1.1;
+  const shrinkedScale = (windowDim.width - 32) / windowDim.width;
+  // const fullScreenScale = 1 + 1 - bounds.width / windowDim.width + 0.015;
+  const fullScreenScaleCSS = "calc(1+ 1-100%/100vw + 0.015)";
 
   const scale = useTransform(
     scrollY,
@@ -60,7 +61,7 @@ const StickyGallery = (props: Props) => {
       zoomLockEndPosition,
       zoomLockEndPosition + windowDim.height / 3,
     ],
-    [fullScreenScale, fullScreenScale, fullScreenScale, 1],
+    [1, 1, 1, shrinkedScale],
   );
 
   //  const wideScale = 1 + 1 - bounds.width / windowDim.width + 0.01;
@@ -96,30 +97,68 @@ const StickyGallery = (props: Props) => {
       ref={boundsRef}
     >
       <motion.div
-        className="h-[100dvh] overflow-hidden bg-black"
+        className="h-[100dvh]"
+        initial={{
+          y: 0,
+          // scale: fullScreenScale,
+        }}
         style={{
           y: containerOffset,
-          scale: scale,
+          // scale: scale,
         }}
       >
         <motion.div
+          initial={{ y: 0 }}
           style={{
             y: contentOffsetY,
           }}
         >
           {imgData.map((image, i) => {
             return (
-              <div className="relative h-[100dvh] overflow-hidden" key={i}>
-                <ImageSlide src={image.src} />
+              <div className="relative h-[100dvh]" key={i}>
+                <motion.div
+                  className="origin-bottom overflow-hidden"
+                  style={{
+                    // only scale the last one
+                    scale: imgData.length - 1 === i ? scale : 1,
+                  }}
+                  key={i}
+                >
+                  <ImageSlide src={image.src} />
+                </motion.div>
                 <MainGrid className="absolute bottom-8 text-white">
-                  <div className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2">
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 0.5,
+                      transition: {
+                        duration: AnimationConfig.SLOW,
+                        delay: 0.5,
+                      },
+                    }}
+                    className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2"
+                  >
                     <div>{image.date}</div>
                     <div>{image.year}</div>
-                  </div>
-                  <div className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro md:col-span-2 md:pr-0 lg:col-span-1">
+                  </motion.div>
+                  <motion.div
+                    initial={{
+                      opacity: 0,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        duration: AnimationConfig.SLOW,
+                        delay: 0.3,
+                      },
+                    }}
+                    className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro md:col-span-2 md:pr-0 lg:col-span-1"
+                  >
                     {" "}
                     {image.description}
-                  </div>
+                  </motion.div>
                 </MainGrid>
               </div>
             );

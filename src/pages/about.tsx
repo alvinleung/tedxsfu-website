@@ -13,23 +13,31 @@ import StickyGallery from "@/component/StickyGallery/StickyGallery";
 import Head from "next/head";
 import Footer from "@/component/Footer/Footer";
 import ActivityGallery from "@/component/ActivityGallery/ActivityGallery";
+import { AnimationConfig } from "@/component/AnimationConfig";
 
 type Props = {};
 
 type SectionLayoutProps = {
   children: React.ReactNode;
   padding?: boolean;
-  hero?: boolean;
+  fullScreen?: boolean;
 };
 
-const SectionLayout = ({ children, padding, hero }: SectionLayoutProps) => {
+const SectionLayout = ({
+  children,
+  padding,
+  fullScreen,
+}: SectionLayoutProps) => {
   //TODO: Implement lazy loading states for the page content for optimisation
   return (
-    <section className={`px-4 pb-8`}>
+    <section className={`${fullScreen ? "" : "px-4"} pb-8`}>
       <StickyContainer>
-        <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
-          {children}
-        </MainGrid>
+        {!fullScreen && (
+          <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
+            {children}
+          </MainGrid>
+        )}
+        {fullScreen && children}
       </StickyContainer>
     </section>
   );
@@ -96,8 +104,17 @@ const About = (props: Props) => {
         ></meta>
       </Head>
       <div className="min-h-screen w-full bg-white font-normal text-black">
-        <SectionLayout hero>
-          <motion.div className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl font-light text-white">
+        <SectionLayout fullScreen>
+          <motion.div
+            className="absolute left-0 right-0 top-[24vh] z-20 flex w-full flex-col items-end justify-start p-4 text-6xl font-light text-white"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: AnimationConfig.SLOW,
+              },
+            }}
+          >
             13 years in the making
           </motion.div>
           <StickyGallery />

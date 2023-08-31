@@ -56,31 +56,31 @@ const TransitionEffect = ({ children }: Props) => {
     >
       <motion.div
         className="fixed bottom-0 left-0 right-0 top-0 flex h-screen w-screen"
-        initial={{
-          opacity: 0,
-          x: isAboutPage
-            ? windowDimension.width * 0.05
-            : -windowDimension.width * 0.05,
-          zIndex: highestZIndex,
-        }}
-        animate={{
-          x: 0,
-          opacity: 1,
-          transition: {
-            duration: AnimationConfig.VERY_SLOW,
-            ease: [0.22, 1, 0.36, 1],
-          },
-        }}
-        exit={{
-          x: isAboutPage
-            ? windowDimension.width * 0.05
-            : -windowDimension.width * 0.05,
-          opacity: 0,
-          transition: {
-            duration: AnimationConfig.VERY_SLOW,
-            ease: [0.64, 0, 0.78, 0],
-          },
-        }}
+        // initial={{
+        //   opacity: 1,
+        //   x: isAboutPage
+        //     ? windowDimension.width * 0.05
+        //     : -windowDimension.width * 0.05,
+        //   zIndex: highestZIndex,
+        // }}
+        // animate={{
+        //   x: 0,
+        //   opacity: 1,
+        //   transition: {
+        //     duration: AnimationConfig.VERY_SLOW,
+        //     ease: [0.22, 1, 0.36, 1],
+        //   },
+        // }}
+        // exit={{
+        //   x: isAboutPage
+        //     ? windowDimension.width * 0.05
+        //     : -windowDimension.width * 0.05,
+        //   opacity: 0,
+        //   transition: {
+        //     duration: AnimationConfig.SLOW,
+        //     ease: [0.64, 0, 0.78, 0],
+        //   },
+        // }}
         key={router.pathname}
       >
         <TransitionContext.Provider value={{ isTransitionDone, highestZIndex }}>
