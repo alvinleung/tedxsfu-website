@@ -23,7 +23,7 @@ const MediaSlide = ({
 
   const windowDim = useWindowDimension();
   const originalX = useMemo(() => 0, []);
-  const originalY = useMemo(() => windowDim.height * 1.2, []);
+  const originalY = useMemo(() => windowDim.height * 1.2, [windowDim.height]);
 
   const rotVariation = 180;
   const originalRotation = useMemo(
