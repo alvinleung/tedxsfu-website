@@ -76,13 +76,18 @@ const ActivityGallery = (props: Props) => {
     return activitiesByMonth;
   }, []);
 
+  const isDesktopView = useBreakpoint(breakpoints.md);
   const windowDim = useWindowDimension();
 
-  const perItemScrollVH = 1; // 0.5 vh
+  const perItemScrollVH = useMemo(
+    () => (isDesktopView ? 1 : 0.6),
+    [isDesktopView],
+  ); // 0.5 vh
+
   const galleryTotalScrollHeight = useMemo(() => {
     // half a scroll per activity
     return windowDim.height * perItemScrollVH * pastActivities.length;
-  }, [pastActivities, windowDim.height]);
+  }, [pastActivities, windowDim.height, perItemScrollVH]);
 
   const allMedia = useMemo(() => {
     return pastActivities.reduce((result, currActivity) => {
@@ -138,7 +143,6 @@ const ActivityGallery = (props: Props) => {
     };
   }, [bounds, allMedia, windowDim, scrollY]);
 
-  const isDesktopView = useBreakpoint(breakpoints.md);
   const [monthContainerRef, monthContainerBound] =
     useBoundingBox<HTMLDivElement>([]);
 

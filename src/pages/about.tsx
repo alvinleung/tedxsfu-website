@@ -189,7 +189,7 @@ const About = (props: Props) => {
               one step at a time.
             </SectionInfoDescription>
           </SectionInfo>
-          <div className="col-span-full col-start-1 mb-0 mt-4">
+          <div className="col-span-full col-start-1 mb-0">
             <ActivityGallery />
           </div>
         </SectionLayout>
