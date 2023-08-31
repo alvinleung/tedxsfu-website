@@ -54,7 +54,7 @@ const Nav = ({ children }: Props) => {
           background: useBreakpoint(breakpoints["2xl"]) ? "transparent" : (open ? "linear-gradient(#000000FF, #00000000)" : "linear-gradient(#00000000, #00000000)")
         }}
       >
-                    <motion.a
+            <motion.a
               key="logo"
               href={"/"}
               className="flex h-12 w-32 flex-row-reverse"
@@ -67,7 +67,7 @@ const Nav = ({ children }: Props) => {
               <motion.svg
                 key="SFU"
                 viewBox="0 0 375 151"
-                className="z-50 md:fixed md:left-[6rem] md:top-4 md:h-6 md:mix-blend-exclusion"
+                className="z-50 md:fixed md:left-[6rem] md:top-4 md:h-6 mix-blend-exclusion"
               >
                 <motion.path
                   fill="#FFFFFF"
@@ -132,23 +132,23 @@ const Nav = ({ children }: Props) => {
           </motion.div>}
         </AnimatePresence>
 
-        <motion.div className="fixed z-[45] max-md:h-24 max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:px-4 max-md:pt-5 max-md:grid grid-cols-4 gap-x-4
-        md:gap-x-2 md:flex md:col-span-2 md:col-start-4 md:justify-self-end w-full md:justify-end md:top-4 md:right-4
-        lg:col-start-6 2xl:col-start-8 lg:col-span-1"
-        animate={{
-          background: useBreakpoint(breakpoints.md) ? "transparent" : (open ? "linear-gradient(#00000000, #000000FF)" : "linear-gradient(#00000000, #00000000)")
-        }}
-        >
-          <motion.a className="col-span-2 text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-fit md:w-full max-w-[9rem]">
+       
+          <motion.a 
+            className="text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-fit md:w-full sm:max-w-[9rem] w-[calc(2*(100vw-5rem)/4)]
+            max-md:bottom-4 max-md:left-4
+            fixed md:right-16 border border-black border-opacity-25 z-50
+            ">
             Buy tickets
           </motion.a>
           <motion.button 
-            className="col-start-4 col-span-1 flex justify-center items-center h-10 py-3 border border-white rounded-full justify-self-end w-full max-w-[6rem] md:max-w-[2.5rem] border-opacity-50"
+            className="col-start-4 col-span-1 flex justify-center items-center h-10 py-3 border border-white border-opacity-25 rounded-full justify-self-end w-full max-w-[6rem] md:max-w-[2.5rem] border-opacity-50
+            
+            fixed right-4 max-md:bottom-4 mix-blend-exclusion z-50
+            "
             // style={{width: "max(auto, 4rem)"}}
             onClick={toggleOpen}>
             <motion.div className="h-5 w-5 bg-white rounded-full"/>
           </motion.button>
-        </motion.div>
       </motion.nav>
 
 
