@@ -49,7 +49,8 @@ const SectionInfo = ({
   left,
 }: SectionCopyProps) => {
   // const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
-  const shouldStick = useBreakpoint(breakpoints.md) || stickyOnMobile;
+  const isDesktop = useBreakpoint(breakpoints.md);
+  const shouldStick = isDesktop || stickyOnMobile;
 
   return (
     <motion.div
@@ -57,7 +58,7 @@ const SectionInfo = ({
         left
           ? "col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
           : "z-10 col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
-      } ${shouldStick ? "sticky top-4" : ""}`}
+      } ${shouldStick ? "sticky top-4" : ""} ${stickyOnMobile ? "top-16" : ""}`}
     >
       {shouldStick && (
         <Sticky top={16} fadeOut>
