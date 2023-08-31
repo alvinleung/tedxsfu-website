@@ -10,6 +10,7 @@ import React, {
   useState,
 } from "react";
 import { AnimationConfig } from "../AnimationConfig";
+import { useIsFirstRender } from "@/hooks/useIsFirstRender";
 
 type Props = {
   children: React.ReactNode;
@@ -30,10 +31,17 @@ const TransitionEffect = ({ children }: Props) => {
   const isAboutPage = router.pathname === "/about";
 
   const [highestZIndex, setHighestZIndex] = useState(0);
-  const [isTransitionDone, setIsTransitionDone] = useState(false);
+  const [isTransitionDone, setIsTransitionDone] = useState(true);
   // const [pageOffsetX, setPageOffsetX] = useState(0);
 
+  const isFirstPage = useRef(true);
   useEffect(() => {
+    if (isFirstPage) {
+      setIsTransitionDone(true);
+      isFirstPage.current = false;
+      return;
+    }
+
     setHighestZIndex(highestZIndex + 1);
     setIsTransitionDone(false);
   }, [router.pathname]);

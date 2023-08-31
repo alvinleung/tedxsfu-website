@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { useRouter } from "next/router";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { AnimationConfig } from "../AnimationConfig";
+import { useTransitionContext } from "../transition/TransitionEffect";
 
 type Props = {
   top?: string;
@@ -25,6 +26,7 @@ const Fixed = ({
 }: Props) => {
   const [isDOMReady, setIsDOMReady] = useState(false);
   const { isUsingSmoothScroll } = useContainerScroll();
+  const { isTransitionDone } = useTransitionContext();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -35,6 +37,8 @@ const Fixed = ({
   const router = useRouter();
   const windowDim = useWindowDimension();
   const isPresent = useIsPresent();
+
+  console.log(isTransitionDone);
 
   return (
     <>
@@ -71,10 +75,11 @@ const Fixed = ({
                   pointerEvents: pointerEvents,
                 }}
                 initial={{
-                  x:
-                    router.pathname === "/about"
-                      ? windowDim.width
-                      : -windowDim.width,
+                  x: isTransitionDone
+                    ? 0
+                    : router.pathname === "/about"
+                    ? windowDim.width
+                    : -windowDim.width,
                 }}
                 animate={{
                   x: 0,
