@@ -44,11 +44,11 @@ export const DirectorInfo = ({
           : "linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 50%)",
       }}
     >
-      <div className="mb-2 pb-1 text-lead">
+      <div className="mb-2 pb-1 text-lead-mobile sm:text-lead">
         {director.name}
         {"\n"}({director.pronouns})
       </div>
-      <div className="text-body">
+      <div className="text-body-mobile sm:text-body">
         {director.position},{" "}
         <span className="opacity-50">{director.description}</span>
       </div>
