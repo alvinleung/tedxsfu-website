@@ -106,7 +106,7 @@ export default function Home() {
         <h2
         >A notice for Remembrance Day</h2>
         <p className="opacity-50"
-        >As our event will be held on November 11, we will be dedicating 20 minutes of our program acknowledging Canadian veterans, past and present.</p>
+        >As our event will be held on November 11, we will be dedicating 20 minutes of our program commemorating Canadian veterans&#8212;past and present.</p>
         </div>
       </SectionLayout>
       <Footer

@@ -31,7 +31,7 @@ export enum NavScrollState {
 
 const Nav = ({ children }: Props) => {
   const path = useRouter();
-  const isAboutPage = path.pathname != "/";
+  const isAboutPage = path.pathname != "/about";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
@@ -89,19 +89,19 @@ const Nav = ({ children }: Props) => {
         </motion.div>
         <motion.div
           key="details"
-          className={`flex flex-col md:flex-row max-md:items-end max-md:pr-1 max-md:border-r max-md:border-ted ${!open && "hidden"}`}  
+          className={`flex flex-col md:flex-row md:gap-x-4 max-md:items-end max-md:pr-1 max-md:border-r max-md:border-ted ${!open && "hidden"}`}  
         >
           <motion.a 
-          className="w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
+          className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
           >
             Sat{useBreakpoint(breakpoints.xs) && <>urday</>}, Nov{useBreakpoint(breakpoints.xs) && <>ember</>} 11, 2023
-            {useBreakpoint(breakpoints.md) && <motion.span>Date</motion.span>}
+            {useBreakpoint(breakpoints.md) && <motion.span className="opacity-50">Date</motion.span>}
           </motion.a>
           <motion.a
-            className="w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
+            className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
           >
             The Centre {useBreakpoint(breakpoints.xs) ? <>for Performing Arts</> : <>Vancouver</> }
-            {useBreakpoint(breakpoints.md) && <motion.span>Venue</motion.span>}
+            {useBreakpoint(breakpoints.md) && <motion.span className="opacity-50">Venue</motion.span>}
           </motion.a>
 
         </motion.div>
@@ -113,8 +113,8 @@ const Nav = ({ children }: Props) => {
           background: open ? "linear-gradient(#00000000, #000000FF)" : "linear-gradient(#00000000, #00000000)"
         }}
         >
-          <motion.a className="col-span-2 text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-fit md:px-6 md:w-full max-w-[16rem]">
-            Buy tickets now
+          <motion.a className="col-span-2 text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-fit md:px-6 md:w-full max-w-[9rem]">
+            Buy tickets
           </motion.a>
           <motion.button 
             className="col-start-4 col-span-1 flex justify-center items-center h-10 py-3 border border-white rounded-full justify-self-end w-full max-w-[6rem] md:max-w-[4rem]"
@@ -140,75 +140,78 @@ const Nav = ({ children }: Props) => {
         }}
         >
           <MainGrid className="pt-32">
-              <motion.a className="col-span-full text-lead">
-                Event info
+              <motion.a 
+                className={`${!isAboutPage && "opacity-50"} col-span-full md:col-span-2 2xl:col-start-2 text-header-mobile max-md:grid grid-cols-4 gap-x-4 h-20 justify-between max-md:border-t border-white max-md:pt-2
+                md:border-l md:pl-2 md:flex md:flex-col md:h-[60dvh] md:min-h-[8rem]
+                `}>
+                <span className="text-body-mobile md:text-header">1</span>
+                <div className="col-span-3">
+                  Event info
+                  <p className="text-micro-mobile">TEDxSFU 2023 at a glance</p>
+                </div>
               </motion.a>
-              <motion.a className="col-span-full text-lead">
-                About us
+              <motion.a 
+                className={`${isAboutPage && "opacity-50"} col-span-full md:col-span-2 2xl:col-start-4 text-header-mobile max-md:grid grid-cols-4 gap-x-4 h-20 justify-between max-md:border-t border-white max-md:pt-2
+                md:border-l md:pl-2 md:flex md:flex-col md:h-[60dvh] md:min-h-[8rem]
+              `}>
+                <span className="text-body-mobile md:text-header">2</span>
+                <div className="col-span-3">
+                  About us
+                  <p className="text-micro-mobile">13 years in the making</p>
+                </div>
               </motion.a>
 
-              <motion.div className="col-span-full">
-                <motion.h2 className="text-lead-mobile">Let&apos;s keep in touch</motion.h2>
-                <motion.div className="my-5">
-                  <motion.h3 className="text-body-mobile">General inquiries</motion.h3>
-                  <motion.a className="text-body-mobile opacity-50">info@tedxsfu.com</motion.a>
+              <motion.div className="col-span-full md:col-span-2 lg:col-span-3 2xl:col-start-2 2xl:col-span-2 mt-12">
+                <motion.h2 className="text-lead-mobile lg:text-lead">Let&apos;s keep in touch</motion.h2>
+                <motion.div className="lg:grid lg:grid-cols-3 lg:gap-x-4">
+                  <motion.div className="my-4">
+                    <motion.h3 className="text-body-mobile">General inquiries & ticketing</motion.h3>
+                    <motion.a className="text-body-mobile opacity-50" href="mailto:info@tedxsfu.com">info@tedxsfu.com</motion.a>
+                  </motion.div>
+                  <motion.div className="my-4">
+                    <motion.h3 className="text-body-mobile">Partnership inquiries</motion.h3>
+                    <motion.a className="text-body-mobile opacity-50" href="mailto:partner@tedxsfu.com">partner@tedxsfu.com</motion.a>
+                  </motion.div>
                 </motion.div>
 
-                <motion.div className="my-5">
-                  <motion.h3 className="text-body-mobile">Partnership inquiries</motion.h3>
-                  <motion.a className="text-body-mobile opacity-50">partner@tedxsfu.com</motion.a>
-                </motion.div>
-              </motion.div>
-
-              <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 md:col-span-2 2xl:col-span-2 2xl:col-start-2">
-            <div className="mb-6 text-lead">
-              Early bird ticket sale and exclusive content — right to your inbox.
-            </div>
-            <EmailForm isDarkMode={true} />
-            </div>
-
-            <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 2xl:col-span-2 2xl:col-start-6">
-              <div className="pb-6 text-body md:text-lead">
-                This independent TEDx event is operated under license from TED.
-              </div>
-              <div className="mb-6 flex flex-row gap-2">
-                <a href="https://" target="_blank">
+                <div className="mb-6 flex flex-row gap-2">
+                <a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank">
                   <Image
                     src={iconFacebook}
-                    alt=""
+                    alt="Facebook"
                     className={true ? "" : "invert"}
                   />
                 </a>
                 <a href="https://instagram.com/tedxsfu" target="_blank">
                   <Image
                     src={iconInstagram}
-                    alt=""
+                    alt="Instagram"
                     className={true ? "" : "invert"}
                   />
                 </a>
-                <a href="https://twitter.com/tedxsfu">
+                <a href="https://twitter.com/tedxsfu" target="_blank">
                   <Image
                     src={iconTwitter}
-                    alt=""
+                    alt="Twitter"
                     className={true ? "" : "invert"}
                   />
                 </a>
                 <a href="https://linkedin.com/company/tedxsfu" target="_blank">
                   <Image
                     src={iconLinkedin}
-                    alt=""
+                    alt="LinkedIn"
                     className={true ? "" : "invert"}
                   />
                 </a>
               </div>
-              <div className="text-body opacity-50">
-                TEDxSFU respectfully acknowledges the xʷməθkʷəy̓əm (Musqueam),
-                Sḵwx̱wú7mesh Úxwumixw (Squamish), səl̓ilw̓ətaʔɬ (Tsleil-Waututh),
-                q̓íc̓əy̓ (Katzie), kʷikʷəƛ̓əm (Kwikwetlem), Qayqayt, Kwantlen,
-                Semiahmoo and Tsawwassen peoples on whose unceded traditional
-                territories our three campuses reside.
+              </motion.div>
+
+              <div className="col-span-full pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-start-4 md:mt-12 2xl:col-span-2 2xl:col-start-7">
+              <div className="mb-6 text-lead">
+                Early bird ticket sale and exclusive content — right to your inbox.
               </div>
-            </div>
+              <EmailForm isDarkMode={true} />
+              </div>
           </MainGrid>
         </motion.div>}
       </AnimatePresence>

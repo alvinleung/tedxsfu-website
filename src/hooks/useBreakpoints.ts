@@ -80,7 +80,7 @@ export function useBreakpoint(breakpointSize: number) {
   const [isOverBreakpoint, setIsOverBreakpoint] = useState(false);
 
   useEffect(() => {
-    setIsOverBreakpoint(windowDimension.width > breakpointSize);
+    setIsOverBreakpoint(windowDimension.width >= breakpointSize);
   }, [windowDimension.width, breakpointSize]);
 
   // useEffect(() => {
