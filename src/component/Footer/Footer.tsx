@@ -14,6 +14,10 @@ import {
 } from "@/hooks/Overscroll/useOverscroll";
 import { motion, useTransform } from "framer-motion";
 import { useRouter } from "next/router";
+import Sticky from "../ScrollContainer/Sticky";
+import StickyContainer from "../ScrollContainer/StickyContainer";
+import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
+import { useWindowDimension } from "@/hooks/useWindowDimension";
 
 type Props = {
   mode?: "dark" | "light";
@@ -34,14 +38,36 @@ const Footer = ({
 }: Props) => {
   const { isOverscrollComplete, isOverscrollStarted, overscrollProgress } =
     useOverscroll(OverscrollDirection.DOWN, 100);
+  const { scrollHeight, scrollY } = useContainerScroll();
+  const windowDim = useWindowDimension();
 
   const offset = useTransform(
     overscrollProgress,
     [0, 1],
     [0, arrowDirection === "normal" ? 10 : -10],
   );
-  const bgScale = useTransform(overscrollProgress, [0, 1], [1.4, 1.4]);
-  const bgOffset = useTransform(overscrollProgress, [0, 1], [0, -30]);
+
+  const exitTransitionProgress = useTransform(
+    scrollY,
+    [
+      scrollHeight - windowDim.height - windowDim.height,
+      scrollHeight - windowDim.height,
+    ],
+    [0, 1],
+  );
+
+  const bgScale = useTransform(exitTransitionProgress, [0, 1], [1.2, 1.4]);
+  const footerOpacity = useTransform(
+    exitTransitionProgress,
+    [0.7, 1],
+    [1, 0.1],
+  );
+
+  const bgOverscrollOffset = useTransform(
+    exitTransitionProgress,
+    [0, 1],
+    [-windowDim.height * 0.8, 0],
+  );
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -60,17 +86,19 @@ const Footer = ({
 
   return (
     <>
-      <footer
+      <motion.footer
         className="px-4 pt-12"
         style={{
           backgroundColor: isDarkMode ? "black" : "white",
           color: isDarkMode ? "white" : "black",
+          opacity: footerOpacity,
         }}
       >
-        <MainGrid>
-          <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-start-2 md:col-span-2 2xl:col-span-2 2xl:col-start-2">
+        <MainGrid className="pb-24">
+          <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
             <div className="mb-6 text-lead">
-              Early bird ticket sale and exclusive content — right to your inbox.
+              Early bird ticket sale and exclusive content — right to your
+              inbox.
             </div>
             <EmailForm isDarkMode={isDarkMode} />
           </div>
@@ -118,15 +146,15 @@ const Footer = ({
             </div>
           </div>
         </MainGrid>
-      </footer>
+      </motion.footer>
       <MainGrid
-        className="relative mx-4 mt-32 h-[30vh] cursor-pointer"
+        className={`relative z-0 h-[80vh] cursor-pointer bg-black px-4 text-white`}
         onClick={handleClick}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         <motion.div
-          className="mt-4 pl-4 uppercase md:col-start-1"
+          className="z-10 mt-4 pl-4 uppercase md:col-start-1"
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}
@@ -134,7 +162,7 @@ const Footer = ({
           {pageNumber}
         </motion.div>
         <motion.div
-          className="col-span-1 mt-4 uppercase max-md:ml-2 md:col-start-2"
+          className="relative z-10 col-span-1 mt-4 uppercase max-md:ml-2 md:col-start-2"
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.4,
           }}
@@ -142,7 +170,7 @@ const Footer = ({
           {targetPageName}
         </motion.div>
         <motion.img
-          className={`z-10 mt-4 ${isDarkMode ? "" : "invert"}`}
+          className={`relative z-10 mt-4`}
           src="../icon/arrow-white.svg"
           style={{ x: offset, rotate: arrowDirection == "normal" ? 0 : 180 }}
           animate={{
@@ -157,9 +185,9 @@ const Footer = ({
             width={2560}
             height={1440}
             alt="Picture of the author"
-            style={{ y: bgOffset, scale: bgScale }}
+            style={{ y: bgOverscrollOffset, scale: bgScale }}
             animate={{
-              opacity: isHovering || isOverscrollStarted ? 0.5 : 0.3,
+              opacity: isHovering || isOverscrollStarted ? 1 : 0.9,
             }}
           />
         </div>
