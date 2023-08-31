@@ -49,33 +49,25 @@ const Nav = ({ children }: Props) => {
   return (
     <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="fixed z-50 top-0 left-0 right-0 px-4 pt-4 h-12 flex justify-between md:grid grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
+        className="top-0 left-0 right-0 px-4 pt-4 h-12 flex justify-between md:grid grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
         animate={{
-          background: open ? "linear-gradient(#000000FF, #00000000)" : "linear-gradient(#00000000, #00000000)"
+          background: useBreakpoint(breakpoints["2xl"]) ? "transparent" : (open ? "linear-gradient(#000000FF, #00000000)" : "linear-gradient(#00000000, #00000000)")
         }}
       >
-        <motion.div
-          key="logo"
-          className="flex"
-          >
-              <motion.svg
-                key="TEDx"
-                viewBox="0 0 501 151"
-                className="h-6"
-              >
-                <motion.path
-                  fill="#EB0028"
-                  d="M40.8 39.6522H0V2.20264h126.6V39.6522H85.7V148.396H40.8V39.6522Zm92.7-37.44956h122.9V39.6522h-78v18.2242h78v34.8461h-78v18.2245h78v37.449H133.5V2.20264Zm130.5 
-                  0h73.7c48.6 0 65.8 36.04776 65.8 72.89656 0 44.8598-23.7 73.2968-74.5 73.2968h-65V2.20264ZM308.9 110.847h17.6c28 0 32.1-22.7306 
-                  32.1-36.4487 0-9.2122-2.9-34.7461-35.3-34.7461H309v71.1948h-.1ZM468 92.322l-13.7-22.8302-13.4 22.8302H408l31.2-46.061-30.1-44.05836H442l12.2 21.82896 
-                  12.5-21.82896h32.9L469.5 46.261l31.2 46.061H468Z"
-                />
-              </motion.svg>
-
+                    <motion.a
+              key="logo"
+              href={"/"}
+              className="flex h-12 w-32 flex-row-reverse"
+              onClick={(e) => {
+                e.preventDefault();
+                setOpen(false);
+                path.push("/");
+              }}
+            >
               <motion.svg
                 key="SFU"
                 viewBox="0 0 375 151"
-                className="h-6"
+                className="z-50 md:fixed md:left-[6rem] md:top-4 md:h-6 md:mix-blend-exclusion"
               >
                 <motion.path
                   fill="#FFFFFF"
@@ -92,7 +84,20 @@ const Nav = ({ children }: Props) => {
                   5.173 22.2 5.173s15.9-1.691 22.2-5.173c6.3-3.481 11.2-8.156 14.7-14.224 3.4-6.067 5.2-12.931 5.2-20.59l-.1-95.19228Z"
                 />
               </motion.svg>
-        </motion.div>
+              <motion.svg
+                key="TEDx"
+                viewBox="0 0 501 151"
+                className="z-50 md:fixed md:left-4 md:top-4 md:h-6"
+              >
+                <motion.path
+                  fill="#EB0028"
+                  d="M40.8 39.6522H0V2.20264h126.6V39.6522H85.7V148.396H40.8V39.6522Zm92.7-37.44956h122.9V39.6522h-78v18.2242h78v34.8461h-78v18.2245h78v37.449H133.5V2.20264Zm130.5 
+                  0h73.7c48.6 0 65.8 36.04776 65.8 72.89656 0 44.8598-23.7 73.2968-74.5 73.2968h-65V2.20264ZM308.9 110.847h17.6c28 0 32.1-22.7306 
+                  32.1-36.4487 0-9.2122-2.9-34.7461-35.3-34.7461H309v71.1948h-.1ZM468 92.322l-13.7-22.8302-13.4 22.8302H408l31.2-46.061-30.1-44.05836H442l12.2 21.82896 
+                  12.5-21.82896h32.9L469.5 46.261l31.2 46.061H468Z"
+                />
+              </motion.svg>
+            </motion.a>
 
         <AnimatePresence>
           {
@@ -127,8 +132,8 @@ const Nav = ({ children }: Props) => {
           </motion.div>}
         </AnimatePresence>
 
-        <motion.div className="max-md:fixed max-md:h-24 bottom-0 left-0 right-0 max-md:px-4 max-md:pt-5 max-md:grid grid-cols-4 gap-x-4
-        md:gap-x-2 md:flex md:col-span-2 md:col-start-4 md:justify-self-end w-full md:justify-end
+        <motion.div className="fixed z-[45] max-md:h-24 max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:px-4 max-md:pt-5 max-md:grid grid-cols-4 gap-x-4
+        md:gap-x-2 md:flex md:col-span-2 md:col-start-4 md:justify-self-end w-full md:justify-end md:top-4 md:right-4
         lg:col-start-6 2xl:col-start-8 lg:col-span-1"
         animate={{
           background: useBreakpoint(breakpoints.md) ? "transparent" : (open ? "linear-gradient(#00000000, #000000FF)" : "linear-gradient(#00000000, #00000000)")
