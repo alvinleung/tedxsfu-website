@@ -14,6 +14,7 @@ import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { AnimateSharedLayout, LayoutGroup, clamp, motion } from "framer-motion";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
+import Fixed from "../ScrollContainer/Fixed";
 
 type Props = {};
 
@@ -142,77 +143,105 @@ const ActivityGallery = (props: Props) => {
     useBoundingBox<HTMLDivElement>([]);
 
   return (
-    <MainGrid ref={containerRef} className="relative">
-      <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
-        <Sticky top={"20vh"} fadeOut>
-          <div
-            className="pt-[20vh]"
-            style={{ height: windowDim.height * perItemScrollVH }}
-          >
-            <div className="mb-4">2023</div>
-            <div className="relative flex flex-col" ref={monthContainerRef}>
-              <motion.div
-                className="absolute -left-3 top-2 h-1 w-1 bg-black"
-                animate={{
-                  y:
-                    currentSlideMonthIndex *
-                    (monthContainerBound.height / activitiesByMonth.length),
-                }}
-              />
-              {activitiesByMonth.map((monthActivity, index) => (
-                <motion.div
-                  className="text-body uppercase"
-                  key={index}
-                  animate={{
-                    opacity:
-                      currentSlideMonth === monthActivity.month ? 1 : 0.5,
-                  }}
-                >
-                  {monthActivity.month}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </Sticky>
-      </div>
-      <div
-        className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3"
-        style={{
-          height: galleryTotalScrollHeight,
-        }}
-      >
-        <Sticky top={"20vh"}>
-          <div
-            className="relative"
-            style={{ height: windowDim.height * perItemScrollVH }}
-          >
-            {allMedia.map((media, index) => {
-              return (
-                <MediaSlide
-                  src={media.src}
-                  currentSlideIndex={currentSlideIndexClamped}
-                  slideCount={allMedia.length}
-                  slideIndex={index}
-                  key={index}
-                />
-              );
-            })}
-          </div>
-        </Sticky>
-      </div>
-      <motion.div
-        className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8"
-        animate={{
-          opacity: isSectionActive ? 1 : 0,
-        }}
-      >
-        {isDesktopView && (
-          <Sticky top={"40vh"}>
-            <SlideInfo slide={allMedia[currentSlideIndexClamped]} />
+    <>
+      {!isDesktopView && (
+        <div className="h-0">
+          <Sticky top={"10vh"}>
+            <motion.div
+              className="flex h-0 flex-col text-micro-mobile"
+              animate={{
+                opacity:
+                  currentSlideIndex >= 0 && currentSlideIndex < allMedia.length
+                    ? 1
+                    : 0,
+              }}
+            >
+              <div className="mx-auto mb-1 w-2/4 flex-shrink-0 text-center text-body-mobile">
+                {allMedia[currentSlideIndexClamped].header}
+              </div>
+              <div className="mx-auto mb-2 w-2/4 text-center opacity-50">
+                {allMedia[currentSlideIndexClamped].description}
+              </div>
+              <div className="mx-auto w-2/4 text-center capitalize opacity-50">
+                {allMedia[currentSlideIndexClamped].month}{" "}
+                {allMedia[currentSlideIndexClamped].day}
+              </div>
+            </motion.div>
           </Sticky>
-        )}
-      </motion.div>
-    </MainGrid>
+        </div>
+      )}
+      <MainGrid ref={containerRef} className="relative">
+        <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
+          <Sticky top={"20vh"} fadeOut>
+            <div
+              className="pt-[20vh]"
+              style={{ height: windowDim.height * perItemScrollVH }}
+            >
+              <div className="mb-4">2023</div>
+              <div className="relative flex flex-col" ref={monthContainerRef}>
+                <motion.div
+                  className="absolute -left-3 top-2 h-1 w-1 bg-black"
+                  animate={{
+                    y:
+                      currentSlideMonthIndex *
+                      (monthContainerBound.height / activitiesByMonth.length),
+                  }}
+                />
+                {activitiesByMonth.map((monthActivity, index) => (
+                  <motion.div
+                    className="text-body uppercase"
+                    key={index}
+                    animate={{
+                      opacity:
+                        currentSlideMonth === monthActivity.month ? 1 : 0.5,
+                    }}
+                  >
+                    {monthActivity.month}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </Sticky>
+        </div>
+        <div
+          className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3"
+          style={{
+            height: galleryTotalScrollHeight,
+          }}
+        >
+          <Sticky top={"20vh"}>
+            <div
+              className="relative"
+              style={{ height: windowDim.height * perItemScrollVH }}
+            >
+              {allMedia.map((media, index) => {
+                return (
+                  <MediaSlide
+                    src={media.src}
+                    currentSlideIndex={currentSlideIndexClamped}
+                    slideCount={allMedia.length}
+                    slideIndex={index}
+                    key={index}
+                  />
+                );
+              })}
+            </div>
+          </Sticky>
+        </div>
+        <motion.div
+          className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8"
+          animate={{
+            opacity: isSectionActive ? 1 : 0,
+          }}
+        >
+          {isDesktopView && (
+            <Sticky top={"40vh"}>
+              <SlideInfo slide={allMedia[currentSlideIndexClamped]} />
+            </Sticky>
+          )}
+        </motion.div>
+      </MainGrid>
+    </>
   );
 };
 
