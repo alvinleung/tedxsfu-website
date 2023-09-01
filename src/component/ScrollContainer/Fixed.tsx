@@ -38,8 +38,6 @@ const Fixed = ({
   const windowDim = useWindowDimension();
   const isPresent = useIsPresent();
 
-  console.log(isTransitionDone);
-
   return (
     <>
       {

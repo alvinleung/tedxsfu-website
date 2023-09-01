@@ -16,6 +16,8 @@ import {
   useState,
 } from "react";
 import { useTransitionContext } from "../transition/TransitionEffect";
+import { useFollowMotion } from "@/hooks/useFollowingMotion";
+import { useEventListener } from "usehooks-ts";
 
 type SmoothScrollParams = {
   container: MutableRefObject<HTMLDivElement>;
@@ -62,42 +64,29 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
     // refreshDocumentMeasurement();
   }, [isUsingSmoothScroll]);
 
+  useEventListener("wheel", () => {
+    setIsUsingSmoothScroll(true);
+  });
+  useEventListener("pointerdown", (e: PointerEvent) => {
+    if (e.pointerType === "mouse") {
+      setIsUsingSmoothScroll(true);
+      return;
+    }
+    // for touch or pen
+    setIsUsingSmoothScroll(false);
+  });
+  const cancelTab = (e: KeyboardEvent) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+    }
+  };
+  useEventListener("keyup", cancelTab);
+  useEventListener("keydown", cancelTab);
   useLayoutEffect(() => {
     if (isMobile()) {
       setIsUsingSmoothScroll(false);
     }
-
-    const handleWheel = () => {
-      setIsUsingSmoothScroll(true);
-    };
-
-    const handlePointerDown = (e: PointerEvent) => {
-      if (e.pointerType === "mouse") {
-        setIsUsingSmoothScroll(true);
-        return;
-      }
-      // for touch or pen
-      setIsUsingSmoothScroll(false);
-    };
-
-    window.addEventListener("wheel", handleWheel);
-    window.addEventListener("pointerdown", handlePointerDown);
-
-    const cancelTab = (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-      }
-    };
-    window.addEventListener("keyup", cancelTab);
-    window.addEventListener("keydown", cancelTab);
-
-    return () => {
-      window.removeEventListener("pointerdown", handlePointerDown);
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("keyup", cancelTab);
-      window.removeEventListener("keydown", cancelTab);
-    };
   }, []);
 
   useEffect(() => {
@@ -111,8 +100,6 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
         targetScrollY.get() + clamp(-maxScroll, maxScroll, e.deltaY),
       );
       targetScrollY.set(newScrollValue);
-
-      beginFrameUpdate();
     };
 
     // HACK: small delay before scroll to prevent
@@ -122,49 +109,19 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
       100,
     );
 
-    let shouldUpdate = false;
-    let animationFrame: number;
-    const stopThreshold = 0.1;
-
-    function beginFrameUpdate() {
-      if (shouldUpdate) return;
-      shouldUpdate = true;
-      animationFrame = requestAnimationFrame(performFrameUpdate);
-    }
-    function performFrameUpdate() {
-      const currentScrollY = scrollY.get();
-      const offset = (targetScrollY.get() - currentScrollY) * 0.15;
-
-      if (Math.abs(offset) > stopThreshold) {
-        const newValue = clamp(
-          0,
-          scrollHeight - windowDimension.height + 100,
-          currentScrollY + offset,
-        );
-
-        scrollY.set(newValue);
-        animationFrame = requestAnimationFrame(performFrameUpdate);
-        return;
-      }
-
-      shouldUpdate = false;
-      scrollY.set(targetScrollY.get());
-    }
-
-    beginFrameUpdate();
-
     return () => {
       window.removeEventListener("wheel", handleMouseWheel);
-      cancelAnimationFrame(animationFrame);
       clearTimeout(timer);
     };
   }, [scrollHeight, windowDimension, isUsingSmoothScroll, canScroll]);
 
-  const callback = useCallback(() => {}, []);
-
-  useMotionValueEvent(targetScrollY, "change", (v) => {});
+  useFollowMotion({
+    target: targetScrollY,
+    current: scrollY,
+  });
 
   // calculating the scrollheight
+
   useEffect(() => {
     const cleanup = scrollY.on("change", (v) => {
       scrollYProgress.set(v / (scrollHeight - windowDimension.height));
