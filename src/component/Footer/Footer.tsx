@@ -37,17 +37,14 @@ const Footer = ({
 }: Props) => {
   const { isOverscrollComplete, isOverscrollStarted, overscrollProgress } =
     useOverscroll(OverscrollDirection.DOWN, 100);
-  const { scrollHeight, scrollY } = useContainerScroll();
-  const windowDim = useWindowDimension();
+  const { scrollEnd, scrollY } = useContainerScroll();
 
-  const offset = useTransform(overscrollProgress, [0, 1], [0, 20]);
+  const windowDim = useWindowDimension();
+  const offset = useTransform(overscrollProgress, [0, 1], [0, 15]);
 
   const exitTransitionProgress = useTransform(
     scrollY,
-    [
-      scrollHeight - windowDim.height - windowDim.height,
-      scrollHeight - windowDim.height,
-    ],
+    [scrollEnd - windowDim.height, scrollEnd],
     [0, 1],
   );
 
@@ -57,7 +54,6 @@ const Footer = ({
     [0.7, 1],
     [1, 0.1],
   );
-
   const bgOverscrollOffset = useTransform(
     exitTransitionProgress,
     [0, 1],
@@ -75,8 +71,8 @@ const Footer = ({
   // beginPageTransition
   const beginPageTransition = () => {
     const bounds = transitionImageContainerRef.current.getBoundingClientRect();
-    // transitionInitialY.current = ;
     setTransitionInitialY(bounds.top - windowDim.height * 0.2);
+    // only change page after updating the exit transition value
     requestAnimationFrame(() => router.push(href));
   };
 
@@ -86,9 +82,7 @@ const Footer = ({
     }
   }, [isOverscrollComplete, windowDim.height]);
 
-  const handleClick = () => {
-    beginPageTransition();
-  };
+  const handleClick = () => beginPageTransition();
 
   const isDarkMode = mode === "dark";
 
