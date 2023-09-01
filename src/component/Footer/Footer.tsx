@@ -196,7 +196,7 @@ const Footer = ({
         />
 
         <motion.div
-          className="absolute bottom-0 z-0 h-full w-full overflow-hidden"
+          className="absolute bottom-0 z-0 h-full w-full overflow-hidden bg-black"
           exit={{
             height: windowDim.height,
             y: -transitionInitialY,
@@ -214,7 +214,7 @@ const Footer = ({
               scale: bgScale,
             }}
             animate={{
-              opacity: isHovering || isOverscrollStarted ? 1 : 0.9,
+              opacity: isHovering || isOverscrollStarted ? 1 : 0.6,
             }}
             exit={{
               scale: 1.125,

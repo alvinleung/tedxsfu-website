@@ -1,8 +1,15 @@
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { isMobile } from "@/utils/isMobile";
-import { clamp, useIsPresent, useMotionValue, useScroll } from "framer-motion";
+import {
+  clamp,
+  useIsPresent,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 import {
   MutableRefObject,
+  useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
@@ -25,7 +32,7 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
   const [scrollWidth, setScrollWidth] = useState(0);
   const [scrollHeight, setScrollHeight] = useState(0);
 
-  const targetScrollY = useRef(0);
+  const targetScrollY = useMotionValue(0);
 
   const refreshDocumentMeasurement = () => {
     // recalculate the document measurement here
@@ -35,7 +42,7 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
   useEffect(() => refreshDocumentMeasurement(), [windowDimension]);
 
   const scrollTo = (target: number) => {
-    targetScrollY.current = target;
+    targetScrollY.set(target);
     scrollY.set(target);
   };
 
@@ -49,8 +56,8 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
     }
 
     console.log("using smooth scroll");
-    targetScrollY.current = 0;
-    scrollY.set(targetScrollY.current);
+    targetScrollY.set(0);
+    scrollY.set(targetScrollY.get());
     container.current.scrollTop = 0;
     // refreshDocumentMeasurement();
   }, [isUsingSmoothScroll]);
@@ -101,9 +108,9 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
       const newScrollValue = clamp(
         0,
         scrollHeight - windowDimension.height,
-        targetScrollY.current + clamp(-maxScroll, maxScroll, e.deltaY),
+        targetScrollY.get() + clamp(-maxScroll, maxScroll, e.deltaY),
       );
-      targetScrollY.current = newScrollValue;
+      targetScrollY.set(newScrollValue);
 
       beginFrameUpdate();
     };
@@ -126,16 +133,22 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
     }
     function performFrameUpdate() {
       const currentScrollY = scrollY.get();
-      const offset = (targetScrollY.current - currentScrollY) * 0.15;
+      const offset = (targetScrollY.get() - currentScrollY) * 0.15;
 
       if (Math.abs(offset) > stopThreshold) {
-        scrollY.set(currentScrollY + offset);
+        const newValue = clamp(
+          0,
+          scrollHeight - windowDimension.height + 100,
+          currentScrollY + offset,
+        );
+
+        scrollY.set(newValue);
         animationFrame = requestAnimationFrame(performFrameUpdate);
         return;
       }
 
       shouldUpdate = false;
-      scrollY.set(targetScrollY.current);
+      scrollY.set(targetScrollY.get());
     }
 
     beginFrameUpdate();
@@ -146,6 +159,10 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
       clearTimeout(timer);
     };
   }, [scrollHeight, windowDimension, isUsingSmoothScroll, canScroll]);
+
+  const callback = useCallback(() => {}, []);
+
+  useMotionValueEvent(targetScrollY, "change", (v) => {});
 
   // calculating the scrollheight
   useEffect(() => {
