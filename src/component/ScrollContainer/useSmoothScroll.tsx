@@ -142,6 +142,7 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
     scrollYProgress: isUsingSmoothScroll
       ? scrollYProgress
       : framerMotionScroll.scrollYProgress,
+    targetScrollY,
     isUsingSmoothScroll,
     scrollHeight,
     scrollWidth,

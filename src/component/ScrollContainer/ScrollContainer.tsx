@@ -18,6 +18,7 @@ import {
   useContext,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -39,8 +40,10 @@ export enum ScrollDirection {
 interface ScrollContextInfo {
   scrollWidth: number;
   scrollHeight: number;
+  scrollEnd: number;
   scrollX: MotionValue;
   scrollY: MotionValue;
+  targetScrollY: MotionValue;
   scrollXProgress: MotionValue;
   scrollYProgress: MotionValue;
   documentOffsetY: MotionValue;
@@ -55,8 +58,10 @@ interface ScrollContextInfo {
 export const ScrollContext = createContext<ScrollContextInfo>({
   scrollWidth: 0,
   scrollHeight: 0,
+  scrollEnd: 0,
   scrollX: new MotionValue(),
   scrollY: new MotionValue(),
+  targetScrollY: new MotionValue(),
   scrollXProgress: new MotionValue(),
   scrollYProgress: new MotionValue(),
   documentOffsetY: new MotionValue(),
@@ -87,6 +92,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     scrollHeight,
     refreshDocumentMeasurement,
     scrollTo,
+    targetScrollY,
   } = useSmoothScroll({
     container: scrollContainerRef,
     canScroll: isPresent,
@@ -122,6 +128,11 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   }, [scrollDirection]);
 
   const windowDim = useWindowDimension();
+
+  const scrollEnd = useMemo(
+    () => scrollHeight - windowDim.height,
+    [scrollHeight, windowDim.height],
+  );
 
   const scrollBarY = useTransform(
     scrollY,
@@ -161,8 +172,10 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
       value={{
         scrollWidth,
         scrollHeight,
+        scrollEnd,
         scrollX,
         scrollY,
+        targetScrollY,
         scrollXProgress,
         scrollYProgress,
         setCanScroll,

@@ -6,6 +6,7 @@ import {
 } from "../../component/ScrollContainer/ScrollContainer";
 import { clamp } from "../../utils/clamp";
 import debounce from "../../utils/debounce";
+import { useWindowDimension } from "../useWindowDimension";
 
 export enum OverscrollDirection {
   UP,
@@ -18,7 +19,9 @@ export function useOverscroll(
   direction: OverscrollDirection = OverscrollDirection.UP,
   maxDist = 200,
 ) {
-  const { scrollYProgress, scrollContainerRef } = useContainerScroll();
+  const { scrollContainerRef, targetScrollY, scrollEnd } = useContainerScroll();
+  const scrollYProgress = useTransform(targetScrollY, [0, scrollEnd], [0, 1]);
+
   const overScroll = useSpring(0, { stiffness: 1500, damping: 200 });
   const overscrollProgress = useTransform(overScroll, [0, maxDist], [0, 1]);
 
