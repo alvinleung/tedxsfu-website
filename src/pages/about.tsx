@@ -216,7 +216,6 @@ const About = (props: Props) => {
           targetPageHref={"/"}
           bgImageSrc={"/about/about-2.jpg"}
           mode="light"
-          arrowDirection="reverse"
           targetPageName={"Event Info"}
         />
       </div>
