@@ -212,11 +212,12 @@ const About = (props: Props) => {
           </div>
         </SectionLayout>
         <Footer
-          pageNumber="2"
+          pageNumber="1"
           targetPageHref={"/"}
-          bgImageSrc={"/about/about-2.jpg"}
+          bgSrc={"./website-transition-graphic.webm"}
           mode="light"
           targetPageName={"Event Info"}
+          bgType={"video"}
         />
       </div>
     </>

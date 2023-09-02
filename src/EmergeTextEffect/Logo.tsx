@@ -17,10 +17,14 @@ import {
   useTransform,
   animate,
   cubicBezier,
+  useAnimate,
+  useAnimation,
 } from "framer-motion";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 
-type Props = {};
+type Props = {
+  isEnterAnimationDone: boolean;
+};
 
 const distSq = (x1: number, y1: number, x2: number, y2: number) => {
   return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
@@ -32,21 +36,23 @@ const clamp = (num: number, min: number, max: number) =>
 const LogoAnimationContext = createContext<any>({
   touchAnimProgress: new MotionValue(),
   animProgress: new MotionValue(),
+  isEnterAnimationDone: false,
 });
 
 const AnimatedPath = (props: any) => {
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
 
-  const { touchAnimProgress, animProgress } = useContext(LogoAnimationContext);
+  const { touchAnimProgress, animProgress, isEnterAnimationDone } =
+    useContext(LogoAnimationContext);
 
-  const [pathRef, bounds] = useBoundingBox([]);
+  const [pathRef, bounds] = useBoundingBox([isEnterAnimationDone]);
   const origin = useMemo(() => {
     return {
       x: bounds.x + bounds.width / 2,
       y: bounds.y + bounds.height / 2,
     };
-  }, [bounds]);
+  }, [bounds, isEnterAnimationDone]);
 
   const cursorProgress = useMotionValue(0);
   const lastClampProgress = useRef(0);
@@ -76,7 +82,7 @@ const AnimatedPath = (props: any) => {
       // reset to normal when mouse is not moving
       animate(cursorProgress, 0, { duration: 4, ease: [0.22, 1, 0.36, 1] });
     }, 100);
-  }, [origin, mousePos, viewport]);
+  }, [origin, mousePos, viewport, isEnterAnimationDone]);
 
   const animatedProgress = useTransform(
     animProgress,
@@ -84,10 +90,10 @@ const AnimatedPath = (props: any) => {
       (Math.sin(
         val * 0.3 +
           (bounds.y * 3) / viewport.width +
-          (bounds.x * 5) / viewport.width
+          (bounds.x * 5) / viewport.width,
       ) +
         1) /
-      2
+      2,
   );
 
   const animtedProgressEase = useTransform(animatedProgress, [0, 1], [1, 0], {
@@ -98,7 +104,7 @@ const AnimatedPath = (props: any) => {
     [animtedProgressEase, cursorProgress, touchAnimProgress],
     ([val, cursor, touch]: any) => {
       return (clamp(cursor + val * 0.1, 0, 1) + touch) * 10 + "px";
-    }
+    },
   );
 
   return (
@@ -111,12 +117,14 @@ const AnimatedPath = (props: any) => {
   );
 };
 
-const Logo = (props: Props) => {
+const Logo = ({ isEnterAnimationDone }: Props) => {
   const animProgress = useMotionValue(0);
   const touchAnimProgress = useMotionValue(0);
   // const viewport = useWindowDimension();
 
   useEffect(() => {
+    if (!isEnterAnimationDone) return;
+
     let prevTouch = 0;
     let touchDelta = 0;
 
@@ -130,7 +138,7 @@ const Logo = (props: Props) => {
       const newProgress = clamp(
         touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)),
         0,
-        1
+        1,
       );
       // touchAnimProgress.set(newProgress);
 
@@ -178,12 +186,14 @@ const Logo = (props: Props) => {
       window.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animFrame);
     };
-  }, []);
+  }, [isEnterAnimationDone]);
 
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   return (
-    <LogoAnimationContext.Provider value={{ animProgress, touchAnimProgress }}>
+    <LogoAnimationContext.Provider
+      value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
+    >
       <svg
         style={
           isBiggerThan2xl

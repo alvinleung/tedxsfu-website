@@ -58,26 +58,7 @@ const DirectorTeamDisplay = (props: Props) => {
         marginBottom: `${itemScrollHeightVW}vw`,
       }}
     >
-      <div className="col-span-full col-start-1 flex flex-col md:col-span-3 md:col-start-3 2xl:col-span-4 2xl:col-start-4">
-        {directors.map((director, i) => {
-          const isOdd = i % 2 === 0;
-          const isCurrentDirector = currentDirector === i;
-
-          const imageWidth = `${itemScrollHeightVW * 2.1}vw`;
-          return (
-            <DirectorIllustration
-              key={i}
-              isOdd={isOdd}
-              isCurrentDirector={isCurrentDirector}
-              director={director}
-              imageWidth={imageWidth}
-              itemScrollHeightVW={itemScrollHeightVW}
-              onDirectorEnter={() => setCurrentDirector(i)}
-            />
-          );
-        })}
-      </div>
-      <div className="absolute md:col-span-1 md:col-start-1 lg:col-span-1 lg:col-start-2 2xl:col-span-1 2xl:col-start-2">
+      <div className="md:col-span-1 md:col-start-1 lg:col-span-1 lg:col-start-2 2xl:col-span-1 2xl:col-start-2">
         <div className="mt-[15vw]">
           {directors.map((director, i) => {
             return (
@@ -112,6 +93,25 @@ const DirectorTeamDisplay = (props: Props) => {
             );
           })}{" "}
         </div>
+      </div>
+      <div className="col-span-full col-start-1 flex flex-col md:col-span-3 md:col-start-3 2xl:col-span-4 2xl:col-start-4">
+        {directors.map((director, i) => {
+          const isOdd = i % 2 === 0;
+          const isCurrentDirector = currentDirector === i;
+
+          const imageWidth = `${itemScrollHeightVW * 2.1}vw`;
+          return (
+            <DirectorIllustration
+              key={i}
+              isOdd={isOdd}
+              isCurrentDirector={isCurrentDirector}
+              director={director}
+              imageWidth={imageWidth}
+              itemScrollHeightVW={itemScrollHeightVW}
+              onDirectorEnter={() => setCurrentDirector(i)}
+            />
+          );
+        })}
       </div>
     </MainGrid>
   );

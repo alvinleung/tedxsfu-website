@@ -24,20 +24,22 @@ type Props = {
   mode?: "dark" | "light";
   targetPageName: string;
   targetPageHref: string;
-  bgImageSrc: string;
+  bgSrc: string;
+  bgType: "video" | "image";
   pageNumber: string;
 };
 
 const Footer = ({
   mode = "dark",
   targetPageHref: href,
-  bgImageSrc,
+  bgSrc,
+  bgType = "image",
   targetPageName,
   pageNumber,
 }: Props) => {
   const { isOverscrollComplete, isOverscrollStarted, overscrollProgress } =
     useOverscroll(OverscrollDirection.DOWN, 100);
-  const { scrollEnd, scrollY } = useContainerScroll();
+  const { scrollEnd, scrollY, scrollTo } = useContainerScroll();
 
   const windowDim = useWindowDimension();
   const offset = useTransform(overscrollProgress, [0, 1], [0, 15]);
@@ -72,6 +74,7 @@ const Footer = ({
   const beginPageTransition = () => {
     const bounds = transitionImageContainerRef.current.getBoundingClientRect();
     setTransitionInitialY(bounds.top - windowDim.height * 0.2);
+
     // only change page after updating the exit transition value
     requestAnimationFrame(() => router.push(href));
   };
@@ -220,13 +223,26 @@ const Footer = ({
               },
             }}
           >
-            <Image
-              src={bgImageSrc}
-              className="h-[100dvh] object-cover"
-              width={2560}
-              height={1440}
-              alt="Picture of the author"
-            />
+            {bgType === "image" && (
+              <Image
+                src={bgSrc}
+                className="h-[100dvh] object-cover"
+                width={2560}
+                height={1440}
+                alt="Picture of the author"
+              />
+            )}
+            {bgType === "video" && (
+              <video
+                src={bgSrc}
+                className="h-[100dvh] object-cover"
+                width={2560}
+                height={1440}
+                muted
+                loop
+                autoPlay
+              />
+            )}
           </motion.div>
         </motion.div>
       </MainGrid>
