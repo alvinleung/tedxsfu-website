@@ -1,12 +1,13 @@
 import Logo from "@/EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const LandingHero = () => {
   const viewport = useWindowDimension();
-
   const anim = useAnimation();
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
+
   useEffect(() => {
     // logo flashing
     const totalFlashingFrame = 5;
@@ -26,6 +27,7 @@ export const LandingHero = () => {
           scale: 1,
         });
         clearTimeout(timeout);
+        setIsAnimationDone(true);
         return;
       }
 
@@ -68,7 +70,7 @@ export const LandingHero = () => {
         >
           November 11 {viewport.width >= 1024 && <br />}2023
         </a>
-        <Logo />
+        <Logo isEnterAnimationDone={isAnimationDone} />
         <a
           className={`pointer-events-auto text-center uppercase leading-tight lg:-translate-x-28`}
           href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
