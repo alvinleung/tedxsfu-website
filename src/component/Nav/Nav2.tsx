@@ -135,14 +135,15 @@ const Nav = ({ children }: Props) => {
 
        
           <motion.a 
-            className="text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-fit md:w-full sm:max-w-[9rem] w-[calc(2*(100vw-5rem)/4)]
+            className="text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-12 flex items-center justify-center
+            md:w-full sm:max-w-[9rem] w-[calc(2*(100vw-5rem)/4)]
             max-md:bottom-4 max-md:left-4
-            fixed md:right-16 border border-black border-opacity-25 z-50
+            fixed md:right-[4.5rem] border border-black border-opacity-25 z-50
             ">
             Buy tickets
           </motion.a>
           <motion.button 
-            className="col-start-4 col-span-1 flex justify-center items-center h-10 py-3 border border-white border-opacity-25 rounded-full justify-self-end w-full max-w-[6rem] md:max-w-[2.5rem] border-opacity-50
+            className="col-start-4 col-span-1 flex justify-center items-center h-12 py-3 border border-white border-opacity-25 rounded-full justify-self-end w-full max-w-[6rem] md:max-w-[3rem] border-opacity-50
             
             fixed right-4 max-md:bottom-4 mix-blend-exclusion z-50
             "
