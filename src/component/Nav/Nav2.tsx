@@ -35,24 +35,17 @@ const Nav = ({ children }: Props) => {
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const toggleOpen = () => {
     setOpen(!open);
   }
 
-  const [selected, setSelected] = useState("");
-
-  useEffect(() => {
-    console.log(selected);
-  },[selected])
-
+  const [selected, setSelected] = useState(path.pathname);
+  
   return (
     <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="top-0 left-0 right-0 px-4 pt-4 h-12 flex justify-between md:grid grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
-        animate={{
-          background: useBreakpoint(breakpoints["2xl"]) ? "transparent" : (open ? "linear-gradient(#000000FF, #00000000)" : "linear-gradient(#00000000, #00000000)")
-        }}
+        className="px-4 pt-4 h-12 flex justify-between md:grid grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
       >
             <motion.a
               key="logo"
@@ -99,7 +92,25 @@ const Nav = ({ children }: Props) => {
               </motion.svg>
             </motion.a>
 
+
+
         <AnimatePresence>
+          {
+            open && 
+            <motion.div className="fixed z-[45] top-0 left-0 right-0 h-16 bg-gradient-to-b from-black to-transparent"
+            initial={{
+              opacity: 0
+            }}
+            animate={{
+              opacity: 1
+            }}
+            exit={{
+              opacity: 0
+            }}
+            >
+
+            </motion.div>
+          }
           {
           open &&  
           <motion.div
@@ -117,13 +128,17 @@ const Nav = ({ children }: Props) => {
             }}
           >
             <motion.a
-            className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
+              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
+              target="_blank"
+              className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
             >
               <motion.span className="hidden xs:block">Saturday, <br className="hidden md:block"/>Nov 11, 2023</motion.span>
               <motion.span className="xs:hidden">Sat, Nov 11, 2023</motion.span>
               <motion.span className="hidden md:block opacity-50">Date</motion.span>
             </motion.a>
             <motion.a
+              href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
+              target="_blank"
               className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
             >
               <motion.span className="hidden xs:block">The Centre for <br className="hidden md:block"/>Performing Arts</motion.span>
@@ -169,6 +184,52 @@ const Nav = ({ children }: Props) => {
           opacity: 0,
         }}
         >
+         <motion.div className="fixed -z-10">
+            <AnimatePresence>
+              {selected === "/about" ?
+              <motion.div
+                initial={{
+                  opacity: 0
+                }}
+                animate={{
+                  opacity: 1
+                }}
+                exit={{
+                  opacity: 0
+                }}
+              >
+                <Image
+                  src="/about/about-2.jpg"
+                  className="h-[100dvh] object-cover"
+                  width={2560}
+                  height={1440}
+                  alt="TEDxSFU conference"
+                />
+              </motion.div>
+
+              :
+
+              <motion.video
+                src="./website-transition-graphic.webm"
+                aria-description="video"
+                className="h-[100dvh] object-cover"
+                width={2560}
+                height={1440}
+                muted
+                loop
+                autoPlay
+                initial={{
+                  opacity: 0
+                }}
+                animate={{
+                  opacity: 1
+                }}
+                exit={{
+                  opacity: 0
+                }}
+              />}
+            </AnimatePresence>
+         </motion.div>
           <MainGrid className="pt-32 2xl:pt-4">
               <motion.a href="/"
                 className={`col-span-full md:col-span-2 2xl:col-start-2 text-header-mobile max-md:grid grid-cols-4 gap-x-4 h-[22.5dvh] justify-between max-md:border-t border-white max-md:pt-2
@@ -180,7 +241,7 @@ const Nav = ({ children }: Props) => {
                   opacity: 1,
                 }}
                 onHoverStart={e => {setSelected("/")}}
-                onHoverEnd={e => {setSelected("")}}
+                onHoverEnd={e => {setSelected(path.pathname)}}
                 >
                 <span className="text-body-mobile md:text-header">1</span>
                 <div className="col-span-3">
@@ -198,7 +259,7 @@ const Nav = ({ children }: Props) => {
                   opacity: 1,
                 }}
                 onHoverStart={e => {setSelected("/about")}}
-                onHoverEnd={e => {setSelected("")}}
+                onHoverEnd={e => {setSelected(path.pathname)}}
                 >
                 <span className="text-body-mobile md:text-header">2</span>
                 <div className="col-span-3">
