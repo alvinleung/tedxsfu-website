@@ -35,7 +35,7 @@ const Nav = ({ children }: Props) => {
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const toggleOpen = () => {
     setOpen(!open);
   }
@@ -67,7 +67,7 @@ const Nav = ({ children }: Props) => {
               <motion.svg
                 key="SFU"
                 viewBox="0 0 375 151"
-                className="z-50 md:fixed md:left-[6rem] md:top-4 md:h-6 mix-blend-exclusion"
+                className="z-50 fixed left-[6rem] top-4 h-6 mix-blend-exclusion"
               >
                 <motion.path
                   fill="#FFFFFF"
@@ -87,7 +87,7 @@ const Nav = ({ children }: Props) => {
               <motion.svg
                 key="TEDx"
                 viewBox="0 0 501 151"
-                className="z-50 md:fixed md:left-4 md:top-4 md:h-6"
+                className="z-50 fixed left-4 top-4 h-6"
               >
                 <motion.path
                   fill="#EB0028"
@@ -104,7 +104,8 @@ const Nav = ({ children }: Props) => {
           open &&  
           <motion.div
             key="details"
-            className={`max-md:flex flex-col md:flex-row md:gap-x-4 md:col-span-2 md:grid md:grid-cols-2 lg:col-start-4 2xl:col-start-6 max-md:items-end max-md:pr-1 max-md:border-r max-md:border-ted ${!open && "hidden"}`}
+            className={`fixed z-50 top-4 max-md:right-4 md:left-[calc((2*(100vw-6rem)/5)+3rem)] lg:left-[calc((2*(100vw-7rem)/6)+3rem)] 2xl:left-[calc((5*(100vw-9rem)/8)+6rem)]
+            max-md:flex flex-col md:flex-row md:gap-x-4 md:col-span-2 md:grid md:grid-cols-2 lg:col-start-4 2xl:col-start-6 max-md:items-end max-md:pr-1 max-md:border-r max-md:border-ted ${!open && "hidden"}`}
             initial={{
               opacity: 0,
             }}
