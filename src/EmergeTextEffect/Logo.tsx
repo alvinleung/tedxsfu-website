@@ -17,6 +17,8 @@ import {
   useTransform,
   animate,
   cubicBezier,
+  useAnimate,
+  useAnimation,
 } from "framer-motion";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 
@@ -84,10 +86,10 @@ const AnimatedPath = (props: any) => {
       (Math.sin(
         val * 0.3 +
           (bounds.y * 3) / viewport.width +
-          (bounds.x * 5) / viewport.width
+          (bounds.x * 5) / viewport.width,
       ) +
         1) /
-      2
+      2,
   );
 
   const animtedProgressEase = useTransform(animatedProgress, [0, 1], [1, 0], {
@@ -98,7 +100,7 @@ const AnimatedPath = (props: any) => {
     [animtedProgressEase, cursorProgress, touchAnimProgress],
     ([val, cursor, touch]: any) => {
       return (clamp(cursor + val * 0.1, 0, 1) + touch) * 10 + "px";
-    }
+    },
   );
 
   return (
@@ -130,7 +132,7 @@ const Logo = (props: Props) => {
       const newProgress = clamp(
         touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)),
         0,
-        1
+        1,
       );
       // touchAnimProgress.set(newProgress);
 

@@ -24,14 +24,16 @@ type Props = {
   mode?: "dark" | "light";
   targetPageName: string;
   targetPageHref: string;
-  bgImageSrc: string;
+  bgSrc: string;
+  bgType: "video" | "image";
   pageNumber: string;
 };
 
 const Footer = ({
   mode = "dark",
   targetPageHref: href,
-  bgImageSrc,
+  bgSrc,
+  bgType = "image",
   targetPageName,
   pageNumber,
 }: Props) => {
@@ -221,13 +223,26 @@ const Footer = ({
               },
             }}
           >
-            <Image
-              src={bgImageSrc}
-              className="h-[100dvh] object-cover"
-              width={2560}
-              height={1440}
-              alt="Picture of the author"
-            />
+            {bgType === "image" && (
+              <Image
+                src={bgSrc}
+                className="h-[100dvh] object-cover"
+                width={2560}
+                height={1440}
+                alt="Picture of the author"
+              />
+            )}
+            {bgType === "video" && (
+              <video
+                src={bgSrc}
+                className="h-[100dvh] object-cover"
+                width={2560}
+                height={1440}
+                muted
+                loop
+                autoPlay
+              />
+            )}
           </motion.div>
         </motion.div>
       </MainGrid>
