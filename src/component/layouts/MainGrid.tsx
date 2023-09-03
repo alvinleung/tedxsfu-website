@@ -6,7 +6,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 const MainGrid = React.forwardRef((props: Props, ref) => {
   const gridStyling =
-    "grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-4";
+    "grid grid-cols-4 md:grid-cols-6 2xl:grid-cols-8 gap-4 md:gap-4";
   const combined = `${props.className} ${gridStyling}`;
 
   return (

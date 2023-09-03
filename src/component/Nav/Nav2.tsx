@@ -35,7 +35,7 @@ const Nav = ({ children }: Props) => {
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const toggleOpen = () => {
     setOpen(!open);
   }
@@ -45,7 +45,7 @@ const Nav = ({ children }: Props) => {
   return (
     <NavContext.Provider value={{ setScrollState }}>
       <motion.nav
-        className="px-4 pt-4 h-12 flex justify-between md:grid grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
+        className="px-4 pt-4 h-12 flex justify-between grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
       >
             <motion.a
               key="logo"
@@ -112,11 +112,30 @@ const Nav = ({ children }: Props) => {
             </motion.div>
           }
           {
+            open && 
+            <motion.div className="fixed z-[45] bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black via-black to-transparent"
+            initial={{
+              opacity: 0
+            }}
+            animate={{
+              opacity: 1
+            }}
+            exit={{
+              opacity: 0
+            }}
+            >
+
+            </motion.div>
+          }
+          {
           open &&  
           <motion.div
             key="details"
-            className={`fixed z-50 top-4 max-md:right-4 md:left-[calc((2*(100vw-6rem)/5)+3rem)] lg:left-[calc((2*(100vw-7rem)/6)+3rem)] 2xl:left-[calc((5*(100vw-9rem)/8)+6rem)]
-            max-md:flex flex-col md:flex-row md:gap-x-4 md:col-span-2 md:grid md:grid-cols-2 lg:col-start-4 2xl:col-start-6 max-md:items-end max-md:pr-1 max-md:border-r max-md:border-ted ${!open && "hidden"}`}
+            className={`fixed z-50 
+            max-md:bottom-4 md:top-4
+            w-full max-w-[calc((2*(100vw-5rem)/4)+1rem)] md:max-w-[calc((2*(100vw-7rem)/6)+1rem)] 2xl:max-w-[calc((2*(100vw-9rem)/8)+1rem)] 
+            left-4 md:left-[calc((2*(100vw-7rem)/6)+3rem)] 2xl:left-[calc((2*(100vw-9rem)/8)+3rem)]
+            max-md:flex flex-col xs:grid xs:gap-x-4 md:col-span-2 xs:grid-cols-2 lg:col-start-4 2xl:col-start-6`}
             initial={{
               opacity: 0,
             }}
@@ -130,41 +149,42 @@ const Nav = ({ children }: Props) => {
             <motion.a
               href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
               target="_blank"
-              className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
+              className="w-fit text-micro-mobile md:text-micro flex flex-col"
             >
-              <motion.span className="hidden xs:block">Saturday, <br className="hidden md:block"/>Nov 11, 2023</motion.span>
+              <motion.span className="hidden xs:block">Saturday, <br className="hidden sm:block"/>Nov 11, 2023</motion.span>
               <motion.span className="xs:hidden">Sat, Nov 11, 2023</motion.span>
-              <motion.span className="hidden md:block opacity-50">Date</motion.span>
+              <motion.span className="hidden xs:block opacity-50 gap-x-4">Calendar</motion.span>
             </motion.a>
             <motion.a
               href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
               target="_blank"
-              className="md:border-l md:border-ted md:pl-1 w-fit text-micro-mobile max-xs:text-right flex-shrink-0 flex flex-col"
+              className="w-fit text-micro-mobile flex flex-col"
             >
-              <motion.span className="hidden xs:block">The Centre for <br className="hidden md:block"/>Performing Arts</motion.span>
-              <motion.span className="xs:hidden">The Centre Vancouver</motion.span>
-             <motion.span className=" hidden md:block opacity-50">Venue</motion.span>
+              <motion.span className="hidden sm:block">The Centre for <br className="hidden sm:block"/>Performing Arts</motion.span>
+              <motion.span className="sm:hidden">The Centre Vancouver</motion.span>
+             <motion.span className=" hidden xs:block opacity-50 flex gap-x-4">Directions</motion.span>
             </motion.a>
           </motion.div>}
         </AnimatePresence>
 
        
           <motion.a 
-            className="text-micro-mobile md:text-micro py-3 text-center rounded-full bg-white text-black uppercase h-12 flex items-center justify-center
-            md:w-full sm:max-w-[9rem] w-[calc(2*(100vw-5rem)/4)]
-            max-md:bottom-4 max-md:left-4
+            className="text-micro-mobile md:text-micro py-3 text-center rounded-lg bg-white text-black uppercase h-9 flex items-center justify-center
+            w-[calc((2*(100vw-5rem)/4)+1rem)]
+            md:w-full md:max-w-[10rem]
+            max-md:bottom-4 max-md:right-4
             fixed md:right-[4.5rem] border border-black border-opacity-25 z-50
             ">
             Buy tickets
           </motion.a>
           <motion.button 
-            className="col-start-4 col-span-1 flex justify-center items-center h-12 py-3 border border-white border-opacity-25 rounded-full justify-self-end w-full max-w-[6rem] md:max-w-[3rem] border-opacity-50
+            className="col-start-4 col-span-1 flex justify-center items-center h-6 md:h-9 py-3 border border-white border-opacity-25 rounded-lg justify-self-end w-full max-w-[calc((1*(100vw-5rem)/4))] md:max-w-[3rem] border-opacity-50
             
-            fixed right-4 max-md:bottom-4 mix-blend-exclusion z-50
+            fixed right-4 mix-blend-exclusion z-50
             "
             // style={{width: "max(auto, 4rem)"}}
             onClick={toggleOpen}>
-            <motion.div className="h-5 w-5 bg-white rounded-full"/>
+            <motion.div className="h-4 w-4 bg-white rounded-full"/>
           </motion.button>
       </motion.nav>
 
@@ -230,10 +250,10 @@ const Nav = ({ children }: Props) => {
               />}
             </AnimatePresence>
          </motion.div>
-          <MainGrid className="pt-32 2xl:pt-4">
+          <MainGrid className="pt-32">
               <motion.a href="/"
-                className={`col-span-full md:col-span-2 2xl:col-start-2 text-header-mobile max-md:grid grid-cols-4 gap-x-4 h-[22.5dvh] justify-between max-md:border-t border-white max-md:pt-2
-                md:border-l md:pl-2 md:flex md:flex-col md:h-[60dvh] md:min-h-[8rem]`}
+                className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between border-t border-white pt-2
+                min-h-[8rem]`}
                 animate={{
                   opacity: (!isAboutPage && (selected != "/about" )) ? 1 : 0.5
                 }}
@@ -243,15 +263,15 @@ const Nav = ({ children }: Props) => {
                 onHoverStart={e => {setSelected("/")}}
                 onHoverEnd={e => {setSelected(path.pathname)}}
                 >
-                <span className="text-body-mobile md:text-header">1</span>
-                <div className="col-span-3">
+                <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">1</span>
+                <div className="col-span-2">
                   Event info
                   <p className="text-micro-mobile">TEDxSFU 2023 at a glance</p>
                 </div>
               </motion.a>
               <motion.a href="/about"
-                className={`col-span-full md:col-span-2 2xl:col-start-4 text-header-mobile max-md:grid grid-cols-4 gap-x-4 h-[22.5dvh] justify-between max-md:border-t border-white max-md:pt-2
-                md:border-l md:pl-2 md:flex md:flex-col md:h-[60dvh] md:min-h-[8rem]`}
+                className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between border-t border-white pt-2
+                min-h-[8rem]`}
                 animate={{
                   opacity: (isAboutPage && (selected != "/" )) ? 1 : 0.5
                 }}
@@ -261,14 +281,14 @@ const Nav = ({ children }: Props) => {
                 onHoverStart={e => {setSelected("/about")}}
                 onHoverEnd={e => {setSelected(path.pathname)}}
                 >
-                <span className="text-body-mobile md:text-header">2</span>
-                <div className="col-span-3">
+                <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">2</span>
+                <div className="col-span-2">
                   About us
                   <p className="text-micro-mobile">13 years in the making</p>
                 </div>
               </motion.a>
 
-              <motion.div className="col-span-full md:col-span-2 lg:col-span-3 2xl:col-start-2 2xl:col-span-2 mt-12">
+              <motion.div className="col-span-3 col-start-2 md:col-span-2 lg:col-span-3 2xl:col-start-2 2xl:col-span-2 mt-12">
                 <motion.h2 className="text-lead-mobile lg:text-lead">Let&apos;s keep in touch</motion.h2>
                 <motion.div className="lg:grid lg:grid-cols-3 lg:gap-x-4 2xl:grid-cols-2">
                   <motion.div className="my-4">
@@ -281,7 +301,7 @@ const Nav = ({ children }: Props) => {
                   </motion.div>
                 </motion.div>
 
-                <div className="mb-6 flex flex-row gap-2">
+                <div className="mb-12 flex flex-row gap-2">
                 <a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank">
                   <Image
                     src={iconFacebook}
@@ -313,11 +333,11 @@ const Nav = ({ children }: Props) => {
               </div>
               </motion.div>
 
-              <div className="col-span-full pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-start-4 md:mt-12 2xl:col-span-2 2xl:col-start-7">
-              <div className="mb-6 text-lead">
-                Early bird ticket sale and exclusive content — right to your inbox.
-              </div>
-              <EmailForm isDarkMode={true} />
+              <div className="col-span-full sm:col-start-2 sm:col-span-3 pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-start-4 md:mt-12 2xl:col-span-2 2xl:col-start-7">
+                <div className="mb-6 text-lead">
+                  Early bird ticket sale and exclusive content — right to your inbox.
+                </div>
+                <EmailForm isDarkMode={true} />
               </div>
           </MainGrid>
         </motion.div>}
