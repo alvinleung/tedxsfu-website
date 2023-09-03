@@ -44,6 +44,7 @@ const Sticky = ({ children, top, duration, fadeOut, ...htmlProps }: Props) => {
   }, [isUsingSmoothScroll]);
 
   const topOffsetPixel = useCSSSizingInPixel(top);
+
   const stickyDuration = useMemo(() => {
     if (duration) {
       return duration;

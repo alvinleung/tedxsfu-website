@@ -66,10 +66,12 @@ const SectionInfo = ({
         left
           ? "col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
           : "z-10 col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-4 lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
-      } ${shouldStick ? "sticky top-4" : ""} ${stickyOnMobile ? "top-16" : ""}`}
+      } ${shouldStick ? "sticky top-4" : ""} ${
+        stickyOnMobile ? "top-[64px]" : ""
+      }`}
     >
       {shouldStick && (
-        <Sticky top={16} fadeOut>
+        <Sticky top={!isDesktop && stickyOnMobile ? 64 : 16} fadeOut>
           {children}
         </Sticky>
       )}

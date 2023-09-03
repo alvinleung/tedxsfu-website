@@ -42,7 +42,9 @@ const Fixed = ({
     <>
       {
         <div
-          className={isUsingSmoothScroll ? "pointer-events-none opacity-0" : ""}
+          className={
+            isUsingSmoothScroll ? "pointer-events-none opacity-0" : " z-10"
+          }
           style={{
             position: "fixed",
             top: top,
@@ -78,9 +80,12 @@ const Fixed = ({
                     : router.pathname === "/about"
                     ? windowDim.width
                     : -windowDim.width,
+
+                  opacity: 0,
                 }}
                 animate={{
                   x: 0,
+                  opacity: 1,
                 }}
                 exit={{
                   x:
