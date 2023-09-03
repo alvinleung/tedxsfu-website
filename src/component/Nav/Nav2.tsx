@@ -8,6 +8,7 @@ import iconLinkedin from "../../../public/img/mdi_linkedin.svg";
 import iconTwitter from "../../../public/img/mdi_twitter.svg";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
+import { useCopyToClipboard } from "usehooks-ts";
 import { useWindowDimension } from "../../hooks/useWindowDimension";
 import NavToggle from "./NavToggle";
 import { AnimatePresence, motion } from "framer-motion";
@@ -41,6 +42,7 @@ const Nav = ({ children }: Props) => {
   }
 
   const [selected, setSelected] = useState(path.pathname);
+  const [value, copy] = useCopyToClipboard()
   
   return (
     <NavContext.Provider value={{ setScrollState }}>
@@ -151,7 +153,7 @@ const Nav = ({ children }: Props) => {
               target="_blank"
               className="w-fit text-micro-mobile md:text-micro flex flex-col"
             >
-              <motion.span className="hidden xs:block">Saturday, <br className="hidden sm:block"/>Nov 11, 2023</motion.span>
+              <motion.span className="hidden xs:block">Saturday, <br className="hidden xs:block"/>Nov 11, 2023</motion.span>
               <motion.span className="xs:hidden">Sat, Nov 11, 2023</motion.span>
               <motion.span className="hidden xs:block opacity-50 gap-x-4">Calendar</motion.span>
             </motion.a>
@@ -251,8 +253,11 @@ const Nav = ({ children }: Props) => {
             </AnimatePresence>
          </motion.div>
           <MainGrid className="pt-32">
-              <motion.a href="/"
-                className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between border-t border-white pt-2
+            <Link href="/"
+            className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile h-[22.5dvh] justify-between border-t border-white pt-2
+            min-h-[8rem]`}>
+              <motion.div
+                className={`grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between
                 min-h-[8rem]`}
                 animate={{
                   opacity: (!isAboutPage && (selected != "/about" )) ? 1 : 0.5
@@ -263,12 +268,14 @@ const Nav = ({ children }: Props) => {
                 onHoverStart={e => {setSelected("/")}}
                 onHoverEnd={e => {setSelected(path.pathname)}}
                 >
-                <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">1</span>
-                <div className="col-span-2">
-                  Event info
-                  <p className="text-micro-mobile">TEDxSFU 2023 at a glance</p>
-                </div>
-              </motion.a>
+                
+                  <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">1</span>
+                  <div className="col-span-3 md:col-span-2">
+                    Event info
+                    <p className="text-micro-mobile">TEDxSFU 2023 at a glance</p>
+                  </div>
+              </motion.div>
+            </Link>
               <motion.a href="/about"
                 className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between border-t border-white pt-2
                 min-h-[8rem]`}
@@ -282,58 +289,81 @@ const Nav = ({ children }: Props) => {
                 onHoverEnd={e => {setSelected(path.pathname)}}
                 >
                 <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">2</span>
-                <div className="col-span-2">
+                <div className="col-span-3 md:col-span-2">
                   About us
                   <p className="text-micro-mobile">13 years in the making</p>
                 </div>
               </motion.a>
 
-              <motion.div className="col-span-3 col-start-2 md:col-span-2 lg:col-span-3 2xl:col-start-2 2xl:col-span-2 mt-12">
-                <motion.h2 className="text-lead-mobile lg:text-lead">Let&apos;s keep in touch</motion.h2>
-                <motion.div className="lg:grid lg:grid-cols-3 lg:gap-x-4 2xl:grid-cols-2">
-                  <motion.div className="my-4">
+
+                <motion.h2 className="text-lead-mobile lg:text-body col-span-full xs:col-span-3 xs:col-start-2 md:col-span-2 lg:col-span-1 lg:col-start-2 mb-4 2xl:col-start-2">Let&apos;s keep in touch</motion.h2>
+                
+                <motion.div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-span-2 lg:col-start-3
+                  grid grid-cols-4 md:grid-cols-3 gap-x-4">
+                  <motion.div className="col-span-3 md:col-span-2">
                     <motion.h3 className="text-body-mobile">General inquiries & ticketing</motion.h3>
-                    <motion.a className="text-body-mobile opacity-50" href="mailto:info@tedxsfu.com">info@tedxsfu.com</motion.a>
+                    <motion.button 
+                      onClick={e => {copy('info@tedxsfu.com')}} 
+                      className="text-body-mobile opacity-50 w-full flex justify-between">
+                        info@tedxsfu.com
+                    </motion.button>
                   </motion.div>
-                  <motion.div className="my-4">
-                    <motion.h3 className="text-body-mobile">Partnership inquiries</motion.h3>
-                    <motion.a className="text-body-mobile opacity-50" href="mailto:partner@tedxsfu.com">partner@tedxsfu.com</motion.a>
-                  </motion.div>
+                  <motion.button 
+                    onClick={e => {copy('info@tedxsfu.com')}} 
+                    className="place-self-end bg-white text-black opacity-50 w-fit py-1 px-2 flex rounded-full">
+                      Copy
+                  </motion.button>
                 </motion.div>
 
-                <div className="mb-12 flex flex-row gap-2">
-                <a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank">
-                  <Image
-                    src={iconFacebook}
-                    alt="Facebook"
-                    className={true ? "" : "invert"}
-                  />
-                </a>
-                <a href="https://instagram.com/tedxsfu" target="_blank">
-                  <Image
-                    src={iconInstagram}
-                    alt="Instagram"
-                    className={true ? "" : "invert"}
-                  />
-                </a>
-                <a href="https://twitter.com/tedxsfu" target="_blank">
-                  <Image
-                    src={iconTwitter}
-                    alt="Twitter"
-                    className={true ? "" : "invert"}
-                  />
-                </a>
-                <a href="https://linkedin.com/company/tedxsfu" target="_blank">
-                  <Image
-                    src={iconLinkedin}
-                    alt="LinkedIn"
-                    className={true ? "" : "invert"}
-                  />
-                </a>
-              </div>
-              </motion.div>
+                <motion.div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-span-2 lg:col-start-3
+                  grid grid-cols-4 md:grid-cols-3 gap-x-4">
+                  <motion.div className="col-span-3 md:col-span-2">
+                    <motion.h3 className="text-body-mobile">Partnership inquiries</motion.h3>
+                    <motion.button
+                      onClick={e => {copy('partner@tedxsfu.com')}} 
+                      className="text-body-mobile opacity-50 w-full flex justify-between">
+                        partner@tedxsfu.com
+                    </motion.button>
+                  </motion.div>
+                  <motion.button 
+                    onClick={e => {copy('partner@tedxsfu.com')}} 
+                    className="place-self-end bg-white text-black opacity-50 w-fit py-1 px-2 flex rounded-full">
+                      Copy
+                  </motion.button>
+                </motion.div>
 
-              <div className="col-span-full sm:col-start-2 sm:col-span-3 pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-start-4 md:mt-12 2xl:col-span-2 2xl:col-start-7">
+              <div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-start-3 lg:col-span-2 mb-12 flex flex-row gap-2">
+                  <a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank">
+                    <Image
+                      src={iconFacebook}
+                      alt="Facebook"
+                      className={true ? "" : "invert"}
+                    />
+                  </a>
+                  <a href="https://instagram.com/tedxsfu" target="_blank">
+                    <Image
+                      src={iconInstagram}
+                      alt="Instagram"
+                      className={true ? "" : "invert"}
+                    />
+                  </a>
+                  <a href="https://twitter.com/tedxsfu" target="_blank">
+                    <Image
+                      src={iconTwitter}
+                      alt="Twitter"
+                      className={true ? "" : "invert"}
+                    />
+                  </a>
+                  <a href="https://linkedin.com/company/tedxsfu" target="_blank">
+                    <Image
+                      src={iconLinkedin}
+                      alt="LinkedIn"
+                      className={true ? "" : "invert"}
+                    />
+                  </a>
+                </div>
+
+              <div className="col-span-full sm:col-start-2 sm:col-span-3 pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-span-2 lg:col-start-3">
                 <div className="mb-6 text-lead">
                   Early bird ticket sale and exclusive content — right to your inbox.
                 </div>
