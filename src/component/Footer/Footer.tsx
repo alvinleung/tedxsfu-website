@@ -153,7 +153,7 @@ const Footer = ({
         </MainGrid>
       </motion.footer>
       <MainGrid
-        className={`relative z-0 h-[80vh] cursor-pointer bg-black text-white`}
+        className={`relative z-0 h-[80dvh] cursor-pointer bg-black text-white`}
         onClick={handleClick}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
