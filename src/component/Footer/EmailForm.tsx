@@ -32,12 +32,13 @@ const EmailForm = ({ isDarkMode }: Props) => {
         handleSubmit(fields);
       }}
       noValidate>
-      <label
+      <motion.label
         className={`relative flex flex-col justify-center rounded-lg 
         text-micro text-white/50
-        pt-4 pb-2 px-2 border border-[${
-          isDarkMode ? darkModeColor : lightModeColor
-        }]`}
+        pt-4 pb-2 px-2 border`}
+        animate={{
+          borderColor: isDarkMode ? darkModeColor : lightModeColor
+        }}
       >
        Your email address*
         <div className="flex flex-row gap-x-4">
@@ -72,7 +73,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
             </AnimatePresence>
           </motion.button>}
         </div>
-      </label>
+      </motion.label>
       {error && <p className="text-ted">An error occured&mdash;please try again</p>}
     </form>
   );

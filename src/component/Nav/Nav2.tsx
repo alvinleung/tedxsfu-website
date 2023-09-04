@@ -210,6 +210,12 @@ const Nav = ({ children }: Props) => {
             <AnimatePresence>
               {selected === "/about" ?
               <motion.div
+                // style={{scale: 1.1}}
+                className="origin-top overflow-hidden"
+                style={{
+                  // only scale the last one
+                  scale: 1.15
+                }}
                 initial={{
                   opacity: 0
                 }}
@@ -255,7 +261,10 @@ const Nav = ({ children }: Props) => {
           <MainGrid className="pt-32">
             <Link href="/"
             className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile h-[22.5dvh] justify-between border-t border-white pt-2
-            min-h-[8rem]`}>
+            min-h-[8rem]`}
+            onClick={(e) => {
+              setOpen(false);
+            }}>
               <motion.div
                 className={`grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between
                 min-h-[8rem]`}
@@ -276,8 +285,14 @@ const Nav = ({ children }: Props) => {
                   </div>
               </motion.div>
             </Link>
-              <motion.a href="/about"
-                className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between border-t border-white pt-2
+            <Link href="/about"
+            className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile h-[22.5dvh] justify-between border-t border-white pt-2
+            min-h-[8rem]`}
+            onClick={(e) => {
+              setOpen(false);
+            }}>
+              <motion.div
+                className={`grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between
                 min-h-[8rem]`}
                 animate={{
                   opacity: (isAboutPage && (selected != "/" )) ? 1 : 0.5
@@ -288,12 +303,13 @@ const Nav = ({ children }: Props) => {
                 onHoverStart={e => {setSelected("/about")}}
                 onHoverEnd={e => {setSelected(path.pathname)}}
                 >
-                <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">2</span>
-                <div className="col-span-3 md:col-span-2">
-                  About us
-                  <p className="text-micro-mobile">13 years in the making</p>
-                </div>
-              </motion.a>
+                  <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">2</span>
+                  <div className="col-span-3 md:col-span-2">
+                    About us
+                    <p className="text-micro-mobile">13 years in the making</p>
+                  </div>
+              </motion.div>
+            </Link>
 
 
                 <motion.h2 className="text-lead-mobile lg:text-body col-span-full xs:col-span-3 xs:col-start-2 md:col-span-2 lg:col-span-1 lg:col-start-2 mb-4 2xl:col-start-2">Let&apos;s keep in touch</motion.h2>
@@ -304,11 +320,15 @@ const Nav = ({ children }: Props) => {
                     <motion.h3 className="text-body-mobile">General inquiries & ticketing</motion.h3>
                     <motion.button 
                       onClick={e => {copy('info@tedxsfu.com')}} 
-                      className="text-body-mobile opacity-50 w-full flex justify-between">
+                      className="text-body-mobile opacity-50 w-full flex justify-between"
+                      >
                         info@tedxsfu.com
                     </motion.button>
                   </motion.div>
                   <motion.button 
+                    whileHover={{
+                      opacity:1
+                    }}
                     onClick={e => {copy('info@tedxsfu.com')}} 
                     className="place-self-end bg-white text-black opacity-50 w-fit py-1 px-2 flex rounded-full">
                       Copy
@@ -326,6 +346,9 @@ const Nav = ({ children }: Props) => {
                     </motion.button>
                   </motion.div>
                   <motion.button 
+                    whileHover={{
+                      opacity:1
+                    }}
                     onClick={e => {copy('partner@tedxsfu.com')}} 
                     className="place-self-end bg-white text-black opacity-50 w-fit py-1 px-2 flex rounded-full">
                       Copy
