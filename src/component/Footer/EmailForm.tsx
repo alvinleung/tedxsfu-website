@@ -95,7 +95,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
       }}
       >An error occured&mdash;please try again</motion.p>}
       {success && 
-      <motion.p className={`text-center h-16 flex justify-center items-center ${isDarkMode ? "text-white" : "text-black" }`}
+      <motion.p className={`text-center h-16 flex justify-center items-center text-body ${isDarkMode ? "text-white" : "text-black" }`}
         initial={{
           opacity: 0
         }}
