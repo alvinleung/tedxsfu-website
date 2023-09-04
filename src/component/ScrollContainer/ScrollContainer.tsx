@@ -95,7 +95,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     targetScrollY,
   } = useSmoothScroll({
     container: scrollContainerRef,
-    canScroll: isPresent,
+    canScroll: isPresent && canScroll,
   });
 
   const documentOffsetY = useTransform(scrollY, (v) => {
