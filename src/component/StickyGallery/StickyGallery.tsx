@@ -126,7 +126,7 @@ const StickyGallery = (props: Props) => {
                 >
                   <ImageSlide src={image.src} />
                 </motion.div>
-                <MainGrid className="absolute bottom-8 text-white">
+                <MainGrid className="absolute bottom-8 px-4 text-white">
                   <motion.div
                     initial={{
                       opacity: 0,
