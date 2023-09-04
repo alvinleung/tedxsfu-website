@@ -53,6 +53,7 @@ interface ScrollContextInfo {
   refreshDocumentMeasurement: () => void;
   isUsingSmoothScroll: boolean;
   scrollTo: (target: number) => void;
+  canScroll: boolean;
 }
 
 export const ScrollContext = createContext<ScrollContextInfo>({
@@ -68,6 +69,7 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   scrollDirection: ScrollDirection.DOWN,
   scrollContainerRef: undefined as unknown as MutableRefObject<HTMLDivElement>,
   setCanScroll: () => {},
+  canScroll: true,
   refreshDocumentMeasurement: () => {},
   isUsingSmoothScroll: true,
   scrollTo: () => {},
@@ -118,7 +120,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   }, [scrollY]);
 
   const navContext = useNavContext();
-  console.log("THe nav is open: "+navContext.open)
+  console.log("THe nav is open: " + navContext.open);
   useEffect(() => {
     if (scrollDirection == ScrollDirection.DOWN) {
       navContext.setScrollState(NavScrollState.SCROLLED);
@@ -186,6 +188,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         refreshDocumentMeasurement,
         isUsingSmoothScroll,
         scrollTo,
+        canScroll,
       }}
     >
       <motion.div

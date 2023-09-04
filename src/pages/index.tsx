@@ -9,6 +9,8 @@ import Footer from "@/component/Footer/Footer";
 import StickyContainer from "@/component/ScrollContainer/StickyContainer";
 import MainGrid from "@/component/layouts/MainGrid";
 import { LandingHero } from "@/component/LandingHero";
+import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
+import { useEffect } from "react";
 
 export default function Home() {
   type SectionLayoutProps = {
@@ -29,7 +31,6 @@ export default function Home() {
       </section>
     );
   };
-  // console.log(scrollY);
   return (
     <>
       <Head>

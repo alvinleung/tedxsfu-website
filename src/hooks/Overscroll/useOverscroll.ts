@@ -19,7 +19,8 @@ export function useOverscroll(
   direction: OverscrollDirection = OverscrollDirection.UP,
   maxDist = 200,
 ) {
-  const { scrollContainerRef, targetScrollY, scrollEnd } = useContainerScroll();
+  const { scrollContainerRef, targetScrollY, scrollEnd, canScroll } =
+    useContainerScroll();
   const scrollYProgress = useTransform(targetScrollY, [0, scrollEnd], [0, 1]);
 
   const overScroll = useSpring(0, { stiffness: 1500, damping: 200 });
@@ -73,7 +74,7 @@ export function useOverscroll(
   }, [scrollYProgress, direction, isOverscrollReady]);
 
   useEffect(() => {
-    if (!isActive || !isOverscrollReady) return;
+    if (!isActive || !isOverscrollReady || !canScroll) return;
 
     const handleWheel = (e: WheelEvent) => {
       let deltaAmount = 0;
@@ -121,6 +122,7 @@ export function useOverscroll(
     overscrollProgress,
     direction,
     isOverscrollReady,
+    canScroll,
   ]);
 
   return { isOverscrollComplete, overscrollProgress, isOverscrollStarted };
