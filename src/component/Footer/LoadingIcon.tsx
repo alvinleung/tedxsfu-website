@@ -8,39 +8,20 @@ type Props = {
 };
 
 const LoadingIcon= () => {
-  const ContainerVariants = {
+  const wrapperVariants = {
     initial: {
+      y: "100%",
     },
     animate: {
-      transition: {
-        // delayChildren: 1,
-        staggerChildren: 2.5,
-        // repeatType: "reverse",
-        repeat: Infinity,
-      }
-    }
-  };
-
-  const transition = {
-    duration: AnimationConfig.SLOW,
-    ease: AnimationConfig.EASING_IN_OUT,
-     repeat: Infinity,
-  }
-
-  const childVars = {
-    initial: {
-      y: "0%",
-      transition: transition
+      y: 0
     },
-    animate: {
-      y: ["0%","-50%","0%"],
-      transition: transition
+    exit: {
+      y: "-100%"
     }
   }
 
   const demoVariants = {
     animate: {
-      // y: "5rem",
       transition: {
         staggerChildren: AnimationConfig.VERY_FAST,
         repeat: Infinity,
@@ -63,36 +44,40 @@ const LoadingIcon= () => {
   };
 
   return (
-    <motion.div className="flex gap-x-1"
-      variants={demoVariants as any}
+    <motion.div
+      variants={wrapperVariants as any}
       initial="initial"
       animate="animate"
       exit="exit"
-      >
-      <motion.div 
-        className="h-2 w-2 bg-white mix-blend-exclusion rounded"
-        variants={demoVariants2 as any}
-        // initial="initial"
-        // animate="animate"
-        // transition={transition}
-      />
-
-      <motion.div 
-        className="h-2 w-2 bg-white mix-blend-exclusion rounded"
-        variants={demoVariants2 as any}
-        // initial="initial"
-        // animate="animate"
-        // transition={transition}
-      />
-
-      <motion.div 
-        className="h-2 w-2 bg-white mix-blend-exclusion rounded"
-        variants={demoVariants2 as any}
-        // initial="initial"
-        // animate="animate"
-        // transition={transition}
-      />
-
+    >
+      <motion.div className="flex gap-x-1"
+        variants={demoVariants as any}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        >
+        <motion.div
+          className="h-2 w-2 bg-white mix-blend-exclusion rounded"
+          variants={demoVariants2 as any}
+          // initial="initial"
+          // animate="animate"
+          // transition={transition}
+        />
+        <motion.div
+          className="h-2 w-2 bg-white mix-blend-exclusion rounded"
+          variants={demoVariants2 as any}
+          // initial="initial"
+          // animate="animate"
+          // transition={transition}
+        />
+        <motion.div
+          className="h-2 w-2 bg-white mix-blend-exclusion rounded"
+          variants={demoVariants2 as any}
+          // initial="initial"
+          // animate="animate"
+          // transition={transition}
+        />
+      </motion.div>
     </motion.div>
   );
 };

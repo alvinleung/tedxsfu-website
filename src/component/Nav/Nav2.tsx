@@ -10,7 +10,7 @@ import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 import { useCopyToClipboard } from "usehooks-ts";
 import { useWindowDimension } from "../../hooks/useWindowDimension";
-import NavToggle from "./NavToggle";
+import Copiable from "./Copiable";
 import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
 import MainGrid from "../layouts/MainGrid";
@@ -20,10 +20,12 @@ type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
+  open: boolean
 }
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
+  open: false,
 });
 export enum NavScrollState {
   SCROLLED,
@@ -36,16 +38,18 @@ const Nav = ({ children }: Props) => {
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
+  const [selected, setSelected] = useState(path.pathname);
+
   const [open, setOpen] = useState(true);
   const toggleOpen = () => {
     setOpen(!open);
+    setSelected(path.pathname);
   }
 
-  const [selected, setSelected] = useState(path.pathname);
   const [value, copy] = useCopyToClipboard()
   
   return (
-    <NavContext.Provider value={{ setScrollState }}>
+    <NavContext.Provider value={{ setScrollState, open }}>
       <motion.nav
         className="px-4 pt-4 h-12 flex justify-between grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
       >
@@ -115,7 +119,7 @@ const Nav = ({ children }: Props) => {
           }
           {
             open && 
-            <motion.div className="fixed z-[45] bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black via-black to-transparent"
+            <motion.div className="fixed z-[45] bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black via-black to-transparent"
             initial={{
               opacity: 0
             }}
@@ -195,7 +199,7 @@ const Nav = ({ children }: Props) => {
         {
         open &&
         <motion.div 
-        className="fixed top-0 left-0 right-0 bottom-0 px-4 z-40 bg-black overflow-y-auto"
+        className="fixed top-0 bottom-0 px-4 z-40 bg-black overflow-y-auto"
         initial={{
           opacity: 0,
         }}
@@ -206,7 +210,7 @@ const Nav = ({ children }: Props) => {
           opacity: 0,
         }}
         >
-         <motion.div className="fixed -z-10">
+         <motion.div className="fixed left-0 -z-10">
             <AnimatePresence>
               {selected === "/about" ?
               <motion.div
@@ -214,7 +218,7 @@ const Nav = ({ children }: Props) => {
                 className="origin-top overflow-hidden"
                 style={{
                   // only scale the last one
-                  scale: 1.15
+                  scale: 1.125
                 }}
                 initial={{
                   opacity: 0
@@ -257,7 +261,7 @@ const Nav = ({ children }: Props) => {
                 }}
               />}
             </AnimatePresence>
-         </motion.div>
+          </motion.div>
           <MainGrid className="pt-32">
             <Link href="/"
             className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile h-[22.5dvh] justify-between border-t border-white pt-2
@@ -314,76 +318,39 @@ const Nav = ({ children }: Props) => {
 
                 <motion.h2 className="text-lead-mobile lg:text-body col-span-full xs:col-span-3 xs:col-start-2 md:col-span-2 lg:col-span-1 lg:col-start-2 mb-4 2xl:col-start-2">Let&apos;s keep in touch</motion.h2>
                 
-                <motion.div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-span-2 lg:col-start-3
-                  grid grid-cols-4 md:grid-cols-3 gap-x-4">
-                  <motion.div className="col-span-3 md:col-span-2">
-                    <motion.h3 className="text-body-mobile">General inquiries & ticketing</motion.h3>
-                    <motion.button 
-                      onClick={e => {copy('info@tedxsfu.com')}} 
-                      className="text-body-mobile opacity-50 w-full flex justify-between"
-                      >
-                        info@tedxsfu.com
-                    </motion.button>
-                  </motion.div>
-                  <motion.button 
-                    whileHover={{
-                      opacity:1
-                    }}
-                    onClick={e => {copy('info@tedxsfu.com')}} 
-                    className="place-self-end bg-white text-black opacity-50 w-fit py-1 px-2 flex rounded-full">
-                      Copy
-                  </motion.button>
-                </motion.div>
-
-                <motion.div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-span-2 lg:col-start-3
-                  grid grid-cols-4 md:grid-cols-3 gap-x-4">
-                  <motion.div className="col-span-3 md:col-span-2">
-                    <motion.h3 className="text-body-mobile">Partnership inquiries</motion.h3>
-                    <motion.button
-                      onClick={e => {copy('partner@tedxsfu.com')}} 
-                      className="text-body-mobile opacity-50 w-full flex justify-between">
-                        partner@tedxsfu.com
-                    </motion.button>
-                  </motion.div>
-                  <motion.button 
-                    whileHover={{
-                      opacity:1
-                    }}
-                    onClick={e => {copy('partner@tedxsfu.com')}} 
-                    className="place-self-end bg-white text-black opacity-50 w-fit py-1 px-2 flex rounded-full">
-                      Copy
-                  </motion.button>
-                </motion.div>
+                <Copiable desc="General inquiries &amp; ticketing" email="info@tedxsfu.com"/>
+                <Copiable desc="Partnership inquiries" email="partner@tedxsfu.com"/>
 
               <div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-start-3 lg:col-span-2 mb-12 flex flex-row gap-2">
-                  <a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank">
+                  <motion.a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank" whileHover={{scale: 1.1}}
+                  >
                     <Image
                       src={iconFacebook}
                       alt="Facebook"
                       className={true ? "" : "invert"}
                     />
-                  </a>
-                  <a href="https://instagram.com/tedxsfu" target="_blank">
+                  </motion.a>
+                  <motion.a href="https://instagram.com/tedxsfu" target="_blank" whileHover={{scale: 1.1}}>
                     <Image
                       src={iconInstagram}
                       alt="Instagram"
                       className={true ? "" : "invert"}
                     />
-                  </a>
-                  <a href="https://twitter.com/tedxsfu" target="_blank">
+                  </motion.a>
+                  <motion.a href="https://twitter.com/tedxsfu" target="_blank" whileHover={{scale: 1.1}}>
                     <Image
                       src={iconTwitter}
                       alt="Twitter"
                       className={true ? "" : "invert"}
                     />
-                  </a>
-                  <a href="https://linkedin.com/company/tedxsfu" target="_blank">
+                  </motion.a>
+                  <motion.a href="https://linkedin.com/company/tedxsfu" target="_blank" whileHover={{scale: 1.1}}>
                     <Image
                       src={iconLinkedin}
                       alt="LinkedIn"
                       className={true ? "" : "invert"}
                     />
-                  </a>
+                  </motion.a>
                 </div>
 
               <div className="col-span-full sm:col-start-2 sm:col-span-3 pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-span-2 lg:col-start-3">
