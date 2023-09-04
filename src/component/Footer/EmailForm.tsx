@@ -50,7 +50,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
         <div className="flex flex-row gap-x-4">
           <input
             type="email"
-            className={`py-2 peer w-full text-white !text-body !bg-transparent !border-none placeholder:text-[#FFFFFF4F]`}
+            className={`py-2 peer w-full !text-body !bg-transparent !border-none ${isDarkMode ? "text-white placeholder:text-[#FFFFFF4F]" : "text-black placeholder:text-[#0000004F]" }`}
             placeholder="your-name@email.com"
             id="EMAIL"
             // autoFocus
@@ -69,11 +69,11 @@ const EmailForm = ({ isDarkMode }: Props) => {
             disabled={!isEmail(fields.EMAIL)}
             animate={{
               color: isEmail(fields.EMAIL) ? "#ffffffFF" : "#ffffff3F",
-              background: isEmail(fields.EMAIL) ? "#4F4F4F" : "#303030"
+              background: isDarkMode ? isEmail(fields.EMAIL) ? "#4F4F4F" : "#303030" : isEmail(fields.EMAIL) ? "#303030" : "#CCCCCC"
               
               }}
             whileHover={{
-                  background: isEmail(fields.EMAIL) ? "#555" : "#303030"
+                  background: isDarkMode ? isEmail(fields.EMAIL) ? "#555" : "#303030" : isEmail(fields.EMAIL) ? "#4F4F4F" : "#CCCCCC"
               }}
           >
               { !loading && !success && <>Join</>}
