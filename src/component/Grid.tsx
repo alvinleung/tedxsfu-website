@@ -7,7 +7,7 @@ type Props = {};
 
 const GridOverlay = (props: Props) => {
   const viewport = useWindowDimension();
-  const showGrid = useBoolean(true);
+  const showGrid = useBoolean(false);
 
   useEventListener("keydown", (e: KeyboardEvent) => {
     if (e.key === "G" && e.shiftKey) {

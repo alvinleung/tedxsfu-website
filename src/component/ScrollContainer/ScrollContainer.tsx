@@ -24,7 +24,7 @@ import {
 } from "react";
 import { useSmoothScroll } from "./useSmoothScroll";
 import { useRouter } from "next/router";
-import { NavScrollState, useNavContext } from "../Nav/Nav";
+import { NavScrollState, useNavContext } from "../Nav/Nav2";
 
 type Props = {
   children: React.ReactNode;
@@ -118,6 +118,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   }, [scrollY]);
 
   const navContext = useNavContext();
+  console.log("THe nav is open: "+navContext.open)
   useEffect(() => {
     if (scrollDirection == ScrollDirection.DOWN) {
       navContext.setScrollState(NavScrollState.SCROLLED);
