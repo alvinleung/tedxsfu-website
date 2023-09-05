@@ -36,6 +36,9 @@ export const NavButton = ({
         style={{
           borderTop: "1px solid rgba(255,255,255,.5)",
         }}
+        whileTap={{
+          scale: 0.97,
+        }}
       >
         <motion.div className={`grid grid-cols-4 gap-4 pt-3 md:grid-cols-3`}>
           <span className="pt-[2px] text-body-mobile md:text-body">
