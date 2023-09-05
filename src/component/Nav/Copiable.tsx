@@ -13,6 +13,7 @@ import MainGrid from "../layouts/MainGrid";
 type Props = { desc: string; email: string };
 
 const Copiable = ({ desc, email }: Props) => {
+    const lg = useBreakpoint(breakpoints.lg);
   const [value, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
   const copyAction = () => {
