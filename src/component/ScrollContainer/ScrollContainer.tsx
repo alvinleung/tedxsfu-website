@@ -120,7 +120,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   }, [scrollY]);
 
   const navContext = useNavContext();
-  console.log("THe nav is open: " + navContext.open);
+ 
   useEffect(() => {
     if (scrollDirection == ScrollDirection.DOWN) {
       navContext.setScrollState(NavScrollState.SCROLLED);

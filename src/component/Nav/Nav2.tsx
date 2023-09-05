@@ -18,6 +18,7 @@ import EventInfoModule from "./EventInfoModule";
 import BackgroundPreview from "./BackgroundPreview";
 import StaggerTransition from "./StaggerTransition";
 import SocialModule from "./SocialModule";
+import Hamburger from "./Hamburger";
 
 type Props = { children: React.ReactNode };
 
@@ -74,6 +75,7 @@ const Nav = ({ children }: Props) => {
     // when new page load
   }, [router.pathname, isOpened]);
 
+  const [open, setOpen] = useState(false);
   const toggleOpen = () => {
     setIsOpened(!isOpened);
     setSelectedPath("");
@@ -186,7 +188,7 @@ const Nav = ({ children }: Props) => {
           // style={{width: "max(auto, 4rem)"}}
           onClick={toggleOpen}
         >
-          <motion.div className="h-4 w-4 rounded-full bg-white" />
+          <Hamburger open={isOpened}/>
         </motion.button>
       </motion.nav>
 
