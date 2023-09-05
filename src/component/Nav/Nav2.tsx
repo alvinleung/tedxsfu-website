@@ -15,12 +15,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
 import MainGrid from "../layouts/MainGrid";
 import EmailForm from "../Footer/EmailForm";
+import { NavButton } from "./NavButton";
 
 type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
-  open: boolean
+  open: boolean;
 }
 
 export const NavContext = createContext<NavContextInterface>({
@@ -44,33 +45,33 @@ const Nav = ({ children }: Props) => {
   const toggleOpen = () => {
     setOpen(!open);
     setSelected(path.pathname);
-  }
+  };
 
-  const [value, copy] = useCopyToClipboard()
-  
+  const [value, copy] = useCopyToClipboard();
+
+  const [isContentOverflowing, setIsContentOverflowing] = useState(false);
+
   return (
     <NavContext.Provider value={{ setScrollState, open }}>
-      <motion.nav
-        className="px-4 pt-4 h-12 flex justify-between grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8 gap-x-3 xs:gap-x-4"
-      >
-            <motion.a
-              key="logo"
-              href={"/"}
-              className="flex h-12 w-32 flex-row-reverse"
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen(false);
-                path.push("/");
-              }}
-            >
-              <motion.svg
-                key="SFU"
-                viewBox="0 0 375 151"
-                className="z-50 fixed left-[6rem] top-4 h-6 mix-blend-exclusion"
-              >
-                <motion.path
-                  fill="#FFFFFF"
-                  d="M116.299 38.4947c-.8-8.057-4.4-14.5226-10.8-19.2971-6.3998-4.7745-14.3998-7.1618-23.9998-7.1618-6.8 0-12.8 1.1936-17.9 3.4814-5.2 2.2878-9.2 
+      <motion.nav className="grid h-12 grid-cols-4 justify-between gap-x-3 px-4 pt-4 xs:gap-x-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8">
+        <motion.a
+          key="logo"
+          href={"/"}
+          className="flex h-12 w-32 flex-row-reverse"
+          onClick={(e) => {
+            e.preventDefault();
+            setOpen(false);
+            path.push("/");
+          }}
+        >
+          <motion.svg
+            key="SFU"
+            viewBox="0 0 375 151"
+            className="fixed left-[6rem] top-4 z-50 h-6 mix-blend-exclusion"
+          >
+            <motion.path
+              fill="#FFFFFF"
+              d="M116.299 38.4947c-.8-8.057-4.4-14.5226-10.8-19.2971-6.3998-4.7745-14.3998-7.1618-23.9998-7.1618-6.8 0-12.8 1.1936-17.9 3.4814-5.2 2.2878-9.2 
                   5.5703-12.1 9.6486-2.9 4.0782-4.4 8.7533-4.4 13.9257 0 3.8793.8 7.1618 2.5 10.0464s3.9 5.3714 6.7 7.4602c2.8 2.0889 6 3.7799 9.4 5.2719 3.4 1.4921 
                   6.9 2.6857 10.5 3.6804l15.4 4.3767c4.7 1.2931 9.2998 2.8846 13.9998 4.874 4.7 1.9894 8.9 4.4761 12.8 7.4602 3.9 2.9841 7 6.6644 9.3 11.0411 2.4 4.3766 
                   3.5 9.5486 3.5 15.6166 0 7.759-2 14.722-6.1 20.889s-9.8 11.14-17.4 14.721c-7.6 3.581-16.5998 
@@ -81,67 +82,132 @@ const Nav = ({ children }: Props) => {
                   19.7944h-12.8v.0995ZM157.1 147.513V2.08887h84.5V14.0252h-71.2v54.7082H235v11.9364h-64.6v66.7442h-13.3v.099ZM361.5 2.08872h13.3V98.3752c0 9.8478-2.3 18.6998-7 26.4588s-11.1 13.926-19.4 18.402c-8.3 4.476-17.9 
                   6.664-28.9 6.664-10.9 0-20.6-2.287-28.9-6.764-8.3-4.476-14.8-10.643-19.5-18.401-4.7-7.759-7-16.612-7-26.4593V1.98926h13.3V97.281c0 7.759 1.7 14.622 5.2 20.59 3.5 6.068 8.4 10.743 14.7 14.224 6.3 3.482 13.7 
                   5.173 22.2 5.173s15.9-1.691 22.2-5.173c6.3-3.481 11.2-8.156 14.7-14.224 3.4-6.067 5.2-12.931 5.2-20.59l-.1-95.19228Z"
-                />
-              </motion.svg>
-              <motion.svg
-                key="TEDx"
-                viewBox="0 0 501 151"
-                className="z-50 fixed left-4 top-4 h-6"
-              >
-                <motion.path
-                  fill="#EB0028"
-                  d="M40.8 39.6522H0V2.20264h126.6V39.6522H85.7V148.396H40.8V39.6522Zm92.7-37.44956h122.9V39.6522h-78v18.2242h78v34.8461h-78v18.2245h78v37.449H133.5V2.20264Zm130.5 
+            />
+          </motion.svg>
+          <motion.svg
+            key="TEDx"
+            viewBox="0 0 501 151"
+            className="fixed left-4 top-4 z-50 h-6"
+          >
+            <motion.path
+              fill="#EB0028"
+              d="M40.8 39.6522H0V2.20264h126.6V39.6522H85.7V148.396H40.8V39.6522Zm92.7-37.44956h122.9V39.6522h-78v18.2242h78v34.8461h-78v18.2245h78v37.449H133.5V2.20264Zm130.5 
                   0h73.7c48.6 0 65.8 36.04776 65.8 72.89656 0 44.8598-23.7 73.2968-74.5 73.2968h-65V2.20264ZM308.9 110.847h17.6c28 0 32.1-22.7306 
                   32.1-36.4487 0-9.2122-2.9-34.7461-35.3-34.7461H309v71.1948h-.1ZM468 92.322l-13.7-22.8302-13.4 22.8302H408l31.2-46.061-30.1-44.05836H442l12.2 21.82896 
                   12.5-21.82896h32.9L469.5 46.261l31.2 46.061H468Z"
-                />
-              </motion.svg>
-            </motion.a>
-
-
+            />
+          </motion.svg>
+        </motion.a>
 
         <AnimatePresence>
-          {
-            open && 
-            <motion.div className="fixed z-[45] top-0 left-0 right-0 h-16 bg-gradient-to-b from-black to-transparent"
-            initial={{
-              opacity: 0
-            }}
-            animate={{
-              opacity: 1
-            }}
-            exit={{
-              opacity: 0
-            }}
+          {isContentOverflowing && (
+            <motion.div
+              className="fixed left-0 right-0 top-0 z-[45] h-16 bg-gradient-to-b from-black to-transparent"
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+            />
+          )}
+          {isContentOverflowing && (
+            <motion.div
+              className="fixed bottom-0 left-0 right-0 z-[45] h-20 bg-gradient-to-t from-black via-black to-transparent"
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
+            />
+          )}
+          {open && (
+            <motion.div
+              key="details"
+              className={`fixed left-4 
+            z-50 w-full
+            max-w-[calc((2*(100vw-5rem)/4)+1rem)] flex-col max-md:bottom-4 max-md:flex 
+            xs:grid xs:grid-cols-2 xs:gap-x-4
+            md:left-[calc((2*(100vw-7rem)/6)+3rem)] md:top-4 md:col-span-2 md:max-w-[calc((2*(100vw-7rem)/6)+1rem)] lg:col-start-4 2xl:left-[calc((2*(100vw-9rem)/8)+3rem)] 2xl:col-start-6 2xl:max-w-[calc((2*(100vw-9rem)/8)+1rem)]`}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
             >
-
+              <motion.a
+                href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
+                target="_blank"
+                className="flex w-fit flex-col text-micro-mobile md:text-micro"
+              >
+                <motion.span className="hidden xs:block">
+                  Saturday, <br className="hidden xs:block" />
+                  Nov 11, 2023
+                </motion.span>
+                <motion.span className="xs:hidden">
+                  Sat, Nov 11, 2023
+                </motion.span>
+                <motion.span className="hidden gap-x-4 opacity-50 xs:block">
+                  Calendar
+                </motion.span>
+              </motion.a>
+              <motion.a
+                href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
+                target="_blank"
+                className="flex w-fit flex-col text-micro-mobile"
+              >
+                <motion.span className="hidden sm:block">
+                  The Centre for <br className="hidden sm:block" />
+                  Performing Arts
+                </motion.span>
+                <motion.span className="sm:hidden">
+                  The Centre Vancouver
+                </motion.span>
+                <motion.span className="flex gap-x-4 opacity-50 xs:block">
+                  Directions
+                </motion.span>
+              </motion.a>
             </motion.div>
-          }
-          {
-            open && 
-            <motion.div className="fixed z-[45] bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black via-black to-transparent"
-            initial={{
-              opacity: 0
-            }}
-            animate={{
-              opacity: 1
-            }}
-            exit={{
-              opacity: 0
-            }}
-            >
+          )}
+        </AnimatePresence>
 
-            </motion.div>
-          }
-          {
-          open &&  
+        <motion.a
+          className="fixed z-50 flex h-9 w-[calc((2*(100vw-5rem)/4)+1rem)] items-center justify-center rounded-md border border-black border-opacity-25 bg-white
+            py-3
+            text-center text-micro-mobile
+            uppercase text-black
+            max-md:bottom-4 max-md:right-4 md:right-[4.5rem] md:w-full md:max-w-[10rem] md:text-micro
+            "
+        >
+          Buy tickets
+        </motion.a>
+        <motion.button
+          className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md border border-white border-opacity-25 border-opacity-50
+            
+            py-3 mix-blend-exclusion md:h-9 md:max-w-[3rem]
+            "
+          // style={{width: "max(auto, 4rem)"}}
+          onClick={toggleOpen}
+        >
+          <motion.div className="h-4 w-4 rounded-full bg-white" />
+        </motion.button>
+      </motion.nav>
+
+      <AnimatePresence>
+        {open && (
           <motion.div
-            key="details"
-            className={`fixed z-50 
-            max-md:bottom-4 md:top-4
-            w-full max-w-[calc((2*(100vw-5rem)/4)+1rem)] md:max-w-[calc((2*(100vw-7rem)/6)+1rem)] 2xl:max-w-[calc((2*(100vw-9rem)/8)+1rem)] 
-            left-4 md:left-[calc((2*(100vw-7rem)/6)+3rem)] 2xl:left-[calc((2*(100vw-9rem)/8)+3rem)]
-            max-md:flex flex-col xs:grid xs:gap-x-4 md:col-span-2 xs:grid-cols-2 lg:col-start-4 2xl:col-start-6`}
+            className="fixed bottom-0 top-0 z-40 w-full overflow-y-auto bg-black px-4"
             initial={{
               opacity: 0,
             }}
@@ -152,215 +218,160 @@ const Nav = ({ children }: Props) => {
               opacity: 0,
             }}
           >
-            <motion.a
-              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
-              target="_blank"
-              className="w-fit text-micro-mobile md:text-micro flex flex-col"
-            >
-              <motion.span className="hidden xs:block">Saturday, <br className="hidden xs:block"/>Nov 11, 2023</motion.span>
-              <motion.span className="xs:hidden">Sat, Nov 11, 2023</motion.span>
-              <motion.span className="hidden xs:block opacity-50 gap-x-4">Calendar</motion.span>
-            </motion.a>
-            <motion.a
-              href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
-              target="_blank"
-              className="w-fit text-micro-mobile flex flex-col"
-            >
-              <motion.span className="hidden sm:block">The Centre for <br className="hidden sm:block"/>Performing Arts</motion.span>
-              <motion.span className="sm:hidden">The Centre Vancouver</motion.span>
-             <motion.span className=" hidden xs:block opacity-50 flex gap-x-4">Directions</motion.span>
-            </motion.a>
-          </motion.div>}
-        </AnimatePresence>
-
-       
-          <motion.a 
-            className="text-micro-mobile md:text-micro py-3 text-center rounded-lg bg-white text-black uppercase h-9 flex items-center justify-center
-            w-[calc((2*(100vw-5rem)/4)+1rem)]
-            md:w-full md:max-w-[10rem]
-            max-md:bottom-4 max-md:right-4
-            fixed md:right-[4.5rem] border border-black border-opacity-25 z-50
-            ">
-            Buy tickets
-          </motion.a>
-          <motion.button 
-            className="col-start-4 col-span-1 flex justify-center items-center h-6 md:h-9 py-3 border border-white border-opacity-25 rounded-lg justify-self-end w-full max-w-[calc((1*(100vw-5rem)/4))] md:max-w-[3rem] border-opacity-50
-            
-            fixed right-4 mix-blend-exclusion z-50
-            "
-            // style={{width: "max(auto, 4rem)"}}
-            onClick={toggleOpen}>
-            <motion.div className="h-4 w-4 bg-white rounded-full"/>
-          </motion.button>
-      </motion.nav>
-
-
-      <AnimatePresence>
-        {
-        open &&
-        <motion.div 
-        className="fixed top-0 bottom-0 px-4 z-40 bg-black overflow-y-auto"
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-        }}
-        exit={{
-          opacity: 0,
-        }}
-        >
-         <motion.div className="fixed left-0 -z-10">
-            <AnimatePresence>
-              {selected === "/about" ?
-              <motion.div
-                // style={{scale: 1.1}}
-                className="origin-top overflow-hidden"
-                style={{
-                  // only scale the last one
-                  scale: 1.125
-                }}
-                initial={{
-                  opacity: 0
-                }}
-                animate={{
-                  opacity: 1
-                }}
-                exit={{
-                  opacity: 0
-                }}
-              >
-                <Image
-                  src="/about/about-2.jpg"
+            <motion.div className="fixed left-0 -z-10">
+              {/* <AnimatePresence> */}
+              {selected === "/about" ? (
+                <motion.div
+                  // style={{scale: 1.1}}
+                  className="origin-top overflow-hidden"
+                  style={{
+                    // only scale the last one
+                    scale: 1.125,
+                  }}
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 0.5,
+                  }}
+                  exit={{
+                    opacity: 0,
+                  }}
+                >
+                  <Image
+                    src="/about/about-2.jpg"
+                    className="h-[100dvh] object-cover"
+                    width={2560}
+                    height={1440}
+                    alt="TEDxSFU conference"
+                  />
+                </motion.div>
+              ) : (
+                <motion.video
+                  src="./website-transition-graphic.webm"
+                  aria-description="video"
                   className="h-[100dvh] object-cover"
                   width={2560}
                   height={1440}
-                  alt="TEDxSFU conference"
+                  muted
+                  loop
+                  autoPlay
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  exit={{
+                    opacity: 0,
+                  }}
                 />
-              </motion.div>
+              )}
+              {/* </AnimatePresence> */}
+            </motion.div>
+            <MainGrid className="h-[100dvh] pt-32">
+              <NavButton
+                onClick={() => setOpen(false)}
+                onEnterPreview={() => {
+                  setSelected("/");
+                }}
+                onExitPreview={() => {
+                  setSelected(path.pathname);
+                }}
+                href={"/"}
+                isHighlighted={selected === "/"}
+                index={"1"}
+                title={"Event Info"}
+                description={"TEDxSFU 2023 at a glance"}
+              />
+              <NavButton
+                onClick={() => setOpen(false)}
+                onEnterPreview={() => {
+                  setSelected("/about");
+                }}
+                onExitPreview={() => {
+                  setSelected(path.pathname);
+                }}
+                href={"/about"}
+                isHighlighted={selected === "/about"}
+                index={"2"}
+                title={"About Us"}
+                description={"13 years in the making"}
+              />
 
-              :
-
-              <motion.video
-                src="./website-transition-graphic.webm"
-                aria-description="video"
-                className="h-[100dvh] object-cover"
-                width={2560}
-                height={1440}
-                muted
-                loop
-                autoPlay
-                initial={{
-                  opacity: 0
-                }}
-                animate={{
-                  opacity: 1
-                }}
-                exit={{
-                  opacity: 0
-                }}
-              />}
-            </AnimatePresence>
-          </motion.div>
-          <MainGrid className="pt-32">
-            <Link href="/"
-            className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile h-[22.5dvh] justify-between border-t border-white pt-2
-            min-h-[8rem]`}
-            onClick={(e) => {
-              setOpen(false);
-            }}>
-              <motion.div
-                className={`grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between
-                min-h-[8rem]`}
-                animate={{
-                  opacity: (!isAboutPage && (selected != "/about" )) ? 1 : 0.5
-                }}
-                whileHover={{
-                  opacity: 1,
-                }}
-                onHoverStart={e => {setSelected("/")}}
-                onHoverEnd={e => {setSelected(path.pathname)}}
-                >
-                
-                  <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">1</span>
-                  <div className="col-span-3 md:col-span-2">
-                    Event info
-                    <p className="text-micro-mobile">TEDxSFU 2023 at a glance</p>
+              <div
+                className="col-span-4 grid grid-cols-4 gap-4 pt-4 md:col-span-3 md:col-start-2 md:grid-cols-3"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.3)" }}
+              >
+                <h2 className="leading-tight">Let&apos;s keep in touch</h2>
+                <div className="col-span-3 md:col-span-2">
+                  <Copiable
+                    desc="General inquiries &amp; ticketing"
+                    email="info@tedxsfu.com"
+                  />
+                  <Copiable
+                    desc="Partnership inquiries"
+                    email="partner@tedxsfu.com"
+                  />
+                  <div className="mt-4 flex flex-row gap-2">
+                    <motion.a
+                      href="https://www.facebook.com/profile.php?id=100094774132695"
+                      target="_blank"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Image
+                        src={iconFacebook}
+                        alt="Facebook"
+                        className={true ? "" : "invert"}
+                      />
+                    </motion.a>
+                    <motion.a
+                      href="https://instagram.com/tedxsfu"
+                      target="_blank"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Image
+                        src={iconInstagram}
+                        alt="Instagram"
+                        className={true ? "" : "invert"}
+                      />
+                    </motion.a>
+                    <motion.a
+                      href="https://twitter.com/tedxsfu"
+                      target="_blank"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Image
+                        src={iconTwitter}
+                        alt="Twitter"
+                        className={true ? "" : "invert"}
+                      />
+                    </motion.a>
+                    <motion.a
+                      href="https://linkedin.com/company/tedxsfu"
+                      target="_blank"
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Image
+                        src={iconLinkedin}
+                        alt="LinkedIn"
+                        className={true ? "" : "invert"}
+                      />
+                    </motion.a>
                   </div>
-              </motion.div>
-            </Link>
-            <Link href="/about"
-            className={`col-span-full lg:col-span-5 lg:col-start-2 2xl:col-start-2 2xl:col-span-3 text-header-mobile h-[22.5dvh] justify-between border-t border-white pt-2
-            min-h-[8rem]`}
-            onClick={(e) => {
-              setOpen(false);
-            }}>
-              <motion.div
-                className={`grid grid-cols-4 md:grid-cols-6 lg:grid-cols-5 2xl:grid-cols-3 gap-x-4 h-[22.5dvh] justify-between
-                min-h-[8rem]`}
-                animate={{
-                  opacity: (isAboutPage && (selected != "/" )) ? 1 : 0.5
-                }}
-                whileHover={{
-                  opacity: 1,
-                }}
-                onHoverStart={e => {setSelected("/about")}}
-                onHoverEnd={e => {setSelected(path.pathname)}}
-                >
-                  <span className="text-body-mobile md:text-body md:col-span-2 lg:col-span-1">2</span>
-                  <div className="col-span-3 md:col-span-2">
-                    About us
-                    <p className="text-micro-mobile">13 years in the making</p>
-                  </div>
-              </motion.div>
-            </Link>
-
-
-                <motion.h2 className="text-lead-mobile lg:text-body col-span-full xs:col-span-3 xs:col-start-2 md:col-span-2 lg:col-span-1 lg:col-start-2 mb-4 2xl:col-start-2">Let&apos;s keep in touch</motion.h2>
-                
-                <Copiable desc="General inquiries &amp; ticketing" email="info@tedxsfu.com"/>
-                <Copiable desc="Partnership inquiries" email="partner@tedxsfu.com"/>
-
-              <div className="col-span-full xs:col-span-3 xs:col-start-2 md:col-start-3 lg:col-start-3 lg:col-span-2 mb-12 flex flex-row gap-2">
-                  <motion.a href="https://www.facebook.com/profile.php?id=100094774132695" target="_blank" whileHover={{scale: 1.1}}
-                  >
-                    <Image
-                      src={iconFacebook}
-                      alt="Facebook"
-                      className={true ? "" : "invert"}
-                    />
-                  </motion.a>
-                  <motion.a href="https://instagram.com/tedxsfu" target="_blank" whileHover={{scale: 1.1}}>
-                    <Image
-                      src={iconInstagram}
-                      alt="Instagram"
-                      className={true ? "" : "invert"}
-                    />
-                  </motion.a>
-                  <motion.a href="https://twitter.com/tedxsfu" target="_blank" whileHover={{scale: 1.1}}>
-                    <Image
-                      src={iconTwitter}
-                      alt="Twitter"
-                      className={true ? "" : "invert"}
-                    />
-                  </motion.a>
-                  <motion.a href="https://linkedin.com/company/tedxsfu" target="_blank" whileHover={{scale: 1.1}}>
-                    <Image
-                      src={iconLinkedin}
-                      alt="LinkedIn"
-                      className={true ? "" : "invert"}
-                    />
-                  </motion.a>
                 </div>
+              </div>
 
-              <div className="col-span-full sm:col-start-2 sm:col-span-3 pb-32 md:pb-24 md:col-span-3 md:col-start-3 lg:col-span-2 lg:col-start-3">
-                <div className="mb-6 text-lead">
-                  Early bird ticket sale and exclusive content — right to your inbox.
+              <div className="col-span-full mt-auto pb-32 sm:col-span-3 sm:col-start-2 md:col-span-3 md:col-start-3 md:pb-12 lg:col-span-2 lg:col-start-3">
+                <div className="mb-6 mt-auto text-body ">
+                  Early bird ticket sale and exclusive content — right to your
+                  inbox.
                 </div>
                 <EmailForm isDarkMode={true} />
               </div>
-          </MainGrid>
-        </motion.div>}
+            </MainGrid>
+          </motion.div>
+        )}
       </AnimatePresence>
       {children}
     </NavContext.Provider>
