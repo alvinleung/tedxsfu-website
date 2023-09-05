@@ -39,7 +39,7 @@ const Footer = ({
 }: Props) => {
   const { isOverscrollComplete, isOverscrollStarted, overscrollProgress } =
     useOverscroll(OverscrollDirection.DOWN, 100);
-  const { scrollEnd, scrollY, scrollTo } = useContainerScroll();
+  const { scrollEnd, scrollY, scrollTo, setCanScroll } = useContainerScroll();
 
   const windowDim = useWindowDimension();
   const offset = useTransform(overscrollProgress, [0, 1], [0, 15]);
@@ -74,6 +74,10 @@ const Footer = ({
   const beginPageTransition = () => {
     const bounds = transitionImageContainerRef.current.getBoundingClientRect();
     setTransitionInitialY(bounds.top - windowDim.height * 0.2);
+
+    // scorll lock
+    scrollTo(scrollY.getPrevious());
+    setCanScroll(false);
 
     // only change page after updating the exit transition value
     requestAnimationFrame(() => router.push(href));
