@@ -96,75 +96,56 @@ const StickyGallery = (props: Props) => {
       className="col-span-full col-start-1 h-[300dvh]"
       ref={boundsRef}
     >
-      <motion.div
-        className="h-[100dvh]"
-        initial={{
-          y: 0,
-          // scale: fullScreenScale,
-        }}
-        style={{
-          y: containerOffset,
-          // scale: scale,
-        }}
-      >
-        <motion.div
-          initial={{ y: 0 }}
-          style={{
-            y: contentOffsetY,
-          }}
-        >
-          {imgData.map((image, i) => {
-            return (
-              <div className="relative h-[100dvh]" key={i}>
-                <motion.div
-                  className="origin-bottom overflow-hidden"
-                  style={{
-                    // only scale the last one
-                    scale: imgData.length - 1 === i ? scale : 1,
-                  }}
-                  key={i}
-                >
-                  <ImageSlide src={image.src} />
-                </motion.div>
-                <MainGrid className="absolute bottom-8 px-4 text-white">
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                    }}
-                    animate={{
-                      opacity: 0.5,
-                      transition: {
-                        duration: AnimationConfig.SLOW,
-                        delay: 0.5,
-                      },
-                    }}
-                    className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2"
-                  >
-                    <div>{image.date}</div>
-                    <div>{image.year}</div>
-                  </motion.div>
-                  <motion.div
-                    initial={{
-                      opacity: 0,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      transition: {
-                        duration: AnimationConfig.SLOW,
-                        delay: 0.3,
-                      },
-                    }}
-                    className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro md:col-span-2 md:pr-0 lg:col-span-1"
-                  >
-                    {" "}
-                    {image.description}
-                  </motion.div>
-                </MainGrid>
-              </div>
-            );
-          })}
-        </motion.div>
-      </motion.div>
+      {imgData.map((image, i) => {
+        return (
+          <div className="relative h-[100dvh]" key={i}>
+            <motion.div
+              className="origin-bottom overflow-hidden"
+              style={{
+                // only scale the last one
+                scale: imgData.length - 1 === i ? scale : 1,
+              }}
+              key={i}
+            >
+              <ImageSlide src={image.src} />
+            </motion.div>
+            <MainGrid className="absolute bottom-8 px-4 text-white">
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 0.5,
+                  transition: {
+                    duration: AnimationConfig.SLOW,
+                    delay: 0.5,
+                  },
+                }}
+                className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2"
+              >
+                <div>{image.date}</div>
+                <div>{image.year}</div>
+              </motion.div>
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                  transition: {
+                    duration: AnimationConfig.SLOW,
+                    delay: 0.3,
+                  },
+                }}
+                className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro md:col-span-2 md:pr-0 lg:col-span-1"
+              >
+                {" "}
+                {image.description}
+              </motion.div>
+            </MainGrid>
+          </div>
+        );
+      })}
     </motion.div>
   );
 };
