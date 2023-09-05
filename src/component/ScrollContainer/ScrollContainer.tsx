@@ -119,14 +119,22 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     };
   }, [scrollY]);
 
-  const navContext = useNavContext();
-  console.log("THe nav is open: " + navContext.open);
+  const nav = useNavContext();
+
+  useEffect(() => {
+    if (nav.isOpened) {
+      setCanScroll(false);
+      return;
+    }
+    setCanScroll(true);
+  }, [nav.isOpened]);
+
   useEffect(() => {
     if (scrollDirection == ScrollDirection.DOWN) {
-      navContext.setScrollState(NavScrollState.SCROLLED);
+      nav.setScrollState(NavScrollState.SCROLLED);
     } else {
       // console.log("default");
-      navContext.setScrollState(NavScrollState.DEFAULT);
+      nav.setScrollState(NavScrollState.DEFAULT);
     }
   }, [scrollDirection]);
 

@@ -23,12 +23,12 @@ type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
-  open: boolean;
+  isOpened: boolean;
 }
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
-  open: false,
+  isOpened: false,
 });
 export enum NavScrollState {
   SCROLLED,
@@ -90,7 +90,7 @@ const Nav = ({ children }: Props) => {
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
 
   return (
-    <NavContext.Provider value={{ setScrollState, open: isOpened }}>
+    <NavContext.Provider value={{ setScrollState, isOpened }}>
       <motion.nav className="grid h-12 grid-cols-4 justify-between gap-x-3 px-4 pt-4 xs:gap-x-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8">
         <motion.a
           key="logo"
