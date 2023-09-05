@@ -43,7 +43,7 @@ export const NavButton = ({
           </span>
           <div className="col-span-3 text-header-mobile md:col-span-2">
             {title}
-            <p className="mt-1 text-micro-mobile">{description}</p>
+            <p className="mt-1 text-body">{description}</p>
           </div>
         </motion.div>
       </motion.div>
