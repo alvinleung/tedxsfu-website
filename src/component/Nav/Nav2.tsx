@@ -24,12 +24,12 @@ type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
-  open: boolean;
+  isOpened: boolean;
 }
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
-  open: false,
+  isOpened: false,
 });
 export enum NavScrollState {
   SCROLLED,
@@ -92,7 +92,7 @@ const Nav = ({ children }: Props) => {
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
 
   return (
-    <NavContext.Provider value={{ setScrollState, open: isOpened }}>
+    <NavContext.Provider value={{ setScrollState, isOpened }}>
       <motion.nav className="grid h-12 grid-cols-4 justify-between gap-x-3 px-4 pt-4 xs:gap-x-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8">
         <motion.a
           key="logo"
@@ -225,9 +225,9 @@ const Nav = ({ children }: Props) => {
           selected={selectedPath}
           hasTransitionBegan={hasTransitionBegan}
         />
-        <MainGrid className="absolute left-0 top-0 h-[100dvh] px-4">
+        <MainGrid className="absolute left-0 top-0 h-[100dvh] overflow-scroll px-4">
           <div
-            className={`col-span-full flex flex-col pt-[15vh] md:col-span-3 md:col-start-2 md:pt-[30vh] 2xl:col-start-2`}
+            className={`col-span-full flex flex-col pt-[18vh] md:col-span-3 md:col-start-2 2xl:col-start-2`}
           >
             <StaggerTransition
               staggerIndex={1}
