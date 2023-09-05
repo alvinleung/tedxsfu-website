@@ -201,8 +201,9 @@ const Nav = ({ children }: Props) => {
         animate={{
           opacity: isOpened ? 1 : 0,
           transition: {
-            duration: AnimationConfig.FAST,
-            // ease: AnimationConfig.EASING_IN_OUT,
+            duration: AnimationConfig.NORMAL,
+            ease: "linear",
+            delay: isOpened ? 0 : 0.2,
           },
         }}
         exit={{
