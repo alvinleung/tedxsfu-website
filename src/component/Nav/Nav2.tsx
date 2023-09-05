@@ -49,11 +49,11 @@ const Nav = ({ children }: Props) => {
   const EXIT_DURATION = 1000;
   const prevPath = useRef(router.pathname);
   useEffect(() => {
-    if (!isOpened) return;
-
     // toggle the path name
     if (prevPath.current === router.pathname) return;
     prevPath.current = router.pathname;
+
+    if (!isOpened) return;
 
     console.log("transitioning to new page");
 
