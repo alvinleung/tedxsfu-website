@@ -13,7 +13,7 @@ import MainGrid from "../layouts/MainGrid";
 type Props = { desc: string; email: string };
 
 const Copiable = ({ desc, email }: Props) => {
-    const lg = useBreakpoint(breakpoints.lg);
+const lg = useBreakpoint(breakpoints.lg);
   const [value, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
   const copyAction = () => {
@@ -29,7 +29,7 @@ const Copiable = ({ desc, email }: Props) => {
           onClick={copyAction}
           className="flex w-full justify-between text-body-mobile opacity-50"
           onHoverEnd={(e) => {
-            setCopied(false);
+            setCopied(!lg);
           }}
         >
           {email}
@@ -47,7 +47,7 @@ const Copiable = ({ desc, email }: Props) => {
           className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full px-2 py-1 text-micro text-white/50"
           layout
           onHoverEnd={(e) => {
-            setCopied(false);
+            setCopied(!lg);
           }}
         >
           <AnimatePresence mode="popLayout">
