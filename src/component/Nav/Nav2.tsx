@@ -48,6 +48,11 @@ const Nav = ({ children }: Props) => {
     setSelected(path.pathname);
   };
 
+  const EXIT_DURATION = 1100;
+  const handleLinkClick = () => {
+    setTimeout(() => setOpen(false), EXIT_DURATION);
+  };
+
   const [value, copy] = useCopyToClipboard();
 
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
@@ -180,12 +185,18 @@ const Nav = ({ children }: Props) => {
                   }}
                   initial={{
                     opacity: 0,
+                    y: 20,
                   }}
                   animate={{
                     opacity: 0.5,
+                    y: 0,
                   }}
                   exit={{
                     opacity: 0,
+                  }}
+                  transition={{
+                    duration: AnimationConfig.VERY_SLOW,
+                    ease: AnimationConfig.EASING,
                   }}
                 >
                   <Image
@@ -208,12 +219,18 @@ const Nav = ({ children }: Props) => {
                   autoPlay
                   initial={{
                     opacity: 0,
+                    y: 20,
                   }}
                   animate={{
                     opacity: 1,
+                    y: 0,
                   }}
                   exit={{
                     opacity: 0,
+                  }}
+                  transition={{
+                    duration: AnimationConfig.VERY_SLOW,
+                    ease: AnimationConfig.EASING,
                   }}
                 />
               )}
@@ -224,7 +241,7 @@ const Nav = ({ children }: Props) => {
                 className={`col-span-full flex flex-col md:col-span-3 md:col-start-2 2xl:col-start-2`}
               >
                 <NavButton
-                  onClick={() => setOpen(false)}
+                  onClick={handleLinkClick}
                   onEnterPreview={() => {
                     setSelected("/");
                   }}
@@ -238,7 +255,7 @@ const Nav = ({ children }: Props) => {
                   description={"TEDxSFU 2023 at a glance"}
                 />
                 <NavButton
-                  onClick={() => setOpen(false)}
+                  onClick={handleLinkClick}
                   onEnterPreview={() => {
                     setSelected("/about");
                   }}
