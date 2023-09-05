@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface NavButtonProps {
   onEnterPreview: () => void;
@@ -19,10 +20,15 @@ export const NavButton = ({
   href,
   isHighlighted,
 }: NavButtonProps) => {
+  const router = useRouter();
+  const handleLinkClick = () => {
+    if (router.pathname !== href) router.push(href);
+  };
+
   return (
-    <Link
-      href={href}
-      className="block h-[7rem]"
+    <a
+      onClick={handleLinkClick}
+      className="block h-[7rem] cursor-pointer"
       onMouseEnter={() => onEnterPreview?.()}
       onMouseLeave={() => onExitPreview?.()}
     >
@@ -47,6 +53,6 @@ export const NavButton = ({
           </div>
         </motion.div>
       </motion.div>
-    </Link>
+    </a>
   );
 };

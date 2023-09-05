@@ -49,6 +49,7 @@ const Nav = ({ children }: Props) => {
 
   const EXIT_DURATION = 1000;
   const prevPath = useRef(router.pathname);
+
   useEffect(() => {
     // toggle the path name
     if (prevPath.current === router.pathname) return;
@@ -61,9 +62,7 @@ const Nav = ({ children }: Props) => {
     setHasTransitionBegan(true);
     const timeout = setTimeout(() => {
       setIsOpened(false);
-
       setTimeout(() => setSelectedPath(""), 500);
-
       requestAnimationFrame(() => {
         setHasTransitionBegan(false);
       });
