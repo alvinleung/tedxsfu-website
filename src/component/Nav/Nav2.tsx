@@ -219,7 +219,7 @@ const Nav = ({ children }: Props) => {
               )}
               {/* </AnimatePresence> */}
             </motion.div>
-            <MainGrid className="h-[100dvh] pt-[20vh]">
+            <MainGrid className="h-[100dvh] pt-[18vh]">
               <div
                 className={`col-span-full flex flex-col md:col-span-3 md:col-start-2 2xl:col-start-2`}
               >
