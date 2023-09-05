@@ -6,10 +6,10 @@ import { useNavContext } from "./Nav2";
 const Hamburger = () => {
     const navContext = useNavContext();
    
-    const [open, setOpen] = useState(navContext.open);
+    const [open, setOpen] = useState(navContext.isOpened);
     useEffect(() => {
-        setOpen(navContext.open)
-    }, [navContext.open])
+        setOpen(navContext.isOpened)
+    }, [navContext.isOpened])
 
     const pathVariants = {
         a: { d: ["M4 5 L20 5 L20 7 L4 7 L4 5Z", "M4 11 L20 11 L20 13 L4 13 L4 11Z", "M7.0502 5.63605L18.3639 16.9498L16.9497 18.364L5.63599 7.05026L7.0502 5.63605Z"] },
