@@ -223,9 +223,9 @@ const Nav = ({ children }: Props) => {
           selected={selectedPath}
           hasTransitionBegan={hasTransitionBegan}
         />
-        <MainGrid className="absolute left-0 top-0 h-[100dvh] px-4">
+        <MainGrid className="absolute left-0 top-0 h-[100dvh] overflow-scroll px-4">
           <div
-            className={`col-span-full flex flex-col pt-[15vh] md:col-span-3 md:col-start-2 md:pt-[30vh] 2xl:col-start-2`}
+            className={`col-span-full flex flex-col pt-[18vh] md:col-span-3 md:col-start-2 2xl:col-start-2`}
           >
             <StaggerTransition
               staggerIndex={1}
