@@ -8,15 +8,15 @@ const directors = [
     description:
       " designer at Reap, previously at Live Nation and Ticketmaster.",
   },
-  {
-    name: "Josh Ralla",
-    pronouns: "he/him",
-    position: "Executive director",
-    stroke: "about/team-josh.png",
-    fill: "about/team-josh-fill.svg",
-    description:
-      " coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
-  },
+  // {
+  //   name: "Josh Ralla",
+  //   pronouns: "he/him",
+  //   position: "Executive director",
+  //   stroke: "about/team-josh.png",
+  //   fill: "about/team-josh-fill.svg",
+  //   description:
+  //     " coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
+  // },
   {
     name: "Kayla You",
     pronouns: "she/her",
@@ -67,18 +67,12 @@ const teams = [
   {
     name: "Events",
     members: [
-      {
-        name: "Josh Ralla",
-        position: "Event director",
-        linkedin: "https://linkedin.com/in/joshralla",
-        image: "profilePictures/joshrProfile.jpeg",
-      },
-      {
-        name: "Josh Chang",
-        position: "Event coordinator",
-        linkedin: "https://linkedin.com/in/jcchang2",
-        image: "profilePictures/joshcProfile.jpeg",
-      },
+      // {
+      //   name: "Josh Ralla",
+      //   position: "Event director",
+      //   linkedin: "https://linkedin.com/in/joshralla",
+      //   image: "profilePictures/joshrProfile.jpeg",
+      // },
       {
         name: "Andrea Choi",
         position: "Event coordinator",
@@ -87,7 +81,7 @@ const teams = [
       },
       {
         name: "Merry Chowdhury",
-        position: "Event doordinator",
+        position: "Event coordinator",
         linkedin: "https://linkedin.com/in/merrychowdhury",
         image: "TEDxSFU_logo_black.svg"
       },
@@ -157,7 +151,7 @@ const teams = [
       },
       {
         name: "Chris Thomas",
-        position: "Designer + developer",
+        position: "Motion designer",
         linkedin: "https://linkedin.com/in/chrisvthomas/",
         image: "profilePictures/christProfile.jpeg"
       },
@@ -213,10 +207,22 @@ const teams = [
         image: "TEDxSFU_logo_black.svg"
       },
       {
+        name: "Robin Yang",
+        position: "Marketing director",
+        linkedin: "https://www.linkedin.com/in/robin-yang-641b5228a/",
+        image: "profilePictures/robinyProfile.jpeg"
+      },
+      {
         name: "Emily Le",
         position: "Marketing coordinator",
         linkedin: "https://linkedin.com/in/emily-le-7b46861ba",
         image: "profilePictures/emilylProfile.jpeg"
+      },
+      {
+        name: "Andrea Li",
+        position: "Marketing coordinator",
+        linkedin: "https://www.linkedin.com/in/andrea-li-343474213/",
+        image: "TEDxSFU_logo_black.svg"
       },
     ],
   },

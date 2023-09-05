@@ -75,7 +75,6 @@ const Nav = ({ children }: Props) => {
     // when new page load
   }, [router.pathname, isOpened]);
 
-  const [open, setOpen] = useState(false);
   const toggleOpen = () => {
     setIsOpened(!isOpened);
     setSelectedPath("");
@@ -181,19 +180,19 @@ const Nav = ({ children }: Props) => {
           Buy tickets
         </motion.a>
         <motion.button
-          className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md border border-white border-opacity-25 border-opacity-50
+          className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md max-md:border border-white border-opacity-25
             
             py-3 mix-blend-exclusion md:h-9 md:max-w-[3rem]
             "
           // style={{width: "max(auto, 4rem)"}}
           onClick={toggleOpen}
         >
-          <Hamburger open={isOpened}/>
+          <Hamburger/>
         </motion.button>
       </motion.nav>
 
       <motion.div
-        className="fixed bottom-0 top-0 z-40 w-full overflow-y-auto"
+        className="fixed bottom-0 top-0 z-40 w-full overflow-hidden"
         style={{
           pointerEvents: isOpened && !hasTransitionBegan ? "all" : "none",
         }}
@@ -225,7 +224,7 @@ const Nav = ({ children }: Props) => {
           selected={selectedPath}
           hasTransitionBegan={hasTransitionBegan}
         />
-        <MainGrid className="absolute left-0 top-0 h-[100dvh] overflow-scroll px-4">
+        <MainGrid className="absolute left-0 max-md:right-0 top-0 h-[100dvh] overflow-scroll px-4">
           <div
             className={`col-span-full flex flex-col pt-[18vh] md:col-span-3 md:col-start-2 2xl:col-start-2`}
           >

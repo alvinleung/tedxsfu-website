@@ -31,7 +31,7 @@ const EventInfoModule = (props: Props) => {
           Performing Arts
         </span>
         <span className="sm:hidden">The Centre Vancouver</span>
-        <span className="mt-1 flex gap-x-4 opacity-50 xs:block">
+        <span className="mt-1 hidden flex gap-x-4 opacity-50 xs:block">
           Directions
         </span>
       </a>

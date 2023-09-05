@@ -34,7 +34,7 @@ const Hamburger = () => {
                 variants={pathVariants}
                 animate={open ? "a" : "b"}
                 transition={{
-                    duration: AnimationConfig.FAST,
+                    duration: AnimationConfig.NORMAL,
                     ease: AnimationConfig.EASING_INVERTED
                 }}
             /> 
@@ -42,7 +42,7 @@ const Hamburger = () => {
                 variants={pathVariants2}
                 animate={open ? "a" : "b"}
                 transition={{
-                    duration: AnimationConfig.FAST,
+                    duration: AnimationConfig.NORMAL,
                     ease: AnimationConfig.EASING_INVERTED
                 }}
             /> 
@@ -50,7 +50,7 @@ const Hamburger = () => {
                variants={pathVariants3}
                animate={open ? "a" : "b"}
                transition={{
-                duration: AnimationConfig.FAST,
+                duration: AnimationConfig.NORMAL,
                 ease: AnimationConfig.EASING_INVERTED
                 }}
             /> 
