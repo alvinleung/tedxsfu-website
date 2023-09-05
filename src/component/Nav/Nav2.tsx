@@ -180,14 +180,14 @@ const Nav = ({ children }: Props) => {
           Buy tickets
         </motion.a>
         <motion.button
-          className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md max-md:border border-white border-opacity-25
+          className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md border-white border-opacity-25 py-3
             
-            py-3 mix-blend-exclusion md:h-9 md:max-w-[3rem]
+            mix-blend-exclusion max-md:border md:h-9 md:max-w-[3rem]
             "
           // style={{width: "max(auto, 4rem)"}}
           onClick={toggleOpen}
         >
-          <Hamburger/>
+          <Hamburger />
         </motion.button>
       </motion.nav>
 
@@ -224,7 +224,7 @@ const Nav = ({ children }: Props) => {
           selected={selectedPath}
           hasTransitionBegan={hasTransitionBegan}
         />
-        <MainGrid className="absolute left-0 max-md:right-0 top-0 h-[100dvh] overflow-scroll px-4">
+        <MainGrid className="absolute left-0 top-0 h-[100dvh] overflow-auto px-4 max-md:right-0">
           <div
             className={`col-span-full flex flex-col pt-[18vh] md:col-span-3 md:col-start-2 2xl:col-start-2`}
           >
