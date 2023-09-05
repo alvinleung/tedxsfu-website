@@ -14,6 +14,7 @@ type Props = { desc : string, email : string };
 
 
 const Copiable = ({ desc, email }: Props) => {
+    const lg = useBreakpoint(breakpoints.lg);
   const [value, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
   const copyAction = () => {
@@ -29,7 +30,7 @@ const Copiable = ({ desc, email }: Props) => {
         <motion.button
             onClick={copyAction} 
             className="text-body-mobile opacity-50 w-full flex justify-between"
-            onHoverEnd={e => {setCopied(false)}}
+            onHoverEnd={e => setCopied(lg ? false : true)}
             >
             {email}
         </motion.button>
@@ -45,13 +46,13 @@ const Copiable = ({ desc, email }: Props) => {
         onClick={copyAction} 
         className="place-self-end text-white/50 w-fit py-1 px-2 flex gap-x-1 rounded-full overflow-hidden"
         layout
-        onHoverEnd={e => {setCopied(false)}}
+        onHoverEnd={e => {setCopied(lg ? false : true)}}
         >
             <AnimatePresence mode="popLayout">
                 <Image
                     src={iconCopy}
                     alt=""
-                    className={"invert opacity-50 "}/> 
+                    className={"invert opacity-50 aspect-square"}/> 
             {
                 copied ?
                 <motion.span
