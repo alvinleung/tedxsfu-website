@@ -27,10 +27,11 @@ const StaggerTransition = ({
         y: secondary ? 0 : isActive ? 0 : 10,
         transition: {
           ease: secondary ? "linear" : AnimationConfig.EASING,
-          duration:
-            secondary && isActive
+          duration: isActive
+            ? secondary
               ? AnimationConfig.VERY_SLOW
-              : AnimationConfig.SLOW,
+              : AnimationConfig.SLOW
+            : AnimationConfig.SLOW,
           delay: isActive ? staggerIndex * STAGGER_DELAY : 0,
         },
       }}
