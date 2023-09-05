@@ -24,7 +24,7 @@ export const NavButton = ({
   return (
     <Link
       href={href}
-      className={`col-span-full min-h-[4rem] md:col-span-3 md:col-start-2 2xl:col-start-2`}
+      className="pb-12"
       onClick={() => onClick?.()}
       onMouseEnter={() => onEnterPreview?.()}
       onMouseLeave={() => onExitPreview?.()}

@@ -269,95 +269,99 @@ const Nav = ({ children }: Props) => {
               )}
               {/* </AnimatePresence> */}
             </motion.div>
-            <MainGrid className="h-[100dvh] pt-32">
-              <NavButton
-                onClick={() => setOpen(false)}
-                onEnterPreview={() => {
-                  setSelected("/");
-                }}
-                onExitPreview={() => {
-                  setSelected(path.pathname);
-                }}
-                href={"/"}
-                isHighlighted={selected === "/"}
-                index={"1"}
-                title={"Event Info"}
-                description={"TEDxSFU 2023 at a glance"}
-              />
-              <NavButton
-                onClick={() => setOpen(false)}
-                onEnterPreview={() => {
-                  setSelected("/about");
-                }}
-                onExitPreview={() => {
-                  setSelected(path.pathname);
-                }}
-                href={"/about"}
-                isHighlighted={selected === "/about"}
-                index={"2"}
-                title={"About Us"}
-                description={"13 years in the making"}
-              />
-
+            <MainGrid className="h-[100dvh] pt-[20vh]">
               <div
-                className="col-span-4 grid grid-cols-4 gap-4 pt-4 md:col-span-3 md:col-start-2 md:grid-cols-3"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.3)" }}
+                className={`col-span-full flex flex-col md:col-span-3 md:col-start-2 2xl:col-start-2`}
               >
-                <h2 className="leading-tight">Let&apos;s keep in touch</h2>
-                <div className="col-span-3 md:col-span-2">
-                  <Copiable
-                    desc="General inquiries &amp; ticketing"
-                    email="info@tedxsfu.com"
-                  />
-                  <Copiable
-                    desc="Partnership inquiries"
-                    email="partner@tedxsfu.com"
-                  />
-                  <div className="mt-4 flex flex-row gap-2">
-                    <motion.a
-                      href="https://www.facebook.com/profile.php?id=100094774132695"
-                      target="_blank"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <Image
-                        src={iconFacebook}
-                        alt="Facebook"
-                        className={true ? "" : "invert"}
-                      />
-                    </motion.a>
-                    <motion.a
-                      href="https://instagram.com/tedxsfu"
-                      target="_blank"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <Image
-                        src={iconInstagram}
-                        alt="Instagram"
-                        className={true ? "" : "invert"}
-                      />
-                    </motion.a>
-                    <motion.a
-                      href="https://twitter.com/tedxsfu"
-                      target="_blank"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <Image
-                        src={iconTwitter}
-                        alt="Twitter"
-                        className={true ? "" : "invert"}
-                      />
-                    </motion.a>
-                    <motion.a
-                      href="https://linkedin.com/company/tedxsfu"
-                      target="_blank"
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <Image
-                        src={iconLinkedin}
-                        alt="LinkedIn"
-                        className={true ? "" : "invert"}
-                      />
-                    </motion.a>
+                <NavButton
+                  onClick={() => setOpen(false)}
+                  onEnterPreview={() => {
+                    setSelected("/");
+                  }}
+                  onExitPreview={() => {
+                    setSelected(path.pathname);
+                  }}
+                  href={"/"}
+                  isHighlighted={selected === "/"}
+                  index={"1"}
+                  title={"Event Info"}
+                  description={"TEDxSFU 2023 at a glance"}
+                />
+                <NavButton
+                  onClick={() => setOpen(false)}
+                  onEnterPreview={() => {
+                    setSelected("/about");
+                  }}
+                  onExitPreview={() => {
+                    setSelected(path.pathname);
+                  }}
+                  href={"/about"}
+                  isHighlighted={selected === "/about"}
+                  index={"2"}
+                  title={"About Us"}
+                  description={"13 years in the making"}
+                />
+
+                <div
+                  className="col-span-4 grid grid-cols-4 gap-4 pt-4 md:col-span-3 md:col-start-2 md:grid-cols-3"
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.3)" }}
+                >
+                  <h2 className="leading-tight">Let&apos;s keep in touch</h2>
+                  <div className="col-span-3 md:col-span-2">
+                    <Copiable
+                      desc="General inquiries &amp; ticketing"
+                      email="info@tedxsfu.com"
+                    />
+                    <Copiable
+                      desc="Partnership inquiries"
+                      email="partner@tedxsfu.com"
+                    />
+                    <div className="mt-4 flex flex-row gap-2">
+                      <motion.a
+                        href="https://www.facebook.com/profile.php?id=100094774132695"
+                        target="_blank"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Image
+                          src={iconFacebook}
+                          alt="Facebook"
+                          className={true ? "" : "invert"}
+                        />
+                      </motion.a>
+                      <motion.a
+                        href="https://instagram.com/tedxsfu"
+                        target="_blank"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Image
+                          src={iconInstagram}
+                          alt="Instagram"
+                          className={true ? "" : "invert"}
+                        />
+                      </motion.a>
+                      <motion.a
+                        href="https://twitter.com/tedxsfu"
+                        target="_blank"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Image
+                          src={iconTwitter}
+                          alt="Twitter"
+                          className={true ? "" : "invert"}
+                        />
+                      </motion.a>
+                      <motion.a
+                        href="https://linkedin.com/company/tedxsfu"
+                        target="_blank"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <Image
+                          src={iconLinkedin}
+                          alt="LinkedIn"
+                          className={true ? "" : "invert"}
+                        />
+                      </motion.a>
+                    </div>
                   </div>
                 </div>
               </div>
