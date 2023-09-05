@@ -15,9 +15,12 @@ const BackgroundPreview = ({ selected, hasTransitionBegan }: Props) => {
         className="relative left-0 h-full w-full overflow-hidden bg-black"
         animate={{
           opacity: hasTransitionBegan ? 1 : 0.5,
+          scale: hasTransitionBegan ? 1 : 1.1,
         }}
         transition={{
           duration: AnimationConfig.VERY_SLOW,
+          ease: AnimationConfig.EASING_IN_OUT,
+          delay: 0.5,
         }}
       >
         <VideoBackground active={selected === "/"} />
