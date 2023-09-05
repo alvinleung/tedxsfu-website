@@ -22,7 +22,7 @@ export const NavButton = ({
   return (
     <Link
       href={href}
-      className="block h-24"
+      className="block h-[7rem]"
       onMouseEnter={() => onEnterPreview?.()}
       onMouseLeave={() => onExitPreview?.()}
     >
