@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface NavButtonProps {
-  onClick: () => void;
   onEnterPreview: () => void;
   onExitPreview: () => void;
   isHighlighted: boolean;
@@ -12,7 +11,6 @@ interface NavButtonProps {
   description: string;
 }
 export const NavButton = ({
-  onClick,
   onEnterPreview,
   onExitPreview,
   title,
@@ -24,20 +22,19 @@ export const NavButton = ({
   return (
     <Link
       href={href}
-      className="pb-12"
-      onClick={() => onClick?.()}
+      className="block h-24"
       onMouseEnter={() => onEnterPreview?.()}
       onMouseLeave={() => onExitPreview?.()}
     >
       <motion.div
         animate={{
-          opacity: isHighlighted ? 1 : 0.5,
+          opacity: isHighlighted ? 1 : 0.4,
         }}
         style={{
-          borderTop: "1px solid rgba(255,255,255,.5)",
+          borderTop: "1px solid rgba(255,255,255,.3)",
         }}
         whileTap={{
-          scale: 0.97,
+          scale: 0.98,
         }}
       >
         <motion.div className={`grid grid-cols-4 gap-4 pt-3 md:grid-cols-3`}>

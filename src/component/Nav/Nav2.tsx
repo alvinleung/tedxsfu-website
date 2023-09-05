@@ -1,13 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import Image from "next/image";
-import iconFacebook from "../../../public/img/ic_baseline-facebook.svg";
-import iconInstagram from "../../../public/img/mdi_instagram.svg";
-import iconLinkedin from "../../../public/img/mdi_linkedin.svg";
-import iconTwitter from "../../../public/img/mdi_twitter.svg";
-import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
-import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 import { useCopyToClipboard } from "usehooks-ts";
 import { useWindowDimension } from "../../hooks/useWindowDimension";
 import Copiable from "./Copiable";
@@ -17,6 +15,9 @@ import MainGrid from "../layouts/MainGrid";
 import EmailForm from "../Footer/EmailForm";
 import { NavButton } from "./NavButton";
 import EventInfoModule from "./EventInfoModule";
+import BackgroundPreview from "./BackgroundPreview";
+import StaggerTransition from "./StaggerTransition";
+import SocialModule from "./SocialModule";
 
 type Props = { children: React.ReactNode };
 
@@ -35,22 +36,53 @@ export enum NavScrollState {
 }
 
 const Nav = ({ children }: Props) => {
-  const path = useRouter();
-  const isAboutPage = path.pathname != "/";
+  const router = useRouter();
+  const isAboutPage = router.pathname != "/";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
   const viewport = useWindowDimension();
 
-  const [selected, setSelected] = useState(path.pathname);
+  const [selectedPath, setSelectedPath] = useState("");
 
-  const [open, setOpen] = useState(true);
+  const [isOpened, setIsOpened] = useState(true);
+  const [hasTransitionBegan, setHasTransitionBegan] = useState(false);
+
+  const EXIT_DURATION = 1000;
+  const prevPath = useRef(router.pathname);
+  useEffect(() => {
+    if (!isOpened) return;
+
+    // toggle the path name
+    if (prevPath.current === router.pathname) return;
+    prevPath.current = router.pathname;
+
+    console.log("transitioning to new page");
+
+    setHasTransitionBegan(true);
+    const timeout = setTimeout(() => {
+      setIsOpened(false);
+
+      setTimeout(() => setSelectedPath(""), 500);
+
+      requestAnimationFrame(() => {
+        setHasTransitionBegan(false);
+      });
+    }, EXIT_DURATION);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+    // when new page load
+  }, [router.pathname, isOpened]);
+
   const toggleOpen = () => {
-    setOpen(!open);
-    setSelected(path.pathname);
+    setIsOpened(!isOpened);
+    setSelectedPath("");
+    setHasTransitionBegan(false);
   };
 
-  const EXIT_DURATION = 1100;
-  const handleLinkClick = () => {
-    setTimeout(() => setOpen(false), EXIT_DURATION);
+  const handlePreviewExit = () => {
+    if (hasTransitionBegan) return;
+    setSelectedPath("");
   };
 
   const [value, copy] = useCopyToClipboard();
@@ -58,7 +90,7 @@ const Nav = ({ children }: Props) => {
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
 
   return (
-    <NavContext.Provider value={{ setScrollState, open }}>
+    <NavContext.Provider value={{ setScrollState, open: isOpened }}>
       <motion.nav className="grid h-12 grid-cols-4 justify-between gap-x-3 px-4 pt-4 xs:gap-x-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8">
         <motion.a
           key="logo"
@@ -66,8 +98,8 @@ const Nav = ({ children }: Props) => {
           className="flex h-12 w-32 flex-row-reverse"
           onClick={(e) => {
             e.preventDefault();
-            setOpen(false);
-            path.push("/");
+            setIsOpened(false);
+            router.push("/");
           }}
         >
           <motion.svg
@@ -134,7 +166,6 @@ const Nav = ({ children }: Props) => {
               }}
             />
           )}
-          {open && <EventInfoModule />}
         </AnimatePresence>
 
         <motion.a
@@ -159,191 +190,121 @@ const Nav = ({ children }: Props) => {
         </motion.button>
       </motion.nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed bottom-0 top-0 z-40 w-full overflow-y-auto bg-black px-4"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
+      <motion.div
+        className="fixed bottom-0 top-0 z-40 w-full overflow-y-auto"
+        style={{
+          pointerEvents: isOpened ? "all" : "none",
+        }}
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: isOpened ? 1 : 0,
+          transition: {
+            duration: AnimationConfig.FAST,
+            // ease: AnimationConfig.EASING_IN_OUT,
+          },
+        }}
+        exit={{
+          opacity: 0,
+        }}
+      >
+        <div className="absolute bottom-0 z-50 h-fit w-full md:bottom-auto md:top-0">
+          <StaggerTransition
+            staggerIndex={4}
+            isActive={isOpened && !hasTransitionBegan}
+            secondary
           >
-            <motion.div className="fixed left-0 -z-10">
-              {/* <AnimatePresence> */}
-              {selected === "/about" ? (
-                <motion.div
-                  // style={{scale: 1.1}}
-                  className="origin-top overflow-hidden"
-                  style={{
-                    // only scale the last one
-                    scale: 1.125,
-                  }}
-                  initial={{
-                    opacity: 0,
-                    y: 20,
-                  }}
-                  animate={{
-                    opacity: 0.5,
-                    y: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                  }}
-                  transition={{
-                    duration: AnimationConfig.VERY_SLOW,
-                    ease: AnimationConfig.EASING,
-                  }}
-                >
-                  <Image
-                    src="/about/about-2.jpg"
-                    className="h-[100dvh] object-cover"
-                    width={2560}
-                    height={1440}
-                    alt="TEDxSFU conference"
-                  />
-                </motion.div>
-              ) : (
-                <motion.video
-                  src="./website-transition-graphic.webm"
-                  aria-description="video"
-                  className="h-[100dvh] object-cover"
-                  width={2560}
-                  height={1440}
-                  muted
-                  loop
-                  autoPlay
-                  initial={{
-                    opacity: 0,
-                    y: 20,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                  }}
-                  transition={{
-                    duration: AnimationConfig.VERY_SLOW,
-                    ease: AnimationConfig.EASING,
-                  }}
-                />
-              )}
-              {/* </AnimatePresence> */}
-            </motion.div>
-            <MainGrid className="h-[100dvh] pt-[18vh]">
-              <div
-                className={`col-span-full flex flex-col md:col-span-3 md:col-start-2 2xl:col-start-2`}
+            <EventInfoModule />
+          </StaggerTransition>
+        </div>
+        <BackgroundPreview
+          selected={selectedPath}
+          hasTransitionBegan={hasTransitionBegan}
+        />
+        <MainGrid className="absolute left-0 top-0 h-[100dvh] px-4">
+          <div
+            className={`col-span-full flex flex-col pt-[15vh] md:col-span-3 md:col-start-2 md:pt-[30vh] 2xl:col-start-2`}
+          >
+            <StaggerTransition
+              staggerIndex={1}
+              isActive={isOpened && !hasTransitionBegan}
+            >
+              <NavButton
+                onEnterPreview={() => {
+                  !hasTransitionBegan && setSelectedPath("/");
+                }}
+                onExitPreview={handlePreviewExit}
+                href={"/"}
+                isHighlighted={
+                  selectedPath === "/" ||
+                  (router.pathname === "/" && selectedPath === "")
+                }
+                index={"1"}
+                title={"Event Info"}
+                description={"TEDxSFU 2023 at a glance"}
+              />
+            </StaggerTransition>
+
+            <StaggerTransition
+              staggerIndex={2}
+              isActive={isOpened && !hasTransitionBegan}
+            >
+              <NavButton
+                onEnterPreview={() => {
+                  !hasTransitionBegan && setSelectedPath("/about");
+                }}
+                onExitPreview={handlePreviewExit}
+                href={"/about"}
+                isHighlighted={
+                  selectedPath === "/about" ||
+                  (router.pathname === "/about" && selectedPath === "")
+                }
+                index={"2"}
+                title={"About Us"}
+                description={"13 years in the making"}
+              />
+            </StaggerTransition>
+
+            <StaggerTransition
+              staggerIndex={3}
+              isActive={isOpened && !hasTransitionBegan}
+            >
+              <motion.div
+                className="col-span-4 grid grid-cols-4 gap-4 pt-4 md:col-span-3 md:col-start-2 md:grid-cols-3"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.3)" }}
               >
-                <NavButton
-                  onClick={handleLinkClick}
-                  onEnterPreview={() => {
-                    setSelected("/");
-                  }}
-                  onExitPreview={() => {
-                    setSelected(path.pathname);
-                  }}
-                  href={"/"}
-                  isHighlighted={selected === "/"}
-                  index={"1"}
-                  title={"Event Info"}
-                  description={"TEDxSFU 2023 at a glance"}
-                />
-                <NavButton
-                  onClick={handleLinkClick}
-                  onEnterPreview={() => {
-                    setSelected("/about");
-                  }}
-                  onExitPreview={() => {
-                    setSelected(path.pathname);
-                  }}
-                  href={"/about"}
-                  isHighlighted={selected === "/about"}
-                  index={"2"}
-                  title={"About Us"}
-                  description={"13 years in the making"}
-                />
-
-                <div
-                  className="col-span-4 grid grid-cols-4 gap-4 pt-4 md:col-span-3 md:col-start-2 md:grid-cols-3"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.3)" }}
-                >
-                  <h2 className="leading-tight">Let&apos;s keep in touch</h2>
-                  <div className="col-span-3 md:col-span-2">
-                    <Copiable
-                      desc="General inquiries &amp; ticketing"
-                      email="info@tedxsfu.com"
-                    />
-                    <Copiable
-                      desc="Partnership inquiries"
-                      email="partner@tedxsfu.com"
-                    />
-                    <div className="mt-4 flex flex-row gap-2">
-                      <motion.a
-                        href="https://www.facebook.com/profile.php?id=100094774132695"
-                        target="_blank"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Image
-                          src={iconFacebook}
-                          alt="Facebook"
-                          className={true ? "" : "invert"}
-                        />
-                      </motion.a>
-                      <motion.a
-                        href="https://instagram.com/tedxsfu"
-                        target="_blank"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Image
-                          src={iconInstagram}
-                          alt="Instagram"
-                          className={true ? "" : "invert"}
-                        />
-                      </motion.a>
-                      <motion.a
-                        href="https://twitter.com/tedxsfu"
-                        target="_blank"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Image
-                          src={iconTwitter}
-                          alt="Twitter"
-                          className={true ? "" : "invert"}
-                        />
-                      </motion.a>
-                      <motion.a
-                        href="https://linkedin.com/company/tedxsfu"
-                        target="_blank"
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <Image
-                          src={iconLinkedin}
-                          alt="LinkedIn"
-                          className={true ? "" : "invert"}
-                        />
-                      </motion.a>
-                    </div>
-                  </div>
+                <h2 className="leading-tight">Let&apos;s keep in touch</h2>
+                <div className="col-span-3 md:col-span-2">
+                  <Copiable
+                    desc="General inquiries &amp; ticketing"
+                    email="info@tedxsfu.com"
+                  />
+                  <Copiable
+                    desc="Partnership inquiries"
+                    email="partner@tedxsfu.com"
+                  />
+                  <SocialModule />
                 </div>
-              </div>
+              </motion.div>
+            </StaggerTransition>
+          </div>
 
-              <div className="col-span-full mt-auto pb-32 sm:col-span-3 sm:col-start-2 md:col-span-3 md:col-start-3 md:pb-12 lg:col-span-2 lg:col-start-3">
-                <div className="mb-6 mt-auto text-body ">
-                  Early bird ticket sale and exclusive content — right to your
-                  inbox.
-                </div>
-                <EmailForm isDarkMode={true} />
+          <div className="col-span-full mt-auto pb-32 sm:col-span-3 sm:col-start-2 md:col-span-3 md:col-start-3 md:pb-12 lg:col-span-2 lg:col-start-3">
+            <StaggerTransition
+              staggerIndex={4}
+              isActive={isOpened && !hasTransitionBegan}
+              secondary
+            >
+              <div className="mb-6 mt-auto text-body ">
+                Early bird ticket sale and exclusive content — right to your
+                inbox.
               </div>
-            </MainGrid>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <EmailForm isDarkMode={true} />
+            </StaggerTransition>
+          </div>
+        </MainGrid>
+      </motion.div>
       {children}
     </NavContext.Provider>
   );

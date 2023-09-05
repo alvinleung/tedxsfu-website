@@ -9,7 +9,7 @@ import { ScrollContainer } from "@/component/ScrollContainer/ScrollContainer";
 import { useRouter } from "next/router";
 import TransitionEffect from "@/component/transition/TransitionEffect";
 import Nav from "@/component/Nav/Nav2";
-import Grid from "@/component/Grid"
+import Grid from "@/component/Grid";
 
 const chiaroscuro = localFont({
   src: [
@@ -31,7 +31,7 @@ const helvetica = localFont({
     {
       path: "../fonts/helvetica/HelveticaNeue-Lt.woff",
       weight: "200",
-      style: "normal"
+      style: "normal",
     },
     {
       path: "../fonts/helvetica/HelveticaNeue-Roman.woff",
@@ -53,24 +53,24 @@ export default function App({ Component, pageProps }: AppProps) {
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
         <Nav>
-        <Grid/>
-        <TransitionEffect>
-          <ScrollContainer>
-            <main className={`${helvetica.className}`}>
-              <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KYF3KQBR9" />
-              <Script id="google-analytics">
-                {`
+          <Grid />
+          <TransitionEffect>
+            <ScrollContainer>
+              <main className={`${helvetica.className}`}>
+                <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KYF3KQBR9" />
+                <Script id="google-analytics">
+                  {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
     
               gtag('config', 'G-4KYF3KQBR9');
             `}
-              </Script>
-              <Component {...pageProps} />{" "}
-            </main>
-          </ScrollContainer>
-        </TransitionEffect>
+                </Script>
+                <Component {...pageProps} />{" "}
+              </main>
+            </ScrollContainer>
+          </TransitionEffect>
         </Nav>
       </MousePosContextProvider>
     </WindowDimensionContextProvider>
