@@ -193,7 +193,7 @@ const Nav = ({ children }: Props) => {
       <motion.div
         className="fixed bottom-0 top-0 z-40 w-full overflow-y-auto"
         style={{
-          pointerEvents: isOpened ? "all" : "none",
+          pointerEvents: isOpened && !hasTransitionBegan ? "all" : "none",
         }}
         initial={{
           opacity: 0,
