@@ -198,9 +198,13 @@ const ActivityGallery = (props: Props) => {
       <MainGrid ref={containerRef} className="relative">
         <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
           <Sticky top={"140px"} fadeOut className="pt-[6dvh]">
-            <div
+            <motion.div
               className="flex h-[50dvh] flex-col items-end pt-[20vh] 2xl:items-start"
               // style={{ height: windowDim.height * perItemScrollVH }}
+
+              animate={{
+                opacity: isSectionActive ? 1 : 0,
+              }}
             >
               <div className="mb-4">2023</div>
               <div className="relative flex flex-col" ref={monthContainerRef}>
@@ -230,7 +234,7 @@ const ActivityGallery = (props: Props) => {
                   </motion.button>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </Sticky>
         </div>
         <div
@@ -259,7 +263,12 @@ const ActivityGallery = (props: Props) => {
             </div>
           </Sticky>
         </div>
-        <motion.div className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8">
+        <motion.div
+          className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8"
+          animate={{
+            opacity: isSectionActive ? 1 : 0,
+          }}
+        >
           {isDesktopView && (
             <Sticky top={"140px"} fadeOut className="pt-[6dvh]">
               <SlideInfo slide={allMedia[currentSlideIndexClamped]} />
