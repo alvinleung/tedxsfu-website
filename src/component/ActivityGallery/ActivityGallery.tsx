@@ -23,7 +23,10 @@ import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import Fixed from "../ScrollContainer/Fixed";
 import { AnimationConfig } from "../AnimationConfig";
 
-type Props = {};
+type Props = {
+  // onGalleryUnfinish: () => void;
+  // onGalleryFinish: () => void;
+};
 
 interface ActivityMedia {
   src: string;
@@ -61,7 +64,7 @@ interface ActivitiesByMonth {
   activities: Activity[];
 }
 
-const ActivityGallery = (props: Props) => {
+const ActivityGallery = ({}: Props) => {
   const activitiesByMonth = useMemo(() => {
     let activitiesByMonth: ActivitiesByMonth[] = [];
     pastActivities.forEach((currActivity) => {
