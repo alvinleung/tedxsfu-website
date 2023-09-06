@@ -52,7 +52,7 @@ interface ScrollContextInfo {
   scrollContainerRef: MutableRefObject<HTMLDivElement>;
   refreshDocumentMeasurement: () => void;
   isUsingSmoothScroll: boolean;
-  scrollTo: (target: number, smooth: boolean) => void;
+  scrollTo: (target: number, smooth?: boolean) => void;
   canScroll: boolean;
 }
 
