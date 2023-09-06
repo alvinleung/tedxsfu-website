@@ -44,7 +44,7 @@ const lg = useBreakpoint(breakpoints.lg);
             background: "#393939",
           }}
           onClick={copyAction}
-          className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full px-2 py-1 text-micro text-white/50"
+          className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full p-1 pr-2 text-micro text-white/50"
           layout
           onHoverEnd={(e) => {
             setCopied(!lg);
