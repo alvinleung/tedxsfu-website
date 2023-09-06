@@ -95,6 +95,10 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
     return () => cancelAnimationFrame(animFrame);
   }, [isScrubbingVideo]);
 
+  useEffect(() => {
+    requestAnimationFrame(() => videoRef.current.pause());
+  }, []);
+
   const handleMetaDataLoaded = () => {
     setVideoScrollDistance(
       Math.floor(videoRef.current.duration) * playbackConst,
@@ -152,7 +156,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           // src="./about/about-intro-video.mp4"
           loop
           muted
-          // autoPlay
+          autoPlay
           className="h-[100vh] w-[100vw]"
           style={{
             zIndex: -1000,
@@ -163,10 +167,11 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
           }}
         >
           {/* <source
-          type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-          src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"
-        ></source> */}
+            type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+            src="https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4"
+          ></source> */}
           <source type="video/webm;codecs=vp9" src={src.webmVp9}></source>
+
           {/* mp4 as fallback */}
           <source
             // webm command
@@ -178,16 +183,19 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
             // for webm vp8 encoding (supported by mobile safari according to caniuse)
             // ffmpeg -i about-intro-video.mp4 -keyint_min 30 -g 30 -c:v libvpx -crf 30 -b:v 0 -b:a 128k -c:a libopus output.webm
 
+            // for webm vp8 encoding no sound (supported by mobile safari according to caniuse)
+            // ffmpeg -i about-intro-video.mp4 -keyint_min 30 -g 30 -c:v libvpx -crf 30 -b:v 0 -b:a 128k -an output.webm
+
             // how to make webm to play smoothly
             // https://forum.videohelp.com/threads/389787-Using-ffmpeg-to-make-an-html5-webm-video-scroll-smoothly
             // type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
 
             // more resource on a vue component
             // https://github.com/diracleo/vue-scrubbable-video
-            type="video/webm;codecs=vp8"
+            type='video/webm;codecs="vp8"'
+            // type="video/webm"
             src={src.webm}
           ></source>
-
           <source type="video/mp4" src={src.mp4}></source>
         </motion.video>
       </Sticky>
