@@ -44,7 +44,7 @@ const Nav = ({ children }: Props) => {
 
   const [selectedPath, setSelectedPath] = useState("");
 
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
   const [hasTransitionBegan, setHasTransitionBegan] = useState(false);
 
   const EXIT_DURATION = 1000;
@@ -184,7 +184,7 @@ const Nav = ({ children }: Props) => {
             max-md:bottom-4 max-md:right-4 md:right-[4.5rem] md:w-full md:max-w-[10rem] md:text-micro
             "
         >
-          Join Waiting List
+          Join waitlist
         </motion.a>
         <motion.button
           className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md border-white border-opacity-25 py-3

@@ -35,13 +35,13 @@ const directors = [
     description: " drama educator and entertainer, previously at Bell Media.",
   },
   {
-    name: "Youngin Cho",
-    pronouns: "she/her",
+    name: "Robin Yang",
+    pronouns: "he/him",
     position: "Marketing director",
-    stroke: "/about/team-youngin.png",
-    fill: "about/team-youngin-fill.svg",
+    stroke: "/about/team-robin.svg",
+    fill: "about/team-robin-fill.png",
     description:
-      " founder and co-executive director at Sän Illustration, previously at Brother Korea Ltd.",
+      " previously a Field Organizer in the Liberal Party of Canada.",
   },
   {
     name: "Alvin Leung",
@@ -201,16 +201,16 @@ const teams = [
     name: "Marketing",
     members: [
       {
-        name: "Youngin Cho",
-        position: "Marketing director",
-        linkedin: "https://linkedin.com/in/young-in-cho",
-        image: "TEDxSFU_logo_black.svg"
-      },
-      {
         name: "Robin Yang",
         position: "Marketing director",
         linkedin: "https://www.linkedin.com/in/robin-yang-641b5228a/",
         image: "profilePictures/robinyProfile.jpeg"
+      },
+      {
+        name: "Youngin Cho",
+        position: "Marketing coordinator",
+        linkedin: "https://linkedin.com/in/young-in-cho",
+        image: "TEDxSFU_logo_black.svg"
       },
       {
         name: "Emily Le",
