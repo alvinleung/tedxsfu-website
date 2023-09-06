@@ -92,15 +92,12 @@ const ActivityGallery = ({
   const isDesktopView = useBreakpoint(breakpoints.md);
   const windowDim = useWindowDimension();
 
-  const perItemScrollVH = useMemo(
-    () => (isDesktopView ? 1 : 0.8),
-    [isDesktopView],
-  ); // 0.5 vh
+  const perItemScrollHeight = useMemo(() => 1200, []);
 
   const galleryTotalScrollHeight = useMemo(() => {
     // half a scroll per activity
-    return windowDim.height * perItemScrollVH * pastActivities.length;
-  }, [pastActivities, windowDim.height, perItemScrollVH]);
+    return perItemScrollHeight * pastActivities.length;
+  }, [pastActivities, perItemScrollHeight]);
 
   const allMedia = useMemo(() => {
     return pastActivities.reduce((result, currActivity) => {
@@ -263,10 +260,7 @@ const ActivityGallery = ({
           }}
         >
           <Sticky top={"140px"} className="pt-[6dvh]">
-            <div
-              className="relative"
-              style={{ height: windowDim.height * 0.8 * perItemScrollVH }}
-            >
+            <div className="relative h-[50dvh]">
               {allMedia.map((media, index) => {
                 return (
                   <MediaSlide
