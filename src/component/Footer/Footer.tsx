@@ -18,6 +18,7 @@ import Sticky from "../ScrollContainer/Sticky";
 import StickyContainer from "../ScrollContainer/StickyContainer";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
+import Copiable from "../Nav/Copiable";
 import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
@@ -117,42 +118,66 @@ const Footer = ({
               This independent TEDx event is operated under license from TED.
             </div>
             <div className="mb-6 flex flex-row gap-2">
-              <a href="https://" target="_blank">
-                <Image
-                  src={iconFacebook}
-                  alt=""
-                  className={isDarkMode ? "" : "invert"}
-                />
-              </a>
-              <a href="https://instagram.com/tedxsfu" target="_blank">
-                <Image
-                  src={iconInstagram}
-                  alt=""
-                  className={isDarkMode ? "" : "invert"}
-                />
-              </a>
-              <a href="https://twitter.com/tedxsfu">
-                <Image
-                  src={iconTwitter}
-                  alt=""
-                  className={isDarkMode ? "" : "invert"}
-                />
-              </a>
-              <a href="https://linkedin.com/company/tedxsfu" target="_blank">
-                <Image
-                  src={iconLinkedin}
-                  alt=""
-                  className={isDarkMode ? "" : "invert"}
-                />
-              </a>
+            <motion.a
+              href="https://www.facebook.com/profile.php?id=100094774132695"
+              target="_blank"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Image
+                src={iconFacebook}
+                alt="Facebook"
+                className={isDarkMode ? "" : "invert"}
+              />
+            </motion.a>
+            <motion.a
+              href="https://instagram.com/tedxsfu"
+              target="_blank"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Image
+                src={iconInstagram}
+                alt="Instagram"
+                className={isDarkMode ? "" : "invert"}
+              />
+            </motion.a>
+            <motion.a
+              href="https://twitter.com/tedxsfu"
+              target="_blank"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Image
+                src={iconTwitter}
+                alt="Twitter"
+                className={isDarkMode ? "" : "invert"}
+              />
+            </motion.a>
+            <motion.a
+              href="https://linkedin.com/company/tedxsfu"
+              target="_blank"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Image
+                src={iconLinkedin}
+                alt="LinkedIn"
+                className={isDarkMode ? "" : "invert"}
+              />
+            </motion.a>
             </div>
-            <div className="text-body opacity-50">
+            <div className="text-body opacity-50 mb-4">
               TEDxSFU respectfully acknowledges the xʷməθkʷəy̓əm (Musqueam),
               Sḵwx̱wú7mesh Úxwumixw (Squamish), səl̓ilw̓ətaʔɬ (Tsleil-Waututh),
               q̓íc̓əy̓ (Katzie), kʷikʷəƛ̓əm (Kwikwetlem), Qayqayt, Kwantlen,
               Semiahmoo and Tsawwassen peoples on whose unceded traditional
               territories our three campuses reside.
             </div>
+            <Copiable
+                    desc="General inquiries &amp; ticketing"
+                    email="info@tedxsfu.com"
+                  />
+            <Copiable
+              desc="Partnership inquiries"
+              email="partner@tedxsfu.com"
+            />
           </div>
         </MainGrid>
       </motion.footer>
