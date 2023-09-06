@@ -176,8 +176,8 @@ const ActivityGallery = (props: Props) => {
         <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
           <Sticky top={"20vh"} fadeOut>
             <div
-              className="pt-[20vh]"
-              style={{ height: windowDim.height * perItemScrollVH }}
+              className="h-[50dvh] pt-[20vh]"
+              // style={{ height: windowDim.height * perItemScrollVH }}
             >
               <div className="mb-4">2023</div>
               <div className="relative flex flex-col" ref={monthContainerRef}>
@@ -230,14 +230,9 @@ const ActivityGallery = (props: Props) => {
             </div>
           </Sticky>
         </div>
-        <motion.div
-          className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8"
-          animate={{
-            opacity: isSectionActive ? 1 : 0,
-          }}
-        >
+        <motion.div className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8">
           {isDesktopView && (
-            <Sticky top={"40vh"}>
+            <Sticky top={"40vh"} fadeOut>
               <SlideInfo slide={allMedia[currentSlideIndexClamped]} />
             </Sticky>
           )}
@@ -251,7 +246,7 @@ const SlideInfo = ({ slide }: { slide: any }) => (
   <div className="mt-[20vh] flex h-[30vh] flex-col">
     <div className="mb-4 text-body">{slide.header}</div>
     <div className="text-body opacity-50">{slide.description}</div>
-    <div className="mt-auto text-body capitalize opacity-50">
+    <div className="mt-16 text-body capitalize opacity-50">
       {slide.month} {slide.day}
     </div>
   </div>
