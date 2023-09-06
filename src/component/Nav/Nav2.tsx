@@ -89,6 +89,14 @@ const Nav = ({ children }: Props) => {
 
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
 
+  const handleLinkButtonClick = (href: string) => {
+    if (router.pathname !== href) {
+      router.push(href);
+      return;
+    }
+    setIsOpened(false);
+  };
+
   return (
     <NavContext.Provider value={{ setScrollState, isOpened }}>
       <motion.nav className="grid h-12 grid-cols-4 justify-between gap-x-3 px-4 pt-4 xs:gap-x-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8">
@@ -232,6 +240,7 @@ const Nav = ({ children }: Props) => {
               isActive={isOpened && !hasTransitionBegan}
             >
               <NavButton
+                onClick={handleLinkButtonClick}
                 onEnterPreview={() => {
                   !hasTransitionBegan && setSelectedPath("/");
                 }}
@@ -252,6 +261,7 @@ const Nav = ({ children }: Props) => {
               isActive={isOpened && !hasTransitionBegan}
             >
               <NavButton
+                onClick={handleLinkButtonClick}
                 onEnterPreview={() => {
                   !hasTransitionBegan && setSelectedPath("/about");
                 }}

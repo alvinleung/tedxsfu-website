@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 interface NavButtonProps {
   onEnterPreview: () => void;
   onExitPreview: () => void;
+  onClick: (href: string) => void;
   isHighlighted: boolean;
   href: string;
   index: string;
@@ -14,15 +15,15 @@ interface NavButtonProps {
 export const NavButton = ({
   onEnterPreview,
   onExitPreview,
+  onClick,
   title,
   index,
   description,
   href,
   isHighlighted,
 }: NavButtonProps) => {
-  const router = useRouter();
   const handleLinkClick = () => {
-    if (router.pathname !== href) router.push(href);
+    onClick(href);
   };
 
   return (
