@@ -43,9 +43,13 @@ export function useSmoothScroll({ container, canScroll }: SmoothScrollParams) {
   };
   useEffect(() => refreshDocumentMeasurement(), [windowDimension]);
 
-  const scrollTo = (target: number) => {
+  const scrollTo = (target: number, smooth: boolean = false) => {
+    if (!smooth) {
+      targetScrollY.set(target);
+      scrollY.set(target);
+      return;
+    }
     targetScrollY.set(target);
-    scrollY.set(target);
   };
 
   useLayoutEffect(() => {

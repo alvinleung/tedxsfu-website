@@ -127,7 +127,8 @@ const ActivityGallery = (props: Props) => {
   );
 
   const [containerRef, bounds] = useBoundingBox([]);
-  const { scrollY } = useContainerScroll();
+  const { scrollY, scrollTo } = useContainerScroll();
+
   useEffect(() => {
     setCurrentSlideIndex(0);
     const updateSlide = (v: number) => {
@@ -146,6 +147,15 @@ const ActivityGallery = (props: Props) => {
 
   const [monthContainerRef, monthContainerBound] =
     useBoundingBox<HTMLDivElement>([]);
+
+  const gotoMonth = (month: string) => {
+    const monthTargetIndex = allMedia.findIndex((media) => {
+      return media.month === month;
+    });
+    const itemHeight = (bounds.height - windowDim.height) / allMedia.length;
+
+    scrollTo(bounds.top + monthTargetIndex * itemHeight, true);
+  };
 
   return (
     <>
@@ -195,7 +205,8 @@ const ActivityGallery = (props: Props) => {
                   }}
                 />
                 {activitiesByMonth.map((monthActivity, index) => (
-                  <motion.div
+                  <motion.button
+                    onClick={() => gotoMonth(monthActivity.month)}
                     className="text-body uppercase"
                     key={index}
                     animate={{
@@ -204,7 +215,7 @@ const ActivityGallery = (props: Props) => {
                     }}
                   >
                     {monthActivity.month}
-                  </motion.div>
+                  </motion.button>
                 ))}
               </div>
             </div>
