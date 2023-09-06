@@ -12,7 +12,13 @@ import { useWindowDimension } from "@/hooks/useWindowDimension";
 import MediaSlide from "./MediaSlide";
 import { useContainerScroll } from "../ScrollContainer/ScrollContainer";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
-import { AnimateSharedLayout, LayoutGroup, clamp, motion } from "framer-motion";
+import {
+  AnimateSharedLayout,
+  LayoutGroup,
+  clamp,
+  motion,
+  useTransform,
+} from "framer-motion";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import Fixed from "../ScrollContainer/Fixed";
 import { AnimationConfig } from "../AnimationConfig";
@@ -145,6 +151,12 @@ const ActivityGallery = (props: Props) => {
     };
   }, [bounds, allMedia, windowDim, scrollY]);
 
+  const slideIndexContinuousValue = useTransform(scrollY, (latest) => {
+    const itemHeight = (bounds.height - windowDim.height) / allMedia.length;
+    const currentItem = (latest - bounds.top) / itemHeight;
+    return currentItem;
+  });
+
   const [monthContainerRef, monthContainerBound] =
     useBoundingBox<HTMLDivElement>([]);
 
@@ -239,6 +251,7 @@ const ActivityGallery = (props: Props) => {
                     currentSlideIndex={currentSlideIndexClamped}
                     slideCount={allMedia.length}
                     slideIndex={index}
+                    slideIndexContinuousValue={slideIndexContinuousValue}
                     key={index}
                   />
                 );
