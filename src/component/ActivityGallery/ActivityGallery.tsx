@@ -206,7 +206,7 @@ const ActivityGallery = (props: Props) => {
           </Sticky>
         </div>
         <div
-          className="col-span-full md:col-span-3 lg:col-span-4 2xl:col-start-3"
+          className="col-span-full md:col-span-4 lg:col-span-4 2xl:col-start-3"
           style={{
             height: galleryTotalScrollHeight,
           }}
@@ -245,7 +245,9 @@ const ActivityGallery = (props: Props) => {
 const SlideInfo = ({ slide }: { slide: any }) => (
   <div className="mt-[20vh] flex h-[30vh] flex-col">
     <div className="mb-4 text-body">{slide.header}</div>
-    <div className="text-body opacity-50">{slide.description}</div>
+    <div className="text-micro-mobile opacity-50 lg:text-body">
+      {slide.description}
+    </div>
     <div className="mt-16 text-body capitalize opacity-50">
       {slide.month} {slide.day}
     </div>

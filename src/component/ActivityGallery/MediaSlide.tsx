@@ -31,20 +31,24 @@ const MediaSlide = ({
     [],
   );
 
+  const BASE_SCALE = 0.95;
+
   return (
     <div className="absolute top-0 flex h-[60vh] w-full items-center justify-center">
       <motion.img
         src={src}
         className="mx-auto h-full w-full object-contain"
-        // style={{
-        //   opacity: isShowing ? 1 : 0,
-        //   rotate: rotation,
-        // }}
+        style={
+          {
+            // opacity: isShowing ? 1 : 0,
+            // rotate: rotation,
+          }
+        }
         animate={{
           scale:
             currentSlideIndex >= slideIndex
-              ? 1 - (currentSlideIndex - slideIndex) * 0.05
-              : 1,
+              ? BASE_SCALE - (currentSlideIndex - slideIndex) * 0.05
+              : BASE_SCALE,
           // opacity: currentSlideIndex < slideIndex ? 1 : 0,
           x: isShowing ? 0 : originalX,
           y: isShowing ? 0 : originalY,
