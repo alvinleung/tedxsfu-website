@@ -30,7 +30,14 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   fadeOut?: boolean;
 }
 
-const Sticky = ({ children, top, duration, fadeOut, ...htmlProps }: Props) => {
+const Sticky = ({
+  children,
+  top,
+  duration,
+  fadeOut,
+  className,
+  ...htmlProps
+}: Props) => {
   // const windowDim = useWindowDimension();
   const [isDOMReady, setIsDOMReady] = useState(false);
   const { scrollY, isUsingSmoothScroll } = useContainerScroll();
@@ -78,7 +85,9 @@ const Sticky = ({ children, top, duration, fadeOut, ...htmlProps }: Props) => {
     <>
       <motion.div
         ref={containerRef}
-        className={`${isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"}`}
+        className={`${
+          isUsingSmoothScroll ? "h-fit" : "sticky top-0 h-fit"
+        } ${className}`}
         style={{
           top: top,
         }}

@@ -185,7 +185,7 @@ const ActivityGallery = (props: Props) => {
       )}
       <MainGrid ref={containerRef} className="relative">
         <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
-          <Sticky top={"20vh"} fadeOut>
+          <Sticky top={"140px"} fadeOut className="pt-[6dvh]">
             <div
               className="flex h-[50dvh] flex-col items-end pt-[20vh] 2xl:items-start"
               // style={{ height: windowDim.height * perItemScrollVH }}
@@ -227,7 +227,7 @@ const ActivityGallery = (props: Props) => {
             height: galleryTotalScrollHeight,
           }}
         >
-          <Sticky top={"20vh"}>
+          <Sticky top={"140px"} className="pt-[6dvh]">
             <div
               className="relative"
               style={{ height: windowDim.height * 0.8 * perItemScrollVH }}
@@ -248,7 +248,7 @@ const ActivityGallery = (props: Props) => {
         </div>
         <motion.div className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8">
           {isDesktopView && (
-            <Sticky top={"40vh"} fadeOut>
+            <Sticky top={"140px"} fadeOut className="pt-[6dvh]">
               <SlideInfo slide={allMedia[currentSlideIndexClamped]} />
             </Sticky>
           )}
@@ -259,7 +259,7 @@ const ActivityGallery = (props: Props) => {
 };
 
 const SlideInfo = ({ slide }: { slide: any }) => (
-  <div className="mt-[20vh] flex h-[30vh] flex-col">
+  <div className="flex h-[30vh] flex-col pt-[20vh]">
     <div className="mb-4 text-micro-mobile lg:text-body">{slide.header}</div>
     <div className="text-micro-mobile opacity-50 lg:text-body">
       {slide.description}
