@@ -57,7 +57,7 @@ const SectionInfo = ({
   left,
 }: SectionCopyProps) => {
   // const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
-  const isDesktop = useBreakpoint(breakpoints.md);
+  const isDesktop = useBreakpoint(breakpoints.lg);
   const shouldStick = isDesktop || stickyOnMobile;
 
   return (
