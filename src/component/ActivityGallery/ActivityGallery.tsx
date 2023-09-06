@@ -24,8 +24,8 @@ import Fixed from "../ScrollContainer/Fixed";
 import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
-  // onGalleryUnfinish: () => void;
-  // onGalleryFinish: () => void;
+  onScrolledPastGallery: () => void;
+  onScrolledBeforeGallery: () => void;
 };
 
 interface ActivityMedia {
@@ -64,7 +64,10 @@ interface ActivitiesByMonth {
   activities: Activity[];
 }
 
-const ActivityGallery = ({}: Props) => {
+const ActivityGallery = ({
+  onScrolledPastGallery,
+  onScrolledBeforeGallery,
+}: Props) => {
   const activitiesByMonth = useMemo(() => {
     let activitiesByMonth: ActivitiesByMonth[] = [];
     pastActivities.forEach((currActivity) => {
@@ -134,6 +137,19 @@ const ActivityGallery = ({}: Props) => {
     () => currentSlideIndex == currentSlideIndexClamped,
     [currentSlideIndex],
   );
+
+  const isPastGallery = useMemo(
+    () => currentSlideIndex >= allMedia.length,
+    [currentSlideIndex],
+  );
+
+  useEffect(() => {
+    if (isPastGallery) {
+      onScrolledPastGallery();
+      return;
+    }
+    onScrolledBeforeGallery();
+  }, [isPastGallery]);
 
   const [containerRef, bounds] = useBoundingBox([]);
   const { scrollY, scrollTo } = useContainerScroll();

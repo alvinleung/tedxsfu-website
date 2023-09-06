@@ -20,6 +20,7 @@ import {
   SectionInfoHeader,
   SectionLayout,
 } from "@/component/layouts/SectionLayouts";
+import ActivityGallerySection from "@/component/ActivityGallerySection";
 
 type Props = {};
 
@@ -131,6 +132,8 @@ const About = (props: Props) => {
             <PastActivitiesGallery />
           </div>
         </SectionLayout> */}
+
+        <ActivityGallerySection />
 
         <Footer
           pageNumber="1"
