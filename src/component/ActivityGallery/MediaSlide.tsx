@@ -1,6 +1,11 @@
 import { useWindowDimension } from "@/hooks/useWindowDimension";
-import { MotionValue, motion, useTransform } from "framer-motion";
-import React, { useMemo } from "react";
+import {
+  MotionValue,
+  motion,
+  useMotionValueEvent,
+  useTransform,
+} from "framer-motion";
+import React, { useEffect, useMemo, useState } from "react";
 import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
@@ -52,12 +57,32 @@ const MediaSlide = ({
     { clamp: true },
   );
 
+  const [isFlickingGesture, setIsFlickingGesture] = useState(false);
+  const [isIncrementing, setIsIncrementing] = useState(false);
+
+  useMotionValueEvent(slideIndexContinuousValue, "change", (latest) => {
+    const delta = (latest - slideIndexContinuousValue.getPrevious()) * 100;
+    const flickThreshold = 5;
+
+    if (delta > 0) {
+      setIsIncrementing(true);
+    } else {
+      setIsIncrementing(false);
+    }
+
+    // not flicking
+    if (Math.abs(delta) < flickThreshold) {
+      setIsFlickingGesture(false);
+      return;
+    }
+    setIsFlickingGesture(true);
+  });
+
   return (
     <div className="absolute top-0 flex h-[60vh] w-full items-center justify-center">
       <motion.div
         animate={{
           y: isShowing ? 0 : originalY * 0.5,
-
           scale:
             currentSlideIndex >= slideIndex
               ? BASE_SCALE - (currentSlideIndex - slideIndex) * 0.02
@@ -65,8 +90,12 @@ const MediaSlide = ({
         }}
         className="mx-auto h-full w-full"
         transition={{
-          duration: AnimationConfig.NORMAL,
-          ease: AnimationConfig.EASING_IN_OUT,
+          duration: isFlickingGesture ? 0.2 : AnimationConfig.NORMAL,
+          ease: isFlickingGesture
+            ? isIncrementing
+              ? AnimationConfig.EASING
+              : AnimationConfig.EASING_INVERTED
+            : AnimationConfig.EASING_DRAMATIC,
         }}
       >
         <motion.img
@@ -78,8 +107,12 @@ const MediaSlide = ({
                 : originalRotation / 2,
           }}
           transition={{
-            duration: AnimationConfig.NORMAL,
-            ease: AnimationConfig.EASING_IN_OUT,
+            duration: isFlickingGesture ? 0.2 : AnimationConfig.NORMAL,
+            ease: isFlickingGesture
+              ? isIncrementing
+                ? AnimationConfig.EASING
+                : AnimationConfig.EASING_INVERTED
+              : AnimationConfig.EASING_DRAMATIC,
           }}
           className="mx-auto h-full w-full object-contain"
           style={{
