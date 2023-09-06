@@ -38,12 +38,12 @@ const MediaSlide = ({
   const showY = useTransform(
     slideIndexContinuousValue,
     [slideIndex - 1, slideIndex],
-    [originalY * 0.5, 0],
+    [originalY * 0.7, 0],
   );
   const rot = useTransform(
     slideIndexContinuousValue,
     [slideIndex - 2, slideIndex],
-    [rotation, rotation],
+    [originalRotation, rotation],
   );
   const scale = useTransform(
     slideIndexContinuousValue,
@@ -57,10 +57,10 @@ const MediaSlide = ({
       <motion.div
         animate={{
           y: isShowing ? 0 : originalY * 0.5,
-          rotate:
-            currentSlideIndex >= slideIndex
-              ? rotation / 2
-              : originalRotation / 2,
+          // rotate:
+          //   currentSlideIndex >= slideIndex
+          //     ? rotation / 2
+          //     : originalRotation / 2,
         }}
         className="mx-auto h-full w-full"
         transition={{
