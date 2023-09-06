@@ -260,7 +260,7 @@ const ActivityGallery = ({
           }}
         >
           <Sticky top={"140px"} className="pt-[6dvh]">
-            <div className="relative h-[50dvh]">
+            <div className="relative h-[60dvh]">
               {allMedia.map((media, index) => {
                 return (
                   <MediaSlide
