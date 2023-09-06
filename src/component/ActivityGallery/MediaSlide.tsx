@@ -52,7 +52,7 @@ const MediaSlide = ({
   );
   const scale = useTransform(
     slideIndexContinuousValue,
-    [slideIndex, slideIndex + 1],
+    [slideIndex - 1, slideIndex + 2],
     [BASE_SCALE, BASE_SCALE * 0.95],
     { clamp: true },
   );
@@ -90,12 +90,12 @@ const MediaSlide = ({
         }}
         className="mx-auto h-full w-full"
         transition={{
-          duration: isFlickingGesture ? 0.2 : AnimationConfig.NORMAL,
+          duration: isFlickingGesture ? 0.2 : AnimationConfig.SLOW,
           ease: isFlickingGesture
             ? isIncrementing
               ? AnimationConfig.EASING
               : AnimationConfig.EASING_INVERTED
-            : AnimationConfig.EASING_DRAMATIC,
+            : AnimationConfig.EASING_IN_OUT,
         }}
       >
         <motion.img
@@ -107,12 +107,12 @@ const MediaSlide = ({
                 : originalRotation / 2,
           }}
           transition={{
-            duration: isFlickingGesture ? 0.2 : AnimationConfig.NORMAL,
+            duration: isFlickingGesture ? 0.2 : AnimationConfig.SLOW,
             ease: isFlickingGesture
               ? isIncrementing
                 ? AnimationConfig.EASING
                 : AnimationConfig.EASING_INVERTED
-              : AnimationConfig.EASING_DRAMATIC,
+              : AnimationConfig.EASING_IN_OUT,
           }}
           className="mx-auto h-full w-full object-contain"
           style={{
