@@ -92,7 +92,10 @@ const ActivityGallery = ({
   const isDesktopView = useBreakpoint(breakpoints.md);
   const windowDim = useWindowDimension();
 
-  const perItemScrollHeight = useMemo(() => 1200, []);
+  const perItemScrollHeight = useMemo(
+    () => (isDesktopView ? 1200 : 900),
+    [isDesktopView],
+  );
 
   const galleryTotalScrollHeight = useMemo(() => {
     // half a scroll per activity
