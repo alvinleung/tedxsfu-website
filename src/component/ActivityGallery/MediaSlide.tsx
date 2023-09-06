@@ -37,19 +37,19 @@ const MediaSlide = ({
 
   const showY = useTransform(
     slideIndexContinuousValue,
-    [slideIndex - 1, slideIndex],
-    [originalY * 0.7, 0],
+    [slideIndex - 2, slideIndex - 0.5],
+    [originalY * 0.5, 0],
   );
   const rot = useTransform(
     slideIndexContinuousValue,
-    [slideIndex - 2, slideIndex],
-    [originalRotation, rotation],
+    [slideIndex - 2, slideIndex - 1],
+    [0, 0],
   );
   const scale = useTransform(
     slideIndexContinuousValue,
-    [slideIndex - 1, slideIndex],
+    [slideIndex, slideIndex + 1],
     [BASE_SCALE, BASE_SCALE * 0.95],
-    { clamp: false },
+    { clamp: true },
   );
 
   return (
@@ -57,10 +57,11 @@ const MediaSlide = ({
       <motion.div
         animate={{
           y: isShowing ? 0 : originalY * 0.5,
-          // rotate:
-          //   currentSlideIndex >= slideIndex
-          //     ? rotation / 2
-          //     : originalRotation / 2,
+
+          scale:
+            currentSlideIndex >= slideIndex
+              ? BASE_SCALE - (currentSlideIndex - slideIndex) * 0.02
+              : BASE_SCALE,
         }}
         className="mx-auto h-full w-full"
         transition={{
@@ -70,12 +71,22 @@ const MediaSlide = ({
       >
         <motion.img
           src={src}
+          animate={{
+            rotate:
+              currentSlideIndex >= slideIndex
+                ? rotation / 2
+                : originalRotation / 2,
+          }}
+          transition={{
+            duration: AnimationConfig.NORMAL,
+            ease: AnimationConfig.EASING_IN_OUT,
+          }}
           className="mx-auto h-full w-full object-contain"
           style={{
             // opacity: isShowing ? 1 : 0,
             // rotate: rotation,
             y: showY,
-            rotate: rot,
+            // rotate: rot,
             scale: scale,
           }}
         />
