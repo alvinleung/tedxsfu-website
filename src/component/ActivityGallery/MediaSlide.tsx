@@ -64,7 +64,7 @@ const MediaSlide = ({
         }}
         className="mx-auto h-full w-full"
         transition={{
-          duration: AnimationConfig.SLOW,
+          duration: AnimationConfig.NORMAL,
           ease: AnimationConfig.EASING_IN_OUT,
         }}
       >
