@@ -15,6 +15,7 @@ import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { AnimateSharedLayout, LayoutGroup, clamp, motion } from "framer-motion";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import Fixed from "../ScrollContainer/Fixed";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {};
 
@@ -176,17 +177,21 @@ const ActivityGallery = (props: Props) => {
         <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
           <Sticky top={"20vh"} fadeOut>
             <div
-              className="h-[50dvh] pt-[20vh]"
+              className="flex h-[50dvh] flex-col items-end pt-[20vh] xl:items-start"
               // style={{ height: windowDim.height * perItemScrollVH }}
             >
               <div className="mb-4">2023</div>
               <div className="relative flex flex-col" ref={monthContainerRef}>
                 <motion.div
-                  className="absolute -left-3 top-2 h-1 w-1 bg-black"
+                  className="absolute -left-2 top-2 h-1 w-1 bg-black"
                   animate={{
                     y:
                       currentSlideMonthIndex *
                       (monthContainerBound.height / activitiesByMonth.length),
+                    transition: {
+                      duration: AnimationConfig.FAST,
+                      ease: AnimationConfig.EASING,
+                    },
                   }}
                 />
                 {activitiesByMonth.map((monthActivity, index) => (
@@ -244,11 +249,11 @@ const ActivityGallery = (props: Props) => {
 
 const SlideInfo = ({ slide }: { slide: any }) => (
   <div className="mt-[20vh] flex h-[30vh] flex-col">
-    <div className="mb-4 text-body">{slide.header}</div>
+    <div className="mb-4 text-micro-mobile lg:text-body">{slide.header}</div>
     <div className="text-micro-mobile opacity-50 lg:text-body">
       {slide.description}
     </div>
-    <div className="mt-16 text-body capitalize opacity-50">
+    <div className="mt-16 text-micro-mobile capitalize opacity-50 lg:text-body">
       {slide.month} {slide.day}
     </div>
   </div>
