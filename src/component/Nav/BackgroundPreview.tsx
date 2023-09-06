@@ -20,7 +20,7 @@ const BackgroundPreview = ({ selected, hasTransitionBegan }: Props) => {
         transition={{
           duration: AnimationConfig.VERY_SLOW,
           ease: AnimationConfig.EASING_IN_OUT,
-          delay: 0.5,
+          delay: 0.3,
         }}
       >
         <VideoBackground active={selected === "/"} />
