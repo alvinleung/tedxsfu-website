@@ -17,8 +17,12 @@ const EmailForm = ({ isDarkMode }: Props) => {
     EMAIL: "",
   });
 
-  const darkModeColor = "rgba(255,255,255,.3)";
-  const lightModeColor = "rgba(0,0,0,.8)";
+  const darkModeColor = "rgba(255,255,255,.15)";
+  const lightModeColor = "rgba(0,0,0,.2)";
+  const darkModeColorFocused = "rgba(255,255,255,.3)";
+  const lightModeColorFocused = "rgba(0,0,0,.4)";
+
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <motion.form
@@ -26,9 +30,15 @@ const EmailForm = ({ isDarkMode }: Props) => {
       className={`text-micro backdrop-blur-sm ${
         isDarkMode ? "bg-neutral-900/25 text-white/50" : "text-black/50"
       } overflow-hidden rounded-lg
-      border px-2 pb-2 pt-4`}
+      border px-3 pb-2 pt-3`}
       animate={{
-        borderColor: isDarkMode ? darkModeColor : lightModeColor,
+        borderColor: isDarkMode
+          ? isFocused
+            ? darkModeColorFocused
+            : darkModeColor
+          : isFocused
+          ? lightModeColorFocused
+          : lightModeColor,
         paddingBottom: success ? "1rem" : "0.5rem",
       }}
       onSubmit={(event) => {
@@ -46,7 +56,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
             }}
           >
             Your email address*
-            <div className="flex flex-row gap-x-4">
+            <div className="mt-1 flex flex-row gap-x-4">
               <input
                 type="email"
                 className={`peer w-full !border-none !bg-transparent py-2 !text-body ${
@@ -56,6 +66,8 @@ const EmailForm = ({ isDarkMode }: Props) => {
                 }`}
                 placeholder="your-name@email.com"
                 id="EMAIL"
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 // autoFocus
                 value={fields.EMAIL}
                 disabled={success}
@@ -66,7 +78,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
                 <motion.button
                   className={`
             h-8
-            rounded-sm px-4 py-2 
+            rounded-[4px] px-4 py-2 
             text-micro uppercase peer-placeholder-shown:cursor-not-allowed peer-invalid:cursor-not-allowed`}
                   disabled={!isEmail(fields.EMAIL)}
                   animate={{
