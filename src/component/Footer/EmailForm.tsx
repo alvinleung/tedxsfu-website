@@ -122,7 +122,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
               opacity: 0,
             }}
           >
-            An error occured&mdash;please try again
+            {message}
           </motion.p>
         )}
         {success && (
