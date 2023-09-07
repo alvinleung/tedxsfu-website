@@ -88,8 +88,8 @@ const EmailForm = ({ isDarkMode }: Props) => {
                         ? "#4F4F4F"
                         : "#303030"
                       : isEmail(fields.EMAIL)
-                      ? "#303030"
-                      : "#BBBBBB",
+                      ? "#666"
+                      : "#A5A5A5",
                   }}
                   whileHover={{
                     background: isDarkMode
@@ -97,8 +97,8 @@ const EmailForm = ({ isDarkMode }: Props) => {
                         ? "#555"
                         : "#303030"
                       : isEmail(fields.EMAIL)
-                      ? "#4F4F4F"
-                      : "#CCCCCC",
+                      ? "#777"
+                      : "#A5A5A5",
                   }}
                 >
                   {!loading && !success && <>Join</>}

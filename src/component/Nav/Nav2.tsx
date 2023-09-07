@@ -292,10 +292,12 @@ const Nav = ({ children }: Props) => {
                   <Copiable
                     desc="General inquiries &amp; ticketing"
                     email="info@tedxsfu.com"
+                    isDarkMode={true}
                   />
                   <Copiable
                     desc="Partnership inquiries"
                     email="partner@tedxsfu.com"
+                    isDarkMode={true}
                   />
                   <SocialModule />
                 </div>
