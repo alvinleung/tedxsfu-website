@@ -213,12 +213,6 @@ const teams = [
         image: "TEDxSFU_logo_black.svg"
       },
       {
-        name: "Emily Le",
-        position: "Marketing coordinator",
-        linkedin: "https://linkedin.com/in/emily-le-7b46861ba",
-        image: "profilePictures/emilylProfile.jpeg"
-      },
-      {
         name: "Andrea Li",
         position: "Marketing coordinator",
         linkedin: "https://www.linkedin.com/in/andrea-li-343474213/",
