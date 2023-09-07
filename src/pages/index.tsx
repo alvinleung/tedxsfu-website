@@ -108,7 +108,7 @@ export default function Home() {
         <h2
         >More magic, coming soon</h2>
         <p className="opacity-50"
-        >There's more to come in the near future. Be sure to stay in touch for future ticketing and more event details.</p>
+        >There&apos;s more to come in the near future. Be sure to stay in touch for future ticketing and more event details.</p>
         </div>
       </SectionLayout>
       <Footer
