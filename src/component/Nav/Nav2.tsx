@@ -102,6 +102,7 @@ const Nav = ({ children }: Props) => {
       <motion.nav className="grid h-12 grid-cols-4 justify-between gap-x-3 px-4 pt-4 xs:gap-x-4 md:grid-cols-5 lg:grid-cols-6 2xl:grid-cols-8">
         <motion.a
           key="logo"
+          aria-label="TEDxSFU"
           href={"/"}
           className="flex h-12 w-32 flex-row-reverse"
           onClick={(e) => {
@@ -192,6 +193,7 @@ const Nav = ({ children }: Props) => {
             mix-blend-exclusion max-md:border md:h-9 md:max-w-[3rem]
             "
           // style={{width: "max(auto, 4rem)"}}
+          aria-label="Menu"
           onClick={toggleOpen}
         >
           <Hamburger />

@@ -218,7 +218,8 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
       >
         <svg
           style={condition}
-          className="fill-white"
+          className="
+          fill-white"
           // width="363"
           // height="303"
           viewBox="0 0 268 64"

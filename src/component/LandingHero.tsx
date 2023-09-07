@@ -1,4 +1,4 @@
-import Logo from "../../public/Logo";
+import Logo from "../EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";

@@ -212,6 +212,7 @@ const Footer = ({
         <motion.img
           className={`relative z-10 mt-4`}
           src="../icon/arrow-white.svg"
+          alt=""
           style={{ x: offset }}
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,

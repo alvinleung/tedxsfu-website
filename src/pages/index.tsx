@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../../public/Logo";
+import Logo from "../EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import Nav from "@/component/Nav/Nav";
 import Head from "next/head";
