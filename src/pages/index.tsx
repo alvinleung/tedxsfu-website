@@ -96,7 +96,7 @@ export default function Home() {
           </div>
           <div className="col-span-full sm:col-span-2">
             <h2 className="text-body mb-4">Be the first in line for tickets: subscribe for $5 off and bite-sized event details</h2>
-            <hr className="col-span-full opacity-50 my-2"/>
+            <hr className="col-span-full opacity-50 my-4"/>
             <EmailForm isDarkMode={true}/>
           </div>
         </div>
