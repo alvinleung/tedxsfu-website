@@ -53,7 +53,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <WindowDimensionContextProvider>
       <MousePosContextProvider>
         <Nav>
-          {/* <Grid /> */}
+          <Grid />
           <TransitionEffect>
             <ScrollContainer>
               <main className={`${helvetica.className}`}>

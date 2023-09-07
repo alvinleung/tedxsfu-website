@@ -94,7 +94,7 @@ export default function Home() {
             </p>
           </div>
           <div className="col-span-full sm:col-span-2">
-            <h2 className="text-body mb-4">$5 off your ticket, bite-sized event details, all in your inbox.</h2>
+            <h2 className="text-body mb-4">Be the first in line for tickets: subscribe for $5 off and bite-sized event details</h2>
             <EmailForm isDarkMode={true}/>
           </div>
         </div>
