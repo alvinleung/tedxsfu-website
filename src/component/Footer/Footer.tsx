@@ -112,11 +112,15 @@ const Footer = ({
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
+            transition={{
+              delay: AnimationConfig.NORMAL
+            }}
             className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
               <div className="mb-6 text-lead">
                 Early bird ticket sale and exclusive content — right to your
                 inbox.
               </div>
+              
               <EmailForm isDarkMode={isDarkMode} />
             </motion.div>}
           </AnimatePresence>
@@ -125,6 +129,7 @@ const Footer = ({
             <div className="pb-6 text-body md:text-lead">
               This independent TEDx event is operated under license from TED.
             </div>
+            
             <div className="mb-6 flex flex-row gap-2">
             
             <motion.a
@@ -179,6 +184,9 @@ const Footer = ({
               Semiahmoo and Tsawwassen peoples on whose unceded traditional
               territories our three campuses reside.
             </div>
+
+            <hr className="col-span-full opacity-50 my-2" style={{borderTopColor: isDarkMode ? "#FFFFFF7F" : "#0000007F"}}/>
+
             <Copiable
                     desc="General inquiries &amp; ticketing"
                     email="info@tedxsfu.com"

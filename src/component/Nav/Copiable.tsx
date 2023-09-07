@@ -38,14 +38,15 @@ const lg = useBreakpoint(breakpoints.lg);
       {useBreakpoint(breakpoints.sm) && (
         <motion.button
           animate={{
-            background: isDarkMode  ? "#242424" : "#4F4F4F"
+            background: isDarkMode  ? "#393939" : "#777",
+            color: isDarkMode ? "#FFFFFF7F" : "#FFFFFF9F"
             // : "#242424"
           }}
           whileHover={{
-            background: isDarkMode ? "#393939" : "#5F5F5F",
+            background: isDarkMode ? "#444444" : "#5F5F5F",
           }}
           onClick={copyAction}
-          className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full p-1 pr-2 text-micro text-white/50"
+          className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full p-1 pr-2 text-micro"
           layout
           onHoverEnd={(e) => {
             setCopied(!lg);
