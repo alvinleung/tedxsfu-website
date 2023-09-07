@@ -5,7 +5,7 @@ import MainGrid from "../layouts/MainGrid";
 import arrowTopRight from "../../../public/img/mdi_arrow-top-right.svg"
 
 type Props = {
-  className: string
+  className?: string
 };
 
 export const EventInfoModule = (props: Props) => {
