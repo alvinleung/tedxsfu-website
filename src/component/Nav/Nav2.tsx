@@ -176,7 +176,7 @@ const Nav = ({ children }: Props) => {
           )}
         </AnimatePresence>
 
-        <motion.a
+        {/* <motion.a
           className="fixed z-50 flex h-9 w-[calc((2*(100vw-5rem)/4)+1rem)] items-center justify-center rounded-md border border-black border-opacity-25 bg-white
             py-3
             text-center text-micro-mobile
@@ -185,7 +185,7 @@ const Nav = ({ children }: Props) => {
             "
         >
           Join waitlist
-        </motion.a>
+        </motion.a> */}
         <motion.button
           className="fixed right-4 z-50 col-span-1 col-start-4 flex h-6 w-full max-w-[calc((1*(100vw-5rem)/4))] items-center justify-center justify-self-end rounded-md border-white border-opacity-25 py-3
             

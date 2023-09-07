@@ -191,17 +191,19 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   const condition = (
-    width >= breakpoints["2xl"] && {height: "11.5vw"}
+    width >= breakpoints["2xl"] && {height: "24vh", maxHeight: "11.5vw"}
     ||
-    width >= breakpoints.lg && {height: "15.25vw"}
+    width >= breakpoints.xl && {height: "min(24vh)", maxHeight: "15vw"}
     ||
-    width >= breakpoints.md && {height: "min(15.5vw, 24vh)"}
+    width >= breakpoints.lg && {height: "min(24vh)", maxHeight: "15.4vw"}
+    ||
+    width >= breakpoints.md && {height: "min(24vh)", maxHeight: "15.5vw"}
     ||
     // width >= breakpoints.sm && {height: "11vw"}
 
     // ||
 
-    {minHeight: "69px", height: "min(22vw, 20vh)"}
+    {minHeight: "69px", height: "min(20vh)", maxHeight: "22vw"}
   )
 
   return (
@@ -211,7 +213,7 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
       <div 
         className="flex flex-col gap-4 max-sm:mt-16"
         style={{
-          marginTop: width >= breakpoints.sm ? "max(1rem, calc(-37.5vw + 304px))" : "4rem"
+          marginTop: useBreakpoint(breakpoints.md) ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25vh - 4rem)))" : "min(max(calc(-37.5vw + 19rem), 1rem, calc(2rem + 22vw)), max(4rem, calc(25vh - 4rem)))"
         }}
       >
         <svg
