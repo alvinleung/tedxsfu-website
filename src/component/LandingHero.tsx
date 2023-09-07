@@ -57,11 +57,11 @@ export const LandingHero = () => {
   }, []);
 
   return (
-    <section className="max-w-screen flex h-[100dvh] flex-col overflow-hidden px-4 lg:justify-center">
+    <section className="max-w-screen flex flex-col overflow-hidden px-4 lg:justify-center">
       <motion.div
         initial={{ scale: 50 }}
         animate={anim}
-        className="my-auto flex flex-col items-center justify-center gap-8 max-lg:pointer-events-none lg:my-16 lg:flex-row"
+        className="my-auto flex flex-col items-center justify-center gap-8 max-lg:pointer-events-none lg:flex-row"
       >
         {/* <a
           className={`pointer-events-auto text-center uppercase leading-tight lg:translate-x-28`}

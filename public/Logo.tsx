@@ -197,18 +197,23 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
     ||
     width >= breakpoints.md && {height: "min(15.5vw, 24vh)"}
     ||
-    width >= breakpoints.sm && {height: "11vw"}
+    // width >= breakpoints.sm && {height: "11vw"}
 
-    ||
+    // ||
 
-    {height: "min(22vw,"}
+    {minHeight: "69px", height: "min(22vw, 20vh)"}
   )
 
   return (
     <LogoAnimationContext.Provider
       value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
     >
-      <div className="flex flex-col gap-4">
+      <div 
+        className="flex flex-col gap-4 max-sm:mt-16"
+        style={{
+          marginTop: width >= breakpoints.sm ? "max(1rem, calc(-37.5vw + 304px))" : "4rem"
+        }}
+      >
         <svg
           style={condition}
           className="fill-white"
