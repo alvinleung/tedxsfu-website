@@ -11,6 +11,8 @@ import MainGrid from "@/component/layouts/MainGrid";
 import { LandingHero } from "@/component/LandingHero";
 import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
 import { useEffect } from "react";
+import EmailForm from "@/component/Footer/EmailForm";
+import { EventInfoModuleCond }  from "@/component/Nav/EventInfoModule";
 
 export default function Home() {
   type SectionLayoutProps = {
@@ -44,7 +46,7 @@ export default function Home() {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <div className="max-w-screen relative h-[100dvh] bg-black">
+      <div className="max-w-screen relative bg-black"> 
         <LandingHero />
         {/* <section className="absolute bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
           <a href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
@@ -80,16 +82,21 @@ export default function Home() {
       </div>
       <SectionLayout>
         <div
-          className="
-        col-span-4 col-start-1
-        my-32 text-lead-mobile sm:col-span-2 sm:col-start-3 sm:my-48 md:col-start-4 md:my-64 lg:col-start-5 lg:text-lead xl:col-start-4 2xl:col-start-6"
+          className="my-16 col-span-full lg:col-span-4 lg:col-start-2 2xl:col-start-3 grid grid-cols-4 gap-x-4 gap-y-8"
         >
-          <h2>A notice for Remembrance Day</h2>
-          <p className="opacity-50">
-            As our event will be held on November 11, we will be dedicating 20
-            minutes of our program commemorating Canadian veterans&#8212;past
-            and present.
-          </p>
+          
+          <div className="col-span-full sm:col-span-2 grid grid-cols-2 gap-x-4">
+            <EventInfoModuleCond className="col-span-full mb-8"/>
+            <hr className="col-span-full opacity-50"/>
+            <h2 className="uppercase opacity-50 text-micro-mobile md:text-micro">Note for 11/11</h2>
+            <p className="opacity-50 text-micro-mobile md:text-micro">
+              In honour of Remembrance Day, 20 minutes of our program will be dedicated to Canadian veterans.
+            </p>
+          </div>
+          <div className="col-span-full sm:col-span-2">
+            <h2 className="text-body mb-4">$5 off your ticket, bite-sized event details, all in your inbox.</h2>
+            <EmailForm isDarkMode={true}/>
+          </div>
         </div>
       </SectionLayout>
       <Footer

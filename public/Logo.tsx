@@ -191,19 +191,19 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   const condition = (
-    width >= breakpoints["2xl"] && {height: "24vh", maxHeight: "11.5vw"}
+    width >= breakpoints["2xl"] && {height: "max(11.5vw, 24vh)", maxHeight: "11.5vw", minHeight:"9rem"}
     ||
-    width >= breakpoints.xl && {height: "min(24vh)", maxHeight: "15vw"}
+    width >= breakpoints.xl && {height: "min(calc(-50vw + 59rem), 24vh)", maxHeight: "15.4vw", minHeight:"9rem"}
     ||
-    width >= breakpoints.lg && {height: "min(24vh)", maxHeight: "15.4vw"}
+    width >= breakpoints.lg && {height: "max(calc(46.875vw - 25rem), 24vh)", maxHeight: "15.4vw"}
     ||
-    width >= breakpoints.md && {height: "min(24vh)", maxHeight: "15.5vw"}
+    width >= breakpoints.md && {height: "24vh", maxHeight: "15.5vw"}
     ||
     // width >= breakpoints.sm && {height: "11vw"}
 
     // ||
 
-    {minHeight: "69px", height: "min(20vh)", maxHeight: "22vw"}
+    {minHeight: "69px", height: "20vh", maxHeight: "22vw"}
   )
 
   return (

@@ -14,7 +14,7 @@ import { AnimationConfig } from "../AnimationConfig";
 import MainGrid from "../layouts/MainGrid";
 import EmailForm from "../Footer/EmailForm";
 import { NavButton } from "./NavButton";
-import EventInfoModule from "./EventInfoModule";
+import { EventInfoModule } from "./EventInfoModule";
 import BackgroundPreview from "./BackgroundPreview";
 import StaggerTransition from "./StaggerTransition";
 import SocialModule from "./SocialModule";
