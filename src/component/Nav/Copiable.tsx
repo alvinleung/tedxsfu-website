@@ -10,9 +10,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AnimationConfig } from "../AnimationConfig";
 import MainGrid from "../layouts/MainGrid";
 
-type Props = { desc: string; email: string };
+type Props = { desc: string; email: string, isDarkMode?: boolean };
 
-const Copiable = ({ desc, email }: Props) => {
+const Copiable = ({ desc, email, isDarkMode }: Props) => {
 const lg = useBreakpoint(breakpoints.lg);
   const [value, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
@@ -38,10 +38,11 @@ const lg = useBreakpoint(breakpoints.lg);
       {useBreakpoint(breakpoints.sm) && (
         <motion.button
           animate={{
-            background: "#242424",
+            background: isDarkMode  ? "#242424" : "#4F4F4F"
+            // : "#242424"
           }}
           whileHover={{
-            background: "#393939",
+            background: isDarkMode ? "#393939" : "#5F5F5F",
           }}
           onClick={copyAction}
           className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full p-1 pr-2 text-micro text-white/50"

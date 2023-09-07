@@ -12,7 +12,7 @@ import {
   OverscrollDirection,
   useOverscroll,
 } from "@/hooks/Overscroll/useOverscroll";
-import { motion, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useTransform } from "framer-motion";
 import { useRouter } from "next/router";
 import Sticky from "../ScrollContainer/Sticky";
 import StickyContainer from "../ScrollContainer/StickyContainer";
@@ -66,6 +66,7 @@ const Footer = ({
   const [isHovering, setIsHovering] = useState(false);
 
   const router = useRouter();
+  const isAboutPage = router.pathname === "/about"
 
   const transitionImageContainerRef =
     useRef() as MutableRefObject<HTMLDivElement>;
@@ -105,13 +106,20 @@ const Footer = ({
         }}
       >
         <MainGrid className="pb-24">
-          <div className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
-            <div className="mb-6 text-lead">
-              Early bird ticket sale and exclusive content — right to your
-              inbox.
-            </div>
-            <EmailForm isDarkMode={isDarkMode} />
-          </div>
+          <AnimatePresence>
+          {isAboutPage && 
+            <motion.div 
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
+              <div className="mb-6 text-lead">
+                Early bird ticket sale and exclusive content — right to your
+                inbox.
+              </div>
+              <EmailForm isDarkMode={isDarkMode} />
+            </motion.div>}
+          </AnimatePresence>
 
           <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 2xl:col-span-2 2xl:col-start-6">
             <div className="pb-6 text-body md:text-lead">
@@ -173,10 +181,12 @@ const Footer = ({
             <Copiable
                     desc="General inquiries &amp; ticketing"
                     email="info@tedxsfu.com"
+                    isDarkMode={isDarkMode}
                   />
             <Copiable
               desc="Partnership inquiries"
               email="partner@tedxsfu.com"
+              isDarkMode={isDarkMode}
             />
           </div>
         </MainGrid>
