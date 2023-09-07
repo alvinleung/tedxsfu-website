@@ -59,7 +59,7 @@ const directors = [
     stroke: "/about/team-nathan.png",
     fill: "about/team-nathan-fill.svg",
     description:
-      " previously a designer at Touchpoint IxD Conference and Guusto.",
+      " designer at Invoke Digital, previously at Touchpoint IxD Conference and Guusto.",
   },
 ];
 
