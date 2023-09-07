@@ -80,6 +80,7 @@ export default function Home() {
           </div>
         </section> */}
       </div>
+
       <SectionLayout>
         <div
           className="my-16 col-span-full lg:col-span-4 lg:col-start-2 2xl:col-start-3 grid grid-cols-4 gap-x-4 gap-y-8"
@@ -98,6 +99,16 @@ export default function Home() {
             <hr className="col-span-full opacity-50 my-2"/>
             <EmailForm isDarkMode={true}/>
           </div>
+        </div>
+      </SectionLayout>
+      <SectionLayout>
+        <div className="
+        text-lead-mobile lg:text-lead
+        my-16 sm:my-24 md:my-32 lg:my-48 col-span-4 col-start-1 sm:col-span-2 sm:col-start-2 md:col-start-2 lg:col-start-2 xl:col-start-2 2xl:col-start-3">
+        <h2
+        >More magic, coming soon</h2>
+        <p className="opacity-50"
+        >There's more to come in the near future. Be sure to stay in touch for future ticketing and more event details.</p>
         </div>
       </SectionLayout>
       <Footer
