@@ -1,4 +1,4 @@
-import Logo from "@/EmergeTextEffect/Logo";
+import Logo from "../../public/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -63,15 +63,15 @@ export const LandingHero = () => {
         animate={anim}
         className="my-auto flex flex-col items-center justify-center gap-8 max-lg:pointer-events-none lg:my-16 lg:flex-row"
       >
-        <a
+        {/* <a
           className={`pointer-events-auto text-center uppercase leading-tight lg:translate-x-28`}
           href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
           target="_blank"
         >
           November 11 {viewport.width >= 1024 && <br />}2023
-        </a>
+        </a> */}
         <Logo isEnterAnimationDone={isAnimationDone} />
-        <a
+        {/* <a
           className={`pointer-events-auto text-center uppercase leading-tight lg:-translate-x-28`}
           href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
           target="_blank"
@@ -79,7 +79,7 @@ export const LandingHero = () => {
           The Centre for
           <br />
           Performing Arts
-        </a>
+        </a> */}
       </motion.div>
     </section>
   );
