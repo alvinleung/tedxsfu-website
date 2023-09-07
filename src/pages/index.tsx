@@ -87,7 +87,7 @@ export default function Home() {
           
           <div className="col-span-full sm:col-span-2 grid grid-cols-2 gap-x-4">
             <EventInfoModuleCond className="col-span-full mb-8"/>
-            <hr className="col-span-full opacity-50"/>
+            <hr className="col-span-full opacity-50 my-2"/>
             <h2 className="uppercase opacity-50 text-micro-mobile md:text-micro">Note for 11/11</h2>
             <p className="opacity-50 text-micro-mobile md:text-micro">
               In honour of Remembrance Day, 20 minutes of our program will be dedicated to Canadian veterans.
