@@ -231,6 +231,8 @@ const Footer = ({
           exit={{
             opacity: 0,
           }}
+          width={24}
+          height={24}
         />
 
         <motion.div
