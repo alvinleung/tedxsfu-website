@@ -191,19 +191,19 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   const condition = (
-    width >= breakpoints["2xl"] && {height: "max(11.5vw, 24vh)", maxHeight: "11.5vw", minHeight:"9rem"}
+    width >= breakpoints["2xl"] && {height: "max(11.5vw, 24dvh)", maxHeight: "11.5vw", minHeight:"9rem"}
     ||
-    width >= breakpoints.xl && {height: "min(calc(-50vw + 59rem), 24vh)", maxHeight: "15.4vw", minHeight:"9rem"}
+    width >= breakpoints.xl && {height: "min(calc(-50vw + 59rem), 24dvh)", maxHeight: "15.4vw", minHeight:"9rem"}
     ||
-    width >= breakpoints.lg && {height: "max(calc(46.875vw - 25rem), 24vh)", maxHeight: "15.4vw"}
+    width >= breakpoints.lg && {height: "max(calc(46.875vw - 25rem), 24dvh)", maxHeight: "15.4vw"}
     ||
-    width >= breakpoints.md && {height: "24vh", maxHeight: "15.5vw"}
+    width >= breakpoints.md && {height: "24dvh", maxHeight: "15.5vw"}
     ||
     // width >= breakpoints.sm && {height: "11vw"}
 
     // ||
 
-    {minHeight: "69px", height: "20vh", maxHeight: "22vw"}
+    {minHeight: "69px", height: "20dvh", maxHeight: "22vw"}
   )
 
   return (
@@ -213,7 +213,7 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
       <div 
         className="flex flex-col gap-4 max-sm:mt-16"
         style={{
-          marginTop: useBreakpoint(breakpoints.md) ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25vh - 4rem)))" : "min(max(calc(-37.5vw + 19rem), 1rem, calc(2rem + 22vw)), max(4rem, calc(25vh - 4rem)))"
+          marginTop: useBreakpoint(breakpoints.md) ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25dvh - 4rem)))" : "min(max(calc(-37.5vw + 19rem), 1rem, calc(2rem + 22vw)), max(4rem, calc(25dvh - 4rem)))"
         }}
       >
         <svg
