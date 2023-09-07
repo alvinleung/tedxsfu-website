@@ -13,17 +13,7 @@ type Props = {};
 const SocialModule = (props: Props) => {
   return (
     <motion.div className="mt-4 flex flex-row gap-2">
-      <motion.a
-        href="https://www.facebook.com/profile.php?id=100094774132695"
-        target="_blank"
-        whileHover={{ scale: 1.1 }}
-      >
-        <Image
-          src={iconFacebook}
-          alt="Facebook"
-          className={true ? "" : "invert"}
-        />
-      </motion.a>
+      
       <motion.a
         href="https://instagram.com/tedxsfu"
         target="_blank"
@@ -54,6 +44,17 @@ const SocialModule = (props: Props) => {
         <Image
           src={iconLinkedin}
           alt="LinkedIn"
+          className={true ? "" : "invert"}
+        />
+      </motion.a>
+      <motion.a
+        href="https://www.facebook.com/profile.php?id=100094774132695"
+        target="_blank"
+        whileHover={{ scale: 1.1 }}
+      >
+        <Image
+          src={iconFacebook}
+          alt="Facebook"
           className={true ? "" : "invert"}
         />
       </motion.a>

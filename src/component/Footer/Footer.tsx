@@ -126,17 +126,7 @@ const Footer = ({
               This independent TEDx event is operated under license from TED.
             </div>
             <div className="mb-6 flex flex-row gap-2">
-            <motion.a
-              href="https://www.facebook.com/profile.php?id=100094774132695"
-              target="_blank"
-              whileHover={{ scale: 1.1 }}
-            >
-              <Image
-                src={iconFacebook}
-                alt="Facebook"
-                className={isDarkMode ? "" : "invert"}
-              />
-            </motion.a>
+            
             <motion.a
               href="https://instagram.com/tedxsfu"
               target="_blank"
@@ -167,6 +157,17 @@ const Footer = ({
               <Image
                 src={iconLinkedin}
                 alt="LinkedIn"
+                className={isDarkMode ? "" : "invert"}
+              />
+            </motion.a>
+            <motion.a
+              href="https://www.facebook.com/profile.php?id=100094774132695"
+              target="_blank"
+              whileHover={{ scale: 1.1 }}
+            >
+              <Image
+                src={iconFacebook}
+                alt="Facebook"
                 className={isDarkMode ? "" : "invert"}
               />
             </motion.a>
