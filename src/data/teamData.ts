@@ -38,8 +38,8 @@ const directors = [
     name: "Robin Yang",
     pronouns: "he/him",
     position: "Marketing director",
-    stroke: "/about/team-robin.svg",
-    fill: "about/team-robin-fill.png",
+    stroke: "/about/team-robin.png",
+    fill: "about/team-robin-fill.svg",
     description:
       " previously a Field Organizer in the Liberal Party of Canada.",
   },
