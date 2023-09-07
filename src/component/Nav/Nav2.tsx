@@ -108,7 +108,7 @@ const Nav = ({ children }: Props) => {
           onClick={(e) => {
             e.preventDefault();
             setIsOpened(false);
-            router.push("/");
+            if(isAboutPage) router.push("/");
           }}
         >
           <motion.svg
