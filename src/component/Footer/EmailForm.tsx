@@ -89,7 +89,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
                         : "#303030"
                       : isEmail(fields.EMAIL)
                       ? "#303030"
-                      : "#CCCCCC",
+                      : "#BBBBBB",
                   }}
                   whileHover={{
                     background: isDarkMode
