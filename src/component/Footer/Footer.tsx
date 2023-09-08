@@ -79,11 +79,13 @@ const Footer = ({
   const transitionImageContainerRef =
     useRef() as MutableRefObject<HTMLDivElement>;
   const [transitionInitialY, setTransitionInitialY] = useState(0);
+  const [isUsingFooterTransition, setIsUsingFooterTransition] = useState(false);
 
   // beginPageTransition
   const beginPageTransition = () => {
     const bounds = transitionImageContainerRef.current.getBoundingClientRect();
     setTransitionInitialY(bounds.top - windowDim.height * 0.2);
+    setIsUsingFooterTransition(true);
 
     // scorll lock
     scrollTo(scrollY.getPrevious());
@@ -263,7 +265,7 @@ const Footer = ({
             height: windowDim.height,
             y: -transitionInitialY,
             transition: {
-              duration: AnimationConfig.VERY_SLOW,
+              duration: isUsingFooterTransition ? AnimationConfig.VERY_SLOW : 0,
               ease: AnimationConfig.EASING_IN_OUT,
             },
           }}
@@ -286,7 +288,9 @@ const Footer = ({
               opacity: 1,
               y: 0,
               transition: {
-                duration: AnimationConfig.VERY_SLOW,
+                duration: isUsingFooterTransition
+                  ? AnimationConfig.VERY_SLOW
+                  : 0,
                 ease: AnimationConfig.EASING_IN_OUT,
               },
             }}
