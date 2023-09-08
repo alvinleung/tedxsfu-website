@@ -85,7 +85,7 @@ const AnimatedPath = (props: any) => {
     timeoutRef.current = setTimeout(() => {
       // reset to normal when mouse is not moving
       animate(cursorProgress, 0, { duration: 1, ease: [0.22, 1, 0.36, 1] });
-    }, 100);
+    }, 200);
   }, [origin, mousePos, viewport, scrollY, isEnterAnimationDone]);
 
   const animatedProgress = useTransform(
