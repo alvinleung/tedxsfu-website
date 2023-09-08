@@ -226,7 +226,10 @@ const ActivityGallery = ({
               }}
             >
               <div className="mb-4">2023</div>
-              <div className="relative flex flex-col" ref={monthContainerRef}>
+              <div
+                className="relative flex flex-col items-start"
+                ref={monthContainerRef}
+              >
                 <motion.div
                   className="absolute -left-2 top-2 h-1 w-1 bg-black"
                   animate={{
