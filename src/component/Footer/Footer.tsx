@@ -229,6 +229,10 @@ const Footer = ({
           }}
           exit={{
             opacity: 0,
+            transition: {
+              duration: isUsingFooterTransition ? AnimationConfig.FAST : 0,
+              ease: "linear",
+            },
           }}
         >
           {pageNumber}
@@ -240,6 +244,10 @@ const Footer = ({
           }}
           exit={{
             opacity: 0,
+            transition: {
+              duration: isUsingFooterTransition ? AnimationConfig.FAST : 0,
+              ease: "linear",
+            },
           }}
         >
           {targetPageName}
@@ -254,6 +262,10 @@ const Footer = ({
           }}
           exit={{
             opacity: 0,
+            transition: {
+              duration: isUsingFooterTransition ? AnimationConfig.FAST : 0,
+              ease: "linear",
+            },
           }}
           width={24}
           height={24}
