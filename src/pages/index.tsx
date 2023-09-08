@@ -48,37 +48,6 @@ export default function Home() {
       </Head>
       <div className="max-w-screen relative bg-black">
         <LandingHero />
-        {/* <section className="absolute bottom-0 left-0 right-0 flex flex-row bg-gradient-to-t from-black to-transparent p-4">
-          <a href="https://forms.gle/YbXZKmgtL8DaFUAC6" target="_blank">
-            Join our newsletter
-          </a>
-          <div className="ml-auto flex flex-row gap-4">
-            <a href="https://linkedin.com/company/tedxsfu" target="_blank">
-              <Image
-                alt="LinkedIn"
-                width="24"
-                height="24"
-                src="./img/mdi_linkedin.svg"
-              ></Image>
-            </a>
-            <a href="https://twitter.com/tedxsfu" target="_blank">
-              <Image
-                alt="Twitter"
-                width="24"
-                height="24"
-                src="./img/mdi_twitter.svg"
-              ></Image>
-            </a>
-            <a href="https://instagram.com/tedxsfu" target="_blank">
-              <Image
-                alt="Instagram"
-                width="24"
-                height="24"
-                src="./img/mdi_instagram.svg"
-              ></Image>
-            </a>
-          </div>
-        </section> */}
       </div>
 
       <SectionLayout>

@@ -100,7 +100,7 @@ export const LandingHero = () => {
             <div className="col-span-full grid grid-cols-2 gap-x-4 sm:col-span-2">
               <EventInfoModuleCond className="col-span-full mb-8" />
               <hr className="col-span-full my-2 opacity-50" />
-              <motion.div className="col-span-full grid grid-cols-2">
+              <motion.div className="col-span-full grid grid-cols-2 gap-4">
                 <h2 className="text-micro-mobile uppercase opacity-50 md:text-micro">
                   Note for 11/11
                 </h2>

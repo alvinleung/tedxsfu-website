@@ -142,6 +142,7 @@ const About = (props: Props) => {
           mode="light"
           targetPageName={"Event Info"}
           bgType={"video"}
+          showEmailCTA
         />
       </div>
     </>
