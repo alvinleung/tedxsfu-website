@@ -190,21 +190,22 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
 
   const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
-  const condition = (
-    width >= breakpoints["2xl"] && {height: "max(11.5vw, 24dvh)", maxHeight: "11.5vw", minHeight:"9rem"}
-    ||
-    width >= breakpoints.xl && {height: "min(calc(-50vw + 59rem), 24dvh)", maxHeight: "15.4vw", minHeight:"9rem"}
-    ||
-    width >= breakpoints.lg && {height: "max(calc(46.875vw - 25rem), 24dvh)", maxHeight: "15.4vw"}
-    ||
-    width >= breakpoints.md && {height: "24dvh", maxHeight: "15.5vw"}
-    ||
-    // width >= breakpoints.sm && {height: "11vw"}
+  // const condition = (
+  //   // width >= breakpoints["2xl"] && {height: "max(11.5vw, 24dvh)", maxHeight: "11.5vw", minHeight:"9rem"}
+  //   // ||
+  //   // width >= breakpoints.xl && {height: "min(calc(-50vw + 59rem), 24dvh)", maxHeight: "15.4vw", minHeight:"9rem"}
+  //   // ||
+  //   // width >= breakpoints.lg && {height: "max(calc(46.875vw - 25rem), 24dvh)", maxHeight: "15.4vw"}
+  //   // ||
+  //   // width >= breakpoints.md && {height: "24dvh", maxHeight: "15.5vw"}
+  //   // ||
+  //   // // width >= breakpoints.sm && {height: "11vw"}
 
-    // ||
+  //   // // ||
 
-    {minHeight: "69px", height: "20dvh", maxHeight: "22vw"}
-  )
+  //   // {minHeight: "69px", height: "20dvh", maxHeight: "22vw"}
+    
+  // )
 
   return (
     <LogoAnimationContext.Provider
@@ -217,8 +218,8 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
         }}
       >
         <svg
-          style={condition}
           className="
+          h-baseline
           fill-white"
           // width="363"
           // height="303"
@@ -237,8 +238,7 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
 
       
         <svg
-          style={condition}
-          className="fill-white"
+          className="h-baseline fill-white"
           // width="363"
           // height="303"
           viewBox="0 0 104 64"
@@ -252,8 +252,7 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
           <AnimatedPath d="M49.4223 21.3335L49.209 21.8313H77.0134H77.5112C86.2579 21.8313 87.2534 22.1157 89.1734 25.3868C90.0891 27.0068 90.2373 28.836 90.4473 31.4273L90.4534 31.5024H90.6668V21.3335H77.1557H49.4223Z" fill="white"/>
         </svg>
         <svg
-          style={condition}
-          className="fill-white"
+          className="fill-white h-baseline"
           // width="363"
           // height="303"
           viewBox="0 0 200 64"

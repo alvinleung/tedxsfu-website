@@ -56,7 +56,7 @@ export default function App({ Component, pageProps }: AppProps) {
           {/* <Grid /> */}
           <TransitionEffect>
             <ScrollContainer>
-              <main className={`${helvetica.className}`}>
+              <main className={`${helvetica.className}`} >
                 <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KYF3KQBR9" />
                 <Script id="google-analytics">
                   {`

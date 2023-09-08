@@ -57,7 +57,7 @@ export const LandingHero = () => {
   }, []);
 
   return (
-    <section className="max-w-screen flex flex-col overflow-hidden px-4 lg:justify-center">
+    <section className="max-w-screen h-[100dvh] flex flex-col overflow-hidden px-4 lg:justify-center">
       <motion.div
         initial={{ scale: 50 }}
         animate={anim}

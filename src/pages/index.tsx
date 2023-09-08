@@ -88,15 +88,21 @@ export default function Home() {
           
           <div className="col-span-full sm:col-span-2 grid grid-cols-2 gap-x-4">
             <EventInfoModuleCond className="col-span-full mb-8"/>
-            <hr className="col-span-full opacity-50 my-2"/>
-            <h2 className="uppercase opacity-50 text-micro-mobile md:text-micro">Note for 11/11</h2>
-            <p className="opacity-50 text-micro-mobile md:text-micro">
-              In honour of Remembrance Day, 20 minutes of our program will be dedicated to Canadian veterans.
-            </p>
+            <motion.div
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              className="col-span-full "
+            >
+              <hr className="opacity-50 my-2"/>
+              <h2 className="uppercase opacity-50 text-micro-mobile md:text-micro">Note for 11/11</h2>
+              <p className="opacity-50 text-micro-mobile md:text-micro">
+                In honour of Remembrance Day, 20 minutes of our program will be dedicated to Canadian veterans.
+              </p>
+            </motion.div>
           </div>
           <div className="col-span-full sm:col-span-2">
             <h2 className="text-body mb-4">Be the first in line for tickets: subscribe for $5 off and bite-sized event details</h2>
-            <hr className="col-span-full opacity-50 my-4"/>
+            {/* <hr className="col-span-full opacity-50 my-4"/> */}
             <EmailForm isDarkMode={true}/>
           </div>
         </div>

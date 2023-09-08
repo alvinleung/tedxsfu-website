@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      spacing: {
+        baseline: "var(--baseline-grid-interval)"
+      },
       screens: {
         'xs': '390px',
       },
@@ -29,6 +32,7 @@ module.exports = {
         "lead-mobile": ["20px", "1.1em"],
         "body-mobile": ["16px", "1.2em"],
         "micro-mobile": ["13px", "1.11em"],
+        baseline: ["var(--baseline-grid-interval)", "1.125em"]
       },
       colors: {
         ted: "#EB0028"
