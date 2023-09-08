@@ -59,6 +59,13 @@ const Footer = ({
     [0.7, 1],
     [1, 0.1],
   );
+
+  const previewOpacity = useTransform(
+    exitTransitionProgress,
+    [0.5, 1],
+    [0.5, 1],
+  );
+
   const bgOverscrollOffset = useTransform(
     exitTransitionProgress,
     [0, 1],
@@ -267,10 +274,13 @@ const Footer = ({
             style={{
               y: bgOverscrollOffset,
               scale: bgScale,
+              opacity: previewOpacity,
             }}
-            animate={{
-              opacity: isHovering || isOverscrollStarted ? 1 : 0.6,
-            }}
+            animate={
+              {
+                // opacity: isHovering || isOverscrollStarted ? 1 : 0.6,
+              }
+            }
             exit={{
               scale: 1.125,
               opacity: 1,
