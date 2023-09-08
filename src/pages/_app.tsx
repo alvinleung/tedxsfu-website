@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import TransitionEffect from "@/component/transition/TransitionEffect";
 import Nav from "@/component/Nav/Nav2";
 import Grid from "@/component/Grid";
+import BaselineGridContext from "@/component/BaselineGridContext";
 
 const chiaroscuro = localFont({
   src: [
@@ -56,7 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
           {/* <Grid /> */}
           <TransitionEffect>
             <ScrollContainer>
-              <main className={`${helvetica.className}`} >
+              <main className={`${helvetica.className}`}>
                 <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KYF3KQBR9" />
                 <Script id="google-analytics">
                   {`
@@ -67,7 +68,9 @@ export default function App({ Component, pageProps }: AppProps) {
               gtag('config', 'G-4KYF3KQBR9');
             `}
                 </Script>
-                <Component {...pageProps} />{" "}
+                <BaselineGridContext>
+                  <Component {...pageProps} />{" "}
+                </BaselineGridContext>
               </main>
             </ScrollContainer>
           </TransitionEffect>

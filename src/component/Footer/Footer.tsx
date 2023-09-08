@@ -66,7 +66,7 @@ const Footer = ({
   const [isHovering, setIsHovering] = useState(false);
 
   const router = useRouter();
-  const isAboutPage = router.pathname === "/about"
+  const isAboutPage = router.pathname === "/about";
 
   const transitionImageContainerRef =
     useRef() as MutableRefObject<HTMLDivElement>;
@@ -107,77 +107,78 @@ const Footer = ({
       >
         <MainGrid className="pb-24">
           <AnimatePresence>
-          {isAboutPage && 
-            <motion.div 
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            transition={{
-              delay: AnimationConfig.NORMAL
-            }}
-            className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2">
-              <div className="mb-6 text-lead">
-                Early bird ticket sale and exclusive content — right to your
-                inbox.
-              </div>
-              
-              <EmailForm isDarkMode={isDarkMode} />
-            </motion.div>}
+            {isAboutPage && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  delay: AnimationConfig.NORMAL,
+                }}
+                className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2"
+              >
+                <div className="mb-6 text-lead">
+                  Early bird ticket sale and exclusive content — right to your
+                  inbox.
+                </div>
+
+                <EmailForm isDarkMode={isDarkMode} />
+              </motion.div>
+            )}
           </AnimatePresence>
 
           <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 2xl:col-span-2 2xl:col-start-6">
             <div className="pb-6 text-body md:text-lead">
               This independent TEDx event is operated under license from TED.
             </div>
-            
+
             <div className="mb-6 flex flex-row gap-2">
-            
-            <motion.a
-              href="https://instagram.com/tedxsfu"
-              target="_blank"
-              whileHover={{ scale: 1.1 }}
-            >
-              <Image
-                src={iconInstagram}
-                alt="Instagram"
-                className={isDarkMode ? "" : "invert"}
-              />
-            </motion.a>
-            <motion.a
-              href="https://twitter.com/tedxsfu"
-              target="_blank"
-              whileHover={{ scale: 1.1 }}
-            >
-              <Image
-                src={iconTwitter}
-                alt="Twitter"
-                className={isDarkMode ? "" : "invert"}
-              />
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com/company/tedxsfu"
-              target="_blank"
-              whileHover={{ scale: 1.1 }}
-            >
-              <Image
-                src={iconLinkedin}
-                alt="LinkedIn"
-                className={isDarkMode ? "" : "invert"}
-              />
-            </motion.a>
-            <motion.a
-              href="https://www.facebook.com/profile.php?id=100094774132695"
-              target="_blank"
-              whileHover={{ scale: 1.1 }}
-            >
-              <Image
-                src={iconFacebook}
-                alt="Facebook"
-                className={isDarkMode ? "" : "invert"}
-              />
-            </motion.a>
+              <motion.a
+                href="https://instagram.com/tedxsfu"
+                target="_blank"
+                whileHover={{ scale: 1.1 }}
+              >
+                <Image
+                  src={iconInstagram}
+                  alt="Instagram"
+                  className={isDarkMode ? "" : "invert"}
+                />
+              </motion.a>
+              <motion.a
+                href="https://twitter.com/tedxsfu"
+                target="_blank"
+                whileHover={{ scale: 1.1 }}
+              >
+                <Image
+                  src={iconTwitter}
+                  alt="Twitter"
+                  className={isDarkMode ? "" : "invert"}
+                />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com/company/tedxsfu"
+                target="_blank"
+                whileHover={{ scale: 1.1 }}
+              >
+                <Image
+                  src={iconLinkedin}
+                  alt="LinkedIn"
+                  className={isDarkMode ? "" : "invert"}
+                />
+              </motion.a>
+              <motion.a
+                href="https://www.facebook.com/profile.php?id=100094774132695"
+                target="_blank"
+                whileHover={{ scale: 1.1 }}
+              >
+                <Image
+                  src={iconFacebook}
+                  alt="Facebook"
+                  className={isDarkMode ? "" : "invert"}
+                />
+              </motion.a>
             </div>
-            <div className="text-body opacity-50 mb-4">
+            <div className="mb-4 text-body opacity-50">
               TEDxSFU respectfully acknowledges the xʷməθkʷəy̓əm (Musqueam),
               Sḵwx̱wú7mesh Úxwumixw (Squamish), səl̓ilw̓ətaʔɬ (Tsleil-Waututh),
               q̓íc̓əy̓ (Katzie), kʷikʷəƛ̓əm (Kwikwetlem), Qayqayt, Kwantlen,
@@ -185,13 +186,20 @@ const Footer = ({
               territories our three campuses reside.
             </div>
 
-            <hr className="col-span-full opacity-50 my-2" style={{borderTopColor: isDarkMode ? "#FFFFFF7F" : "#0000007F"}}/>
+            <hr
+              className="col-span-full mb-2 mt-12 opacity-50"
+              style={{ borderTopColor: isDarkMode ? "#FFFFFF7F" : "#0000007F" }}
+            />
+
+            <h3 className="mb-4 text-micro uppercase tracking-wider opacity-50">
+              Contacts
+            </h3>
 
             <Copiable
-                    desc="General inquiries &amp; ticketing"
-                    email="info@tedxsfu.com"
-                    isDarkMode={isDarkMode}
-                  />
+              desc="General inquiries &amp; ticketing"
+              email="info@tedxsfu.com"
+              isDarkMode={isDarkMode}
+            />
             <Copiable
               desc="Partnership inquiries"
               email="partner@tedxsfu.com"
