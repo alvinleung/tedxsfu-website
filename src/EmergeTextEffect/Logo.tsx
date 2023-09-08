@@ -47,6 +47,8 @@ const AnimatedPath = (props: any) => {
   const { touchAnimProgress, animProgress, isEnterAnimationDone } =
     useContext(LogoAnimationContext);
 
+  const { scrollY } = useContainerScroll();
+
   const [pathRef, bounds] = useBoundingBox([isEnterAnimationDone]);
   const origin = useMemo(() => {
     return {
@@ -63,7 +65,8 @@ const AnimatedPath = (props: any) => {
   useEffect(() => {
     const maxDistSqNorm = 150;
     const distanceSq =
-      distSq(origin.x, origin.y, mousePos.x, mousePos.y) / viewport.width;
+      distSq(origin.x, origin.y, mousePos.x, mousePos.y + scrollY.get()) /
+      viewport.width;
 
     // ease in expo
     const ease = cubicBezier(0.22, 1, 0.36, 1);
@@ -83,7 +86,7 @@ const AnimatedPath = (props: any) => {
       // reset to normal when mouse is not moving
       animate(cursorProgress, 0, { duration: 4, ease: [0.22, 1, 0.36, 1] });
     }, 100);
-  }, [origin, mousePos, viewport, isEnterAnimationDone]);
+  }, [origin, mousePos, viewport, scrollY, isEnterAnimationDone]);
 
   const animatedProgress = useTransform(
     animProgress,
