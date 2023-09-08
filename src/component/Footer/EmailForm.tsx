@@ -26,7 +26,6 @@ const EmailForm = ({ isDarkMode }: Props) => {
 
   return (
     <motion.form
-      layout
       className={`text-micro backdrop-blur-sm ${
         isDarkMode ? "bg-neutral-900/25 text-white/50" : "text-black/50"
       } overflow-hidden rounded-lg
