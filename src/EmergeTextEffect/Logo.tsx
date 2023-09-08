@@ -63,7 +63,7 @@ const AnimatedPath = (props: any) => {
   const timeoutRef = useRef<any>();
 
   useEffect(() => {
-    const maxDistSqNorm = 150;
+    const maxDistSqNorm = 25;
     const distanceSq =
       distSq(origin.x, origin.y, mousePos.x, mousePos.y + scrollY.get()) /
       viewport.width;
@@ -73,7 +73,7 @@ const AnimatedPath = (props: any) => {
     const clampedProgress = 1 - ease(clamp(distanceSq / maxDistSqNorm, 0, 1));
 
     animate(cursorProgress, clampedProgress, {
-      duration: 2,
+      duration: 1,
       ease: [0.22, 1, 0.36, 1],
     });
     lastClampProgress.current = clampedProgress;
@@ -84,7 +84,7 @@ const AnimatedPath = (props: any) => {
 
     timeoutRef.current = setTimeout(() => {
       // reset to normal when mouse is not moving
-      animate(cursorProgress, 0, { duration: 4, ease: [0.22, 1, 0.36, 1] });
+      animate(cursorProgress, 0, { duration: 1, ease: [0.22, 1, 0.36, 1] });
     }, 100);
   }, [origin, mousePos, viewport, scrollY, isEnterAnimationDone]);
 
