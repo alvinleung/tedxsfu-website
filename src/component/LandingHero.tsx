@@ -31,7 +31,10 @@ export const LandingHero = () => {
           scale: 1,
         });
         clearTimeout(timeout);
-        setIsAnimationDone(true);
+
+        // set animation done in the next frame so that the layout is
+        // to be sure updated before calling it done
+        requestAnimationFrame(() => setIsAnimationDone(true));
         return;
       }
 
