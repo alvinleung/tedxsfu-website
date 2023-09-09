@@ -50,11 +50,16 @@ export default function Home() {
         <LandingHero />
       </div>
 
+      <div className="h-96 sm:h-72 md:h-64 lg:h-48">
+
+      </div>
+
       <SectionLayout>
         <div
           className="
         col-span-4 col-start-1
-        my-16 text-lead-mobile sm:col-span-2 sm:col-start-2 sm:my-24 md:col-start-2 md:my-32 lg:col-start-2 lg:my-48 lg:text-lead xl:col-start-2 2xl:col-start-3"
+        
+        mb-16 text-lead-mobile sm:col-span-2 sm:col-start-2 sm:mb-24 md:col-start-2 md:mb-32 lg:col-start-2 lg:mb-48 lg:text-lead xl:col-start-2 2xl:col-start-3"
         >
           <h2>More magic, coming soon</h2>
           <p className="opacity-50">
