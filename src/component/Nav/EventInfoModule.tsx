@@ -16,7 +16,19 @@ export const EventInfoModule = ({ isActive }: Props) => {
     <MainGrid
       className={`fixed left-0 right-0 z-50 px-grid-margin-x py-grid-margin-y`}
     >
-      <div className="col-start-3">
+      <div className="col-start-2 xl:col-start-3">
+        <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
+          <EventInfoLink
+            label={"Direction"}
+            href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
+          >
+            <span className="whitespace-nowrap uppercase">
+              The Center of <br /> performing Arts
+            </span>
+          </EventInfoLink>
+        </StaggerTransition>
+      </div>
+      <div className="col-start-3 xl:col-start-4">
         <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
           <EventInfoLink
             label={"Calendar"}
@@ -30,18 +42,6 @@ export const EventInfoModule = ({ isActive }: Props) => {
               </span>
               <span className="ml-2 opacity-70">(sat)</span>
             </div>
-          </EventInfoLink>
-        </StaggerTransition>
-      </div>
-      <div className="col-start-4">
-        <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
-          <EventInfoLink
-            label={"Direction"}
-            href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
-          >
-            <span className="whitespace-nowrap uppercase">
-              The Center of <br /> performing Arts
-            </span>
           </EventInfoLink>
         </StaggerTransition>
       </div>
@@ -64,12 +64,12 @@ export const EventInfoModuleCond = (props: Props) => {
           setHover("");
         }}
       >
-        <span className="hidden xs:block md:text-body">
-          Saturday, <br className="hidden xs:block" />
+        <span className="xs:block hidden md:text-body">
+          Saturday, <br className="xs:block hidden" />
           Nov 11, 2023
         </span>
         <span className="xs:hidden md:text-body">Sat, Nov 11, 2023</span>
-        <span className="mt-1 hidden gap-x-1 opacity-50 xs:flex">
+        <span className="xs:flex mt-1 hidden gap-x-1 opacity-50">
           Calendar
           <motion.div
             animate={{
@@ -97,7 +97,7 @@ export const EventInfoModuleCond = (props: Props) => {
           Performing Arts
         </span>
         {/* <span className="sm:hidden md:text-body">The Centre Vancouver</span> */}
-        <span className="mt-1 hidden gap-x-1 opacity-50 xs:flex">
+        <span className="xs:flex mt-1 hidden gap-x-1 opacity-50">
           Directions
           <motion.div
             animate={{

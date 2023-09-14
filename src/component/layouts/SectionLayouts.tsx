@@ -1,4 +1,8 @@
-import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
+import {
+  breakpoints,
+  useAllBreakpoints,
+  useBreakpoint,
+} from "@/hooks/useBreakpoints";
 import StickyContainer from "../ScrollContainer/StickyContainer";
 import MainGrid from "./MainGrid";
 import { motion } from "framer-motion";
@@ -44,21 +48,52 @@ export const SectionInfo = ({
   left,
 }: SectionCopyProps) => {
   // const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
-  const isDesktop = useBreakpoint(breakpoints.lg);
-  const shouldStick = isDesktop || stickyOnMobile;
+  const bp = useAllBreakpoints();
+  const atBreakpointMD = bp >= breakpoints.md;
+  const atBreakpointSM = bp >= breakpoints.sm;
+
+  const shouldStick = atBreakpointMD || stickyOnMobile;
+
+  const breakpoint2XL = "2xl:col-span-2 2xl:col-start-2";
+  const breakpointXL = "xl:col-span-3 xl:col-start-2";
+  const breakpointL = "lg:col-span-2 lg:col-start-2 lg:top-[28px]";
+  const breakpointM = "md:col-span-2 md:col-start-2";
+  const breakpointS = "sm:col-span-2 sm:col-start-1";
+  const breakpointXS = "xs:col-span-full xs:col-start-1";
+
+  const mobileStickyOffset = "64px";
+  const tabletSmallStickyOffset = "96px";
 
   return (
     <motion.div
-      className={`${
-        left
-          ? "col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-[28px] lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-3"
-          : "z-10 col-span-full col-start-1 h-fit md:top-20 md:col-span-2 md:col-start-1 lg:top-[28px] lg:col-span-2 lg:col-start-2 2xl:col-span-2 2xl:col-start-2"
-      } ${shouldStick ? "sticky top-[28px]" : ""} ${
-        stickyOnMobile ? "top-[64px]" : ""
+      className={`
+      ${left ? " h-fit " : "z-10  h-fit"} 
+      ${breakpoint2XL} 
+      ${breakpointXL} 
+      ${breakpointL} 
+      ${breakpointM} 
+      ${breakpointS} 
+      ${breakpointXS} 
+      ${shouldStick ? "sticky top-[28px]" : ""} 
+      ${
+        stickyOnMobile
+          ? atBreakpointSM
+            ? `top-[${mobileStickyOffset}]`
+            : `top-[${tabletSmallStickyOffset}]`
+          : ""
       }`}
     >
       {shouldStick && (
-        <Sticky top={!isDesktop && stickyOnMobile ? 64 : 28} fadeOut>
+        <Sticky
+          top={
+            stickyOnMobile && !atBreakpointMD
+              ? atBreakpointSM
+                ? tabletSmallStickyOffset
+                : mobileStickyOffset
+              : 28
+          }
+          fadeOut
+        >
           {children}
         </Sticky>
       )}
@@ -68,12 +103,12 @@ export const SectionInfo = ({
 };
 
 export const SectionInfoHeader = (props: any) => (
-  <h3 className="mb-1 text-lead-mobile sm:text-lead-tablet lg:text-lead">
+  <h3 className="mb-1 text-lead-mobile sm:text-lead-tablet xl:text-lead">
     {props.children}
   </h3>
 );
 export const SectionInfoDescription = (props: any) => (
-  <h3 className="text-lead-mobile opacity-50 sm:text-lead-tablet lg:text-lead">
+  <h3 className="text-lead-mobile opacity-50 sm:text-lead-tablet xl:text-lead">
     {props.children}
   </h3>
 );

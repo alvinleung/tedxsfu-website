@@ -17,9 +17,6 @@ module.exports = {
         "nav-button-offset-y": "var(--nav-button-offset-y)",
         "nav-button-height": "46px",
       },
-      screens: {
-        xs: "390px",
-      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -44,6 +41,14 @@ module.exports = {
       },
       colors: {
         ted: "#EB0028",
+      },
+      screens: {
+        xs: "390px",
+        sm: "640px",
+        md: "860px",
+        lg: "1024px",
+        xl: "1400px",
+        "2xl": "1590px",
       },
     },
   },

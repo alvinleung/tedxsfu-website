@@ -1,4 +1,4 @@
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useLayoutEffect } from "react";
 import resolveConfig from "tailwindcss/resolveConfig";
 //@ts-ignore
 import tailwindConfig from "../../tailwind.config.js";
@@ -22,13 +22,13 @@ interface BreakpointValues {
 
 export function useBreakpointValues(
   breakpointValues: BreakpointValues,
-  deps: any[]
+  deps: any[],
 ) {
   const currBreakpoint = useAllBreakpoints();
   const [value, setValue] = useState<any>(breakpoints.sm);
   const allBreakpointsNames = useMemo(() => Object.keys(breakpoints), []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let newBreakpointValue: any = breakpointValues.default;
     let breakpointName = "";
     for (let i = 0; i < allBreakpointsNames.length; i++) {
@@ -58,7 +58,7 @@ export function useAllBreakpoints() {
   const [currentBreakpoint, setCurrentBreakpoint] = useState(0);
   const allBreakpoints = useMemo(() => Object.values(breakpoints), []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let newBreakpoint = 0;
     for (let i = 0; i < allBreakpoints.length; i++) {
       if (allBreakpoints[i] < windowDimension.width) {
@@ -79,7 +79,7 @@ export function useBreakpoint(breakpointSize: number) {
   const windowDimension = useWindowDimension();
   const [isOverBreakpoint, setIsOverBreakpoint] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsOverBreakpoint(windowDimension.width >= breakpointSize);
   }, [windowDimension.width, breakpointSize]);
 
