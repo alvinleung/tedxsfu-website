@@ -36,7 +36,7 @@ export const DirectorInfo = ({
           duration: 0.3,
         },
       }}
-      className={isDesktop ? "" : "px-4 pb-24 pt-32"}
+      className={isDesktop ? "" : "px-grid-margin-x pb-24 pt-32"}
       style={{
         height: isDesktop ? itemScrollHeightVW + "vw" : "auto",
         background: isDesktop

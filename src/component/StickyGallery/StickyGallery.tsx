@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import StickyContainer from "../ScrollContainer/StickyContainer";
 import Sticky from "../ScrollContainer/Sticky";
@@ -9,6 +9,7 @@ import { AnimationConfig } from "../AnimationConfig";
 import { useBoundingBox } from "@/hooks/useBoundingBox";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import MainGrid from "../layouts/MainGrid";
+import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 type Props = {};
 
@@ -48,10 +49,17 @@ const StickyGallery = (props: Props) => {
   const zoomLockStartPosition = bounds.top;
   const zoomLockEndPosition = bounds.bottom - windowDim.height;
 
-  const fullScreenScale = 1.1;
-  const shrinkedScale = (windowDim.width - 32) / windowDim.width;
+  // const fullScreenScale = 1.1;
+
+  // breakpoint
+  const isBiggerThanMD = useBreakpoint(breakpoints.md);
+  const marginWidth = useMemo(
+    () => (isBiggerThanMD ? 32 : 16),
+    [isBiggerThanMD],
+  );
+  const shrinkedScale = (windowDim.width - marginWidth * 2) / windowDim.width;
   // const fullScreenScale = 1 + 1 - bounds.width / windowDim.width + 0.015;
-  const fullScreenScaleCSS = "calc(1+ 1-100%/100vw + 0.015)";
+  // const fullScreenScaleCSS = "calc(1+ 1-100%/100vw + 0.015)";
 
   const scale = useTransform(
     scrollY,
@@ -109,7 +117,7 @@ const StickyGallery = (props: Props) => {
             >
               <ImageSlide src={image.src} />
             </motion.div>
-            <MainGrid className="absolute bottom-8 px-4 text-white">
+            <MainGrid className="absolute bottom-8 px-grid-margin-x text-white">
               <motion.div
                 initial={{
                   opacity: 0,
@@ -121,7 +129,7 @@ const StickyGallery = (props: Props) => {
                     delay: 0.5,
                   },
                 }}
-                className="px-4 text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2"
+                className="px-grid-margin-x text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2"
               >
                 <div>{image.date}</div>
                 <div>{image.year}</div>

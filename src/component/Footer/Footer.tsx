@@ -108,7 +108,7 @@ const Footer = ({
   return (
     <>
       <motion.footer
-        className="px-4 pt-12"
+        className="px-grid-margin-x pt-12"
         style={{
           backgroundColor: isDarkMode ? "black" : "white",
           color: isDarkMode ? "white" : "black",
@@ -217,13 +217,13 @@ const Footer = ({
         </MainGrid>
       </motion.footer>
       <MainGrid
-        className={`relative z-0 h-[80dvh] cursor-pointer bg-black text-white`}
+        className={`relative z-0 h-[80dvh] cursor-pointer bg-black px-grid-margin-x text-white`}
         onClick={handleClick}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         <motion.div
-          className="z-10 mt-4 pl-4 uppercase md:col-start-1"
+          className="z-10 mt-4 uppercase md:col-start-1"
           animate={{
             opacity: isHovering || isOverscrollStarted ? 1 : 0.3,
           }}

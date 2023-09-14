@@ -9,6 +9,26 @@
   --baseline-grid-interval: 20vw;
 }
 
+/* 
+
+Responsive sizes and typography on tailwind
+https://stackoverflow.com/questions/65232320/responsive-font-sizes-plugin
+
+*/
+html {
+  --grid-margin-x: 14px;
+  --grid-margin-y: 16px;
+  --grid-gap: 12px;
+  --nav-button-offset-y: -10px;
+
+  @screen md {
+    --grid-margin-x: 32px;
+    --grid-margin-y: 32px;
+    --grid-gap: 14px;
+    --nav-button-offset-y: -10px;
+  }
+}
+
 body {
   text-rendering: geometricPrecision;
   color: rgb(var(--foreground-rgb));
@@ -20,7 +40,6 @@ body {
     rgb(var(--background-start-rgb));
 
   font-family: sans-serif;
-
   overflow-x: hidden;
 }
 
@@ -45,8 +64,7 @@ input:focus,
 input:-webkit-autofill,
 input:-webkit-autofill::first-line,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:hover
-input:-webkit-autofill:active {
+input:-webkit-autofill:hover input:-webkit-autofill:active {
   /* font-size: inherit;
   font-family: Helvetica; */
   background-color: transparent;
@@ -57,9 +75,9 @@ input:-webkit-autofill:active {
 }
 
 &:-webkit-autofill::first-line,
-      &:-webkit-autofill,
-      &:-webkit-autofill:hover,
-      &:-webkit-autofill:focus,
-      &:-webkit-autofill:active {
-        font-family: Times, "Times New Roman", serif !important;
-      }
+&:-webkit-autofill,
+&:-webkit-autofill:hover,
+&:-webkit-autofill:focus,
+&:-webkit-autofill:active {
+  font-family: Times, "Times New Roman", serif !important;
+}

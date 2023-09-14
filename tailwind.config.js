@@ -9,10 +9,16 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        baseline: "var(--baseline-grid-interval)"
+        baseline: "var(--baseline-grid-interval)",
+        "grid-margin-x": "var(--grid-margin-x)",
+        "grid-margin-y": "var(--grid-margin-y)",
+        "grid-gap": "var(--grid-gap)",
+        "logo-height": "26px",
+        "nav-button-offset-y": "var(--nav-button-offset-y)",
+        "nav-button-height": "46px",
       },
       screens: {
-        'xs': '390px',
+        xs: "390px",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -32,11 +38,11 @@ module.exports = {
         "lead-mobile": ["20px", "1.1em"],
         "body-mobile": ["16px", "1.2em"],
         "micro-mobile": ["13px", "1.11em"],
-        baseline: ["var(--baseline-grid-interval)", "1.125em"]
+        baseline: ["var(--baseline-grid-interval)", "1.125em"],
       },
       colors: {
-        ted: "#EB0028"
-      }
+        ted: "#EB0028",
+      },
     },
   },
   plugins: [],

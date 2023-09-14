@@ -77,7 +77,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
                 <motion.button
                   className={`
             h-8
-            rounded-[4px] px-4 py-2 
+            rounded-[4px] px-grid-margin-x py-2 
             text-micro uppercase peer-placeholder-shown:cursor-not-allowed peer-invalid:cursor-not-allowed`}
                   disabled={!isEmail(fields.EMAIL)}
                   animate={{

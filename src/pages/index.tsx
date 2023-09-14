@@ -24,7 +24,7 @@ export default function Home() {
   const SectionLayout = ({ children, padding, hero }: SectionLayoutProps) => {
     //TODO: Implement lazy loading states for the page content for optimisation
     return (
-      <section className={`px-4 pb-8`}>
+      <section className={`px-grid-margin-x pb-8`}>
         <StickyContainer>
           <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
             {children}
@@ -50,9 +50,7 @@ export default function Home() {
         <LandingHero />
       </div>
 
-      <div className="h-96 sm:h-72 md:h-64 lg:h-48">
-
-      </div>
+      <div className="h-96 sm:h-72 md:h-64 lg:h-48"></div>
 
       <SectionLayout>
         <div
