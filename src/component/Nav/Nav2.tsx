@@ -148,15 +148,6 @@ const Nav = ({ children }: Props) => {
           opacity: 0,
         }}
       >
-        <div className="absolute bottom-0 z-50 h-fit w-full md:bottom-auto md:top-0">
-          <StaggerTransition
-            staggerIndex={4}
-            isActive={isOpened && !hasTransitionBegan}
-            secondary
-          >
-            {/* <EventInfoModule /> */}
-          </StaggerTransition>
-        </div>
         <BackgroundPreview
           selected={selectedPath}
           hasTransitionBegan={hasTransitionBegan}
