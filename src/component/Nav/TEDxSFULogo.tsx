@@ -15,7 +15,7 @@ export const TEDxSFULogo = ({ onClick }: { onClick: () => void }) => {
         key="TEDx"
         width={501}
         height={151}
-        className="fixed left-0 top-0 z-50 mt-grid-margin-y block h-logo-height max-w-fit pl-grid-margin-x"
+        className="fixed left-0 top-0 z-[60] mt-grid-margin-y block h-logo-height max-w-fit pl-grid-margin-x"
         viewBox="0 0 501 151"
       >
         <motion.path
@@ -31,7 +31,7 @@ export const TEDxSFULogo = ({ onClick }: { onClick: () => void }) => {
         width={375}
         height={151}
         viewBox="0 0 375 151"
-        className="fixed left-[5.1rem] top-0 z-50 mt-grid-margin-y h-logo-height max-w-fit pl-grid-margin-x mix-blend-exclusion"
+        className="fixed left-[5.1rem] top-0 z-[60] mt-grid-margin-y h-logo-height max-w-fit pl-grid-margin-x mix-blend-exclusion"
       >
         <motion.path
           fill="#FFFFFF"

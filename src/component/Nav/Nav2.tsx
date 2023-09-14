@@ -107,36 +107,12 @@ const Nav = ({ children }: Props) => {
             if (isAboutPage) router.push("/");
           }}
         />
-        <MainGrid
-          className={`fixed left-0 right-0 z-40 px-grid-margin-x py-grid-margin-y `}
-        >
-          <div className="col-start-3">
-            <EventInfoLink
-              label={"Calendar"}
-              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
-            >
-              <div className="flex flex-row">
-                <span className="text-[34px] font-light uppercase leading-[32px]">
-                  <span className="ml-[-4px] tracking-[-0.17em]">1</span>
-                  <span className="tracking-[-0.05em]">1/</span>
-                  <span className="tracking-[-0.17em]">11</span>
-                </span>
-                <span className="ml-2 opacity-70">(sat)</span>
-              </div>
-            </EventInfoLink>
-          </div>
-          <div className="col-start-4">
-            <EventInfoLink
-              label={"Direction"}
-              href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
-            >
-              <span className="whitespace-nowrap uppercase">
-                The Center of <br /> performing Arts
-              </span>
-            </EventInfoLink>
-          </div>
-        </MainGrid>
 
+        <EventInfoModule
+          isActive={
+            router.pathname === "/" || (isOpened && !hasTransitionBegan)
+          }
+        />
         <div className="fixed right-[64px] top-grid-margin-y z-50 mt-nav-button-offset-y pr-grid-margin-x">
           <TicketCTA isHighlighted={false} />
         </div>
@@ -178,7 +154,7 @@ const Nav = ({ children }: Props) => {
             isActive={isOpened && !hasTransitionBegan}
             secondary
           >
-            <EventInfoModule />
+            {/* <EventInfoModule /> */}
           </StaggerTransition>
         </div>
         <BackgroundPreview

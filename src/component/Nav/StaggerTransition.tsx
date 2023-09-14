@@ -1,23 +1,25 @@
-import { motion } from "framer-motion";
+import { MotionProps, motion } from "framer-motion";
 import React from "react";
 import { AnimationConfig } from "../AnimationConfig";
 
 const STAGGER_DELAY = 0.08;
-type Props = {
+interface Props extends MotionProps {
   children: React.ReactNode;
   staggerIndex: number;
   isActive: boolean;
   secondary?: boolean;
-};
+}
 
 const StaggerTransition = ({
   children,
   staggerIndex,
   isActive,
   secondary = false,
+  ...props
 }: Props) => {
   return (
     <motion.div
+      {...props}
       initial={{
         opacity: 0,
         y: secondary ? 0 : 10,
