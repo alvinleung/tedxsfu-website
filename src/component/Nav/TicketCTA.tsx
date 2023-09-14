@@ -6,30 +6,45 @@ type Props = {
 
 const TicketCTA = ({ isHighlighted }: Props) => {
   return (
-    <button
-      className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet"
+    <a
+      href="https://google.com"
+      target="_blank"
+      className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet backdrop-blur-lg"
       style={{
-        backgroundColor: "#FFF",
-        color: "#000",
+        backgroundColor: isHighlighted ? "#FFF" : "rgba(255,255,255,.05)",
+        color: isHighlighted ? "#000" : "#FFF",
+        border: isHighlighted ? "1px solid rgba(0,0,0,0)" : "1px solid #383838",
       }}
     >
-      <div className="pl-[7px] pr-[6px]">
+      <div
+        className="pl-[7px] pr-[6px]"
+        style={{
+          filter: isHighlighted ? "" : "invert(1)",
+        }}
+      >
         <TicketIcon />
       </div>
 
       <div
         className="h-[28px]"
         style={{
-          borderLeft: "1px solid #333",
+          borderLeft: isHighlighted ? "1px solid #333" : "1px solid #555555",
         }}
       />
       <div className="flex h-[28px] flex-col items-start whitespace-nowrap pl-[9px] pr-[9px]">
-        <div className="text-nav uppercase leading-none">Get Tickets Now</div>
-        <div className="mt-[2px] flex flex-col text-nav-s leading-none tracking-wide">
+        <div className="mt-[-1px] text-nav uppercase leading-none">
+          Get Tickets
+        </div>
+        <div
+          className="mt-[3px] flex flex-col text-nav-s leading-none tracking-wide"
+          style={{
+            opacity: isHighlighted ? 1 : 0.7,
+          }}
+        >
           Ticketmaster
         </div>
       </div>
-    </button>
+    </a>
   );
 };
 
