@@ -88,7 +88,7 @@ export const LandingHero = () => {
           Performing Arts
         </a> */}
 
-        <MainGrid className="absolute mr-4">
+        <MainGrid>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{
