@@ -21,6 +21,8 @@ import SocialModule from "./SocialModule";
 import Hamburger from "./Hamburger";
 import { TEDxSFULogo } from "./TEDxSFULogo";
 import Scrim from "./Scrim";
+import EventInfo, { EventInfoLink } from "./EventInfo";
+import TicketCTA from "./TicketCTA";
 
 type Props = { children: React.ReactNode };
 
@@ -105,6 +107,20 @@ const Nav = ({ children }: Props) => {
             if (isAboutPage) router.push("/");
           }}
         />
+        <MainGrid
+          className={`fixed left-0 right-0 z-40 px-grid-margin-x py-grid-margin-y `}
+        >
+          <div className="col-start-3">
+            <EventInfoLink />
+          </div>
+          <div className="col-start-4">
+            <EventInfoLink />
+          </div>
+          <div className="col-start-5 my-nav-button-offset-y">
+            <TicketCTA isHighlighted={false} />
+          </div>
+        </MainGrid>
+
         <Scrim isShowing={isContentOverflowing} />
         <motion.button
           className="fixed right-grid-margin-y top-grid-margin-y z-50 mt-nav-button-offset-y flex h-nav-button-height w-nav-button-height items-center justify-center"

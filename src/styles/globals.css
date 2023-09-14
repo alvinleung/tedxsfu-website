@@ -21,7 +21,7 @@ html {
   --grid-gap: 12px;
   --nav-button-offset-y: -10px;
 
-  @screen md {
+  @screen sm {
     --grid-margin-x: 32px;
     --grid-margin-y: 32px;
     --grid-gap: 14px;

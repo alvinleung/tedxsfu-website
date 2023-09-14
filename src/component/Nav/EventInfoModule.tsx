@@ -11,7 +11,7 @@ type Props = {
 export const EventInfoModule = (props: Props) => {
   const [hover, setHover] = useState("");
   return (
-    <MainGrid className={`w-full px-grid-margin-x py-4 `}>
+    <MainGrid className={`w-full px-grid-margin-x py-grid-margin-y `}>
       <motion.a
         href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
         target="_blank"

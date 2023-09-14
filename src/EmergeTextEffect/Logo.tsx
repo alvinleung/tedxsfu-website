@@ -219,12 +219,12 @@ const Logo = ({ isEnterAnimationDone }: Props) => {
       value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
     >
       <div
-        className="pointer-events-none flex flex-col gap-4 max-sm:mt-16"
-        style={{
-          marginTop: useBreakpoint(breakpoints.md)
-            ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25dvh - 4rem)))"
-            : "min(max(calc(-37.5vw + 19rem), 1rem, calc(2rem + 22vw)), max(4rem, calc(25dvh - 4rem)))",
-        }}
+        className="pointer-events-none mt-36 flex flex-col gap-4 xl:mt-grid-margin-y"
+        // style={{
+        //   marginTop: useBreakpoint(breakpoints.md)
+        //     ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25dvh - 4rem)))"
+        //     : "min(max(calc(-37.5vw + 19rem), 1rem, calc(2rem + 22vw)), max(4rem, calc(25dvh - 4rem)))",
+        // }}
       >
         <svg
           className="
