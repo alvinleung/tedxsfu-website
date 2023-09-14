@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Logo from "../EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
-import Nav from "@/component/Nav/Nav";
+import Nav from "@/component/Nav/NavOld";
 import Head from "next/head";
 import { motion } from "framer-motion";
 import { AnimationConfig } from "@/component/AnimationConfig";

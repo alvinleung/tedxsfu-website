@@ -24,7 +24,7 @@ import {
 } from "react";
 import { useSmoothScroll } from "./useSmoothScroll";
 import { useRouter } from "next/router";
-import { NavScrollState, useNavContext } from "../Nav/Nav2";
+import { NavScrollState, useNavContext } from "../Nav/Nav";
 
 type Props = {
   children: React.ReactNode;

@@ -8,7 +8,7 @@ import localFont from "next/font/local";
 import { ScrollContainer } from "@/component/ScrollContainer/ScrollContainer";
 import { useRouter } from "next/router";
 import TransitionEffect from "@/component/transition/TransitionEffect";
-import Nav from "@/component/Nav/Nav2";
+import Nav from "@/component/Nav/Nav";
 import Grid from "@/component/Grid";
 import BaselineGridContext from "@/component/BaselineGridContext";
 
