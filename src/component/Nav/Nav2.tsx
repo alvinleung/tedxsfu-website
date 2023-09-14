@@ -116,8 +116,10 @@ const Nav = ({ children }: Props) => {
           <div className="col-start-4">
             <EventInfoLink />
           </div>
-          <div className="col-start-5 my-nav-button-offset-y">
-            <TicketCTA isHighlighted={false} />
+          <div className="relative col-start-5 col-end-9 my-nav-button-offset-y">
+            <div className="absolute right-[64px]">
+              <TicketCTA isHighlighted={false} />
+            </div>
           </div>
         </MainGrid>
 

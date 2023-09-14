@@ -7,7 +7,7 @@ type Props = {
 const TicketCTA = ({ isHighlighted }: Props) => {
   return (
     <button
-      className="flex h-[46px] flex-row items-center rounded-md px-[4px] py-[8px] text-body-tablet"
+      className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet"
       style={{
         backgroundColor: "#FFF",
         color: "#000",
