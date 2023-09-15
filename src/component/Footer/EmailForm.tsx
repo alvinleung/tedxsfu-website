@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
 import { useFormFields, useMailChimpForm } from "use-mailchimp-form";
 import React, { useState, useEffect, useMemo } from "react";
 import LoadingIcon from "./LoadingIcon";
@@ -7,9 +7,10 @@ import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   isDarkMode: boolean;
+  secondary?: boolean;
 };
 
-const EmailForm = ({ isDarkMode }: Props) => {
+const EmailForm = ({ isDarkMode, secondary }: Props) => {
   // const url = "fdsa";
   const url =
     "https://tedxsfu.us7.list-manage.com/subscribe/post?u=92f4f790178ff00e2b0e57b7f&amp;id=2f9caf4ffb&amp;f_id=00a9d2e4f0";
@@ -18,6 +19,8 @@ const EmailForm = ({ isDarkMode }: Props) => {
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: "",
   });
+
+  const errorAnim = useAnimationControls();
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -40,7 +43,14 @@ const EmailForm = ({ isDarkMode }: Props) => {
 
   const onFormSubmit = () => {
     setHasSubmitted(true);
-    if (canSubmit) handleSubmit(fields);
+    if (canSubmit) {
+      handleSubmit(fields);
+      return;
+    }
+    errorAnim.start({
+      x: [5, -5, 5, 0],
+      transition: { duration: 0.3 },
+    });
   };
 
   const darkModeColor = "rgba(255,255,255,.15)";
@@ -90,7 +100,8 @@ const EmailForm = ({ isDarkMode }: Props) => {
           >
             Your email address*
             <div className="mt-1 flex flex-row gap-x-4">
-              <input
+              <motion.input
+                animate={errorAnim}
                 type="email"
                 className={`peer w-full !border-none !bg-transparent py-2 !text-body ${
                   isDarkMode
@@ -117,25 +128,28 @@ const EmailForm = ({ isDarkMode }: Props) => {
             h-8
             rounded-[4px] px-4 py-2 
             text-micro uppercase`}
-                  disabled={isEmpty}
-                  animate={{
-                    color: isDarkMode
-                      ? !isEmpty
+                  disabled={secondary && isEmpty}
+                  animate={
+                    secondary && {
+                      color: isDarkMode
+                        ? !isEmpty
+                          ? "#000"
+                          : "#999"
+                        : !isEmpty
+                        ? "#FFF"
+                        : "#888",
+                      background: isDarkMode
+                        ? !isEmpty
+                          ? "#fff"
+                          : "#222"
+                        : !isEmpty
                         ? "#000"
-                        : "#999"
-                      : !isEmpty
-                      ? "#FFF"
-                      : "#888",
-                    background: isDarkMode
-                      ? !isEmpty
-                        ? "#fff"
-                        : "#222"
-                      : !isEmpty
-                      ? "#000"
-                      : "#DDD",
-                  }}
+                        : "#DDD",
+                    }
+                  }
                   style={{
-                    cursor: isEmpty ? "not-allowed" : "pointer",
+                    color: isDarkMode ? "#000" : "#FFF",
+                    background: isDarkMode ? "#fff" : "#000",
                   }}
                 >
                   {!loading && !success && <>Join</>}

@@ -23,7 +23,7 @@ import { TEDxSFULogo } from "./TEDxSFULogo";
 import Scrim from "./Scrim";
 import EventInfo, { EventInfoLink } from "./EventInfoLink";
 import TicketCTA from "./TicketCTA";
-import { useLogoContext } from "../../EmergeTextEffect/Logo"
+import { useLogoContext } from "../../EmergeTextEffect/Logo";
 
 type Props = { children: React.ReactNode };
 
@@ -31,14 +31,14 @@ interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
   isOpened: boolean;
   // eventModuleIsOpened: boolean;
-  setEventModuleOpenWithoutLogo: (isOpen : boolean) => void;
+  setEventModuleOpenWithoutLogo: (isOpen: boolean) => void;
 }
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
   isOpened: false,
   // eventModuleIsOpened: false,
-  setEventModuleOpenWithoutLogo: (isOpen : boolean) => {},
+  setEventModuleOpenWithoutLogo: (isOpen: boolean) => {},
 });
 export enum NavScrollState {
   SCROLLED,
@@ -49,7 +49,8 @@ const Nav = ({ children }: Props) => {
   const router = useRouter();
   const isAboutPage = router.pathname != "/";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
-  const [eventModuleOpenWithoutLogo, setEventModuleOpenWithoutLogo] = useState(true);
+  const [eventModuleOpenWithoutLogo, setEventModuleOpenWithoutLogo] =
+    useState(true);
 
   const [selectedPath, setSelectedPath] = useState("");
 
@@ -105,7 +106,9 @@ const Nav = ({ children }: Props) => {
   };
 
   return (
-    <NavContext.Provider value={{ setScrollState, isOpened, setEventModuleOpenWithoutLogo }}>
+    <NavContext.Provider
+      value={{ setScrollState, isOpened, setEventModuleOpenWithoutLogo }}
+    >
       <motion.nav>
         <TEDxSFULogo
           onClick={() => {
@@ -116,18 +119,21 @@ const Nav = ({ children }: Props) => {
 
         <EventInfoModule
           isActive={
-            router.pathname === "/" && !eventModuleOpenWithoutLogo || (isOpened && !hasTransitionBegan)
+            (router.pathname === "/" && !eventModuleOpenWithoutLogo) ||
+            (isOpened && !hasTransitionBegan)
           }
         />
-        <div className="fixed max-md:bottom-grid-margin-y max-md:left-0 max-md:right-0 md:right-[64px] md:top-grid-margin-y z-50 mt-nav-button-offset-y md:pr-grid-margin-x
-        max-md:mx-auto
-        ">
-          <TicketCTA isHighlighted={false} isAboutPage={isAboutPage}/>
+        <div
+          className="fixed z-50 mt-nav-button-offset-y max-md:bottom-grid-margin-y max-md:left-0 max-md:right-0 max-md:mx-auto md:right-[64px] md:top-grid-margin-y
+        md:pr-grid-margin-x
+        "
+        >
+          <TicketCTA isHighlighted={false} isAboutPage={isAboutPage} />
         </div>
 
         <Scrim isShowing={isContentOverflowing} />
         <motion.button
-          className="fixed right-2 sm:right-grid-margin-x top-grid-margin-y z-50 mt-nav-button-offset-y flex h-nav-button-height w-nav-button-height items-center justify-center mix-blend-exclusion"
+          className="fixed right-2 top-grid-margin-y z-50 mt-nav-button-offset-y flex h-nav-button-height w-nav-button-height items-center justify-center mix-blend-exclusion sm:right-grid-margin-x"
           // style={{width: "max(auto, 4rem)"}}
           aria-label="Menu"
           onClick={toggleOpen}
@@ -239,10 +245,9 @@ const Nav = ({ children }: Props) => {
               secondary
             >
               <div className="mb-6 mt-auto text-body ">
-                Exclusive ticket discounts and content — right to your
-                inbox.
+                Exclusive ticket discounts and content — right to your inbox.
               </div>
-              <EmailForm isDarkMode={true} />
+              <EmailForm secondary isDarkMode={true} />
             </StaggerTransition>
           </div>
         </MainGrid>
