@@ -70,7 +70,7 @@ const NavScreen = ({
         selected={selectedPath}
         hasTransitionBegan={hasTransitionBegan}
       />
-      <MainGrid className="absolute left-0 top-0 h-[100dvh] overflow-auto px-grid-margin-x max-md:right-0">
+      <MainGrid className="absolute left-0 right-0 top-0 h-[100dvh] overflow-auto px-grid-margin-x max-md:right-0">
         <div
           className={`col-span-full flex flex-col pt-[18vh] md:col-span-3 md:col-start-2 2xl:col-start-2`}
         >
