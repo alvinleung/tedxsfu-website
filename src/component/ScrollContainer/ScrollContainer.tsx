@@ -6,6 +6,7 @@ import {
   motion,
   useIsPresent,
   useMotionValue,
+  useMotionValueEvent,
   useScroll,
   useSpring,
   useTransform,
@@ -54,6 +55,7 @@ interface ScrollContextInfo {
   isUsingSmoothScroll: boolean;
   scrollTo: (target: number, smooth?: boolean) => void;
   canScroll: boolean;
+  hasScrolled: boolean;
 }
 
 export const ScrollContext = createContext<ScrollContextInfo>({
@@ -70,6 +72,7 @@ export const ScrollContext = createContext<ScrollContextInfo>({
   scrollContainerRef: undefined as unknown as MutableRefObject<HTMLDivElement>,
   setCanScroll: () => {},
   canScroll: true,
+  hasScrolled: false,
   refreshDocumentMeasurement: () => {},
   isUsingSmoothScroll: true,
   scrollTo: () => {},
@@ -81,6 +84,8 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const [scrollDirection, setScrollDirection] = useState<ScrollDirection>(
     ScrollDirection.UNKNOWN,
   );
+
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const isPresent = useIsPresent();
 
@@ -103,6 +108,14 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const documentOffsetY = useTransform(scrollY, (v) => {
     if (!isUsingSmoothScroll) return 0;
     return -v;
+  });
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 0) {
+      setHasScrolled(true);
+      return;
+    }
+    setHasScrolled(false);
   });
 
   useEffect(() => {
@@ -197,6 +210,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
         isUsingSmoothScroll,
         scrollTo,
         canScroll,
+        hasScrolled,
       }}
     >
       <motion.div

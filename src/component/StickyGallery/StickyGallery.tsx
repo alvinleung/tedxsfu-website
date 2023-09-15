@@ -41,7 +41,7 @@ const imgData = [
 ];
 
 const StickyGallery = (props: Props) => {
-  const { scrollY } = useContainerScroll();
+  const { scrollY, hasScrolled } = useContainerScroll();
 
   const windowDim = useWindowDimension();
   const [boundsRef, bounds] = useBoundingBox<HTMLDivElement>([]);
@@ -52,11 +52,13 @@ const StickyGallery = (props: Props) => {
   // const fullScreenScale = 1.1;
 
   // breakpoint
-  const isBiggerThanMD = useBreakpoint(breakpoints.md);
+  const atBreakpointSM = useBreakpoint(breakpoints.sm);
+  const atBreakpointMD = useBreakpoint(breakpoints.md);
   const marginWidth = useMemo(
-    () => (isBiggerThanMD ? 32 : 16),
-    [isBiggerThanMD],
+    () => (atBreakpointSM ? 32 : 16),
+    [atBreakpointSM],
   );
+
   const shrinkedScale = (windowDim.width - marginWidth * 2) / windowDim.width;
   // const fullScreenScale = 1 + 1 - bounds.width / windowDim.width + 0.015;
   // const fullScreenScaleCSS = "calc(1+ 1-100%/100vw + 0.015)";
@@ -85,17 +87,17 @@ const StickyGallery = (props: Props) => {
   //    [1, wideScale, wideScale, 1],
   //  );
 
-  const containerOffset = useTransform(scrollY, (v) => {
-    if (v < zoomLockStartPosition) return 0;
-    if (v > zoomLockEndPosition)
-      return zoomLockEndPosition - zoomLockStartPosition;
-    const offset = v - zoomLockStartPosition;
-    return offset;
-  });
+  // const containerOffset = useTransform(scrollY, (v) => {
+  //   if (v < zoomLockStartPosition) return 0;
+  //   if (v > zoomLockEndPosition)
+  //     return zoomLockEndPosition - zoomLockStartPosition;
+  //   const offset = v - zoomLockStartPosition;
+  //   return offset;
+  // });
 
-  const contentOffsetY = useTransform(containerOffset, (v) => {
-    return -v;
-  });
+  // const contentOffsetY = useTransform(containerOffset, (v) => {
+  //   return -v;
+  // });
 
   // const inverseScale = useTransform(scale, (v) => -v);
 
@@ -117,16 +119,18 @@ const StickyGallery = (props: Props) => {
             >
               <ImageSlide src={image.src} />
             </motion.div>
-            <MainGrid className="absolute bottom-8 px-grid-margin-x text-white">
+            <MainGrid className="absolute bottom-6 px-grid-margin-x text-white sm:bottom-8">
               <motion.div
                 initial={{
                   opacity: 0,
                 }}
                 animate={{
-                  opacity: 0.5,
+                  opacity: hasScrolled || atBreakpointMD ? 0.5 : 0,
                   transition: {
-                    duration: AnimationConfig.SLOW,
-                    delay: 0.5,
+                    duration: !atBreakpointMD
+                      ? AnimationConfig.NORMAL
+                      : AnimationConfig.SLOW,
+                    delay: atBreakpointMD ? 0.5 : 0,
                   },
                 }}
                 className="px-grid-margin-x text-micro opacity-50 md:col-start-2 md:px-0  lg:col-span-1 lg:col-start-2"
@@ -139,13 +143,15 @@ const StickyGallery = (props: Props) => {
                   opacity: 0,
                 }}
                 animate={{
-                  opacity: 1,
+                  opacity: hasScrolled || atBreakpointMD ? 1 : 0,
                   transition: {
-                    duration: AnimationConfig.SLOW,
-                    delay: 0.3,
+                    duration: !atBreakpointMD
+                      ? AnimationConfig.NORMAL
+                      : AnimationConfig.SLOW,
+                    delay: atBreakpointMD ? 0.3 : 0,
                   },
                 }}
-                className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro md:col-span-2 md:pr-0 lg:col-span-1"
+                className="col-span-3 col-start-2 border-l border-l-[rgba(255,255,255,.5)] pl-2 pr-4 text-micro sm:col-span-2 md:col-span-2 md:pr-0 lg:col-span-1"
               >
                 {" "}
                 {image.description}
