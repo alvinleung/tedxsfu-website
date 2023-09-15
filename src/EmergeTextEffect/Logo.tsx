@@ -233,7 +233,7 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
       value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
     >
       <div
-        className="pointer-events-none mt-36 flex flex-col gap-4 xl:mt-grid-margin-y" ref={ref}
+        className="sm:w-fit pointer-events-none mt-36 flex flex-col gap-4 xl:mt-grid-margin-y" ref={ref}
         // style={{
         //   marginTop: useBreakpoint(breakpoints.md)
         //     ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25dvh - 4rem)))"

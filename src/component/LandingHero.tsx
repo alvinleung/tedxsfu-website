@@ -6,6 +6,7 @@ import MainGrid from "./layouts/MainGrid";
 import { EventInfoModuleCond } from "./Nav/EventInfoModule";
 import EmailForm from "./Footer/EmailForm";
 import { AnimationConfig } from "./AnimationConfig";
+import EventInfoLink from "./Nav/EventInfoLink";
 
 export const LandingHero = () => {
   const viewport = useWindowDimension();
@@ -64,29 +65,37 @@ export const LandingHero = () => {
   }, []);
 
   return (
-    <section className="max-w-screen h-[100dvh] overflow-hidden px-grid-margin-x">
+    <section className="max-w-screen overflow-hidden px-grid-margin-x">
       <motion.div
         initial={{ scale: 50 }}
         animate={anim}
-        // className="max-lg:pointer-events-none"
+        className="mx-auto relative sm:w-fit"
       >
-        {/* <a
-          className={`pointer-events-auto text-center uppercase leading-tight lg:translate-x-28`}
-          href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
-          target="_blank"
-        >
-          November 11 {viewport.width >= 1024 && <br />}2023
-        </a> */}
         <Logo isEnterAnimationDone={isAnimationDone} />
-        {/* <a
-          className={`pointer-events-auto text-center uppercase leading-tight lg:-translate-x-28`}
-          href="https://goo.gl/maps/yx7ytZ2okDUuF33q7"
-          target="_blank"
-        >
-          The Centre for
-          <br />
-          Performing Arts
-        </a> */}
+        <MainGrid className="max-sm:relative max-sm:my-8">
+          <div className="max-sm:col-span-2 sm:absolute sm:right-[85%] flex flex-col sm:justify-center sm:top-0 sm:bottom-0">
+            <EventInfoLink
+                label={"Directions"}
+                href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
+                className="sm:items-center"
+              >
+                <span className="sm:whitespace-nowrap uppercase sm:text-center">
+                  Saturday, <br/> Nov 11, 2023
+                </span>
+              </EventInfoLink>
+          </div>
+          <div className="max-sm:col-span-2 sm:absolute sm:left-[85%] flex flex-col sm:justify-center sm:top-0 sm:bottom-0">
+            <EventInfoLink
+                label={"Directions"}
+                href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
+                className="sm:items-center"
+              >
+                <span className="sm:whitespace-nowrap uppercase sm:text-center">
+                  The Centre For <br /> Performing Arts
+                </span>
+              </EventInfoLink>
+          </div>
+        </MainGrid>
 
         
       </motion.div>

@@ -9,11 +9,13 @@ interface EventInfoLinkProps {
   children: React.ReactNode;
   label: string;
   href: string;
+  className?: string;
 }
 export const EventInfoLink = ({
   children,
   href,
   label,
+  className
 }: EventInfoLinkProps) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -21,7 +23,7 @@ export const EventInfoLink = ({
     <motion.a
       href={href}
       target="_blank"
-      className="my-[-3px] flex flex-col text-nav"
+      className={`my-[-3px] flex flex-col text-nav ${className}`}
       onHoverStart={(e) => {
         setIsHovering(true);
       }}
