@@ -24,6 +24,7 @@ import Scrim from "./Scrim";
 import EventInfo, { EventInfoLink } from "./EventInfoLink";
 import TicketCTA from "./TicketCTA";
 import { useLogoContext } from "../../EmergeTextEffect/Logo";
+import NavScreen from "./NavScreen";
 
 type Props = { children: React.ReactNode };
 
@@ -31,6 +32,7 @@ interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
   isOpened: boolean;
   // eventModuleIsOpened: boolean;
+  exitDuration: number;
   setEventModuleOpenWithoutLogo: (isOpen: boolean) => void;
 }
 
@@ -39,6 +41,7 @@ export const NavContext = createContext<NavContextInterface>({
   isOpened: false,
   // eventModuleIsOpened: false,
   setEventModuleOpenWithoutLogo: (isOpen: boolean) => {},
+  exitDuration: 1000,
 });
 export enum NavScrollState {
   SCROLLED,
@@ -52,12 +55,10 @@ const Nav = ({ children }: Props) => {
   const [eventModuleOpenWithoutLogo, setEventModuleOpenWithoutLogo] =
     useState(true);
 
-  const [selectedPath, setSelectedPath] = useState("");
-
   const [isOpened, setIsOpened] = useState(false);
   const [hasTransitionBegan, setHasTransitionBegan] = useState(false);
 
-  const EXIT_DURATION = 1000;
+  const EXIT_DURATION = AnimationConfig.VERY_SLOW * 1000;
   const prevPath = useRef(router.pathname);
 
   useEffect(() => {
@@ -67,12 +68,10 @@ const Nav = ({ children }: Props) => {
 
     if (!isOpened) return;
 
-    console.log("transitioning to new page");
-
     setHasTransitionBegan(true);
     const timeout = setTimeout(() => {
       setIsOpened(false);
-      setTimeout(() => setSelectedPath(""), 500);
+      // setTimeout(() => setSelectedPath(""), 500);
       requestAnimationFrame(() => {
         setHasTransitionBegan(false);
       });
@@ -86,13 +85,7 @@ const Nav = ({ children }: Props) => {
 
   const toggleOpen = () => {
     setIsOpened(!isOpened);
-    setSelectedPath("");
     setHasTransitionBegan(false);
-  };
-
-  const handlePreviewExit = () => {
-    if (hasTransitionBegan) return;
-    setSelectedPath("");
   };
 
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
@@ -107,7 +100,12 @@ const Nav = ({ children }: Props) => {
 
   return (
     <NavContext.Provider
-      value={{ setScrollState, isOpened, setEventModuleOpenWithoutLogo }}
+      value={{
+        setScrollState,
+        isOpened,
+        setEventModuleOpenWithoutLogo,
+        exitDuration: EXIT_DURATION,
+      }}
     >
       <motion.nav>
         <TEDxSFULogo
@@ -142,116 +140,12 @@ const Nav = ({ children }: Props) => {
         </motion.button>
       </motion.nav>
 
-      <motion.div
-        className="fixed bottom-0 top-0 z-40 w-full overflow-hidden"
-        style={{
-          pointerEvents: isOpened && !hasTransitionBegan ? "all" : "none",
-        }}
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: isOpened ? 1 : 0,
-          transition: {
-            duration: AnimationConfig.NORMAL,
-            ease: "linear",
-            delay: isOpened ? 0 : 0.2,
-          },
-        }}
-        exit={{
-          opacity: 0,
-        }}
-      >
-        <BackgroundPreview
-          selected={selectedPath}
-          hasTransitionBegan={hasTransitionBegan}
-        />
-        <MainGrid className="absolute left-0 top-0 h-[100dvh] overflow-auto px-grid-margin-x max-md:right-0">
-          <div
-            className={`col-span-full flex flex-col pt-[18vh] md:col-span-3 md:col-start-2 2xl:col-start-2`}
-          >
-            <StaggerTransition
-              staggerIndex={1}
-              isActive={isOpened && !hasTransitionBegan}
-            >
-              <NavButton
-                onClick={handleLinkButtonClick}
-                onEnterPreview={() => {
-                  !hasTransitionBegan && setSelectedPath("/");
-                }}
-                onExitPreview={handlePreviewExit}
-                href={"/"}
-                isHighlighted={
-                  selectedPath === "/" ||
-                  (router.pathname === "/" && selectedPath === "")
-                }
-                index={"1"}
-                title={"Event Info"}
-                description={"TEDxSFU 2023 at a glance"}
-              />
-            </StaggerTransition>
+      <NavScreen
+        isOpened={isOpened}
+        hasTransitionBegan={hasTransitionBegan}
+        onNavButtonClick={handleLinkButtonClick}
+      />
 
-            <StaggerTransition
-              staggerIndex={2}
-              isActive={isOpened && !hasTransitionBegan}
-            >
-              <NavButton
-                onClick={handleLinkButtonClick}
-                onEnterPreview={() => {
-                  !hasTransitionBegan && setSelectedPath("/about");
-                }}
-                onExitPreview={handlePreviewExit}
-                href={"/about"}
-                isHighlighted={
-                  selectedPath === "/about" ||
-                  (router.pathname === "/about" && selectedPath === "")
-                }
-                index={"2"}
-                title={"About Us"}
-                description={"13 years in the making"}
-              />
-            </StaggerTransition>
-
-            <StaggerTransition
-              staggerIndex={3}
-              isActive={isOpened && !hasTransitionBegan}
-            >
-              <motion.div
-                className="col-span-4 grid grid-cols-4 gap-4 pt-4 md:col-span-3 md:col-start-2 md:grid-cols-3"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.3)" }}
-              >
-                <h2 className="leading-tight">Let&apos;s keep in touch</h2>
-                <div className="col-span-3 md:col-span-2">
-                  <Copiable
-                    desc="General inquiries &amp; ticketing"
-                    email="info@tedxsfu.com"
-                    isDarkMode={true}
-                  />
-                  <Copiable
-                    desc="Partnership inquiries"
-                    email="partner@tedxsfu.com"
-                    isDarkMode={true}
-                  />
-                  <SocialModule />
-                </div>
-              </motion.div>
-            </StaggerTransition>
-          </div>
-
-          <div className="col-span-full mt-auto pb-32 sm:col-span-3 sm:col-start-2 md:col-span-3 md:col-start-3 md:pb-12 lg:col-span-2 lg:col-start-3">
-            <StaggerTransition
-              staggerIndex={4}
-              isActive={isOpened && !hasTransitionBegan}
-              secondary
-            >
-              <div className="mb-6 mt-auto text-body ">
-                Exclusive ticket discounts and content — right to your inbox.
-              </div>
-              <EmailForm secondary isDarkMode={true} />
-            </StaggerTransition>
-          </div>
-        </MainGrid>
-      </motion.div>
       {children}
     </NavContext.Provider>
   );
