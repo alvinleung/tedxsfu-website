@@ -13,47 +13,51 @@ import MainGrid from "../layouts/MainGrid";
 type Props = { desc: string; email: string; isDarkMode?: boolean };
 
 const Copiable = ({ desc, email, isDarkMode }: Props) => {
-  const lg = useBreakpoint(breakpoints.lg);
   const [value, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
   const copyAction = () => {
     copy(email);
     setCopied(true);
+
+    setTimeout(() => setCopied(false), 3000);
   };
 
   return (
     <div className="flex flex-row">
       <div className="mb-4 mr-auto flex flex-col">
         <motion.h3 className="text-body-mobile">{desc}</motion.h3>
-        <motion.button
-          onClick={copyAction}
+        <a
+          href={`mailto:${email}`}
           className="flex w-full justify-between text-body-mobile opacity-50"
-          onHoverEnd={(e) => {
-            setCopied(!lg);
-          }}
         >
           {email}
-        </motion.button>
+        </a>
       </div>
       {useBreakpoint(breakpoints.sm) && (
         <motion.button
           animate={{
-            background: isDarkMode ? "#393939" : "#777",
-            color: isDarkMode ? "#FFFFFF7F" : "#FFFFFF9F",
+            // background: isDarkMode ? "#232323" : "#555",
+            color: isDarkMode ? "#FFFFFF7F" : "#333",
             // : "#242424"
           }}
           whileHover={{
-            background: isDarkMode ? "#444444" : "#5F5F5F",
+            color: isDarkMode ? "#FFFFFF7F" : "#333",
+            // background: isDarkMode ? "#444444" : "#5F5F5F",
+          }}
+          transition={{
+            duration: AnimationConfig.NORMAL,
+            ease: AnimationConfig.EASING,
           }}
           onClick={copyAction}
-          className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full p-1 pr-2 text-micro"
+          className="mb-auto flex w-fit place-self-end overflow-hidden rounded-full p-[2px] text-micro"
           layout
-          onHoverEnd={(e) => {
-            setCopied(!lg);
-          }}
         >
           <AnimatePresence mode="popLayout">
-            <Image src={iconCopy} alt="" className={"h-4 opacity-50 invert"} />
+            <Image
+              src={iconCopy}
+              alt=""
+              className={`h-4 opacity-60 ${isDarkMode ? "invert" : ""}`}
+            />
             {copied ? (
               <motion.span
                 key="copied"
@@ -66,6 +70,10 @@ const Copiable = ({ desc, email, isDarkMode }: Props) => {
                 exit={{
                   y: "-100%",
                   opacity: 0,
+                }}
+                transition={{
+                  duration: AnimationConfig.NORMAL,
+                  ease: AnimationConfig.EASING,
                 }}
               >
                 Copied
@@ -82,6 +90,10 @@ const Copiable = ({ desc, email, isDarkMode }: Props) => {
                 exit={{
                   y: "-100%",
                   opacity: 0,
+                }}
+                transition={{
+                  duration: AnimationConfig.NORMAL,
+                  ease: AnimationConfig.EASING,
                 }}
               >
                 Copy
