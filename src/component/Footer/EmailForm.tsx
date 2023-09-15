@@ -67,8 +67,8 @@ const EmailForm = ({ isDarkMode }: Props) => {
         paddingBottom: success ? "1rem" : "0.5rem",
       }}
       transition={{
-        duration: AnimationConfig.VERY_SLOW,
-        ease: AnimationConfig.EASING_IN_OUT,
+        duration: AnimationConfig.NORMAL,
+        ease: AnimationConfig.EASING,
       }}
       onSubmit={(event) => {
         event.preventDefault();
@@ -125,7 +125,7 @@ const EmailForm = ({ isDarkMode }: Props) => {
                         : "#999"
                       : !isEmpty
                       ? "#FFF"
-                      : "#555",
+                      : "#888",
                     background: isDarkMode
                       ? !isEmpty
                         ? "#fff"
