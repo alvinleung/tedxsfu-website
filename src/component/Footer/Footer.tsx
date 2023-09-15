@@ -116,23 +116,21 @@ const Footer = ({
         }}
       >
         <MainGrid className="pb-24">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              delay: AnimationConfig.NORMAL,
+            }}
+            className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 xl:col-span-2 xl:col-start-2"
+          >
+            <div className="mb-6 text-lead">
+              Exclusive ticket discounts and content — right to your inbox.
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                delay: AnimationConfig.NORMAL,
-              }}
-              className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 xl:col-span-2 xl:col-start-4"
-            >
-              <div className="mb-6 text-lead">
-                Exclusive ticket discounts and content — right to your
-                inbox.
-              </div>
-
-              <EmailForm isDarkMode={isDarkMode} />
-            </motion.div>
+            <EmailForm isDarkMode={isDarkMode} />
+          </motion.div>
 
           <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 xl:col-span-2 xl:col-start-6">
             <div className="pb-6 text-body md:text-lead">
