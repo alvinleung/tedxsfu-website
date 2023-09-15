@@ -127,7 +127,7 @@ const Nav = ({ children }: Props) => {
 
         <Scrim isShowing={isContentOverflowing} />
         <motion.button
-          className="fixed right-grid-margin-y top-grid-margin-y z-50 mt-nav-button-offset-y flex h-nav-button-height w-nav-button-height items-center justify-center mix-blend-exclusion"
+          className="fixed right-2 sm:right-grid-margin-x top-grid-margin-y z-50 mt-nav-button-offset-y flex h-nav-button-height w-nav-button-height items-center justify-center mix-blend-exclusion"
           // style={{width: "max(auto, 4rem)"}}
           aria-label="Menu"
           onClick={toggleOpen}

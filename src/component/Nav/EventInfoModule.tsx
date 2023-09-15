@@ -16,19 +16,22 @@ export const EventInfoModule = ({ isActive }: Props) => {
     <MainGrid
       className={`fixed left-0 right-0 z-50 px-grid-margin-x py-grid-margin-y`}
     >
-      <div className="col-start-2 xl:col-start-3">
+      <div className="max-sm:hidden sm:col-start-2 xl:col-start-3">
         <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
           <EventInfoLink
-            label={"Direction"}
+            label={"Directions"}
             href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
           >
-            <span className="whitespace-nowrap uppercase">
-              The Center of <br /> performing Arts
+            <span className="sm:hidden sm:whitespace-nowrap uppercase">
+              The Centre <br/> Vancouver
+            </span>
+            <span className="max-sm:hidden sm:whitespace-nowrap uppercase">
+              The Centre For <br /> Performing Arts
             </span>
           </EventInfoLink>
         </StaggerTransition>
       </div>
-      <div className="col-start-3 xl:col-start-4">
+      <div className="max-sm:col-start-3 max-sm:col-span-2 col-start-3 xl:col-start-4">
         <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
           <EventInfoLink
             label={"Calendar"}
