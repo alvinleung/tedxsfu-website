@@ -7,7 +7,7 @@ type Props = {
 const TicketCTA = ({ isHighlighted }: Props) => {
   return (
     <a
-      href="https://google.com"
+      href="https://www.ticketmaster.ca/event/11005F2D0FDD4B2A"
       target="_blank"
       className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet backdrop-blur-lg"
       style={{
