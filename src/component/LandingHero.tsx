@@ -1,4 +1,4 @@
-import Logo from "../EmergeTextEffect/Logo";
+import { Logo } from "../EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -88,41 +88,7 @@ export const LandingHero = () => {
           Performing Arts
         </a> */}
 
-        <MainGrid>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: isAnimationDone ? 1 : 0,
-              transition: {
-                delay: 0.1,
-                duration: AnimationConfig.VERY_SLOW,
-              },
-            }}
-            className="col-span-full my-16 grid grid-cols-4 gap-x-4 gap-y-8 lg:col-span-4 lg:col-start-2 2xl:col-start-3"
-          >
-            <div className="col-span-full grid grid-cols-2 gap-x-4 sm:col-span-2">
-              <EventInfoModuleCond className="col-span-full mb-8" />
-              <hr className="col-span-full my-2 opacity-50" />
-              <motion.div className="col-span-full grid grid-cols-2 gap-4">
-                <h2 className="text-micro-mobile uppercase opacity-50 md:text-micro">
-                  Note for 11/11
-                </h2>
-                <p className="text-micro-mobile opacity-50 md:text-micro">
-                  In honour of Remembrance Day, 20 minutes of our program will
-                  be dedicated to Canadian veterans.
-                </p>
-              </motion.div>
-            </div>
-            <div className="col-span-full sm:col-span-2">
-              <h2 className="mb-4 text-body">
-                Be the first in line for tickets: subscribe for $5 off and
-                bite-sized event details
-              </h2>
-              {/* <hr className="col-span-full opacity-50 my-4"/> */}
-              <EmailForm isDarkMode={true} />
-            </div>
-          </motion.div>
-        </MainGrid>
+        
       </motion.div>
     </section>
   );

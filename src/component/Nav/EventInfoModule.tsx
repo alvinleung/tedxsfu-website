@@ -40,7 +40,7 @@ export const EventInfoModule = ({ isActive }: Props) => {
                 <span className="tracking-[-0.05em]">1/</span>
                 <span className="tracking-[-0.17em]">11</span>
               </span>
-              <span className="ml-2 opacity-70">(sat)</span>
+              <span className="ml-2 opacity-70 uppercase">(Sat)</span>
             </div>
           </EventInfoLink>
         </StaggerTransition>

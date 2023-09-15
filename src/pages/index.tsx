@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../EmergeTextEffect/Logo";
+
 import { useWindowDimension } from "@/hooks/useWindowDimension";
 import Nav from "@/component/Nav/NavOld";
 import Head from "next/head";
@@ -49,8 +49,6 @@ export default function Home() {
       <div className="max-w-screen relative bg-black">
         <LandingHero />
       </div>
-
-      <div className="h-96 sm:h-72 md:h-64 lg:h-48"></div>
 
       <SectionLayout>
         <div

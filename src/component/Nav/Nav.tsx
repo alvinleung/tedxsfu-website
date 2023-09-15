@@ -23,17 +23,22 @@ import { TEDxSFULogo } from "./TEDxSFULogo";
 import Scrim from "./Scrim";
 import EventInfo, { EventInfoLink } from "./EventInfoLink";
 import TicketCTA from "./TicketCTA";
+import { useLogoContext } from "../../EmergeTextEffect/Logo"
 
 type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
   isOpened: boolean;
+  // eventModuleIsOpened: boolean;
+  setEventModuleOpenWithoutLogo: (isOpen : boolean) => void;
 }
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
   isOpened: false,
+  // eventModuleIsOpened: false,
+  setEventModuleOpenWithoutLogo: (isOpen : boolean) => {},
 });
 export enum NavScrollState {
   SCROLLED,
@@ -44,6 +49,7 @@ const Nav = ({ children }: Props) => {
   const router = useRouter();
   const isAboutPage = router.pathname != "/";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
+  const [eventModuleOpenWithoutLogo, setEventModuleOpenWithoutLogo] = useState(true);
 
   const [selectedPath, setSelectedPath] = useState("");
 
@@ -99,7 +105,7 @@ const Nav = ({ children }: Props) => {
   };
 
   return (
-    <NavContext.Provider value={{ setScrollState, isOpened }}>
+    <NavContext.Provider value={{ setScrollState, isOpened, setEventModuleOpenWithoutLogo }}>
       <motion.nav>
         <TEDxSFULogo
           onClick={() => {
@@ -110,7 +116,7 @@ const Nav = ({ children }: Props) => {
 
         <EventInfoModule
           isActive={
-            router.pathname === "/" || (isOpened && !hasTransitionBegan)
+            router.pathname === "/" && !eventModuleOpenWithoutLogo || (isOpened && !hasTransitionBegan)
           }
         />
         <div className="fixed right-[64px] top-grid-margin-y z-50 mt-nav-button-offset-y pr-grid-margin-x">
