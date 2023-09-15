@@ -1,14 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useFormFields, useMailChimpForm } from "use-mailchimp-form";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import LoadingIcon from "./LoadingIcon";
 import isEmail from "validator/lib/isEmail";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   isDarkMode: boolean;
 };
 
 const EmailForm = ({ isDarkMode }: Props) => {
+  // const url = "fdsa";
   const url =
     "https://tedxsfu.us7.list-manage.com/subscribe/post?u=92f4f790178ff00e2b0e57b7f&amp;id=2f9caf4ffb&amp;f_id=00a9d2e4f0";
   const { loading, error, success, message, handleSubmit } =
@@ -16,6 +18,30 @@ const EmailForm = ({ isDarkMode }: Props) => {
   const { fields, handleFieldChange } = useFormFields({
     EMAIL: "",
   });
+
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const canSubmit = useMemo(() => isEmail(fields.EMAIL), [fields]);
+  const isEmpty = useMemo(() => fields.EMAIL === "", [fields]);
+
+  const errorMessage = useMemo(() => {
+    // mailchimp error
+    if (error) {
+      return message;
+    }
+    // format error
+    if (!isEmail(fields.EMAIL) && hasSubmitted) {
+      return "Please enter a valid email to subscribe.";
+    }
+
+    return "";
+  }, [message, error, hasSubmitted, fields.EMAIL]);
+  const hasError = errorMessage !== "";
+
+  const onFormSubmit = () => {
+    setHasSubmitted(true);
+    if (canSubmit) handleSubmit(fields);
+  };
 
   const darkModeColor = "rgba(255,255,255,.15)";
   const lightModeColor = "rgba(0,0,0,.2)";
@@ -40,9 +66,13 @@ const EmailForm = ({ isDarkMode }: Props) => {
           : lightModeColor,
         paddingBottom: success ? "1rem" : "0.5rem",
       }}
+      transition={{
+        duration: AnimationConfig.VERY_SLOW,
+        ease: AnimationConfig.EASING_IN_OUT,
+      }}
       onSubmit={(event) => {
         event.preventDefault();
-        handleSubmit(fields);
+        onFormSubmit();
       }}
       noValidate
     >
@@ -52,6 +82,10 @@ const EmailForm = ({ isDarkMode }: Props) => {
             className={`relative flex flex-col justify-center`}
             exit={{
               opacity: 0,
+            }}
+            transition={{
+              duration: AnimationConfig.NORMAL,
+              ease: "linear",
             }}
           >
             Your email address*
@@ -75,53 +109,58 @@ const EmailForm = ({ isDarkMode }: Props) => {
               />
               {!success && (
                 <motion.button
+                  transition={{
+                    duration: AnimationConfig.NORMAL,
+                    ease: AnimationConfig.EASING,
+                  }}
                   className={`
             h-8
-            rounded-[4px] px-grid-margin-x py-2 
-            text-micro uppercase peer-placeholder-shown:cursor-not-allowed peer-invalid:cursor-not-allowed`}
-                  disabled={!isEmail(fields.EMAIL)}
+            rounded-[4px] px-4 py-2 
+            text-micro uppercase`}
+                  disabled={isEmpty}
                   animate={{
-                    color: isEmail(fields.EMAIL) ? "#ffffffFF" : "#ffffff3F",
+                    color: isDarkMode
+                      ? !isEmpty
+                        ? "#000"
+                        : "#999"
+                      : !isEmpty
+                      ? "#FFF"
+                      : "#555",
                     background: isDarkMode
-                      ? isEmail(fields.EMAIL)
-                        ? "#4F4F4F"
-                        : "#303030"
-                      : isEmail(fields.EMAIL)
-                      ? "#666"
-                      : "#A5A5A5",
+                      ? !isEmpty
+                        ? "#fff"
+                        : "#222"
+                      : !isEmpty
+                      ? "#000"
+                      : "#DDD",
                   }}
-                  whileHover={{
-                    background: isDarkMode
-                      ? isEmail(fields.EMAIL)
-                        ? "#555"
-                        : "#303030"
-                      : isEmail(fields.EMAIL)
-                      ? "#777"
-                      : "#A5A5A5",
+                  style={{
+                    cursor: isEmpty ? "not-allowed" : "pointer",
                   }}
                 >
                   {!loading && !success && <>Join</>}
-                  {loading && <LoadingIcon />}
+                  {loading && (
+                    <div className={isDarkMode ? "invert" : ""}>
+                      <LoadingIcon />
+                    </div>
+                  )}
                   {/* <LoadingIcon/> */}
                 </motion.button>
               )}
             </div>
           </motion.label>
         )}
-        {error && (
+        {hasError && (
           <motion.p
-            className="text-ted"
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
+            className="mt-2 pt-2 text-micro-mobile"
+            style={{
+              color: isDarkMode ? "#FFF" : "#000",
+              borderTop: isDarkMode
+                ? "1px solid rgba(255,255,255,.2)"
+                : "1px solid rgba(0,0,0,.2)",
             }}
           >
-            {message}
+            {errorMessage}
           </motion.p>
         )}
         {success && (
@@ -137,6 +176,11 @@ const EmailForm = ({ isDarkMode }: Props) => {
             }}
             exit={{
               opacity: 0,
+            }}
+            transition={{
+              duration: AnimationConfig.SLOW,
+              delay: 0.3,
+              ease: "linear",
             }}
           >
             Thanks for subscribing!
