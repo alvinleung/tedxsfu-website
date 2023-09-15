@@ -15,7 +15,7 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
     <motion.a
       href="https://www.ticketmaster.ca/event/11005F2D0FDD4B2A"
       target="_blank"
-      className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet backdrop-blur-lg max-sm:w-fit max-sm:mx-auto"
+      className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet backdrop-blur-lg max-md:w-fit max-md:mx-auto"
       style={{
         backgroundColor: isHighlighted ? "#FFF" : "rgba(255,255,255,.05)",
         border: isHighlighted ? "1px solid rgba(0,0,0,0)" : "1px solid #383838",

@@ -119,8 +119,8 @@ const Nav = ({ children }: Props) => {
             router.pathname === "/" && !eventModuleOpenWithoutLogo || (isOpened && !hasTransitionBegan)
           }
         />
-        <div className="fixed max-sm:bottom-grid-margin-y max-sm:left-0 max-sm:right-0 sm:right-[64px] sm:top-grid-margin-y z-50 mt-nav-button-offset-y sm:pr-grid-margin-x
-        max-sm:mx-auto
+        <div className="fixed max-md:bottom-grid-margin-y max-md:left-0 max-md:right-0 md:right-[64px] md:top-grid-margin-y z-50 mt-nav-button-offset-y md:pr-grid-margin-x
+        max-md:mx-auto
         ">
           <TicketCTA isHighlighted={false} isAboutPage={isAboutPage}/>
         </div>
@@ -239,7 +239,7 @@ const Nav = ({ children }: Props) => {
               secondary
             >
               <div className="mb-6 mt-auto text-body ">
-                Early bird ticket sale and exclusive content — right to your
+                Exclusive ticket discounts and content — right to your
                 inbox.
               </div>
               <EmailForm isDarkMode={true} />

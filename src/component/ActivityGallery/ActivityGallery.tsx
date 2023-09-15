@@ -215,10 +215,10 @@ const ActivityGallery = ({
         </Sticky>
       )}
       <MainGrid ref={containerRef} className="relative">
-        <div className="col-span-full col-start-1 hidden md:col-span-1 md:block 2xl:col-start-2">
+        <div className="col-span-full col-start-1 hidden md:col-span-1 md:block xl:col-start-2">
           <Sticky top={"140px"} fadeOut className="pt-[6dvh]">
             <motion.div
-              className="flex h-[50dvh] flex-col items-end pt-[20vh] 2xl:items-start"
+              className="flex h-[50dvh] flex-col items-end pt-[20vh] xl:items-start"
               // style={{ height: windowDim.height * perItemScrollVH }}
 
               animate={{
@@ -260,7 +260,7 @@ const ActivityGallery = ({
           </Sticky>
         </div>
         <div
-          className="col-span-full md:col-span-4 lg:col-span-4 2xl:col-start-3"
+          className="col-span-full md:col-span-3 lg:col-span-4 xl:col-start-3"
           style={{
             height: galleryTotalScrollHeight,
           }}
@@ -283,7 +283,7 @@ const ActivityGallery = ({
           </Sticky>
         </div>
         <motion.div
-          className="col-span-full col-start-1 md:col-span-1 2xl:col-start-8"
+          className="col-span-full col-start-1 md:col-span-1 xl:col-start-8"
           animate={{
             opacity: isSectionActive ? 1 : 0,
           }}

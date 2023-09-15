@@ -124,7 +124,7 @@ const Footer = ({
               transition={{
                 delay: AnimationConfig.NORMAL,
               }}
-              className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 2xl:col-span-2 2xl:col-start-2"
+              className="col-span-full pb-12 sm:col-span-2 sm:col-start-1 md:col-span-2 md:col-start-2 xl:col-span-2 xl:col-start-4"
             >
               <div className="mb-6 text-lead">
                 Exclusive ticket discounts and content — right to your
@@ -134,7 +134,7 @@ const Footer = ({
               <EmailForm isDarkMode={isDarkMode} />
             </motion.div>
 
-          <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 2xl:col-span-2 2xl:col-start-6">
+          <div className="col-span-full sm:col-span-2 sm:col-start-3 md:col-start-4 xl:col-span-2 xl:col-start-6">
             <div className="pb-6 text-body md:text-lead">
               This independent TEDx event is operated under license from TED.
             </div>
