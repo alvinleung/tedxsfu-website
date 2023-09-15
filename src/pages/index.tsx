@@ -54,6 +54,7 @@ export default function Home() {
         <div
           className="
         col-span-4 col-start-1
+        h-[100dvh] flex flex-col justify-center
         
         mb-16 text-lead-mobile sm:col-span-2 sm:col-start-2 sm:mb-24 md:col-start-2 md:mb-32 lg:col-start-2 lg:mb-48 lg:text-lead xl:col-start-2 2xl:col-start-3"
         >
