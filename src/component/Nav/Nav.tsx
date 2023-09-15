@@ -117,7 +117,9 @@ const Nav = ({ children }: Props) => {
 
         <EventInfoModule
           isActive={
-            (router.pathname === "/" && !eventModuleOpenWithoutLogo) ||
+            (router.pathname === "/" &&
+              scrollState === NavScrollState.SCROLLED &&
+              !eventModuleOpenWithoutLogo) ||
             (isOpened && !hasTransitionBegan)
           }
         />
