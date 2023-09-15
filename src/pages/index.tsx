@@ -60,9 +60,17 @@ export default function Home() {
         >
           <h2>More magic, coming soon</h2>
           <p className="opacity-50">
-            There&apos;s more to come in the near future. Be sure to stay in
-            touch for future ticketing and more event details.
+            We&apos;ll soon be announcing our all star speaker cast, flying in from Vancouver, San Fransisco, Toronto—unmask the world of Olympians, pioneers in tech, and thought leaders along the West Coast.
           </p>
+          <hr className="col-span-full my-2 opacity-50" />
+              <motion.div className="col-span-full grid grid-cols-2 gap-4">
+                <h2 className="text-micro-mobile uppercase opacity-50 md:text-micro">
+                  Note for 11/11
+                </h2>
+                <p className="text-micro-mobile opacity-50 md:text-micro">
+                  In partnership with Honour House, 20 minutes of our program will be dedicated to Remembrance Day.
+                </p>
+              </motion.div>
         </div>
       </SectionLayout>
       <Footer
