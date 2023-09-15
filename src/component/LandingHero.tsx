@@ -75,8 +75,8 @@ export const LandingHero = () => {
         <MainGrid className="max-sm:relative max-sm:my-8">
           <div className="max-sm:col-span-2 sm:absolute sm:right-[85%] flex flex-col sm:justify-center sm:top-0 sm:bottom-0">
             <EventInfoLink
-                label={"Directions"}
-                href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
+                label={"Calendar"}
+                href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
                 className="sm:items-center"
               >
                 <span className="sm:whitespace-nowrap uppercase sm:text-center">
