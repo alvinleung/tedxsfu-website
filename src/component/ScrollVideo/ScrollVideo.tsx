@@ -163,7 +163,7 @@ const ScrollVideo = ({ playbackConst = 150, src }: Props) => {
             scale: videoScale,
             x: videoPos,
             objectFit: isLandscape ? "cover" : "contain",
-            objectPosition: isLandscape ? "center bottom" : "",
+            objectPosition: isLandscape ? "center bottom" : "center",
           }}
         >
           {/* <source

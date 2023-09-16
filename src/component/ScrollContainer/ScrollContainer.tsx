@@ -164,6 +164,8 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     [0, windowDim.height],
   );
 
+  const scrollBarHeight = (windowDim.height / scrollHeight) * windowDim.height;
+
   const [shouldShowScrollbar, setShouldShowScrollBar] = useState(true);
 
   useEffect(() => {
@@ -233,7 +235,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
           <motion.div
             className="w-1 bg-white"
             style={{
-              height: (windowDim.height / scrollHeight) * windowDim.height,
+              height: scrollBarHeight === Infinity ? 0 : scrollBarHeight,
               y: scrollBarY,
             }}
             animate={{
