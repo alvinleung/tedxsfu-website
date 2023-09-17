@@ -65,39 +65,37 @@ export const LandingHero = () => {
   }, []);
 
   return (
-    <section className="max-w-screen overflow-hidden px-grid-margin-x">
+    <section className="max-w-screen overflow-hidden px-grid-margin-x pb-grid-margin-y">
       <motion.div
         initial={{ scale: 50 }}
         animate={anim}
-        className="mx-auto relative sm:w-fit"
+        className="relative mx-auto sm:w-fit"
       >
         <Logo isEnterAnimationDone={isAnimationDone} />
         <MainGrid className="max-sm:relative max-sm:my-8">
-          <div className="max-sm:col-span-2 sm:absolute sm:right-[85%] flex flex-col sm:justify-center sm:top-0 sm:bottom-0">
+          <div className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:right-[85%] sm:top-0 sm:justify-center">
             <EventInfoLink
-                label={"Calendar"}
-                href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
-                className="sm:items-center"
-              >
-                <span className="sm:whitespace-nowrap uppercase sm:text-center">
-                  Saturday, <br/> Nov 11, 2023
-                </span>
-              </EventInfoLink>
+              label={"Calendar"}
+              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
+              className="sm:items-center"
+            >
+              <span className="uppercase sm:whitespace-nowrap sm:text-center">
+                Saturday, <br /> Nov 11, 2023
+              </span>
+            </EventInfoLink>
           </div>
-          <div className="max-sm:col-span-2 sm:absolute sm:left-[85%] flex flex-col sm:justify-center sm:top-0 sm:bottom-0">
+          <div className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:left-[85%] sm:top-0 sm:justify-center">
             <EventInfoLink
-                label={"Directions"}
-                href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
-                className="sm:items-center"
-              >
-                <span className="sm:whitespace-nowrap uppercase sm:text-center">
-                  The Centre For <br /> Performing Arts
-                </span>
-              </EventInfoLink>
+              label={"Directions"}
+              href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
+              className="sm:items-center"
+            >
+              <span className="uppercase sm:whitespace-nowrap sm:text-center">
+                The Centre For <br /> Performing Arts
+              </span>
+            </EventInfoLink>
           </div>
         </MainGrid>
-
-        
       </motion.div>
     </section>
   );

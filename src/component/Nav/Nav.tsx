@@ -33,14 +33,14 @@ interface NavContextInterface {
   isOpened: boolean;
   // eventModuleIsOpened: boolean;
   exitDuration: number;
-  setEventModuleOpenWithoutLogo: (isOpen: boolean) => void;
+  setIsLandingLogoVisible: (isOpen: boolean) => void;
 }
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
   isOpened: false,
   // eventModuleIsOpened: false,
-  setEventModuleOpenWithoutLogo: (isOpen: boolean) => {},
+  setIsLandingLogoVisible: (isOpen: boolean) => {},
   exitDuration: 1000,
 });
 export enum NavScrollState {
@@ -52,8 +52,13 @@ const Nav = ({ children }: Props) => {
   const router = useRouter();
   const isAboutPage = router.pathname != "/";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
-  const [eventModuleOpenWithoutLogo, setEventModuleOpenWithoutLogo] =
-    useState(true);
+  const [isLandingLogoVisible, setIsLandingLogoVisible] = useState(true);
+
+  useEffect(() => {
+    if (router.pathname === "/") {
+      setIsLandingLogoVisible(true);
+    }
+  }, [router.pathname]);
 
   const [isOpened, setIsOpened] = useState(false);
   const [hasTransitionBegan, setHasTransitionBegan] = useState(false);
@@ -103,7 +108,7 @@ const Nav = ({ children }: Props) => {
       value={{
         setScrollState,
         isOpened,
-        setEventModuleOpenWithoutLogo,
+        setIsLandingLogoVisible,
         exitDuration: EXIT_DURATION,
       }}
     >
@@ -117,11 +122,10 @@ const Nav = ({ children }: Props) => {
 
         <EventInfoModule
           isActive={
-            (router.pathname === "/" &&
-              scrollState === NavScrollState.SCROLLED &&
-              !eventModuleOpenWithoutLogo) ||
-            (isOpened && !hasTransitionBegan)
+            router.pathname === "/" || (isOpened && !hasTransitionBegan)
           }
+          isLandingLogoVisible={isLandingLogoVisible}
+          isMenuOpened={isOpened}
         />
         <div
           className="fixed z-50 mt-nav-button-offset-y max-md:bottom-grid-margin-y max-md:left-0 max-md:right-0 max-md:mx-auto md:right-[64px] md:top-grid-margin-y

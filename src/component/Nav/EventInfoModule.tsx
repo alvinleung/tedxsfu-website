@@ -5,33 +5,62 @@ import MainGrid from "../layouts/MainGrid";
 import arrowTopRight from "../../../public/img/mdi_arrow-top-right.svg";
 import EventInfoLink from "./EventInfoLink";
 import StaggerTransition from "./StaggerTransition";
+import { AnimationConfig } from "../AnimationConfig";
 
 type Props = {
   className?: string;
   isActive: boolean;
+  isLandingLogoVisible: boolean;
+  isMenuOpened: boolean;
 };
 
-export const EventInfoModule = ({ isActive }: Props) => {
+export const EventInfoModule = ({
+  isActive,
+  isLandingLogoVisible,
+  isMenuOpened,
+}: Props) => {
   return (
     <MainGrid
       className={`fixed left-0 right-0 z-50 px-grid-margin-x py-grid-margin-y`}
     >
-      <div className="max-sm:hidden sm:col-start-2 xl:col-start-3">
+      <motion.div
+        animate={{
+          opacity: isLandingLogoVisible && !isMenuOpened ? 0 : 1,
+          transition: {
+            duration: isLandingLogoVisible
+              ? AnimationConfig.VERY_FAST
+              : AnimationConfig.FAST,
+            ease: AnimationConfig.EASING,
+          },
+        }}
+        className="max-sm:hidden sm:col-start-2 xl:col-start-3"
+      >
         <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
           <EventInfoLink
             label={"Directions"}
             href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
           >
-            <span className="sm:hidden sm:whitespace-nowrap uppercase">
-              The Centre <br/> Vancouver
+            <span className="uppercase sm:hidden sm:whitespace-nowrap">
+              The Centre <br /> Vancouver
             </span>
-            <span className="max-sm:hidden sm:whitespace-nowrap uppercase">
+            <span className="uppercase max-sm:hidden sm:whitespace-nowrap">
               The Centre For <br /> Performing Arts
             </span>
           </EventInfoLink>
         </StaggerTransition>
-      </div>
-      <div className="max-sm:col-start-3 max-sm:col-span-2 col-start-3 xl:col-start-4">
+      </motion.div>
+      <motion.div
+        animate={{
+          opacity: isLandingLogoVisible && !isMenuOpened ? 0 : 1,
+          transition: {
+            duration: isLandingLogoVisible
+              ? AnimationConfig.VERY_FAST
+              : AnimationConfig.FAST,
+            ease: AnimationConfig.EASING,
+          },
+        }}
+        className="col-start-3 max-sm:col-span-2 max-sm:col-start-3 xl:col-start-4"
+      >
         <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
           <EventInfoLink
             label={"Calendar"}
@@ -43,11 +72,11 @@ export const EventInfoModule = ({ isActive }: Props) => {
                 <span className="tracking-[-0.05em]">1/</span>
                 <span className="tracking-[-0.17em]">11</span>
               </span>
-              <span className="ml-2 opacity-70 uppercase">(Sat)</span>
+              <span className="ml-2 uppercase opacity-70">(Sat)</span>
             </div>
           </EventInfoLink>
         </StaggerTransition>
-      </div>
+      </motion.div>
     </MainGrid>
   );
 };
@@ -67,12 +96,12 @@ export const EventInfoModuleCond = (props: Props) => {
           setHover("");
         }}
       >
-        <span className="xs:block hidden md:text-body">
-          Saturday, <br className="xs:block hidden" />
+        <span className="hidden xs:block md:text-body">
+          Saturday, <br className="hidden xs:block" />
           Nov 11, 2023
         </span>
         <span className="xs:hidden md:text-body">Sat, Nov 11, 2023</span>
-        <span className="xs:flex mt-1 hidden gap-x-1 opacity-50">
+        <span className="mt-1 hidden gap-x-1 opacity-50 xs:flex">
           Calendar
           <motion.div
             animate={{
@@ -100,7 +129,7 @@ export const EventInfoModuleCond = (props: Props) => {
           Performing Arts
         </span>
         {/* <span className="sm:hidden md:text-body">The Centre Vancouver</span> */}
-        <span className="xs:flex mt-1 hidden gap-x-1 opacity-50">
+        <span className="mt-1 hidden gap-x-1 opacity-50 xs:flex">
           Directions
           <motion.div
             animate={{

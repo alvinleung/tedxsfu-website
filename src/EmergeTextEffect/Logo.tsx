@@ -20,10 +20,12 @@ import {
   useAnimate,
   useAnimation,
   useWillChange,
-  useInView
+  useInView,
 } from "framer-motion";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 import { useNavContext } from "@/component/Nav/Nav";
+import { useIsFirstRender } from "@/hooks/useIsFirstRender";
+import { useEffectOnce } from "usehooks-ts";
 
 type Props = {
   isEnterAnimationDone: boolean;
@@ -40,7 +42,7 @@ const LogoAnimationContext = createContext<any>({
   touchAnimProgress: new MotionValue(),
   animProgress: new MotionValue(),
   isEnterAnimationDone: false,
-  isInView: false
+  isInView: false,
 });
 
 const AnimatedPath = (props: any) => {
@@ -131,12 +133,13 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
   const animProgress = useMotionValue(0);
   const touchAnimProgress = useMotionValue(0);
   const { width } = useWindowDimension();
-  const { setEventModuleOpenWithoutLogo } = useNavContext();
+  const { setIsLandingLogoVisible } = useNavContext();
   const ref = useRef(null);
   const isInView = useInView(ref);
+
   useEffect(() => {
-    setEventModuleOpenWithoutLogo(isInView)
-  }, [isInView])
+    setIsLandingLogoVisible(isInView);
+  }, [isInView]);
 
   useEffect(() => {
     if (!isEnterAnimationDone) return;
@@ -204,10 +207,6 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
     };
   }, [isEnterAnimationDone]);
 
-  useEffect(() => {
-    console.log("Hi "+isInView)
-  }, [isInView])
-
   // const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
 
   // const condition = (
@@ -227,13 +226,13 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
 
   // )
 
-
   return (
     <LogoAnimationContext.Provider
       value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
     >
       <div
-        className="sm:w-fit pointer-events-none mt-36 flex flex-col gap-4 xl:mt-grid-margin-y" ref={ref}
+        className="pointer-events-none mt-36 flex flex-col gap-4 sm:w-fit xl:mt-grid-margin-y"
+        ref={ref}
         // style={{
         //   marginTop: useBreakpoint(breakpoints.md)
         //     ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25dvh - 4rem)))"

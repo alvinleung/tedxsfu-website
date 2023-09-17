@@ -24,7 +24,9 @@ export const SectionLayout = ({
     <section className={`${fullScreen ? "" : "px-grid-margin-x"} pb-8`}>
       <StickyContainer>
         {!fullScreen && (
-          <MainGrid className={`${padding ? "mt-24 md:mt-64" : ""}`}>
+          <MainGrid
+            className={`${padding ? "relative mt-24 md:mt-64" : "relative"}`}
+          >
             {children}
           </MainGrid>
         )}
@@ -39,6 +41,9 @@ type SectionCopyProps = {
   sticky?: boolean;
   stickyOnMobile?: boolean;
   left?: boolean;
+  right?: boolean;
+  padding?: boolean;
+  fadeIn?: boolean;
 };
 
 export const SectionInfo = ({
@@ -46,6 +51,9 @@ export const SectionInfo = ({
   sticky,
   stickyOnMobile,
   left,
+  right,
+  padding,
+  fadeIn,
 }: SectionCopyProps) => {
   // const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
   const bp = useAllBreakpoints();
@@ -53,6 +61,9 @@ export const SectionInfo = ({
   const atBreakpointSM = bp >= breakpoints.sm;
 
   const shouldStick = atBreakpointMD || stickyOnMobile;
+
+  const breakpoint2XLRight = "2xl:col-span-2 2xl:col-start-7";
+  const breakpointXLRight = "xl:col-span-2 xl:col-start-7";
 
   const breakpoint2XL = "2xl:col-span-2 2xl:col-start-2";
   const breakpointXL = "xl:col-span-3 xl:col-start-2";
@@ -68,8 +79,8 @@ export const SectionInfo = ({
     <motion.div
       className={`
       ${left ? " h-fit " : "z-10  h-fit"} 
-      ${breakpoint2XL} 
-      ${breakpointXL} 
+      ${right ? breakpoint2XLRight : breakpoint2XL} 
+      ${right ? breakpointXLRight : breakpointXL} 
       ${breakpointL} 
       ${breakpointM} 
       ${breakpointS} 
@@ -93,6 +104,7 @@ export const SectionInfo = ({
               : 28
           }
           fadeOut
+          fadeIn={fadeIn}
         >
           {children}
         </Sticky>

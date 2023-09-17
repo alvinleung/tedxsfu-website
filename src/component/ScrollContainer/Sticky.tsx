@@ -28,6 +28,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   top: number | string;
   duration?: number;
   fadeOut?: boolean;
+  fadeIn?: boolean;
 }
 
 const Sticky = ({
@@ -35,6 +36,7 @@ const Sticky = ({
   top,
   duration,
   fadeOut,
+  fadeIn,
   className,
   ...htmlProps
 }: Props) => {
@@ -77,8 +79,13 @@ const Sticky = ({
 
   const stikcyOpacity = useTransform(
     scrollY,
-    [stickyEndPos - bounds.height, stickyEndPos],
-    [1, 0],
+    [
+      fadeIn ? stickyStartPos - bounds.height / 2 : 0,
+      fadeIn ? stickyStartPos : 0,
+      stickyEndPos - bounds.height,
+      stickyEndPos,
+    ],
+    [0, 1, 1, 0],
   );
 
   return (

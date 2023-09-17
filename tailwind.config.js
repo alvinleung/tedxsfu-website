@@ -16,6 +16,7 @@ module.exports = {
         "logo-height": "26px",
         "nav-button-offset-y": "var(--nav-button-offset-y)",
         "nav-button-height": "46px",
+        "viewport-height": "100dvh",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
