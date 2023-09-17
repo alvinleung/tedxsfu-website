@@ -72,7 +72,7 @@ export const SectionInfo = ({
   const breakpointL = "lg:col-span-2 lg:col-start-2 lg:top-[28px]";
   const breakpointM = "md:col-span-2 md:col-start-2";
   const breakpointS = "sm:col-span-2 sm:col-start-1";
-  const breakpointXS = "xs:col-span-full xs:col-start-1";
+  const breakpointXS = "col-span-full col-start-1";
 
   const mobileStickyOffset = "64px";
   const tabletSmallStickyOffset = "96px";
