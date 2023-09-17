@@ -11,6 +11,7 @@ import {
   SectionInfoDescription,
   SectionInfoHeader,
 } from "./SectionLayouts";
+import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 type Props = {};
 
@@ -37,10 +38,12 @@ const SpeakerSection = (props: Props) => {
     // },
   );
 
+  const atBreakpointXL = useBreakpoint(breakpoints.xl);
+  const shiftX = atBreakpointXL ? 0 : -windowDim.width * 0.1;
   const offsetX = useTransform(
     scrollY,
     [0, endTransitionPosition],
-    [0, -windowDim.width * 0.05],
+    [0, shiftX],
     { ease: getFramerMotionEase(AnimationConfig.EASING) },
   );
   const scale = useTransform(scrollY, [0, endTransitionPosition], [1, 0.6], {

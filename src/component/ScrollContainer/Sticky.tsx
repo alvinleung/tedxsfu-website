@@ -80,8 +80,8 @@ const Sticky = ({
   const stikcyOpacity = useTransform(
     scrollY,
     [
-      fadeIn ? stickyStartPos - bounds.height / 2 : 0,
       fadeIn ? stickyStartPos : 0,
+      fadeIn ? stickyStartPos + bounds.height / 2 : 0,
       stickyEndPos - bounds.height,
       stickyEndPos,
     ],

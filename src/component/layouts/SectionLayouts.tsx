@@ -64,6 +64,8 @@ export const SectionInfo = ({
 
   const breakpoint2XLRight = "2xl:col-span-2 2xl:col-start-7";
   const breakpointXLRight = "xl:col-span-2 xl:col-start-7";
+  const breakpointLRight = "l:gcol-span-2 lg:col-start-5";
+  const breakpointMRight = "md:col-span-2 md:col-start-4";
 
   const breakpoint2XL = "2xl:col-span-2 2xl:col-start-2";
   const breakpointXL = "xl:col-span-3 xl:col-start-2";
@@ -81,8 +83,8 @@ export const SectionInfo = ({
       ${left ? " h-fit " : "z-10  h-fit"} 
       ${right ? breakpoint2XLRight : breakpoint2XL} 
       ${right ? breakpointXLRight : breakpointXL} 
-      ${breakpointL} 
-      ${breakpointM} 
+      ${right ? breakpointLRight : breakpointL} 
+      ${right ? breakpointMRight : breakpointM} 
       ${breakpointS} 
       ${breakpointXS} 
       ${shouldStick ? "sticky top-[28px]" : ""} 
