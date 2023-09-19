@@ -42,17 +42,18 @@ const SpeakerSection = (props: Props) => {
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
 
   // console.log(speakerSectionScrollHeight);
+  const atBreakpointXL = useBreakpoint(breakpoints.xl);
 
+  const shiftY = atBreakpointXL ? 1.45 : 1.4;
   const offsetY = useTransform(
     scrollY,
     [0, endTransitionPosition],
-    [-windowDim.height * 0.8, windowDim.height * 0],
+    [-endTransitionPosition * shiftY, windowDim.height * 0],
     // {
     //   ease: getFramerMotionEase(AnimationConfig.EASING),
     // },
   );
 
-  const atBreakpointXL = useBreakpoint(breakpoints.xl);
   const shiftX = atBreakpointXL
     ? -windowDim.width * 0.08
     : -windowDim.width * 0.1;
@@ -63,7 +64,7 @@ const SpeakerSection = (props: Props) => {
     { ease: cubicBezier(0.92, 0, 0.6, 1.01) },
   );
 
-  const scale = useTransform(scrollY, [0, endTransitionPosition], [1, 0.55], {
+  const scale = useTransform(scrollY, [0, endTransitionPosition], [2, 1], {
     // ease: getFramerMotionEase(AnimationConfig.EASING),
   });
 
@@ -118,14 +119,14 @@ const SpeakerSection = (props: Props) => {
               {speakers[currentSpeakerSlide].talkTitle}
             </div>
             <hr className="col-span-full opacity-50" />
-            <div className="flex flex-col py-2">
+            <button className="flex w-full flex-col py-2">
               <div className="text-body">
                 {speakers[currentSpeakerSlide].name}
               </div>
               <div className="text-body opacity-50">
                 {speakers[currentSpeakerSlide].title}
               </div>
-            </div>
+            </button>
             <hr className="col-span-full mb-4 opacity-50" />
             {/* <div>See all Speakers</div> */}
           </div>
@@ -135,7 +136,10 @@ const SpeakerSection = (props: Props) => {
         // className="h-[500vh]"
         style={{ height: speakerSectionScrollHeight }}
       ></div>
-      <div className="absolute inset-0 overflow-hidden" ref={imageContainerRef}>
+      <div
+        className="absolute inset-0  overflow-hidden"
+        ref={imageContainerRef}
+      >
         <Sticky top={0}>
           <motion.div
             className="h-screen w-screen"
@@ -146,7 +150,7 @@ const SpeakerSection = (props: Props) => {
               transformOrigin: "top",
             }}
           >
-            <div className="relative">
+            <div className="relative translate-y-[25vh] scale-150">
               {speakers.map((speaker, index) => {
                 if (index === 0) {
                   return (
@@ -156,6 +160,7 @@ const SpeakerSection = (props: Props) => {
                       width={1920}
                       height={1080}
                       alt={speaker.name}
+                      className="h-screen object-contain object-top"
                       animate={{
                         opacity: index === currentSpeakerSlide ? 1 : 0,
                         // y:
@@ -175,7 +180,7 @@ const SpeakerSection = (props: Props) => {
                 return (
                   <motion.img
                     key={index}
-                    className="absolute inset-0"
+                    className="absolute inset-0 h-screen object-contain object-top"
                     src={speaker.portraits[0]}
                     width={1920}
                     height={1080}

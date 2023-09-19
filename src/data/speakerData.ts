@@ -17,7 +17,7 @@ const speakers = [
     name: "Chris Wilson",
     pronouns: "they/them",
     talkTitle: "Unmask Career Norms",
-    title: "Ex-Helicopter Pilot & Career Coach",
+    title: "Former Helicopter Pilot & Career Coach",
     portraits: ["./speaker-section/speaker-chris.jpg"],
   },
   {
@@ -38,7 +38,7 @@ const speakers = [
     name: "Tiara Cash",
     pronouns: "they/them",
     talkTitle: "Unmask Radical Rest",
-    title: "Mindfulness Practitionor",
+    title: "Mindfulness Practitionor & PHD Student",
     portraits: ["./speaker-section/speaker-tiara.jpg"],
   },
   {
