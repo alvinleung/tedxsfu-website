@@ -139,7 +139,7 @@ const SpeakerSection = (props: Props) => {
             </p>
           </div>
 
-          <div className="mt-auto translate-x-[100%] pb-grid-margin-y md:translate-x-0">
+          <div className="mt-auto pb-grid-margin-y sm:translate-x-[100%] md:translate-x-0">
             <SpeakerInfoModule
               talkTitle={speakers[currentSpeakerSlide].talkTitle}
               name={speakers[currentSpeakerSlide].name}
