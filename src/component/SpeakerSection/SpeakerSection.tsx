@@ -28,6 +28,20 @@ function getFramerMotionEase(arr: number[]) {
   return cubicBezier(arr[0], arr[1], arr[2], arr[3]);
 }
 
+const SpeakerInfoModule = ({ talkTitle, name, title }: any) => (
+  <>
+    <div className="mb-1 text-micro-tablet uppercase opacity-50 md:text-micro">
+      {talkTitle}
+    </div>
+    <hr className="col-span-full opacity-50" />
+    <button className="flex w-full flex-col py-2">
+      <div className="text-body">{name}</div>
+      <div className="text-body opacity-50">{title}</div>
+    </button>
+    <hr className="col-span-full mb-4 opacity-50" />
+  </>
+);
+
 const SpeakerSection = (props: Props) => {
   const { scrollY } = useContainerScroll();
 
@@ -62,7 +76,7 @@ const SpeakerSection = (props: Props) => {
     }
 
     if (atBreakpointMD) {
-      return -windowDim.width * 0.2;
+      return -windowDim.width * 0.18;
     }
     return 0;
   }, [atBreakpointXL, atBreakpointMD]);
@@ -92,20 +106,22 @@ const SpeakerSection = (props: Props) => {
 
   return (
     <MainGrid className={`relative px-grid-margin-x`}>
-      <Sticky top={0} fadeIn fadeOut>
-        <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
-          <div className="z-50 mb-grid-margin-y mt-auto">
-            <PageIndicator
-              totalPages={speakers.length}
-              current={currentSpeakerSlide}
-            />
+      {atBreakpointMD && (
+        <Sticky top={0} fadeIn fadeOut>
+          <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
+            <div className="z-50 mb-grid-margin-y mt-auto">
+              <PageIndicator
+                totalPages={speakers.length}
+                current={currentSpeakerSlide}
+              />
+            </div>
           </div>
-        </div>
-      </Sticky>
+        </Sticky>
+      )}
 
-      <SectionInfo right fadeIn>
-        <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
-          <div className="h-[22dvh]" />
+      <SectionInfo right fadeIn stickyOnMobile>
+        <div className="flex h-[82dvh] flex-col md:h-[calc(100dvh-var(--grid-margin-y))]">
+          <div className="h-8 md:h-[22dvh]" />
           <SectionInfoHeader>The Programme</SectionInfoHeader>
           <SectionInfoDescription>
             all star speaker cast, flying in from Vancouver, San Francisco,
@@ -123,24 +139,16 @@ const SpeakerSection = (props: Props) => {
             </p>
           </div>
 
-          <div className="mt-auto pb-grid-margin-y">
-            <div className="mb-1 text-micro-tablet uppercase opacity-50 md:text-micro">
-              {speakers[currentSpeakerSlide].talkTitle}
-            </div>
-            <hr className="col-span-full opacity-50" />
-            <button className="flex w-full flex-col py-2">
-              <div className="text-body">
-                {speakers[currentSpeakerSlide].name}
-              </div>
-              <div className="text-body opacity-50">
-                {speakers[currentSpeakerSlide].title}
-              </div>
-            </button>
-            <hr className="col-span-full mb-4 opacity-50" />
-            {/* <div>See all Speakers</div> */}
+          <div className="mt-auto translate-x-[100%] pb-grid-margin-y md:translate-x-0">
+            <SpeakerInfoModule
+              talkTitle={speakers[currentSpeakerSlide].talkTitle}
+              name={speakers[currentSpeakerSlide].name}
+              title={speakers[currentSpeakerSlide].title}
+            />
           </div>
         </div>
       </SectionInfo>
+
       <div
         // className="h-[500vh]"
         style={{ height: speakerSectionScrollHeight }}
@@ -159,7 +167,7 @@ const SpeakerSection = (props: Props) => {
               transformOrigin: "top",
             }}
           >
-            <div className="relative translate-y-[25vh] scale-150">
+            <div className="relative translate-y-[25vh] scale-[1.15] md:scale-150">
               {speakers.map((speaker, index) => {
                 if (index === 0) {
                   return (
@@ -180,7 +188,7 @@ const SpeakerSection = (props: Props) => {
                         //     : -50,
                       }}
                       transition={{
-                        duration: AnimationConfig.NORMAL,
+                        duration: AnimationConfig.FAST,
                       }}
                     />
                   );
@@ -204,7 +212,7 @@ const SpeakerSection = (props: Props) => {
                       //     : -50,
                     }}
                     transition={{
-                      duration: AnimationConfig.NORMAL,
+                      duration: AnimationConfig.FAST,
                     }}
                   />
                 );
