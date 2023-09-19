@@ -20,7 +20,7 @@ const PageIndicator = ({ totalPages, current }: Props) => {
             key={index}
             className="h-[1px] w-3 bg-white"
             animate={{
-              opacity: current === index ? 1 : 0.5,
+              opacity: current === index ? 1 : 0.3,
             }}
           />
         );

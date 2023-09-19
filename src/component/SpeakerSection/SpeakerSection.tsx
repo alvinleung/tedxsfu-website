@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useMemo, useState, useTransition } from "react";
 import Image from "next/image";
 import {
   cubicBezier,
@@ -20,6 +20,7 @@ import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 import speakers from "@/data/speakerData";
 import { clamp } from "@/utils/clamp";
 import PageIndicator from "../PageIndicator";
+import MainGrid from "../layouts/MainGrid";
 
 type Props = {};
 
@@ -37,12 +38,13 @@ const SpeakerSection = (props: Props) => {
   const endTransitionPosition = imageContainerBounds.top;
 
   const offsetBeforeSlide = windowDim.height;
-  const speakerSlideHeight = 1000;
+  const speakerSlideHeight = 600;
   const speakerSectionScrollHeight =
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
 
   // console.log(speakerSectionScrollHeight);
   const atBreakpointXL = useBreakpoint(breakpoints.xl);
+  const atBreakpointMD = useBreakpoint(breakpoints.md);
 
   const shiftY = atBreakpointXL ? 1.45 : 1.4;
   const offsetY = useTransform(
@@ -54,9 +56,16 @@ const SpeakerSection = (props: Props) => {
     // },
   );
 
-  const shiftX = atBreakpointXL
-    ? -windowDim.width * 0.08
-    : -windowDim.width * 0.1;
+  const shiftX = useMemo(() => {
+    if (atBreakpointXL) {
+      return -windowDim.width * 0.08;
+    }
+
+    if (atBreakpointMD) {
+      return -windowDim.width * 0.2;
+    }
+    return 0;
+  }, [atBreakpointXL, atBreakpointMD]);
   const offsetX = useTransform(
     scrollY,
     [0, endTransitionPosition + 200],
@@ -82,7 +91,7 @@ const SpeakerSection = (props: Props) => {
   // console.log(currentSpeakerSlide);
 
   return (
-    <>
+    <MainGrid className={`relative px-grid-margin-x`}>
       <Sticky top={0} fadeIn fadeOut>
         <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
           <div className="z-50 mb-grid-margin-y mt-auto">
@@ -204,7 +213,7 @@ const SpeakerSection = (props: Props) => {
           </motion.div>
         </Sticky>
       </div>
-    </>
+    </MainGrid>
   );
 };
 
