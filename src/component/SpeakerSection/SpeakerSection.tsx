@@ -60,7 +60,16 @@ const SpeakerSection = (props: Props) => {
   const atBreakpointXL = useBreakpoint(breakpoints.xl);
   const atBreakpointMD = useBreakpoint(breakpoints.md);
 
-  const shiftY = atBreakpointXL ? 1.45 : 1.4;
+  const shiftY = useMemo(() => {
+    if (atBreakpointXL) {
+      return 1.45;
+    }
+
+    if (atBreakpointMD) {
+      return 1.2;
+    }
+    return 1.7;
+  }, [atBreakpointXL, atBreakpointMD]);
   const offsetY = useTransform(
     scrollY,
     [0, endTransitionPosition],
@@ -167,7 +176,7 @@ const SpeakerSection = (props: Props) => {
               transformOrigin: "top",
             }}
           >
-            <div className="relative translate-y-[25vh] scale-[1.15] md:scale-150">
+            <div className="relative translate-y-[35vh] scale-[1.15] md:translate-y-[25vh] md:scale-150">
               {speakers.map((speaker, index) => {
                 if (index === 0) {
                   return (

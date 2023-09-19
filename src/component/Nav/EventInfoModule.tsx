@@ -37,7 +37,7 @@ export const EventInfoModule = ({
       >
         <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
           <EventInfoLink
-            label={"Directions"}
+            label={"Google Map"}
             href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
           >
             <span className="uppercase sm:hidden sm:whitespace-nowrap">

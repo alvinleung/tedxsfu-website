@@ -165,6 +165,9 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       animate={{
         color: isHighlighted ? "#000" : isAboutPage ? "#999" : "#FFF",
       }}
+      whileTap={{
+        scale: 0.98,
+      }}
       onHoverStart={(e) => {
         setHover(true);
       }}
@@ -179,7 +182,7 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       <div
         className="pl-[7px] pr-[6px]"
         style={{
-          filter: isHighlighted ? "" : "mix-blend-exclusion",
+          filter: isHighlighted ? "invert(1)" : "",
         }}
       >
         <TicketIcon
@@ -195,7 +198,11 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
           borderLeft: isHighlighted ? "1px solid #333" : "1px solid #555555",
         }}
       />
-      <div className="flex h-[28px] flex-col items-start whitespace-nowrap pl-[9px] pr-[9px] mix-blend-exclusion">
+      <div
+        className={`flex h-[28px] flex-col items-start whitespace-nowrap pl-[9px] pr-[9px] ${
+          isHighlighted ? "" : "mix-blend-exclusion"
+        }`}
+      >
         <div className="pointer-events-none mt-[-1px] text-nav uppercase leading-none">
           Get Tickets
         </div>

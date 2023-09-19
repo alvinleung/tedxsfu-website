@@ -142,14 +142,22 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     setCanScroll(true);
   }, [nav.isOpened]);
 
-  useEffect(() => {
-    if (scrollDirection == ScrollDirection.DOWN) {
-      nav.setScrollState(NavScrollState.SCROLLED);
-    } else {
-      // console.log("default");
+  // useEffect(() => {
+  //   if (scrollDirection == ScrollDirection.DOWN) {
+  //     nav.setScrollState(NavScrollState.SCROLLED);
+  //   } else {
+  //     // console.log("default");
+  //     nav.setScrollState(NavScrollState.DEFAULT);
+  //   }
+  // }, [scrollDirection]);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest === 0) {
       nav.setScrollState(NavScrollState.DEFAULT);
+      return;
     }
-  }, [scrollDirection]);
+    nav.setScrollState(NavScrollState.SCROLLED);
+  });
 
   const windowDim = useWindowDimension();
 
