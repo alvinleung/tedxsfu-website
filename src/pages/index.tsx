@@ -19,7 +19,7 @@ import {
   SectionInfoHeader,
   SectionLayout,
 } from "@/component/layouts/SectionLayouts";
-import SpeakerSection from "@/component/layouts/SpeakerSection";
+import SpeakerSection from "@/component/SpeakerSection/SpeakerSection";
 
 export default function Home() {
   return (
