@@ -42,7 +42,7 @@ const SpeakerInfoModule = ({ talkTitle, name, title }: any) => (
     <hr className="col-span-full opacity-40" />
     <button className="flex w-full flex-col py-2">
       <div className="text-body">{name}</div>
-      <div className="text-body opacity-50">{title}</div>
+      <div className="text-left text-body opacity-50">{title}</div>
     </button>
     <hr className="col-span-full mb-4 opacity-40" />
   </>
@@ -55,14 +55,13 @@ const SpeakerSection = (props: Props) => {
   const atBreakpointXL = useBreakpoint(breakpoints.xl);
   const atBreakpointMD = useBreakpoint(breakpoints.md);
   const atBreakpointSM = useBreakpoint(breakpoints.sm);
-  const currentBreakpoint = useAllBreakpoints();
 
   const [imageContainerRef, imageContainerBounds] =
     useBoundingBox<HTMLDivElement>([]);
 
   const endTransitionPosition = imageContainerBounds.top;
 
-  const offsetBeforeSlide = windowDim.height;
+  const offsetBeforeSlide = windowDim.height < 1200 ? 1200 : windowDim.height;
   const speakerSlideHeight = 600;
   const speakerSectionScrollHeight =
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
@@ -122,15 +121,13 @@ const SpeakerSection = (props: Props) => {
     setCurrentSpeakerSlide(currentSlide);
   });
 
-  // console.log(currentSpeakerSlide);
-
   return (
     <MainGrid className={`relative px-grid-margin-x`}>
-      <div className="z-50">
+      <div className="z-50 h-0">
         {atBreakpointSM && (
           <Sticky top={0} fadeIn fadeOut>
             <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
-              <div className=" mb-grid-margin-y mt-auto">
+              <div className="mb-grid-margin-y mt-auto">
                 <PageIndicator
                   totalPages={speakers.length}
                   current={currentSpeakerSlideClamped}
@@ -142,7 +139,7 @@ const SpeakerSection = (props: Props) => {
       </div>
 
       <SectionInfo right fadeIn stickyOnMobile>
-        <div className="relative flex h-[82dvh] flex-col md:h-[calc(100dvh-var(--grid-margin-y))]">
+        <div className="relative flex h-[calc(100dvh-var(--grid-margin-y)-115px)] flex-col md:h-[calc(100dvh-var(--grid-margin-y))]">
           <div className="h-8 md:h-[22dvh]" />
           <AnimatePresence mode="sync">
             {(atBreakpointSM || currentSpeakerSlide < 0) && (
@@ -185,7 +182,7 @@ const SpeakerSection = (props: Props) => {
                   ease: AnimationConfig.EASING,
                 }}
                 key="2"
-                className="absolute top-8 w-full pb-grid-margin-y sm:static sm:mt-auto md:translate-x-0"
+                className="absolute top-8 w-full sm:static sm:mt-auto md:translate-x-0 md:pb-grid-margin-y"
               >
                 <div className="translate-x-0 pl-0 sm:translate-x-full sm:pl-4 md:translate-x-0 md:pl-0">
                   <SpeakerInfoModule
@@ -226,7 +223,7 @@ const SpeakerSection = (props: Props) => {
                       width={1920}
                       height={1080}
                       alt={speaker.name}
-                      className="h-screen w-screen object-cover object-center md:object-contain"
+                      className="h-screen w-screen object-cover object-center sm:object-contain"
                       animate={{
                         opacity: index === currentSpeakerSlideClamped ? 1 : 0,
                         // y:
@@ -246,7 +243,7 @@ const SpeakerSection = (props: Props) => {
                 return (
                   <motion.img
                     key={index}
-                    className="absolute inset-0 h-screen w-screen object-cover object-center md:object-contain"
+                    className="absolute inset-0 h-screen w-screen object-cover object-center sm:object-contain"
                     src={speaker.portraits[0]}
                     width={1920}
                     height={1080}

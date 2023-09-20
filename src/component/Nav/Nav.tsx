@@ -128,8 +128,8 @@ const Nav = ({ children }: Props) => {
           isMenuOpened={isOpened}
         />
         <div
-          className="fixed z-50 mt-nav-button-offset-y max-md:bottom-grid-margin-y max-md:left-0 max-md:right-0 max-md:mx-auto md:right-[64px] md:top-grid-margin-y
-        md:pr-grid-margin-x
+          className="fixed z-50 mt-nav-button-offset-y max-sm:bottom-grid-margin-y max-sm:left-0 max-sm:right-0 max-sm:mx-auto sm:right-[64px] sm:top-grid-margin-y
+        sm:pr-grid-margin-x
         "
         >
           <TicketCTA isHighlighted={false} isAboutPage={isAboutPage} />
