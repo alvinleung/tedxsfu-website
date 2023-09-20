@@ -70,6 +70,9 @@ const SpeakerSection = (props: Props) => {
 
   const shiftY = useMemo(() => {
     if (atBreakpointXL) {
+      return 1.35;
+    }
+    if (atBreakpointLG) {
       return 1.45;
     }
 
@@ -77,7 +80,7 @@ const SpeakerSection = (props: Props) => {
       return 1.2;
     }
     return 1.7;
-  }, [atBreakpointXL, atBreakpointMD]);
+  }, [atBreakpointXL, atBreakpointMD, atBreakpointLG]);
   const offsetY = useTransform(
     scrollY,
     [0, endTransitionPosition],
@@ -163,7 +166,7 @@ const SpeakerSection = (props: Props) => {
                   Francisco, Toronto—unmask the world of Olympians, pioneers in
                   tech, and thought leaders along the West Coast.
                 </SectionInfoDescription>
-                <hr className="my-2 mt-8 opacity-40" />
+                <hr className="my-2  opacity-40 md:mt-8" />
                 <div className="grid grid-cols-2 gap-4">
                   <h2 className="text-micro-mobile uppercase opacity-50 md:text-micro">
                     Note for 11/11
