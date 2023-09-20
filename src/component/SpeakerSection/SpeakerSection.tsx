@@ -246,7 +246,7 @@ const SpeakerSection = (props: Props) => {
               className="absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
               style={{ opacity: scrimOpacity }}
             />
-            <div className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[5vh] xl:translate-y-[20vh] xl:scale-[1.25] 2xl:scale-[1.4]">
+            <div className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[20vh] 2xl:scale-[1.4]">
               {/* scrim */}
               {speakers.map((speaker, index) => {
                 if (index === 0) {
