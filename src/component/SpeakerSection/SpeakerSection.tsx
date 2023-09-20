@@ -105,8 +105,15 @@ const SpeakerSection = (props: Props) => {
   }, [atBreakpointXL, atBreakpointMD, atBreakpointLG]);
   const offsetX = useTransform(
     scrollY,
-    [0, endTransitionPosition + 200],
-    [0, shiftX],
+    [
+      0,
+      endTransitionPosition + 200,
+      imageContainerBounds.bottom -
+        speakerTrailingPaddding -
+        windowDim.height / 2,
+      imageContainerBounds.bottom - speakerTrailingPaddding,
+    ],
+    [0, shiftX, shiftX, 0],
     { ease: cubicBezier(0.92, 0, 0.6, 1.01) },
   );
 
