@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, useTransition } from "react";
 import Image from "next/image";
 import {
+  AnimatePresence,
   cubicBezier,
   motion,
   useMotionValueEvent,
@@ -16,11 +17,16 @@ import {
   SectionInfoDescription,
   SectionInfoHeader,
 } from "../layouts/SectionLayouts";
-import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
+import {
+  breakpoints,
+  useAllBreakpoints,
+  useBreakpoint,
+} from "@/hooks/useBreakpoints";
 import speakers from "@/data/speakerData";
 import { clamp } from "@/utils/clamp";
 import PageIndicator from "../PageIndicator";
 import MainGrid from "../layouts/MainGrid";
+import Fixed from "../ScrollContainer/Fixed";
 
 type Props = {};
 
@@ -30,15 +36,15 @@ function getFramerMotionEase(arr: number[]) {
 
 const SpeakerInfoModule = ({ talkTitle, name, title }: any) => (
   <>
-    <div className="mb-1 text-micro-tablet uppercase opacity-50 md:text-micro">
+    <div className="mb-1 text-micro-tablet uppercase tracking-wider opacity-60 md:text-micro">
       {talkTitle}
     </div>
-    <hr className="col-span-full opacity-50" />
+    <hr className="col-span-full opacity-40" />
     <button className="flex w-full flex-col py-2">
       <div className="text-body">{name}</div>
       <div className="text-body opacity-50">{title}</div>
     </button>
-    <hr className="col-span-full mb-4 opacity-50" />
+    <hr className="col-span-full mb-4 opacity-40" />
   </>
 );
 
@@ -46,6 +52,11 @@ const SpeakerSection = (props: Props) => {
   const { scrollY } = useContainerScroll();
 
   const windowDim = useWindowDimension();
+  const atBreakpointXL = useBreakpoint(breakpoints.xl);
+  const atBreakpointMD = useBreakpoint(breakpoints.md);
+  const atBreakpointSM = useBreakpoint(breakpoints.sm);
+  const currentBreakpoint = useAllBreakpoints();
+
   const [imageContainerRef, imageContainerBounds] =
     useBoundingBox<HTMLDivElement>([]);
 
@@ -55,10 +66,7 @@ const SpeakerSection = (props: Props) => {
   const speakerSlideHeight = 600;
   const speakerSectionScrollHeight =
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
-
-  // console.log(speakerSectionScrollHeight);
-  const atBreakpointXL = useBreakpoint(breakpoints.xl);
-  const atBreakpointMD = useBreakpoint(breakpoints.md);
+  const speakerTrailingPaddding = windowDim.height;
 
   const shiftY = useMemo(() => {
     if (atBreakpointXL) {
@@ -101,71 +109,102 @@ const SpeakerSection = (props: Props) => {
   });
 
   const [currentSpeakerSlide, setCurrentSpeakerSlide] = useState(0);
+  const currentSpeakerSlideClamped = useMemo(
+    () => clamp(currentSpeakerSlide, 0, speakers.length - 1),
+    [currentSpeakerSlide],
+  );
   useMotionValueEvent(scrollY, "change", (latest) => {
     const offsetY = latest - imageContainerBounds.top - offsetBeforeSlide;
     const currentSlide = Math.round(
       (offsetY / (speakerSectionScrollHeight - offsetBeforeSlide)) *
         speakers.length,
     );
-    const currentSlideClamped = clamp(currentSlide, 0, speakers.length - 1);
-    setCurrentSpeakerSlide(currentSlideClamped);
+    setCurrentSpeakerSlide(currentSlide);
   });
 
   // console.log(currentSpeakerSlide);
 
   return (
     <MainGrid className={`relative px-grid-margin-x`}>
-      {atBreakpointMD && (
-        <Sticky top={0} fadeIn fadeOut>
-          <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
-            <div className="z-50 mb-grid-margin-y mt-auto">
-              <PageIndicator
-                totalPages={speakers.length}
-                current={currentSpeakerSlide}
-              />
+      <div className="z-50">
+        {atBreakpointSM && (
+          <Sticky top={0} fadeIn fadeOut>
+            <div className="flex h-[calc(100dvh-var(--grid-margin-y))] flex-col">
+              <div className=" mb-grid-margin-y mt-auto">
+                <PageIndicator
+                  totalPages={speakers.length}
+                  current={currentSpeakerSlideClamped}
+                />
+              </div>
             </div>
-          </div>
-        </Sticky>
-      )}
+          </Sticky>
+        )}
+      </div>
 
       <SectionInfo right fadeIn stickyOnMobile>
-        <div className="flex h-[82dvh] flex-col md:h-[calc(100dvh-var(--grid-margin-y))]">
+        <div className="relative flex h-[82dvh] flex-col md:h-[calc(100dvh-var(--grid-margin-y))]">
           <div className="h-8 md:h-[22dvh]" />
-          <SectionInfoHeader>The Programme</SectionInfoHeader>
-          <SectionInfoDescription>
-            all star speaker cast, flying in from Vancouver, San Francisco,
-            Toronto—unmask the world of Olympians, pioneers in tech, and thought
-            leaders along the West Coast.
-          </SectionInfoDescription>
-          <hr className="col-span-full my-2 mt-8 opacity-50" />
-          <div className="col-span-full grid grid-cols-2 gap-4">
-            <h2 className="text-micro-mobile uppercase opacity-50 md:text-micro">
-              Note for 11/11
-            </h2>
-            <p className="text-micro-mobile opacity-50 md:text-micro">
-              In partnership with Honour House, 20 minutes of our program will
-              be dedicated to Remembrance Day.
-            </p>
-          </div>
+          <AnimatePresence mode="sync">
+            {(atBreakpointSM || currentSpeakerSlide < 0) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  duration: AnimationConfig.FAST,
+                  ease: AnimationConfig.EASING,
+                }}
+                key="1"
+              >
+                <SectionInfoHeader>The Programme</SectionInfoHeader>
+                <SectionInfoDescription>
+                  all star speaker cast, flying in from Vancouver, San
+                  Francisco, Toronto—unmask the world of Olympians, pioneers in
+                  tech, and thought leaders along the West Coast.
+                </SectionInfoDescription>
+                <hr className="my-2 mt-8 opacity-40" />
+                <div className="grid grid-cols-2 gap-4">
+                  <h2 className="text-micro-mobile uppercase opacity-50 md:text-micro">
+                    Note for 11/11
+                  </h2>
+                  <p className="text-micro-mobile opacity-50 md:text-micro">
+                    In partnership with Honour House, 20 minutes of our program
+                    will be dedicated to Remembrance Day.
+                  </p>
+                </div>
+              </motion.div>
+            )}
 
-          <div className="mt-auto pb-grid-margin-y sm:translate-x-[100%] md:translate-x-0">
-            <SpeakerInfoModule
-              talkTitle={speakers[currentSpeakerSlide].talkTitle}
-              name={speakers[currentSpeakerSlide].name}
-              title={speakers[currentSpeakerSlide].title}
-            />
-          </div>
+            {(atBreakpointSM || currentSpeakerSlide >= 0) && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{
+                  duration: AnimationConfig.FAST,
+                  ease: AnimationConfig.EASING,
+                }}
+                key="2"
+                className="absolute top-8 w-full pb-grid-margin-y sm:static sm:mt-auto md:translate-x-0"
+              >
+                <div className="translate-x-0 pl-0 sm:translate-x-full sm:pl-4 md:translate-x-0 md:pl-0">
+                  <SpeakerInfoModule
+                    talkTitle={speakers[currentSpeakerSlideClamped].talkTitle}
+                    name={speakers[currentSpeakerSlideClamped].name}
+                    title={speakers[currentSpeakerSlideClamped].title}
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </SectionInfo>
 
       <div
         // className="h-[500vh]"
-        style={{ height: speakerSectionScrollHeight }}
+        style={{ height: speakerSectionScrollHeight + speakerTrailingPaddding }}
       ></div>
-      <div
-        className="absolute inset-0  overflow-hidden"
-        ref={imageContainerRef}
-      >
+      <div className="absolute inset-0 overflow-hidden" ref={imageContainerRef}>
         <Sticky top={0}>
           <motion.div
             className="h-screen w-screen"
@@ -176,7 +215,8 @@ const SpeakerSection = (props: Props) => {
               transformOrigin: "top",
             }}
           >
-            <div className="relative translate-y-[35vh] scale-[1.15] md:translate-y-[25vh] md:scale-150">
+            <div className="scale-1 relative h-full w-full translate-y-[26vh] sm:translate-y-[25vh] md:translate-y-[5vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:scale-[1.4]">
+              <div className="absolute bottom-48 left-0 right-0 top-[30vh] z-10 hidden w-full bg-gradient-to-t from-black sm:block md:hidden"></div>
               {speakers.map((speaker, index) => {
                 if (index === 0) {
                   return (
@@ -186,9 +226,9 @@ const SpeakerSection = (props: Props) => {
                       width={1920}
                       height={1080}
                       alt={speaker.name}
-                      className="h-screen object-contain object-top"
+                      className="h-screen w-screen object-cover object-center md:object-contain"
                       animate={{
-                        opacity: index === currentSpeakerSlide ? 1 : 0,
+                        opacity: index === currentSpeakerSlideClamped ? 1 : 0,
                         // y:
                         //   index >= currentSpeakerSlide
                         //     ? 50
@@ -206,13 +246,13 @@ const SpeakerSection = (props: Props) => {
                 return (
                   <motion.img
                     key={index}
-                    className="absolute inset-0 h-screen object-contain object-top"
+                    className="absolute inset-0 h-screen w-screen object-cover object-center md:object-contain"
                     src={speaker.portraits[0]}
                     width={1920}
                     height={1080}
                     alt={speaker.name}
                     animate={{
-                      opacity: index === currentSpeakerSlide ? 1 : 0,
+                      opacity: index === currentSpeakerSlideClamped ? 1 : 0,
                       // y:
                       //   index >= currentSpeakerSlide
                       //     ? 50
