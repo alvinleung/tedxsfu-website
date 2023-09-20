@@ -18,7 +18,7 @@ type Props = {
 
 const FigureLayout = ({ children, caption, width, height }: Props) => {
   const [ref, bounds] = useBoundingBox<HTMLDivElement>([]);
-  const isInView = useInView(ref, { margin: "0% 0% -40% 0%" });
+  const isInView = useInView(ref, { margin: "0% 0% -30% 0%" });
 
   const aspectRatio = width / height;
 
@@ -35,7 +35,7 @@ const FigureLayout = ({ children, caption, width, height }: Props) => {
           className="origin-bottom"
           animate={{
             opacity: isInView ? 1 : 0.7,
-            scale: isInView ? 1 : 1.05,
+            scale: isInView ? 1 : 1.1,
             // x: isInView ? 0 : 0,
           }}
           transition={{

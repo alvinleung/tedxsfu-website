@@ -59,7 +59,7 @@ export default function Home() {
           width={1920}
           height={1200}
           caption={{
-            header: "The Centre",
+            header: "The Centre for Performing Arts",
             description:
               "Designed by the archtect of Library Square, Moshe Safdie, bask in a grand theatre with history rooted in creativity, storytelling and discussion.",
           }}
