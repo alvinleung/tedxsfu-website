@@ -60,7 +60,7 @@ export const SectionInfo = ({
   const atBreakpointMD = bp >= breakpoints.md;
   const atBreakpointSM = bp >= breakpoints.sm;
 
-  const shouldStick = atBreakpointMD || stickyOnMobile;
+  const shouldStick = sticky && (atBreakpointMD || stickyOnMobile);
 
   const breakpoint2XLRight = "2xl:col-span-2 2xl:col-start-7";
   const breakpointXLRight = "xl:col-span-2 xl:col-start-7";

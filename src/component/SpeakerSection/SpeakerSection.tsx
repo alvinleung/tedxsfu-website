@@ -128,6 +128,21 @@ const SpeakerSection = (props: Props) => {
     setCurrentSpeakerSlide(currentSlide);
   });
 
+  const isTablet = atBreakpointSM && !atBreakpointMD;
+  const scrimOpacityBeginPoint = isTablet
+    ? 0
+    : imageContainerBounds.bottom -
+      speakerTrailingPaddding -
+      windowDim.height / 2;
+  const scrimOpacityEndPoint = isTablet
+    ? 0
+    : imageContainerBounds.bottom - speakerTrailingPaddding;
+  const scrimOpacity = useTransform(
+    scrollY,
+    [scrimOpacityBeginPoint, scrimOpacityEndPoint],
+    [0, 1],
+  );
+
   return (
     <MainGrid className={`relative px-grid-margin-x`}>
       <div className="z-50 h-0">
@@ -145,7 +160,7 @@ const SpeakerSection = (props: Props) => {
         )}
       </div>
 
-      <SectionInfo right fadeIn stickyOnMobile>
+      <SectionInfo right fadeIn stickyOnMobile sticky>
         <div className="relative flex h-[calc(100dvh-var(--grid-margin-y)-115px)] flex-col md:h-[calc(100dvh-var(--grid-margin-y))]">
           <div className="h-8 md:h-[22dvh]" />
           <AnimatePresence mode="sync">
@@ -219,8 +234,13 @@ const SpeakerSection = (props: Props) => {
               transformOrigin: "top",
             }}
           >
-            <div className="relative h-full w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[5vh] xl:translate-y-[20vh] xl:scale-[1.25] 2xl:scale-[1.4]">
-              <div className="absolute bottom-48 left-0 right-0 top-[30vh] z-10 hidden w-full bg-gradient-to-t from-black sm:block md:hidden"></div>
+            {/* Scrim */}
+            <motion.div
+              className="absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
+              style={{ opacity: scrimOpacity }}
+            />
+            <div className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[5vh] xl:translate-y-[20vh] xl:scale-[1.25] 2xl:scale-[1.4]">
+              {/* scrim */}
               {speakers.map((speaker, index) => {
                 if (index === 0) {
                   return (
