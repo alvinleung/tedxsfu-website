@@ -53,6 +53,7 @@ const SpeakerSection = (props: Props) => {
 
   const windowDim = useWindowDimension();
   const atBreakpointXL = useBreakpoint(breakpoints.xl);
+  const atBreakpointLG = useBreakpoint(breakpoints.lg);
   const atBreakpointMD = useBreakpoint(breakpoints.md);
   const atBreakpointSM = useBreakpoint(breakpoints.sm);
 
@@ -91,11 +92,14 @@ const SpeakerSection = (props: Props) => {
       return -windowDim.width * 0.08;
     }
 
+    if (atBreakpointLG) {
+      return -windowDim.width * 0.12;
+    }
     if (atBreakpointMD) {
       return -windowDim.width * 0.18;
     }
     return 0;
-  }, [atBreakpointXL, atBreakpointMD]);
+  }, [atBreakpointXL, atBreakpointMD, atBreakpointLG]);
   const offsetX = useTransform(
     scrollY,
     [0, endTransitionPosition + 200],
