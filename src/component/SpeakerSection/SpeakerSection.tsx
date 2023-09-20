@@ -62,7 +62,7 @@ const SpeakerSection = (props: Props) => {
   const endTransitionPosition = imageContainerBounds.top;
 
   const offsetBeforeSlide = windowDim.height < 1200 ? 1200 : windowDim.height;
-  const speakerSlideHeight = 600;
+  const speakerSlideHeight = 500;
   const speakerSectionScrollHeight =
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
   const speakerTrailingPaddding = windowDim.height;
@@ -212,7 +212,7 @@ const SpeakerSection = (props: Props) => {
               transformOrigin: "top",
             }}
           >
-            <div className="scale-1 relative h-full w-full translate-y-[26vh] sm:translate-y-[25vh] md:translate-y-[5vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:scale-[1.4]">
+            <div className="relative h-full w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[5vh] xl:translate-y-[20vh] xl:scale-[1.25] 2xl:scale-[1.4]">
               <div className="absolute bottom-48 left-0 right-0 top-[30vh] z-10 hidden w-full bg-gradient-to-t from-black sm:block md:hidden"></div>
               {speakers.map((speaker, index) => {
                 if (index === 0) {
