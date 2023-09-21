@@ -74,8 +74,8 @@ export const SectionInfo = ({
   const breakpointXS = "col-span-full col-start-1";
 
   const stickyOffset = useBreakpointValues({
-    default: "64px",
-    sm: "96px",
+    default: "48px",
+    sm: "88px",
   });
 
   return (
