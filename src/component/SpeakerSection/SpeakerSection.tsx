@@ -230,7 +230,13 @@ const SpeakerSection = (props: Props) => {
         // className="h-[500vh]"
         style={{ height: speakerSectionScrollHeight + speakerTrailingPaddding }}
       ></div>
-      <div className="absolute inset-0 overflow-hidden" ref={imageContainerRef}>
+      <div
+        className="absolute inset-0"
+        style={{
+          contain: "paint",
+        }}
+        ref={imageContainerRef}
+      >
         <Sticky top={0}>
           <motion.div
             className="h-screen w-screen"
