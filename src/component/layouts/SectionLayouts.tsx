@@ -2,11 +2,13 @@ import {
   breakpoints,
   useAllBreakpoints,
   useBreakpoint,
+  useBreakpointValues,
 } from "@/hooks/useBreakpoints";
 import StickyContainer from "../ScrollContainer/StickyContainer";
 import MainGrid from "./MainGrid";
 import { motion } from "framer-motion";
 import Sticky from "../ScrollContainer/Sticky";
+import { useMemo } from "react";
 
 type SectionLayoutProps = {
   children: React.ReactNode;
@@ -56,10 +58,7 @@ export const SectionInfo = ({
   fadeIn,
 }: SectionCopyProps) => {
   // const shouldStick = useBreakpoint(breakpoints.lg) && sticky;
-  const bp = useAllBreakpoints();
-  const atBreakpointMD = bp >= breakpoints.md;
-  const atBreakpointSM = bp >= breakpoints.sm;
-
+  const atBreakpointMD = useBreakpoint(breakpoints.md);
   const shouldStick = sticky && (atBreakpointMD || stickyOnMobile);
 
   const breakpoint2XLRight = "2xl:col-span-2 2xl:col-start-7";
@@ -74,8 +73,10 @@ export const SectionInfo = ({
   const breakpointS = "sm:col-span-2 sm:col-start-1";
   const breakpointXS = "col-span-full col-start-1";
 
-  const mobileStickyOffset = "64px";
-  const tabletSmallStickyOffset = "96px";
+  const stickyOffset = useBreakpointValues({
+    default: "64px",
+    sm: "96px",
+  });
 
   return (
     <motion.div
@@ -87,24 +88,15 @@ export const SectionInfo = ({
       ${right ? breakpointMRight : breakpointM} 
       ${breakpointS} 
       ${breakpointXS} 
-      ${shouldStick ? "sticky top-[28px]" : ""} 
-      ${
-        stickyOnMobile
-          ? atBreakpointSM
-            ? `top-[${mobileStickyOffset}]`
-            : `top-[${tabletSmallStickyOffset}]`
-          : ""
+      ${shouldStick || stickyOnMobile ? "sticky" : ""}
       }`}
+      style={{
+        top: (shouldStick || stickyOnMobile) && stickyOffset,
+      }}
     >
       {shouldStick && (
         <Sticky
-          top={
-            stickyOnMobile && !atBreakpointMD
-              ? atBreakpointSM
-                ? tabletSmallStickyOffset
-                : mobileStickyOffset
-              : 28
-          }
+          top={stickyOnMobile && !atBreakpointMD ? stickyOffset : 28}
           fadeOut
           fadeIn={fadeIn}
         >

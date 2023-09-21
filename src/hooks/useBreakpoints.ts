@@ -20,10 +20,7 @@ interface BreakpointValues {
   "2xl"?: number | string | Function;
 }
 
-export function useBreakpointValues(
-  breakpointValues: BreakpointValues,
-  deps: any[],
-) {
+export function useBreakpointValues(breakpointValues: BreakpointValues) {
   const currBreakpoint = useAllBreakpoints();
   const [value, setValue] = useState<any>(breakpoints.sm);
   const allBreakpointsNames = useMemo(() => Object.keys(breakpoints), []);
@@ -48,7 +45,7 @@ export function useBreakpointValues(
       return;
     }
     setValue(newBreakpointValue);
-  }, [currBreakpoint, deps]);
+  }, [currBreakpoint]);
 
   return value;
 }
@@ -112,6 +109,8 @@ export function useMobileBreakpoint() {
 interface BreakpointTable {
   [key: string]: number;
 }
+
+// must be in ascending order
 export const breakpoints: BreakpointTable = {
   //@ts-ignore
   xs: parseInt(fullConfig.theme.screens.xs),

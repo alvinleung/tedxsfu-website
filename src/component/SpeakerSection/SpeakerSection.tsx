@@ -226,6 +226,7 @@ const SpeakerSection = (props: Props) => {
         </div>
       </SectionInfo>
 
+      {/* Scroll area */}
       <div
         // className="h-[500vh]"
         style={{ height: speakerSectionScrollHeight + speakerTrailingPaddding }}
@@ -233,6 +234,8 @@ const SpeakerSection = (props: Props) => {
       <div
         className="absolute inset-0"
         style={{
+          // use contain paint rather than overflow-hidden to prevent
+          // creating a new scroll context for the sticky inside this div
           contain: "paint",
         }}
         ref={imageContainerRef}
