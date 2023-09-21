@@ -132,7 +132,10 @@ const Nav = ({ children }: Props) => {
         sm:pr-grid-margin-x
         "
         >
-          <TicketCTA isHighlighted={false} isAboutPage={isAboutPage} />
+          <TicketCTA
+            isHighlighted={scrollState === NavScrollState.SCROLLED || isOpened}
+            isAboutPage={isAboutPage}
+          />
         </div>
 
         <Scrim isShowing={isContentOverflowing} />

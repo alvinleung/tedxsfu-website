@@ -155,15 +155,17 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       href="https://www.ticketmaster.ca/event/11005F2D0FDD4B2A"
       target="_blank"
       className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet backdrop-blur-lg max-md:mx-auto max-md:w-fit"
-      style={{
-        backgroundColor: isHighlighted ? "#FFF" : "rgba(255,255,255,.05)",
-        border: isHighlighted ? "1px solid rgba(0,0,0,0)" : "1px solid #383838",
-      }}
       whileHover={{
-        border: isHighlighted ? "1px solid rgba(0,0,0,0)" : "1px solid #585858",
+        border: isHighlighted
+          ? "1px solid rgba(255,255,255,1)"
+          : "1px solid rgba(88, 88, 88,1)",
       }}
       animate={{
         color: isHighlighted ? "#000" : isAboutPage ? "#999" : "#FFF",
+        border: isHighlighted ? "1px solid rgba(0,0,0,0)" : "1px solid #383838",
+        backgroundColor: isHighlighted
+          ? "rgba(255,255,255,1)"
+          : "rgba(255,255,255,.05)",
       }}
       whileTap={{
         scale: 0.98,
@@ -176,6 +178,10 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       }}
       onPointerDown={(e) => {
         setPressed(true);
+      }}
+      transition={{
+        duration: AnimationConfig.FAST,
+        ease: "linear",
       }}
       // onMouseUp={e => {setPressed(false)}}
     >
@@ -192,9 +198,9 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
         />
       </div>
 
-      <div
+      <motion.div
         className="h-[28px]"
-        style={{
+        animate={{
           borderLeft: isHighlighted ? "1px solid #333" : "1px solid #555555",
         }}
       />
@@ -206,14 +212,14 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
         <div className="pointer-events-none mt-[-1px] text-nav uppercase leading-none">
           Get Tickets
         </div>
-        <div
+        <motion.div
           className="pointer-events-none mt-[3px] flex flex-col text-nav-s leading-none tracking-wide"
           style={{
             opacity: isHighlighted ? 1 : 0.7,
           }}
         >
           $5 off presale
-        </div>
+        </motion.div>
       </div>
     </motion.a>
   );
