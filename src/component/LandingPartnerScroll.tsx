@@ -21,9 +21,9 @@ const LandingPartnerScroll = ({ isVisible }: Props) => {
       </div>
       <div className="mt-4 flex items-center justify-center gap-6 px-12">
         {partners.map(
-          (partner) =>
+          (partner, index) =>
             partner.featured && (
-              <div className="grow">
+              <div className="grow" key={index}>
                 <img src={partner.logo} className="max-h-12" />
               </div>
             ),
