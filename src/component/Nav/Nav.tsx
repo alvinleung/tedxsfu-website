@@ -25,11 +25,16 @@ import EventInfo, { EventInfoLink } from "./EventInfoLink";
 import TicketCTA from "./TicketCTA";
 import { useLogoContext } from "../../EmergeTextEffect/Logo";
 import NavScreen from "./NavScreen";
+import {
+  ScrollDirection,
+  useContainerScroll,
+} from "../ScrollContainer/ScrollContainer";
 
 type Props = { children: React.ReactNode };
 
 interface NavContextInterface {
   setScrollState: (scrolledState: NavScrollState) => void;
+  setScrollDirection: (scrollDirection: ScrollDirection) => void;
   isOpened: boolean;
   // eventModuleIsOpened: boolean;
   exitDuration: number;
@@ -38,6 +43,7 @@ interface NavContextInterface {
 
 export const NavContext = createContext<NavContextInterface>({
   setScrollState: (scrolledState: NavScrollState) => {},
+  setScrollDirection: (scrollDirection: ScrollDirection) => {},
   isOpened: false,
   // eventModuleIsOpened: false,
   setIsLandingLogoVisible: (isOpen: boolean) => {},
@@ -52,6 +58,9 @@ const Nav = ({ children }: Props) => {
   const router = useRouter();
   const isAboutPage = router.pathname != "/";
   const [scrollState, setScrollState] = useState(NavScrollState.DEFAULT);
+  const [scrollDirection, setScrollDirection] = useState(
+    ScrollDirection.UNKNOWN,
+  );
   const [isLandingLogoVisible, setIsLandingLogoVisible] = useState(true);
 
   useEffect(() => {
@@ -107,6 +116,7 @@ const Nav = ({ children }: Props) => {
     <NavContext.Provider
       value={{
         setScrollState,
+        setScrollDirection,
         isOpened,
         setIsLandingLogoVisible,
         exitDuration: EXIT_DURATION,
@@ -126,6 +136,7 @@ const Nav = ({ children }: Props) => {
           }
           isLandingLogoVisible={isLandingLogoVisible}
           isMenuOpened={isOpened}
+          scrollDirection={scrollDirection}
         />
         <div
           className="fixed z-50 mt-nav-button-offset-y max-sm:bottom-grid-margin-y max-sm:left-0 max-sm:right-0 max-sm:mx-auto sm:right-[64px] sm:top-grid-margin-y

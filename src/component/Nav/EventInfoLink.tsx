@@ -15,7 +15,7 @@ export const EventInfoLink = ({
   children,
   href,
   label,
-  className
+  className,
 }: EventInfoLinkProps) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -32,7 +32,7 @@ export const EventInfoLink = ({
       }}
     >
       {children}
-      <span className="mt-1 hidden gap-x-1 tracking-wide opacity-50 xs:flex">
+      <span className="mt-1 hidden gap-x-1 tracking-wide opacity-50 sm:flex">
         {label}
         <motion.div
           animate={{

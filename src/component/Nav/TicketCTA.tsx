@@ -188,7 +188,7 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       <div
         className="pl-[7px] pr-[6px]"
         style={{
-          filter: isHighlighted ? "invert(1)" : "",
+          filter: isHighlighted ? "invert(1)" : "none",
         }}
       >
         <TicketIcon

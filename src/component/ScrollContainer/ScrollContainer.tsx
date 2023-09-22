@@ -110,10 +110,11 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     return -v;
   });
 
+  const nav = useNavContext();
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 0) {
       setHasScrolled(true);
-      return;
     }
     setHasScrolled(false);
   });
@@ -122,17 +123,17 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
     const unobserveScrollY = scrollY.on("change", (val) => {
       if (val > scrollY.getPrevious()) {
         setScrollDirection(ScrollDirection.DOWN);
+        nav.setScrollDirection(ScrollDirection.DOWN);
         return;
       }
       setScrollDirection(ScrollDirection.UP);
+      nav.setScrollDirection(ScrollDirection.UP);
     });
 
     return () => {
       unobserveScrollY();
     };
   }, [scrollY]);
-
-  const nav = useNavContext();
 
   useEffect(() => {
     if (nav.isOpened) {
