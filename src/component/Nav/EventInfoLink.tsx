@@ -10,12 +10,14 @@ interface EventInfoLinkProps {
   label: string;
   href: string;
   className?: string;
+  centerAlign?: boolean;
 }
 export const EventInfoLink = ({
   children,
   href,
   label,
   className,
+  centerAlign,
 }: EventInfoLinkProps) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -23,7 +25,9 @@ export const EventInfoLink = ({
     <motion.a
       href={href}
       target="_blank"
-      className={`my-[-3px] flex flex-col text-nav ${className}`}
+      className={`my-[-3px] flex flex-col text-nav ${className} ${
+        centerAlign ? "items-center justify-center text-center" : ""
+      }`}
       onHoverStart={(e) => {
         setIsHovering(true);
       }}
@@ -32,7 +36,7 @@ export const EventInfoLink = ({
       }}
     >
       {children}
-      <span className="mt-1 hidden gap-x-1 tracking-wide opacity-50 sm:flex">
+      <span className={`mt-1 hidden gap-x-1 tracking-wide opacity-50 xs:flex`}>
         {label}
         <motion.div
           animate={{
