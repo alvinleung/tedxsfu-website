@@ -60,8 +60,8 @@ const SpeakerImageSlide = ({
         key={index}
         className={
           index === 0
-            ? "h-screen w-screen cursor-pointer object-cover object-center sm:object-contain"
-            : "absolute inset-0 h-screen w-screen cursor-pointer object-cover object-center sm:object-contain"
+            ? "h-screen w-screen  object-cover object-center sm:object-contain"
+            : "absolute inset-0 h-screen w-screen  object-cover object-center sm:object-contain"
         }
         src={speaker.portraits[currentPhoto]}
         width={1920}

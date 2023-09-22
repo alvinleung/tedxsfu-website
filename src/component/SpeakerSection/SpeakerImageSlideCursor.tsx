@@ -17,8 +17,8 @@ const SpeakerImageSlideCursor = ({ total, current, active }: Props) => {
       className="pointer-events-none absolute left-0 top-0 "
       animate={{
         opacity: active ? 1 : 0,
-        x: mouse.x,
-        y: mouse.y + 20,
+        x: mouse.x + 20,
+        y: mouse.y + 30,
         // display: active ? "block" : "none",
         zIndex: 1000,
         transition: {
@@ -27,10 +27,10 @@ const SpeakerImageSlideCursor = ({ total, current, active }: Props) => {
         },
       }}
     >
-      <div className="text-header">
+      <div className="text-body">
         {current + 1}/{total}
       </div>
-      <div className="text-center text-micro">(click)</div>
+      <div className="text-center text-body ">(next)</div>
     </motion.div>
   );
 };
