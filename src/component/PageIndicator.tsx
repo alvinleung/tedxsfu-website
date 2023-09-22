@@ -14,7 +14,6 @@ const PageIndicator = ({ totalPages, current }: Props) => {
   return (
     <motion.div className="flex flex-col gap-2">
       {pages.map((_, index) => {
-        console.log(index);
         return (
           <motion.div
             key={index}

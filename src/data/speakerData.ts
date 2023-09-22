@@ -53,7 +53,7 @@ const speakers = [
     pronouns: "they/them",
     talkTitle: "Unmask AI",
     title: "Tokyo 2020 Olympian & Pro Skateboarder",
-    portraits: ["./speaker-section/speaker-hayley.jpg"],
+    portraits: ["./speaker-section/speaker-sumaiya.jpg"],
   },
 ];
 

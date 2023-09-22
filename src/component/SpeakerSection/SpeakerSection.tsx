@@ -59,7 +59,7 @@ const SpeakerSection = (props: Props) => {
 
   const endTransitionPosition = imageContainerBounds.top;
 
-  const offsetBeforeSlide = windowDim.height < 1200 ? 1200 : windowDim.height;
+  const offsetBeforeSlide = windowDim.height < 1600 ? 1600 : windowDim.height;
   const speakerSlideHeight = 500;
   const speakerSectionScrollHeight =
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
@@ -123,25 +123,27 @@ const SpeakerSection = (props: Props) => {
     () => clamp(currentSpeakerSlide, 0, speakers.length - 1),
     [currentSpeakerSlide],
   );
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const offsetY = latest - imageContainerBounds.top - offsetBeforeSlide;
-    const currentSlide = Math.round(
-      (offsetY / (speakerSectionScrollHeight - offsetBeforeSlide)) *
-        speakers.length,
-    );
-    setCurrentSpeakerSlide(currentSlide);
-  });
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   const offsetY = latest - imageContainerBounds.top - offsetBeforeSlide;
+  //   const currentSlide = Math.floor(
+  //     (offsetY / (speakerSectionScrollHeight - offsetBeforeSlide)) *
+  //       speakers.length,
+  //   );
+  //   setCurrentSpeakerSlide(currentSlide);
+  // });
 
   const beginPos = imageContainerBounds.top + offsetBeforeSlide;
-  const endPos = beginPos + speakerSectionScrollHeight;
+  const endPos = beginPos + speakers.length * speakerSlideHeight;
   const currentSpeakerSlideContinuous = useTransform(
     scrollY,
     [beginPos, endPos],
-    [0, speakers.length - 1],
+    [0, speakers.length],
+    { clamp: false },
   );
 
   useMotionValueEvent(currentSpeakerSlideContinuous, "change", (latest) => {
-    console.log(latest);
+    const currSpeakerSlide = Math.floor(latest);
+    setCurrentSpeakerSlide(currSpeakerSlide);
   });
 
   const isTablet = atBreakpointSM && !atBreakpointMD;

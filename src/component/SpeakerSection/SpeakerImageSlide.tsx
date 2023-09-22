@@ -1,6 +1,7 @@
 import { MotionValue, motion, useTransform } from "framer-motion";
 import React from "react";
 import { AnimationConfig } from "../AnimationConfig";
+import { getFramerMotionEase } from "@/utils/getFramerMotionEase";
 
 type Props = {
   index: number;
@@ -17,8 +18,16 @@ const SpeakerImageSlide = ({
 }: Props) => {
   const scale = useTransform(
     currentSpeakerSlideContinuous,
-    [index - 1, index],
-    [1.1, 1],
+    [index, index + 1],
+    [1, 1.0],
+    // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
+  );
+
+  const y = useTransform(
+    currentSpeakerSlideContinuous,
+    [index, index + 1],
+    [10, 0],
+    // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
   );
 
   return (
@@ -34,16 +43,23 @@ const SpeakerImageSlide = ({
       height={1080}
       alt={speaker.name}
       // match parmida background
-      style={{ scale, backgroundColor: "#050505" }}
-      animate={{
+      style={{
+        scale,
+        y,
+        backgroundColor: "#050505",
         opacity: index === currentSpeakerSlideClamped ? 1 : 0,
-        // y:
-        //   index >= currentSpeakerSlide
-        //     ? 50
-        //     : index == currentSpeakerSlide
-        //     ? 0
-        //     : -50,
       }}
+      animate={
+        {
+          // opacity: index === currentSpeakerSlideClamped ? 1 : 0,
+          // y:
+          //   index >= currentSpeakerSlide
+          //     ? 50
+          //     : index == currentSpeakerSlide
+          //     ? 0
+          //     : -50,
+        }
+      }
       transition={{
         duration: AnimationConfig.FAST,
       }}
