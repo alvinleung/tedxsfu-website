@@ -113,8 +113,9 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const nav = useNavContext();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 0) {
+    if (latest > 10) {
       setHasScrolled(true);
+      return;
     }
     setHasScrolled(false);
   });
