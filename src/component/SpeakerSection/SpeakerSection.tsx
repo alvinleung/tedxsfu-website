@@ -28,6 +28,7 @@ import PageIndicator from "../PageIndicator";
 import MainGrid from "../layouts/MainGrid";
 import Fixed from "../ScrollContainer/Fixed";
 import SpeakerImageSlide from "./SpeakerImageSlide";
+import SpeakerImageSlideCursor from "./SpeakerImageSlideCursor";
 
 type Props = {};
 
@@ -161,6 +162,8 @@ const SpeakerSection = (props: Props) => {
     [0, 1],
   );
 
+  const [currentSpeakerPhoto, setCurrentSpeakerPhoto] = useState(0);
+
   return (
     <MainGrid className={`relative px-grid-margin-x`}>
       <div className="z-50 h-0">
@@ -263,7 +266,7 @@ const SpeakerSection = (props: Props) => {
           >
             {/* Scrim */}
             <motion.div
-              className="absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
+              className="pointer-events-none absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
               style={{ opacity: scrimOpacity }}
             />
             <div className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[20vh] 2xl:scale-[1.4]">
@@ -275,10 +278,21 @@ const SpeakerSection = (props: Props) => {
                   index={index}
                   currentSpeakerSlideClamped={currentSpeakerSlideClamped}
                   currentSpeakerSlideContinuous={currentSpeakerSlideContinuous}
+                  onCurrentPhotoChange={(photo) =>
+                    setCurrentSpeakerPhoto(photo)
+                  }
+                  canShufflePhoto={
+                    currentSpeakerSlideClamped === currentSpeakerSlide
+                  }
                 />
               ))}
             </div>
           </motion.div>
+          <SpeakerImageSlideCursor
+            total={speakers[currentSpeakerSlideClamped].portraits.length}
+            current={currentSpeakerPhoto}
+            active={currentSpeakerSlideClamped === currentSpeakerSlide}
+          />
         </Sticky>
       </div>
     </MainGrid>

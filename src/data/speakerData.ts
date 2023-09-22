@@ -4,7 +4,11 @@ const speakers = [
     pronouns: "they/them",
     talkTitle: "Unmask AI",
     title: "Amazon AI Tech Lead",
-    portraits: ["./speaker-section/speaker-parmida.jpg"],
+    portraits: [
+      "./speaker-section/speaker-parmida-1.jpg",
+      "./speaker-section/speaker-parmida-2.jpg",
+      "./speaker-section/speaker-parmida-3.jpg",
+    ],
   },
   {
     name: "Vladimir Kanic",
