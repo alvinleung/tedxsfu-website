@@ -86,7 +86,7 @@ export const LandingHero = () => {
           </div>
           <div className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:left-[85%] sm:top-0 sm:justify-center">
             <EventInfoLink
-              label={"Google Map"}
+              label={"Google Maps"}
               href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
               className="sm:items-center"
             >
