@@ -110,6 +110,11 @@ const AnimatedPath = (props: any) => {
   const animtedProgressEase = useTransform(animatedProgress, [0, 1], [1, 0], {
     ease: cubicBezier(0.16, 1, 0.3, 1),
   });
+  // const windowDim = useWindowDimension();
+  // const toucnAnimOffset = useTransform(
+  //   touchAnimProgress as MotionValue<number>,
+  //   (latest) => clamp(latest * (1 - bounds.y / windowDim.height) *1.1, 0, 1),
+  // );
 
   const animatedStrokeWidth = useTransform(
     [animtedProgressEase, cursorProgress, touchAnimProgress],
@@ -138,11 +143,13 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
   const windowDim = useWindowDimension();
   const { scrollY } = useContainerScroll();
   // const touchAnimProgress = useMotionValue(0);
+
+  const atBreakpointSM = useBreakpoint(breakpoints.sm);
   const touchAnimProgress = useTransform(
     scrollY,
-    [0, windowDim.height / 2],
-    [0, 1.1],
-    { ease: getFramerMotionEase(AnimationConfig.EASING) },
+    [0, atBreakpointSM ? windowDim.height * 0.3 : windowDim.height * 0.15],
+    [0, atBreakpointSM ? 1 : 1],
+    { ease: getFramerMotionEase(AnimationConfig.EASING_INVERTED) },
   );
   const ref = useRef(null);
   const isInView = useInView(ref);
