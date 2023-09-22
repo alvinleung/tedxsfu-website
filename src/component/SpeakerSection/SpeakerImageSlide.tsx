@@ -19,7 +19,7 @@ const SpeakerImageSlide = ({
   const y = useTransform(
     currentSpeakerSlideContinuous,
     [index, index + 2],
-    [0, -20],
+    [0, -30],
     // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
   );
 
