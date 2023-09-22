@@ -26,6 +26,8 @@ import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 import { useNavContext } from "@/component/Nav/Nav";
 import { useIsFirstRender } from "@/hooks/useIsFirstRender";
 import { useEffectOnce } from "usehooks-ts";
+import { AnimationConfig } from "@/component/AnimationConfig";
+import { getFramerMotionEase } from "@/utils/getFramerMotionEase";
 
 type Props = {
   isEnterAnimationDone: boolean;
@@ -131,9 +133,17 @@ const AnimatedPath = (props: any) => {
 
 export const Logo = ({ isEnterAnimationDone }: Props) => {
   const animProgress = useMotionValue(0);
-  const touchAnimProgress = useMotionValue(0);
-  const { width } = useWindowDimension();
   const { setIsLandingLogoVisible } = useNavContext();
+
+  const windowDim = useWindowDimension();
+  const { scrollY } = useContainerScroll();
+  // const touchAnimProgress = useMotionValue(0);
+  const touchAnimProgress = useTransform(
+    scrollY,
+    [0, windowDim.height / 2],
+    [0, 1.1],
+    { ease: getFramerMotionEase(AnimationConfig.EASING) },
+  );
   const ref = useRef(null);
   const isInView = useInView(ref);
 
@@ -143,45 +153,6 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
 
   useEffect(() => {
     if (!isEnterAnimationDone) return;
-
-    let prevTouch = 0;
-    let touchDelta = 0;
-
-    let timeout: any = 0;
-
-    const handleTouchMove = (e: TouchEvent) => {
-      const currTouch = e.touches[0].clientY;
-      touchDelta = currTouch - prevTouch;
-      prevTouch = currTouch;
-
-      const newProgress = clamp(
-        touchAnimProgress.get() + Math.abs(clamp(touchDelta / 20, -1, 1)),
-        0,
-        1,
-      );
-      // touchAnimProgress.set(newProgress);
-
-      // e.preventDefault();
-      // e.stopPropagation();
-
-      animate(touchAnimProgress, newProgress, {
-        duration: 0.3,
-        ease: [0.22, 1, 0.36, 1],
-      });
-
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-
-      timeout = setTimeout(() => {
-        // reset to normal when mouse is not moving
-        animate(touchAnimProgress, 0, {
-          duration: 1,
-          ease: [0.22, 1, 0.36, 1],
-        });
-      }, 300);
-    };
-
     let animFrame = 0;
     function frameUpdate() {
       animProgress.set(animProgress.get() - 0.1);
@@ -189,43 +160,10 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
     }
     animFrame = requestAnimationFrame(frameUpdate);
 
-    const handleTouchStart = (e: TouchEvent) => {
-      const currTouch = e.touches[0].clientY;
-      touchDelta = 0;
-      prevTouch = currTouch;
-    };
-    const handleTouchEnd = (e: TouchEvent) => {};
-
-    // remove touch move event
-    // window.addEventListener("touchmove", handleTouchMove);
-    // window.addEventListener("touchstart", handleTouchStart);
-    // window.addEventListener("touchend", handleTouchEnd);
     return () => {
-      // window.removeEventListener("touchmove", handleTouchMove);
-      // window.removeEventListener("touchstart", handleTouchStart);
-      // window.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animFrame);
     };
   }, [isEnterAnimationDone]);
-
-  // const isBiggerThan2xl = useBreakpoint(breakpoints.xl);
-
-  // const condition = (
-  //   // width >= breakpoints["2xl"] && {height: "max(11.5vw, 24dvh)", maxHeight: "11.5vw", minHeight:"9rem"}
-  //   // ||
-  //   // width >= breakpoints.xl && {height: "min(calc(-50vw + 59rem), 24dvh)", maxHeight: "15.4vw", minHeight:"9rem"}
-  //   // ||
-  //   // width >= breakpoints.lg && {height: "max(calc(46.875vw - 25rem), 24dvh)", maxHeight: "15.4vw"}
-  //   // ||
-  //   // width >= breakpoints.md && {height: "24dvh", maxHeight: "15.5vw"}
-  //   // ||
-  //   // // width >= breakpoints.sm && {height: "11vw"}
-
-  //   // // ||
-
-  //   // {minHeight: "69px", height: "20dvh", maxHeight: "22vw"}
-
-  // )
 
   return (
     <LogoAnimationContext.Provider
@@ -234,11 +172,6 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
       <div
         className="pointer-events-none mt-32 flex flex-col gap-4 sm:mt-24 sm:w-fit xl:mt-grid-margin-y"
         ref={ref}
-        // style={{
-        //   marginTop: useBreakpoint(breakpoints.md)
-        //     ? "min(max(1rem, calc(-50vw + 33rem)), max(1rem, calc(25dvh - 4rem)))"
-        //     : "min(max(calc(-37.5vw + 19rem), 1rem, calc(2rem + 22vw)), max(4rem, calc(25dvh - 4rem)))",
-        // }}
       >
         <svg
           className="

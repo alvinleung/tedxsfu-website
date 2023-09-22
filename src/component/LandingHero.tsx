@@ -1,6 +1,6 @@
 import { Logo } from "../EmergeTextEffect/Logo";
 import { useWindowDimension } from "@/hooks/useWindowDimension";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import MainGrid from "./layouts/MainGrid";
 import { EventInfoModuleCond } from "./Nav/EventInfoModule";
@@ -13,6 +13,10 @@ import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 export const LandingHero = () => {
   const viewport = useWindowDimension();
+
+  const { hasScrolled, scrollY } = useContainerScroll();
+  const logoOpacity = useTransform(scrollY, [0, 100], [1, 0]);
+
   // const anim = useAnimation();
   // const [isAnimationDone, setIsAnimationDone] = useState(false);
 
@@ -67,15 +71,15 @@ export const LandingHero = () => {
   //   };
   // }, []);
 
-  const { hasScrolled } = useContainerScroll();
-
   const atMDBreakpoint = useBreakpoint(breakpoints.md);
 
   return (
     <section className="max-w-screen overflow-hidden px-grid-margin-x pb-grid-margin-y">
       <motion.div
-        // initial={{ scale: 50 }}
-        // animate={anim}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+        }}
         className="relative mx-auto sm:w-fit"
       >
         <Logo isEnterAnimationDone={true} />
@@ -86,6 +90,9 @@ export const LandingHero = () => {
             )}
           </div>
           <motion.div
+            style={{
+              opacity: atMDBreakpoint ? logoOpacity : 1,
+            }}
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
               y: !atMDBreakpoint && hasScrolled ? -20 : 0,
@@ -108,6 +115,9 @@ export const LandingHero = () => {
             </EventInfoLink>
           </motion.div>
           <motion.div
+            style={{
+              opacity: atMDBreakpoint ? logoOpacity : 1,
+            }}
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
               y: !atMDBreakpoint && hasScrolled ? -20 : 0,

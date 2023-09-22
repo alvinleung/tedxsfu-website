@@ -27,12 +27,9 @@ import { clamp } from "@/utils/clamp";
 import PageIndicator from "../PageIndicator";
 import MainGrid from "../layouts/MainGrid";
 import Fixed from "../ScrollContainer/Fixed";
+import SpeakerImageSlide from "./SpeakerImageSlide";
 
 type Props = {};
-
-function getFramerMotionEase(arr: number[]) {
-  return cubicBezier(arr[0], arr[1], arr[2], arr[3]);
-}
 
 const SpeakerInfoModule = ({ talkTitle, name, title }: any) => (
   <>
@@ -133,6 +130,18 @@ const SpeakerSection = (props: Props) => {
         speakers.length,
     );
     setCurrentSpeakerSlide(currentSlide);
+  });
+
+  const beginPos = imageContainerBounds.top + offsetBeforeSlide;
+  const endPos = beginPos + speakerSectionScrollHeight;
+  const currentSpeakerSlideContinuous = useTransform(
+    scrollY,
+    [beginPos, endPos],
+    [0, speakers.length - 1],
+  );
+
+  useMotionValueEvent(currentSpeakerSlideContinuous, "change", (latest) => {
+    console.log(latest);
   });
 
   const isTablet = atBreakpointSM && !atBreakpointMD;
@@ -257,55 +266,15 @@ const SpeakerSection = (props: Props) => {
             />
             <div className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[20vh] 2xl:scale-[1.4]">
               {/* scrim */}
-              {speakers.map((speaker, index) => {
-                if (index === 0) {
-                  return (
-                    <motion.img
-                      key={index}
-                      src={speaker.portraits[0]}
-                      width={1920}
-                      height={1080}
-                      alt={speaker.name}
-                      className="h-screen w-screen object-cover object-center sm:object-contain"
-                      animate={{
-                        opacity: index === currentSpeakerSlideClamped ? 1 : 0,
-                        // y:
-                        //   index >= currentSpeakerSlide
-                        //     ? 50
-                        //     : index == currentSpeakerSlide
-                        //     ? 0
-                        //     : -50,
-                      }}
-                      transition={{
-                        duration: AnimationConfig.FAST,
-                      }}
-                    />
-                  );
-                }
-
-                return (
-                  <motion.img
-                    key={index}
-                    className="absolute inset-0 h-screen w-screen object-cover object-center sm:object-contain"
-                    src={speaker.portraits[0]}
-                    width={1920}
-                    height={1080}
-                    alt={speaker.name}
-                    animate={{
-                      opacity: index === currentSpeakerSlideClamped ? 1 : 0,
-                      // y:
-                      //   index >= currentSpeakerSlide
-                      //     ? 50
-                      //     : index == currentSpeakerSlide
-                      //     ? 0
-                      //     : -50,
-                    }}
-                    transition={{
-                      duration: AnimationConfig.FAST,
-                    }}
-                  />
-                );
-              })}
+              {speakers.map((speaker, index) => (
+                <SpeakerImageSlide
+                  key={index}
+                  speaker={speaker}
+                  index={index}
+                  currentSpeakerSlideClamped={currentSpeakerSlideClamped}
+                  currentSpeakerSlideContinuous={currentSpeakerSlideContinuous}
+                />
+              ))}
             </div>
           </motion.div>
         </Sticky>
