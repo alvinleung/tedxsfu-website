@@ -196,13 +196,14 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
     };
     const handleTouchEnd = (e: TouchEvent) => {};
 
-    window.addEventListener("touchmove", handleTouchMove);
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
+    // remove touch move event
+    // window.addEventListener("touchmove", handleTouchMove);
+    // window.addEventListener("touchstart", handleTouchStart);
+    // window.addEventListener("touchend", handleTouchEnd);
     return () => {
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
+      // window.removeEventListener("touchmove", handleTouchMove);
+      // window.removeEventListener("touchstart", handleTouchStart);
+      // window.removeEventListener("touchend", handleTouchEnd);
       cancelAnimationFrame(animFrame);
     };
   }, [isEnterAnimationDone]);
@@ -231,7 +232,7 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
       value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
     >
       <div
-        className="pointer-events-none mt-36 flex flex-col gap-4 sm:w-fit xl:mt-grid-margin-y"
+        className="pointer-events-none mt-32 flex flex-col gap-4 sm:mt-24 sm:w-fit xl:mt-grid-margin-y"
         ref={ref}
         // style={{
         //   marginTop: useBreakpoint(breakpoints.md)
