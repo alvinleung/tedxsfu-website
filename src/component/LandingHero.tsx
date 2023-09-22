@@ -3,7 +3,6 @@ import { useWindowDimension } from "@/hooks/useWindowDimension";
 import { motion, useAnimation, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import MainGrid from "./layouts/MainGrid";
-import { EventInfoModuleCond } from "./Nav/EventInfoModule";
 import EmailForm from "./Footer/EmailForm";
 import { AnimationConfig } from "./AnimationConfig";
 import EventInfoLink from "./Nav/EventInfoLink";
@@ -84,9 +83,9 @@ export const LandingHero = () => {
       >
         <Logo isEnterAnimationDone={true} />
         <MainGrid className="max-sm:relative max-sm:mb-4 max-sm:mt-20">
-          <div className="absolute left-0 right-0">
+          <div className="absolute bottom-0 left-0 right-0">
             {!atMDBreakpoint && (
-              <LandingPartnerScroll isVisible={!hasScrolled} />
+              <LandingPartnerScroll isVisible={hasScrolled} />
             )}
           </div>
           <motion.div
@@ -95,7 +94,7 @@ export const LandingHero = () => {
             }}
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
-              y: !atMDBreakpoint && hasScrolled ? -20 : 0,
+              // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
               transition: {
                 duration: AnimationConfig.NORMAL,
                 ease: AnimationConfig.EASING,
@@ -120,7 +119,7 @@ export const LandingHero = () => {
             }}
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
-              y: !atMDBreakpoint && hasScrolled ? -20 : 0,
+              // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
               transition: {
                 duration: AnimationConfig.NORMAL,
                 ease: AnimationConfig.EASING,
