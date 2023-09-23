@@ -22,10 +22,16 @@ const SpeakerImageSlide = ({
   onCurrentPhotoChange,
   canShufflePhoto,
 }: Props) => {
+  const scale = useTransform(
+    currentSpeakerSlideContinuous,
+    [index, index + 2],
+    [1, 1.07],
+    // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
+  );
   const y = useTransform(
     currentSpeakerSlideContinuous,
     [index, index + 2],
-    [0, -30],
+    [0, 10],
     // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
   );
 
@@ -69,6 +75,7 @@ const SpeakerImageSlide = ({
         alt={speaker.name}
         // match parmida background
         style={{
+          scale,
           y,
           backgroundColor: "#050505",
           opacity: index === currentSpeakerSlideClamped ? 1 : 0,
