@@ -18,12 +18,12 @@ type Props = {
 
 const FigureLayout = ({ children, caption, width, height }: Props) => {
   const [ref, bounds] = useBoundingBox<HTMLDivElement>([]);
-  const isInView = useInView(ref, { margin: "0% 0% -30% 0%" });
+  const isInView = useInView(ref, { margin: "0% 0% -10% 0%" });
 
   const aspectRatio = width / height;
 
   return (
-    <figure className="relative col-span-full col-start-1 mt-12 md:col-span-4 md:col-start-2 lg:col-span-6 lg:col-start-2">
+    <figure className="relative col-span-full col-start-1 row-start-2 mt-12 md:col-span-4 md:col-start-2 xl:col-span-4 xl:col-start-4">
       <div
         ref={ref}
         className="w-full overflow-hidden"
@@ -34,8 +34,8 @@ const FigureLayout = ({ children, caption, width, height }: Props) => {
         <motion.div
           className="origin-bottom"
           animate={{
-            opacity: isInView ? 1 : 0.7,
-            scale: isInView ? 1 : 1.1,
+            opacity: isInView ? 1 : 0.2,
+            scale: isInView ? 1 : 1.05,
             // x: isInView ? 0 : 0,
           }}
           transition={{

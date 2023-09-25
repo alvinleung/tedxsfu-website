@@ -54,6 +54,7 @@ export default function Home() {
             discussion.
           </SectionInfoDescription>
         </SectionInfo>
+
         <FigureLayout
           width={1920}
           height={1200}
