@@ -13,7 +13,7 @@ const speakers = [
   {
     name: "Micky Papa",
     pronouns: "they/them",
-    talkTitle: "Unmask AI",
+    talkTitle: "Unmask Skateboarding",
     title: "Tokyo 2020 Olympian & Pro Skateboarder",
     portraits: ["./speaker-section/speaker-micky.jpg"],
   },

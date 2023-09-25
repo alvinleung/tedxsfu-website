@@ -196,9 +196,9 @@ const SpeakerSection = (props: Props) => {
                 }}
                 key="1"
               >
-                <SectionInfoHeader>Our all-star programme</SectionInfoHeader>
+                <SectionInfoHeader>An all-star program</SectionInfoHeader>
                 <SectionInfoDescription>
-                  A stellar lineup from Toronto, San Francisco and Metro
+                  A stellar line-up from Toronto, San Francisco and Metro
                   Vancouver—dive into stories of victory and vulnerability from
                   the Olympic rings, Silicon Valley and beyond.
                 </SectionInfoDescription>

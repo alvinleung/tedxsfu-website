@@ -18,6 +18,7 @@ const LandingPartnerScroll = ({ isVisible }: Props) => {
   return (
     <div>
       <motion.div
+        initial={{ opacity: 0 }}
         animate={{
           opacity: isVisible ? 1 : 0,
           transition: {
@@ -36,6 +37,7 @@ const LandingPartnerScroll = ({ isVisible }: Props) => {
           <motion.div
             className="grow"
             key={index}
+            initial={{ opacity: 0 }}
             animate={{
               opacity: isVisible ? 1 : 0,
               y: isVisible ? 0 : 10,

@@ -9,6 +9,7 @@ import EventInfoLink from "./Nav/EventInfoLink";
 import { useContainerScroll } from "./ScrollContainer/ScrollContainer";
 import LandingPartnerScroll from "./LandingPartnerScroll";
 import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
+import { useBoundingBox } from "@/hooks/useBoundingBox";
 
 export const LandingHero = () => {
   const viewport = useWindowDimension();
@@ -69,17 +70,23 @@ export const LandingHero = () => {
   //     clearTimeout(timeout);
   //   };
   // }, []);
-
   const atMDBreakpoint = useBreakpoint(breakpoints.md);
 
   return (
-    <section className="max-w-screen overflow-hidden px-grid-margin-x pb-grid-margin-y">
+    <section className="max-w-screen px-grid-margin-x pb-grid-margin-y">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
+        // initial={{ opacity: 0 }}
+        // animate={{
+        //   opacity: 1,
+        // }}
+        initial={{ y: "10vh" }}
+        animate={{ y: "0vh" }}
+        transition={{
+          ease: AnimationConfig.EASING_DRAMATIC,
+          duration: 1.5,
+          delay: 1.5,
         }}
-        className="relative mx-auto sm:w-fit"
+        className="relative z-20 mx-auto sm:w-fit"
       >
         <Logo isEnterAnimationDone={true} />
         <MainGrid className="max-sm:relative max-sm:mb-4 max-sm:mt-20">
@@ -88,9 +95,10 @@ export const LandingHero = () => {
               <LandingPartnerScroll isVisible={hasScrolled} />
             )}
           </div>
+
           <motion.div
             style={{
-              opacity: atMDBreakpoint ? logoOpacity : 1,
+              opacity: logoOpacity,
             }}
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
@@ -100,46 +108,81 @@ export const LandingHero = () => {
                 ease: AnimationConfig.EASING,
               },
             }}
-            className="flex flex-col max-sm:col-span-2 max-sm:border-r max-sm:border-r-[rgba(255,255,255,.4)] sm:absolute sm:bottom-0 sm:right-[85%] sm:top-0 sm:justify-center"
+            className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:right-[85%] sm:top-0 sm:justify-center"
           >
-            <EventInfoLink
-              centerAlign
-              label={"Calendar"}
-              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
-              className="sm:items-center"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: {
+                  duration: AnimationConfig.VERY_SLOW,
+                  delay: 2,
+                },
+              }}
+              className="max-sm:border-r max-sm:border-r-[rgba(255,255,255,.4)] "
             >
-              <span className="uppercase sm:whitespace-nowrap sm:text-center">
-                Saturday, <br /> Nov 11, 2023
-              </span>
-            </EventInfoLink>
+              <EventInfoLink
+                centerAlign
+                label={"Calendar"}
+                href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
+                className="sm:items-center"
+              >
+                <span className="uppercase sm:whitespace-nowrap sm:text-center">
+                  Saturday, <br /> Nov 11, 2023
+                </span>
+              </EventInfoLink>
+            </motion.div>
           </motion.div>
+
           <motion.div
             style={{
-              opacity: atMDBreakpoint ? logoOpacity : 1,
+              opacity: logoOpacity,
             }}
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
               // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
               transition: {
-                duration: AnimationConfig.NORMAL,
+                duration: AnimationConfig.VERY_SLOW,
                 ease: AnimationConfig.EASING,
               },
             }}
             className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:left-[85%] sm:top-0 sm:justify-center"
           >
-            <EventInfoLink
-              centerAlign
-              label={"Google Map"}
-              href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
-              className="sm:items-center"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: {
+                  duration: AnimationConfig.NORMAL,
+                  delay: 2,
+                },
+              }}
             >
-              <span className="uppercase sm:whitespace-nowrap sm:text-center">
-                The Centre For <br /> Performing Arts
-              </span>
-            </EventInfoLink>
+              <EventInfoLink
+                centerAlign
+                label={"Google Map"}
+                href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
+                className="sm:items-center"
+              >
+                <span className="uppercase sm:whitespace-nowrap sm:text-center">
+                  The Centre For <br /> Performing Arts
+                </span>
+              </EventInfoLink>
+            </motion.div>
           </motion.div>
         </MainGrid>
       </motion.div>
+      {/* scrim for transition */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 z-10 bg-black"
+        initial={{ scaleY: 3 }}
+        animate={{ scaleY: 1 }}
+        transition={{
+          ease: AnimationConfig.EASING_DRAMATIC,
+          duration: 1.5,
+          delay: 1.5,
+        }}
+      />
     </section>
   );
 };
