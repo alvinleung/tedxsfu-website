@@ -196,11 +196,11 @@ const SpeakerSection = (props: Props) => {
                 }}
                 key="1"
               >
-                <SectionInfoHeader>The Programme</SectionInfoHeader>
+                <SectionInfoHeader>Our all-star programme</SectionInfoHeader>
                 <SectionInfoDescription>
-                  all star speaker cast, flying in from Vancouver, San
-                  Francisco, Toronto—unmask the world of Olympians, pioneers in
-                  tech, and thought leaders along the West Coast.
+                  A stellar lineup from Toronto, San Francisco and Metro
+                  Vancouver—dive into stories of victory and vulnerability from
+                  the Olympic rings, Silicon Valley and beyond.
                 </SectionInfoDescription>
                 <hr className="my-2  opacity-40 md:mt-8" />
                 <div className="grid grid-cols-2 gap-4">
@@ -269,15 +269,7 @@ const SpeakerSection = (props: Props) => {
               className="pointer-events-none absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
               style={{ opacity: scrimOpacity }}
             />
-            <div
-              style={{
-                cursor:
-                  currentSpeakerSlideClamped === currentSpeakerSlide
-                    ? "pointer"
-                    : "default",
-              }}
-              className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[20vh] 2xl:scale-[1.4]"
-            >
+            <div className="relative h-screen w-full translate-y-[16vh] scale-[1] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[16vh] 2xl:scale-[1.25]">
               {/* scrim */}
               {speakers.map((speaker, index) => (
                 <SpeakerImageSlide
@@ -289,18 +281,16 @@ const SpeakerSection = (props: Props) => {
                   onCurrentPhotoChange={(photo) =>
                     setCurrentSpeakerPhoto(photo)
                   }
-                  canShufflePhoto={
-                    currentSpeakerSlideClamped === currentSpeakerSlide
-                  }
+                  canShufflePhoto={false}
                 />
               ))}
             </div>
           </motion.div>
-          <SpeakerImageSlideCursor
+          {/* <SpeakerImageSlideCursor
             total={speakers[currentSpeakerSlideClamped].portraits.length}
             current={currentSpeakerPhoto}
             active={currentSpeakerSlideClamped === currentSpeakerSlide}
-          />
+          /> */}
         </Sticky>
       </div>
     </MainGrid>

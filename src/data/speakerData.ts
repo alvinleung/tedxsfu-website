@@ -11,12 +11,20 @@ const speakers = [
     ],
   },
   {
+    name: "Micky Papa",
+    pronouns: "they/them",
+    talkTitle: "Unmask AI",
+    title: "Tokyo 2020 Olympian & Pro Skateboarder",
+    portraits: ["./speaker-section/speaker-micky.jpg"],
+  },
+  {
     name: "Vladimir Kanic",
     pronouns: "they/them",
     talkTitle: "Unmask Breathing",
     title: "Governor General Award Winning Artist",
     portraits: ["./speaker-section/speaker-vladimir.jpg"],
   },
+
   {
     name: "Chris Wilson",
     pronouns: "they/them",
@@ -51,13 +59,6 @@ const speakers = [
     talkTitle: "Unmask ADHD",
     title: "ADHD Advocate & Internet Personality",
     portraits: ["./speaker-section/speaker-hayley.jpg"],
-  },
-  {
-    name: "Micky Papa",
-    pronouns: "they/them",
-    talkTitle: "Unmask AI",
-    title: "Tokyo 2020 Olympian & Pro Skateboarder",
-    portraits: ["./speaker-section/speaker-sumaiya.jpg"],
   },
 ];
 

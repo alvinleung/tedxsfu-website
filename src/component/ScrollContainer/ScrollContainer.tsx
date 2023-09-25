@@ -236,6 +236,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
           zIndex: zIndex,
           // overflowY: isPresent ? "inherit" : "scroll",
           pointerEvents: isPresent ? "all" : "none",
+          willChange: "transform",
         }}
       >
         <motion.div style={{ y: isUsingSmoothScroll ? documentOffsetY : 0 }}>

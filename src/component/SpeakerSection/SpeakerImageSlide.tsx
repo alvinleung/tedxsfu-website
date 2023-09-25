@@ -54,11 +54,11 @@ const SpeakerImageSlide = ({
     }
   }, [isCurrentSpeaker]);
 
-  useEventListener("click", () => {
-    if (isCurrentSpeaker) {
-      nextPhoto();
-    }
-  });
+  // useEventListener("click", () => {
+  //   if (isCurrentSpeaker) {
+  //     nextPhoto();
+  //   }
+  // });
 
   return (
     <>
@@ -69,6 +69,7 @@ const SpeakerImageSlide = ({
             ? "h-screen w-screen  object-cover object-center sm:object-contain"
             : "absolute inset-0 h-screen w-screen  object-cover object-center sm:object-contain"
         }
+        onClick={() => nextPhoto()}
         src={speaker.portraits[currentPhoto]}
         width={1920}
         height={1080}
