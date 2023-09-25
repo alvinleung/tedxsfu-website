@@ -147,7 +147,8 @@ const AnimatedPath = (props: any) => {
   );
 };
 
-export const Logo = ({ isEnterAnimationDone }: Props) => {
+export const Logo = ({}: Props) => {
+  const [isEnterAnimationDone, setIsEnterAnimationDone] = useState(false);
   const animProgress = useMotionValue(0);
   const { setIsLandingLogoVisible } = useNavContext();
 
@@ -213,6 +214,9 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
           },
         }}
         ref={ref}
+        onAnimationComplete={() => {
+          setIsEnterAnimationDone(true);
+        }}
       >
         <svg
           className="

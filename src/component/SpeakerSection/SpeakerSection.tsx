@@ -197,10 +197,12 @@ const SpeakerSection = (props: Props) => {
                 key="1"
               >
                 <SectionInfoHeader>An all-star program</SectionInfoHeader>
+                {/* <SectionInfoHeader>A "noteworthy" program</SectionInfoHeader> */}
                 <SectionInfoDescription>
-                  A stellar line-up from Toronto, San Francisco and Metro
-                  Vancouver—dive into stories of victory and vulnerability from
-                  the Olympic rings, Silicon Valley and beyond.
+                  Seek human truths with a stellar line-up from Toronto, San
+                  Francisco and Metro Vancouver—dive into stories of victory and
+                  vulnerability from the Olympic rings, Silicon Valley and
+                  beyond.
                 </SectionInfoDescription>
                 <hr className="my-2  opacity-40 md:mt-8" />
                 <div className="grid grid-cols-2 gap-4">
