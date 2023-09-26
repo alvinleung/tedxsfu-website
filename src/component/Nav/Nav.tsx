@@ -29,6 +29,7 @@ import {
   ScrollDirection,
   useContainerScroll,
 } from "../ScrollContainer/ScrollContainer";
+import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
 
 type Props = { children: React.ReactNode };
 
@@ -104,6 +105,8 @@ const Nav = ({ children }: Props) => {
 
   const [isContentOverflowing, setIsContentOverflowing] = useState(false);
 
+  const atBreakpointSM = useBreakpoint(breakpoints.sm);
+
   const handleLinkButtonClick = (href: string) => {
     if (router.pathname !== href) {
       router.push(href);
@@ -144,7 +147,11 @@ const Nav = ({ children }: Props) => {
         "
         >
           <TicketCTA
-            isHighlighted={scrollState === NavScrollState.SCROLLED || isOpened}
+            isHighlighted={
+              scrollState === NavScrollState.SCROLLED ||
+              isOpened ||
+              !atBreakpointSM
+            }
             isAboutPage={isAboutPage}
           />
         </div>

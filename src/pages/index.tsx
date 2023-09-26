@@ -12,7 +12,6 @@ import { LandingHero } from "@/component/LandingHero";
 import { useContainerScroll } from "@/component/ScrollContainer/ScrollContainer";
 import { useEffect } from "react";
 import EmailForm from "@/component/Footer/EmailForm";
-import { EventInfoModuleCond } from "@/component/Nav/EventInfoModule";
 import {
   SectionInfo,
   SectionInfoDescription,
@@ -65,6 +64,7 @@ export default function Home() {
             discussion.
           </SectionInfoDescription>
         </SectionInfo>
+
         <FigureLayout
           width={1920}
           height={1200}

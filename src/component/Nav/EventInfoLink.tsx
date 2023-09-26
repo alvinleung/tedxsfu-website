@@ -36,17 +36,19 @@ export const EventInfoLink = ({
       }}
     >
       {children}
-      <span className={`mt-1 hidden gap-x-1 tracking-wide opacity-50 xs:flex`}>
-        {label}
-        <motion.div
-          animate={{
-            x: isHovering ? "0.125rem" : 0,
-            y: isHovering ? "-0.125rem" : 0,
-          }}
-        >
-          <Image src={arrowTopRight} alt="" className="h-4 w-auto invert" />
-        </motion.div>
-      </span>
+      {label && label !== "" && (
+        <span className={`mt-1 flex gap-x-1 tracking-wide opacity-50`}>
+          {label}
+          <motion.div
+            animate={{
+              x: isHovering ? "0.125rem" : 0,
+              y: isHovering ? "-0.125rem" : 0,
+            }}
+          >
+            <Image src={arrowTopRight} alt="" className="h-4 w-auto invert" />
+          </motion.div>
+        </span>
+      )}
     </motion.a>
   );
 };

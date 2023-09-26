@@ -28,6 +28,7 @@ import PageIndicator from "../PageIndicator";
 import MainGrid from "../layouts/MainGrid";
 import Fixed from "../ScrollContainer/Fixed";
 import SpeakerImageSlide from "./SpeakerImageSlide";
+import SpeakerImageSlideCursor from "./SpeakerImageSlideCursor";
 
 type Props = {};
 
@@ -123,25 +124,27 @@ const SpeakerSection = (props: Props) => {
     () => clamp(currentSpeakerSlide, 0, speakers.length - 1),
     [currentSpeakerSlide],
   );
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const offsetY = latest - imageContainerBounds.top - offsetBeforeSlide;
-    const currentSlide = Math.round(
-      (offsetY / (speakerSectionScrollHeight - offsetBeforeSlide)) *
-        speakers.length,
-    );
-    setCurrentSpeakerSlide(currentSlide);
-  });
+  // useMotionValueEvent(scrollY, "change", (latest) => {
+  //   const offsetY = latest - imageContainerBounds.top - offsetBeforeSlide;
+  //   const currentSlide = Math.floor(
+  //     (offsetY / (speakerSectionScrollHeight - offsetBeforeSlide)) *
+  //       speakers.length,
+  //   );
+  //   setCurrentSpeakerSlide(currentSlide);
+  // });
 
   const beginPos = imageContainerBounds.top + offsetBeforeSlide;
-  const endPos = beginPos + speakerSectionScrollHeight;
+  const endPos = beginPos + speakers.length * speakerSlideHeight;
   const currentSpeakerSlideContinuous = useTransform(
     scrollY,
     [beginPos, endPos],
-    [0, speakers.length - 1],
+    [0, speakers.length],
+    { clamp: false },
   );
 
   useMotionValueEvent(currentSpeakerSlideContinuous, "change", (latest) => {
-    console.log(latest);
+    const currSpeakerSlide = Math.floor(latest);
+    setCurrentSpeakerSlide(currSpeakerSlide);
   });
 
   const isTablet = atBreakpointSM && !atBreakpointMD;
@@ -158,6 +161,8 @@ const SpeakerSection = (props: Props) => {
     [scrimOpacityBeginPoint, scrimOpacityEndPoint],
     [0, 1],
   );
+
+  const [currentSpeakerPhoto, setCurrentSpeakerPhoto] = useState(0);
 
   return (
     <MainGrid className={`relative px-grid-margin-x`}>
@@ -191,11 +196,13 @@ const SpeakerSection = (props: Props) => {
                 }}
                 key="1"
               >
-                <SectionInfoHeader>The Programme</SectionInfoHeader>
+                <SectionInfoHeader>An all-star program</SectionInfoHeader>
+                {/* <SectionInfoHeader>A "noteworthy" program</SectionInfoHeader> */}
                 <SectionInfoDescription>
-                  all star speaker cast, flying in from Vancouver, San
-                  Francisco, Toronto—unmask the world of Olympians, pioneers in
-                  tech, and thought leaders along the West Coast.
+                  Seek human truths with a stellar line-up from Toronto, San
+                  Francisco and Metro Vancouver—dive into stories of victory and
+                  vulnerability from the Olympic rings, Silicon Valley and
+                  beyond.
                 </SectionInfoDescription>
                 <hr className="my-2  opacity-40 md:mt-8" />
                 <div className="grid grid-cols-2 gap-4">
@@ -261,10 +268,10 @@ const SpeakerSection = (props: Props) => {
           >
             {/* Scrim */}
             <motion.div
-              className="absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
+              className="pointer-events-none absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
               style={{ opacity: scrimOpacity }}
             />
-            <div className="relative h-screen w-full translate-y-[26vh] scale-[1.2] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[20vh] 2xl:scale-[1.4]">
+            <div className="relative h-screen w-full translate-y-[16vh] scale-[1] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[16vh] 2xl:scale-[1.25]">
               {/* scrim */}
               {speakers.map((speaker, index) => (
                 <SpeakerImageSlide
@@ -273,10 +280,19 @@ const SpeakerSection = (props: Props) => {
                   index={index}
                   currentSpeakerSlideClamped={currentSpeakerSlideClamped}
                   currentSpeakerSlideContinuous={currentSpeakerSlideContinuous}
+                  onCurrentPhotoChange={(photo) =>
+                    setCurrentSpeakerPhoto(photo)
+                  }
+                  canShufflePhoto={false}
                 />
               ))}
             </div>
           </motion.div>
+          {/* <SpeakerImageSlideCursor
+            total={speakers[currentSpeakerSlideClamped].portraits.length}
+            current={currentSpeakerPhoto}
+            active={currentSpeakerSlideClamped === currentSpeakerSlide}
+          /> */}
         </Sticky>
       </div>
     </MainGrid>

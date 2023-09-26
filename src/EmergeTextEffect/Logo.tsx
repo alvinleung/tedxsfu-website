@@ -21,6 +21,7 @@ import {
   useAnimation,
   useWillChange,
   useInView,
+  useAnimationControls,
 } from "framer-motion";
 import { useBreakpoint, breakpoints } from "@/hooks/useBreakpoints";
 import { useNavContext } from "@/component/Nav/Nav";
@@ -42,6 +43,7 @@ const clamp = (num: number, min: number, max: number) =>
 
 const LogoAnimationContext = createContext<any>({
   touchAnimProgress: new MotionValue(),
+  landingAnimProgress: new MotionValue(),
   animProgress: new MotionValue(),
   isEnterAnimationDone: false,
   isInView: false,
@@ -51,8 +53,12 @@ const AnimatedPath = (props: any) => {
   const mousePos = useMousePosition();
   const viewport = useWindowDimension();
 
-  const { touchAnimProgress, animProgress, isEnterAnimationDone } =
-    useContext(LogoAnimationContext);
+  const {
+    touchAnimProgress,
+    animProgress,
+    isEnterAnimationDone,
+    landingAnimProgress,
+  } = useContext(LogoAnimationContext);
 
   const { scrollY } = useContainerScroll();
 
@@ -117,9 +123,14 @@ const AnimatedPath = (props: any) => {
   // );
 
   const animatedStrokeWidth = useTransform(
-    [animtedProgressEase, cursorProgress, touchAnimProgress],
-    ([val, cursor, touch]: any) => {
-      return (clamp(cursor + val * 0.1, 0, 1) + touch) * 10 + "px";
+    [
+      animtedProgressEase,
+      cursorProgress,
+      touchAnimProgress,
+      landingAnimProgress,
+    ],
+    ([val, cursor, touch, landing]: any) => {
+      return landing + (clamp(cursor + val * 0.1, 0, 1) + touch) * 10 + "px";
     },
   );
 
@@ -136,13 +147,22 @@ const AnimatedPath = (props: any) => {
   );
 };
 
-export const Logo = ({ isEnterAnimationDone }: Props) => {
+export const Logo = ({}: Props) => {
+  const [isEnterAnimationDone, setIsEnterAnimationDone] = useState(false);
   const animProgress = useMotionValue(0);
   const { setIsLandingLogoVisible } = useNavContext();
 
   const windowDim = useWindowDimension();
   const { scrollY } = useContainerScroll();
   // const touchAnimProgress = useMotionValue(0);
+
+  const landingAnimProgress = useMotionValue(5);
+  useEffect(() => {
+    animate(landingAnimProgress, 0, {
+      duration: 2,
+      // ease: getFramerMotionEase(AnimationConfig.EASING_DRAMATIC),
+    });
+  }, []);
 
   const atBreakpointSM = useBreakpoint(breakpoints.sm);
   const touchAnimProgress = useTransform(
@@ -174,11 +194,29 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
 
   return (
     <LogoAnimationContext.Provider
-      value={{ animProgress, touchAnimProgress, isEnterAnimationDone }}
+      value={{
+        animProgress,
+        touchAnimProgress,
+        isEnterAnimationDone,
+        landingAnimProgress,
+      }}
     >
-      <div
+      <motion.div
         className="pointer-events-none mt-32 flex flex-col gap-4 sm:mt-24 sm:w-fit xl:mt-grid-margin-y"
+        initial={{
+          scale: 1.12,
+        }}
+        animate={{
+          scale: 1,
+          transition: {
+            duration: 4,
+            ease: AnimationConfig.EASING_DRAMATIC,
+          },
+        }}
         ref={ref}
+        onAnimationComplete={() => {
+          setIsEnterAnimationDone(true);
+        }}
       >
         <svg
           className="
@@ -273,7 +311,7 @@ export const Logo = ({ isEnterAnimationDone }: Props) => {
             fill="white"
           />
         </svg>
-      </div>
+      </motion.div>
     </LogoAnimationContext.Provider>
   );
 };

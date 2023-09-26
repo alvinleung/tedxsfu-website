@@ -113,8 +113,9 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
   const nav = useNavContext();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 0) {
+    if (latest > 10) {
       setHasScrolled(true);
+      return;
     }
     setHasScrolled(false);
   });
@@ -235,6 +236,7 @@ export const ScrollContainer = ({ children, zIndex = 0 }: Props) => {
           zIndex: zIndex,
           // overflowY: isPresent ? "inherit" : "scroll",
           pointerEvents: isPresent ? "all" : "none",
+          willChange: "transform",
         }}
       >
         <motion.div style={{ y: isUsingSmoothScroll ? documentOffsetY : 0 }}>
