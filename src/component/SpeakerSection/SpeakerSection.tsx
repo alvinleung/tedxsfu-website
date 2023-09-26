@@ -60,8 +60,8 @@ const SpeakerSection = (props: Props) => {
 
   const endTransitionPosition = imageContainerBounds.top;
 
-  const offsetBeforeSlide = windowDim.height < 1200 ? 1200 : windowDim.height;
-  const speakerSlideHeight = 500;
+  const offsetBeforeSlide = windowDim.height < 1000 ? 1000 : windowDim.height;
+  const speakerSlideHeight = 400;
   const speakerSectionScrollHeight =
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
   const speakerTrailingPaddding = windowDim.height;
