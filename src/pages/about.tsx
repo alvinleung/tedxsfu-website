@@ -37,6 +37,16 @@ const About = (props: Props) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
+        <meta property="og:title" content="TEDxSFU" key="ogtitle" />
+        <meta
+          property="og:description"
+          content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."
+          key="ogdesc"
+        />
+        <meta property="og:image" content="<generated>" />
+        <meta property="og:image:type" content="<generated>" />
+        <meta property="og:image:width" content="<generated>" />
+        <meta property="og:image:height" content="<generated>" />
       </Head>
       <div className="min-h-screen w-full bg-white font-normal text-black">
         <SectionLayout fullScreen>
