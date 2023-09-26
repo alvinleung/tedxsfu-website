@@ -47,7 +47,7 @@ const FigureLayout = ({ children, caption, width, height }: Props) => {
         </motion.div>
       </div>
       {caption && (
-        <div className="bottom-0 left-0 right-0 mt-4 grid grid-cols-4 gap-4 text-white sm:bottom-6 lg:grid-cols-6">
+        <div className="bottom-0 left-0 right-0 mt-4 grid grid-cols-4 gap-4 text-white sm:bottom-6 lg:grid-cols-4">
           <motion.div className="text-micro md:col-span-2 md:col-start-1 md:px-0 lg:col-span-2 lg:col-start-1">
             {caption.header}
           </motion.div>
