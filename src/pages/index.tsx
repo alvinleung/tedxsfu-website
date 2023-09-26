@@ -41,9 +41,21 @@ export default function Home() {
           key="ogdesc"
         />
         <meta property="og:image" content="/opengraph-image.png" />
-        <meta property="og:image:type" content="<generated>" />
-        <meta property="og:image:width" content="<generated>" />
-        <meta property="og:image:height" content="<generated>" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://tedxsfu.com/opengraph-image.png"
+        />
+        <meta name="twitter:title" content="TEDxSFU" />
+        <meta
+          name="twitter:description"
+          content="Every year, TEDxSFU conferences provide a platform for industry professionals, advocates, educators, and storytellers to showcase their ideas worth spreading. TEDxSFU continues to engage over 2,500 members in the Metro Vancouver area annually through community members conferences, dialogue sessions, and after-party events. We're excited to gather a community of supporters who share similar desires to build community and spaces for storytelling, dialogue, and exploration of today's most intriguing and pressing topics."
+        />
+        <meta name="twitter:image" content="/opengraph-image.png" />
       </Head>
       <div className="max-w-screen relative bg-black">
         <LandingHero />
