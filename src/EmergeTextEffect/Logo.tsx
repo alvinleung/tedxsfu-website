@@ -179,7 +179,7 @@ export const Logo = ({}: Props) => {
   }, [isInView]);
 
   useEffect(() => {
-    if (!isEnterAnimationDone) return;
+    // if (!isEnterAnimationDone) return;
     let animFrame = 0;
     function frameUpdate() {
       animProgress.set(animProgress.get() - 0.1);

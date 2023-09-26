@@ -97,9 +97,13 @@ export const LandingHero = () => {
           </div>
 
           <motion.div
-            style={{
-              opacity: logoOpacity,
-            }}
+            style={
+              atMDBreakpoint
+                ? {
+                    opacity: logoOpacity,
+                  }
+                : {}
+            }
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
               // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
@@ -135,14 +139,18 @@ export const LandingHero = () => {
           </motion.div>
 
           <motion.div
-            style={{
-              opacity: logoOpacity,
-            }}
+            style={
+              atMDBreakpoint
+                ? {
+                    opacity: logoOpacity,
+                  }
+                : {}
+            }
             animate={{
               opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
               // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
               transition: {
-                duration: AnimationConfig.VERY_SLOW,
+                duration: AnimationConfig.NORMAL,
                 ease: AnimationConfig.EASING,
               },
             }}
@@ -153,7 +161,7 @@ export const LandingHero = () => {
               animate={{
                 opacity: 1,
                 transition: {
-                  duration: AnimationConfig.NORMAL,
+                  duration: AnimationConfig.VERY_SLOW,
                   delay: 2,
                 },
               }}
