@@ -47,6 +47,10 @@ export default function Home() {
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta
+          property="twitter:domain"
+          content="https://tedxsfu.com/opengraph-image.png"
+        />
+        <meta
           property="twitter:url"
           content="https://tedxsfu.com/opengraph-image.png"
         />
