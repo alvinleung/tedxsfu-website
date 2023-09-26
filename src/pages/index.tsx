@@ -56,12 +56,12 @@ export default function Home() {
       <SectionLayout padding>
         <SectionInfo>
           <SectionInfoHeader>
-            1,800 seats in Downtown Vancouver
+            {/* Frame it as the experience highlight rather than just venue */}A
+            day of discovery with 1,800 others
           </SectionInfoHeader>
           <SectionInfoDescription>
-            Designed by the archtect of Library Square, Moshe Safdie, bask in a
-            grand theatre with history rooted in creativity, storytelling and
-            discussion.
+            Gather around The Centre for Performing Arts for our full-day event.
+            Meet like-minded during our lunch session...
           </SectionInfoDescription>
         </SectionInfo>
 
