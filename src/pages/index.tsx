@@ -73,7 +73,7 @@ export default function Home() {
           </SectionInfoHeader>
           <SectionInfoDescription>
             Gather around The Centre for Performing Arts for our full-day event.
-            Meet like-minded during our lunch session...
+            Meet like-minded during our lunch session food trucks xyz...
           </SectionInfoDescription>
         </SectionInfo>
 

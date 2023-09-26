@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import React, { useEffect, useMemo, useState } from "react";
 import { AnimationConfig } from "../AnimationConfig";
+import Image from "next/image";
 
 type Props = {
   src: string;
@@ -98,8 +99,8 @@ const MediaSlide = ({
             : AnimationConfig.EASING_IN_OUT,
         }}
       >
-        <motion.img
-          src={src}
+        <motion.div
+          className="h-full w-full"
           animate={{
             rotate:
               currentSlideIndex >= slideIndex
@@ -114,7 +115,6 @@ const MediaSlide = ({
                 : AnimationConfig.EASING_INVERTED
               : AnimationConfig.EASING_IN_OUT,
           }}
-          className="mx-auto h-full w-full object-contain"
           style={{
             // opacity: isShowing ? 1 : 0,
             // rotate: rotation,
@@ -122,7 +122,15 @@ const MediaSlide = ({
             // rotate: rot,
             scale: scale,
           }}
-        />
+        >
+          <Image
+            className="h-full w-full object-contain"
+            src={src}
+            width={1280}
+            height={720}
+            alt="past activity"
+          />
+        </motion.div>
       </motion.div>
     </div>
   );

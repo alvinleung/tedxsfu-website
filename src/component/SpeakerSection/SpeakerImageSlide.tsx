@@ -4,6 +4,8 @@ import { AnimationConfig } from "../AnimationConfig";
 import { getFramerMotionEase } from "@/utils/getFramerMotionEase";
 import { useEventListener } from "usehooks-ts";
 import SpeakerImageSlideCursor from "./SpeakerImageSlideCursor";
+import { breakpoints, useBreakpoint } from "@/hooks/useBreakpoints";
+import Image from "next/image";
 
 type Props = {
   index: number;
@@ -22,16 +24,17 @@ const SpeakerImageSlide = ({
   onCurrentPhotoChange,
   canShufflePhoto,
 }: Props) => {
+  const atBreakpointSM = useBreakpoint(breakpoints.sm);
   const scale = useTransform(
     currentSpeakerSlideContinuous,
     [index, index + 2],
-    [1, 1.07],
-    // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
+    [1, atBreakpointSM ? 1.07 : 1],
+    { clamp: false },
   );
   const y = useTransform(
     currentSpeakerSlideContinuous,
     [index, index + 2],
-    [0, 10],
+    [atBreakpointSM ? 0 : 50, atBreakpointSM ? 10 : -50],
     // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
   );
 
@@ -60,43 +63,47 @@ const SpeakerImageSlide = ({
   //   }
   // });
 
+  const portraitSrc = speaker.portraits[0];
+
   return (
-    <>
-      <motion.img
-        key={index}
+    <motion.div
+      className={
+        index === 0
+          ? "h-screen w-screen"
+          : "absolute inset-0 h-screen w-screen "
+      }
+      style={{
+        scale,
+        y,
+        backgroundColor: "#050505",
+        // opacity: index === currentSpeakerSlideClamped ? 1 : 0,
+      }}
+      animate={{
+        opacity: index === currentSpeakerSlideClamped ? 1 : 0,
+        // y:
+        //   index >= currentSpeakerSlide
+        //     ? 50
+        //     : index == currentSpeakerSlide
+        //     ? 0
+        //     : -50,
+      }}
+      transition={{
+        duration: AnimationConfig.FAST,
+      }}
+      key={index}
+    >
+      <Image
         className={
-          index === 0
-            ? "h-screen w-screen  object-cover object-center sm:object-contain"
-            : "absolute inset-0 h-screen w-screen  object-cover object-center sm:object-contain"
+          "h-screen w-screen object-cover object-center sm:object-contain"
         }
         onClick={() => nextPhoto()}
-        src={speaker.portraits[currentPhoto]}
+        src={portraitSrc}
         width={1920}
         height={1080}
         alt={speaker.name}
         // match parmida background
-        style={{
-          scale,
-          y,
-          backgroundColor: "#050505",
-          opacity: index === currentSpeakerSlideClamped ? 1 : 0,
-        }}
-        animate={
-          {
-            // opacity: index === currentSpeakerSlideClamped ? 1 : 0,
-            // y:
-            //   index >= currentSpeakerSlide
-            //     ? 50
-            //     : index == currentSpeakerSlide
-            //     ? 0
-            //     : -50,
-          }
-        }
-        transition={{
-          duration: AnimationConfig.FAST,
-        }}
       />
-    </>
+    </motion.div>
   );
 };
 

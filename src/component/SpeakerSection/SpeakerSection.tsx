@@ -73,7 +73,6 @@ const SpeakerSection = (props: Props) => {
     if (atBreakpointLG) {
       return 1.45;
     }
-
     if (atBreakpointMD) {
       return 1.2;
     }
