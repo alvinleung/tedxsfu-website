@@ -41,9 +41,9 @@ export default function Home() {
           key="ogdesc"
         />
         <meta property="og:image" content="/opengraph-image.png" />
-        <meta property="og:image:type" content="<generated>" />
-        <meta property="og:image:width" content="<generated>" />
-        <meta property="og:image:height" content="<generated>" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
       <div className="max-w-screen relative bg-black">
         <LandingHero />
