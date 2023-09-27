@@ -168,7 +168,7 @@ export const LandingHero = () => {
             >
               <EventInfoLink
                 centerAlign
-                label={"Google Map"}
+                label={"Google Maps"}
                 href="https://goo.gl/maps/KrAtQTKUTuSxVoFT7"
                 className="sm:items-center"
               >
