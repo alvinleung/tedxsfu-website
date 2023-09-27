@@ -11,18 +11,18 @@ const speakers = [
     ],
   },
   {
-    name: "Micky Papa",
+    name: "Upcoming Speaker",
     pronouns: "they/them",
-    talkTitle: "Unmask Skateboarding",
-    title: "Tokyo 2020 Olympian & Pro Skateboarder",
-    portraits: ["/speaker-section/speaker-micky.jpg"],
+    talkTitle: "???",
+    title: "Coming soon, mid-October",
+    portraits: ["/speaker-section/speaker-mr.jpg"],
   },
   {
-    name: "Vladimir Kanic",
+    name: "Upcoming Speaker",
     pronouns: "they/them",
-    talkTitle: "Unmask Breathing",
-    title: "Governor General Award Winning Artist",
-    portraits: ["/speaker-section/speaker-vladimir.jpg"],
+    talkTitle: "???",
+    title: "Coming soon, mid-October",
+    portraits: ["/speaker-section/speaker-vr.jpg"],
   },
 
   {
