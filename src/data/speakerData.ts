@@ -51,7 +51,7 @@ const speakers = [
     pronouns: "they/them",
     talkTitle: "Unmask Radical Rest",
     title: "Mindfulness Practitioner & PhD Student",
-    portraits: ["./speaker-section/speaker-tiara.jpg"],
+    portraits: ["/speaker-section/speaker-tiara.jpg"],
   },
   {
     name: "Hayley Honeyman",
