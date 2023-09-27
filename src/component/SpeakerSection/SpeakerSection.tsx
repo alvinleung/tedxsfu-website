@@ -21,6 +21,7 @@ import {
   breakpoints,
   useAllBreakpoints,
   useBreakpoint,
+  useBreakpointValues,
 } from "@/hooks/useBreakpoints";
 import speakers from "@/data/speakerData";
 import { clamp } from "@/utils/clamp";
@@ -66,18 +67,25 @@ const SpeakerSection = (props: Props) => {
     speakers.length * speakerSlideHeight + offsetBeforeSlide;
   const speakerTrailingPaddding = windowDim.height;
 
-  const shiftY = useMemo(() => {
-    if (atBreakpointXL) {
-      return 1.35;
-    }
-    if (atBreakpointLG) {
-      return 1.45;
-    }
-    if (atBreakpointMD) {
-      return 1.2;
-    }
-    return 1.7;
-  }, [atBreakpointXL, atBreakpointMD, atBreakpointLG]);
+  const shiftY = useBreakpointValues({
+    default: 2.5,
+    xl: 1.22,
+    lg: 1.1,
+    md: 1.2,
+    sm: 1.65,
+  });
+  // const shiftY = useMemo(() => {
+  //   if (atBreakpointXL) {
+  //     return 1.35;
+  //   }
+  //   if (atBreakpointLG) {
+  //     return 1.45;
+  //   }
+  //   if (atBreakpointMD) {
+  //     return 1.2;
+  //   }
+  //   return 2.6;
+  // }, [atBreakpointXL, atBreakpointMD, atBreakpointLG]);
   const offsetY = useTransform(
     scrollY,
     [0, endTransitionPosition],
@@ -148,12 +156,12 @@ const SpeakerSection = (props: Props) => {
 
   const isTablet = atBreakpointSM && !atBreakpointMD;
   const scrimOpacityBeginPoint = isTablet
-    ? 0
+    ? imageContainerBounds.top
     : imageContainerBounds.bottom -
       speakerTrailingPaddding -
       windowDim.height / 2;
   const scrimOpacityEndPoint = isTablet
-    ? 0
+    ? imageContainerBounds.top + offsetBeforeSlide
     : imageContainerBounds.bottom - speakerTrailingPaddding;
   const scrimOpacity = useTransform(
     scrollY,
@@ -267,7 +275,7 @@ const SpeakerSection = (props: Props) => {
           >
             {/* Scrim */}
             <motion.div
-              className="pointer-events-none absolute bottom-0 left-0 right-0 top-[60vh] z-10  w-full bg-gradient-to-t from-black "
+              className="pointer-events-none fixed bottom-[0vh] left-0 right-0 top-[70vh] z-10  w-full bg-gradient-to-t from-black "
               style={{ opacity: scrimOpacity }}
             />
             <div className="relative h-screen w-full translate-y-[16vh] scale-[1] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[16vh] 2xl:scale-[1.25]">

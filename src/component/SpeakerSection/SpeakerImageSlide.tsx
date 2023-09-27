@@ -34,7 +34,8 @@ const SpeakerImageSlide = ({
   const y = useTransform(
     currentSpeakerSlideContinuous,
     [index, index + 2],
-    [atBreakpointSM ? 0 : 50, atBreakpointSM ? 10 : -50],
+    [atBreakpointSM ? 0 : 70, atBreakpointSM ? 10 : -70],
+    { clamp: false },
     // { ease: getFramerMotionEase(AnimationConfig.EASING), clamp: false },
   );
 
