@@ -275,9 +275,24 @@ const SpeakerSection = (props: Props) => {
           >
             {/* Scrim */}
             <motion.div
-              className="pointer-events-none fixed bottom-[0vh] left-0 right-0 top-[70vh] z-10  w-full bg-gradient-to-t from-black "
+              className="pointer-events-none absolute bottom-[0vh] left-0 right-0 top-[70vh] z-10  w-full bg-gradient-to-t from-black "
               style={{ opacity: scrimOpacity }}
             />
+            {!atBreakpointSM && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity:
+                    currentSpeakerSlideClamped === currentSpeakerSlide ? 1 : 0,
+                }}
+                className="pointer-events-none absolute bottom-0 left-auto right-4 top-[50vh] z-10 "
+              >
+                <PageIndicator
+                  totalPages={speakers.length}
+                  current={currentSpeakerSlideClamped}
+                />
+              </motion.div>
+            )}
             <div className="relative h-screen w-full translate-y-[16vh] scale-[1] sm:translate-y-[25vh] sm:scale-[1] md:translate-y-[8vh] xl:translate-y-[16vh] xl:scale-[1.25] 2xl:translate-y-[16vh] 2xl:scale-[1.25]">
               {/* scrim */}
               {speakers.map((speaker, index) => (
@@ -295,6 +310,7 @@ const SpeakerSection = (props: Props) => {
               ))}
             </div>
           </motion.div>
+
           {/* <SpeakerImageSlideCursor
             total={speakers[currentSpeakerSlideClamped].portraits.length}
             current={currentSpeakerPhoto}

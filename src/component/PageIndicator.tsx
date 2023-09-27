@@ -17,9 +17,10 @@ const PageIndicator = ({ totalPages, current }: Props) => {
         return (
           <motion.div
             key={index}
-            className="h-[1px] w-3 bg-white"
+            className="h-[1px] w-4 bg-white"
             animate={{
-              opacity: current === index ? 1 : 0.3,
+              opacity: current === index ? 1 : 0.5,
+              scaleX: current === index ? 1 : 0.3,
             }}
           />
         );
