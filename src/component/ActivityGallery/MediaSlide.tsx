@@ -129,6 +129,7 @@ const MediaSlide = ({
             width={1280}
             height={720}
             alt="past activity"
+            placeholder="blur"
           />
         </motion.div>
       </motion.div>

@@ -34,6 +34,7 @@ const ImageSlide = ({ src }: Props) => {
         width={2560}
         height={1440}
         alt="Picture of the author"
+        placeholder="blur"
       />
     </motion.div>
   );
