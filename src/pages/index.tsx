@@ -99,7 +99,7 @@ export default function Home() {
         </FigureLayout>
       </SectionLayout>
 
-      <SectionLayout padding>
+      {/* <SectionLayout padding>
         <SectionInfo>
           <SectionInfoHeader>
             1,800 seats in Downtown Vancouver
@@ -110,7 +110,7 @@ export default function Home() {
             discussion.
           </SectionInfoDescription>
         </SectionInfo>
-      </SectionLayout>
+      </SectionLayout> */}
 
       <Footer
         pageNumber="2"

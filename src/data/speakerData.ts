@@ -15,14 +15,14 @@ const speakers = [
     pronouns: "they/them",
     talkTitle: "???",
     title: "Coming soon, mid-October",
-    portraits: ["/speaker-section/speaker-mr.jpg"],
+    portraits: ["/speaker-section/speaker-mx.jpg"],
   },
   {
     name: "Upcoming Speaker",
     pronouns: "they/them",
     talkTitle: "???",
     title: "Coming soon, mid-October",
-    portraits: ["/speaker-section/speaker-vr.jpg"],
+    portraits: ["/speaker-section/speaker-vx.jpg"],
   },
 
   {
