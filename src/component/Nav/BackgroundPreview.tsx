@@ -91,6 +91,7 @@ const ImageBackground = ({ active = false }) => {
         width={2560}
         height={1440}
         alt="TEDxSFU conference"
+        placeholder="blur"
       />
     </motion.div>
   );

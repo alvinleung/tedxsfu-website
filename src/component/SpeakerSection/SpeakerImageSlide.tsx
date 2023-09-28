@@ -97,6 +97,7 @@ const SpeakerImageSlide = ({
         className={
           "h-screen w-screen object-cover object-center sm:object-contain"
         }
+        placeholder="blur"
         onClick={() => nextPhoto()}
         src={portraitSrc}
         width={1920}
