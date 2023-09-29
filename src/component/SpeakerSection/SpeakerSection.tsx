@@ -299,6 +299,7 @@ const SpeakerSection = (props: Props) => {
                   key={index}
                   speaker={speaker}
                   index={index}
+                  blurHash={speaker.blurHash}
                   currentSpeakerSlideClamped={currentSpeakerSlideClamped}
                   currentSpeakerSlideContinuous={currentSpeakerSlideContinuous}
                   onCurrentPhotoChange={(photo) =>

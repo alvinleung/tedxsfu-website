@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import Image from "next/image";
 import { AnimationConfig } from "../AnimationConfig";
+import about from "../../../public/about/about-2.jpg";
 
 type Props = {
   selected: string;
@@ -86,7 +87,7 @@ const ImageBackground = ({ active = false }) => {
       }}
     >
       <Image
-        src="/about/about-2.jpg"
+        src={about}
         className="h-[100dvh] object-cover"
         width={2560}
         height={1440}

@@ -6,9 +6,10 @@ import { useBoundingBox } from "@/hooks/useBoundingBox";
 
 type Props = {
   src: string;
+  blurHash: string;
 };
 
-const ImageSlide = ({ src }: Props) => {
+const ImageSlide = ({ src, blurHash }: Props) => {
   const { scrollY } = useContainerScroll();
   const [imgRef, imgBounds] = useBoundingBox<HTMLImageElement>([]);
   const offset = useTransform(
@@ -34,6 +35,7 @@ const ImageSlide = ({ src }: Props) => {
         width={2560}
         height={1440}
         alt="Picture of the author"
+        blurDataURL={blurHash}
         placeholder="blur"
       />
     </motion.div>

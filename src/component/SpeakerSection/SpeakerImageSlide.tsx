@@ -14,6 +14,7 @@ type Props = {
   currentSpeakerSlideContinuous: MotionValue;
   canShufflePhoto: boolean;
   onCurrentPhotoChange: (photo: number) => void;
+  blurHash: string;
 };
 
 const SpeakerImageSlide = ({
@@ -23,6 +24,7 @@ const SpeakerImageSlide = ({
   currentSpeakerSlideContinuous,
   onCurrentPhotoChange,
   canShufflePhoto,
+  blurHash,
 }: Props) => {
   const atBreakpointSM = useBreakpoint(breakpoints.sm);
   const scale = useTransform(
@@ -98,6 +100,7 @@ const SpeakerImageSlide = ({
           "h-screen w-screen object-cover object-center sm:object-contain"
         }
         placeholder="blur"
+        blurDataURL={blurHash}
         onClick={() => nextPhoto()}
         src={portraitSrc}
         width={1920}
