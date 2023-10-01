@@ -90,28 +90,32 @@ export const LandingHero = () => {
       >
         <Logo isEnterAnimationDone={true} />
         <MainGrid className="max-sm:relative max-sm:mb-4 max-sm:mt-20">
-          <div className="absolute bottom-0 left-0 right-0">
+          {
+            // TEMP COMMENT
+            /* <div className="absolute bottom-0 left-0 right-0">
             {!atMDBreakpoint && (
               <LandingPartnerScroll isVisible={hasScrolled} />
             )}
-          </div>
+          </div> */
+          }
 
           <motion.div
-            style={
-              atMDBreakpoint
-                ? {
-                    opacity: logoOpacity,
-                  }
-                : {}
-            }
-            animate={{
-              opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
-              // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
-              transition: {
-                duration: AnimationConfig.NORMAL,
-                ease: AnimationConfig.EASING,
-              },
-            }}
+            // TEMP COMMENT
+            // style={
+            //   atMDBreakpoint
+            //     ? {
+            //         opacity: logoOpacity,
+            //       }
+            //     : {}
+            // }
+            // animate={{
+            //   opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
+            //   // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
+            //   transition: {
+            //     duration: AnimationConfig.NORMAL,
+            //     ease: AnimationConfig.EASING,
+            //   },
+            // }}
             className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:right-[85%] sm:top-0 sm:justify-center"
           >
             <motion.div
@@ -139,21 +143,22 @@ export const LandingHero = () => {
           </motion.div>
 
           <motion.div
-            style={
-              atMDBreakpoint
-                ? {
-                    opacity: logoOpacity,
-                  }
-                : {}
-            }
-            animate={{
-              opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
-              // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
-              transition: {
-                duration: AnimationConfig.NORMAL,
-                ease: AnimationConfig.EASING,
-              },
-            }}
+            // TEMP COMMENT
+            // style={
+            //   atMDBreakpoint
+            //     ? {
+            //         opacity: logoOpacity,
+            //       }
+            //     : {}
+            // }
+            // animate={{
+            //   opacity: !atMDBreakpoint && hasScrolled ? 0 : 1,
+            //   // y: !atMDBreakpoint && hasScrolled ? -20 : 0,
+            //   transition: {
+            //     duration: AnimationConfig.NORMAL,
+            //     ease: AnimationConfig.EASING,
+            //   },
+            // }}
             className="flex flex-col max-sm:col-span-2 sm:absolute sm:bottom-0 sm:left-[85%] sm:top-0 sm:justify-center"
           >
             <motion.div
