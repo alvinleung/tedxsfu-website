@@ -234,7 +234,7 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
             opacity: isHighlighted && !isAboutPage ? 1 : 0.7,
           }}
         >
-          $5 off presale
+          Ticketmaster
         </motion.div>
       </div>
     </motion.a>
