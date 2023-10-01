@@ -15,6 +15,7 @@ type Props = {
   slideCount: number;
   slideIndex: number;
   slideIndexContinuousValue: MotionValue;
+  blurDataURL: string;
 };
 
 const MediaSlide = ({
@@ -23,6 +24,7 @@ const MediaSlide = ({
   slideIndex,
   slideCount,
   slideIndexContinuousValue,
+  blurDataURL,
 }: Props) => {
   const variation = 15;
   const rotation = useMemo(() => variation / 2 - Math.random() * variation, []);
@@ -128,6 +130,7 @@ const MediaSlide = ({
             src={src}
             width={1280}
             height={720}
+            blurDataURL={blurDataURL}
             alt="past activity"
             placeholder="blur"
           />

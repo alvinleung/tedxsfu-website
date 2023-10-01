@@ -32,6 +32,7 @@ interface ActivityMedia {
   src: string;
   format: "landscape" | "square";
   type: "image";
+  blurHash: string;
 }
 
 type ActivityMediaWithInfo = Omit<Activity & ActivityMedia, "media">;
@@ -276,6 +277,7 @@ const ActivityGallery = ({
                     slideIndex={index}
                     slideIndexContinuousValue={slideIndexContinuousValue}
                     key={index}
+                    blurDataURL={media.blurHash}
                   />
                 );
               })}
