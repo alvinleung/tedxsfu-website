@@ -76,7 +76,7 @@ export default function Home() {
             day of discovery with 1,800 others
           </SectionInfoHeader>
           <SectionInfoDescription>
-            With conversation spaces in the lobby or a couple steps into Library
+            With conversation spaces in the lobby or a brisk walk into Library
             Square, connect with curious personalities&mdash;all in the heart of
             Downtown Vancouver.
           </SectionInfoDescription>
