@@ -156,16 +156,27 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       target="_blank"
       className="flex h-[46px] flex-row items-center rounded-md px-[4px] text-body-tablet backdrop-blur-lg max-md:mx-auto max-md:w-fit"
       whileHover={{
-        border: isHighlighted
-          ? "1px solid rgba(255,255,255,1)"
-          : "1px solid rgba(88, 88, 88,1)",
+        border:
+          isHighlighted && !isAboutPage
+            ? "1px solid rgba(255,255,255,1)"
+            : "1px solid rgba(88, 88, 88,1)",
       }}
       animate={{
-        color: isHighlighted ? "#000" : isAboutPage ? "#999" : "#FFF",
-        border: isHighlighted ? "1px solid rgba(0,0,0,0)" : "1px solid #383838",
-        backgroundColor: isHighlighted
-          ? "rgba(255,255,255,1)"
-          : "rgba(255,255,255,.05)",
+        color: isHighlighted
+          ? isAboutPage
+            ? "#BBB"
+            : "#000"
+          : isAboutPage
+          ? "#999"
+          : "#FFF",
+        border:
+          isHighlighted && !isAboutPage
+            ? "1px solid rgba(0,0,0,0)"
+            : "1px solid #383838",
+        backgroundColor:
+          isHighlighted && !isAboutPage
+            ? "rgba(255,255,255,1)"
+            : "rgba(255,255,255,.05)",
       }}
       whileTap={{
         scale: 0.98,
@@ -188,7 +199,7 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       <div
         className="pl-[7px] pr-[6px]"
         style={{
-          filter: isHighlighted ? "invert(1)" : "none",
+          filter: isHighlighted && !isAboutPage ? "invert(1)" : "none",
         }}
       >
         <TicketIcon
@@ -201,12 +212,17 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
       <motion.div
         className="h-[28px]"
         animate={{
-          borderLeft: isHighlighted ? "1px solid #333" : "1px solid #555555",
+          borderLeft:
+            isHighlighted && !isAboutPage
+              ? "1px solid #333"
+              : "1px solid #555555",
         }}
       />
       <div
         className={`flex h-[28px] flex-col items-start whitespace-nowrap pl-[9px] pr-[9px] ${
-          isHighlighted ? "" : "mix-blend-exclusion"
+          isHighlighted && !isAboutPage
+            ? "mix-blend-none"
+            : "mix-blend-exclusion"
         }`}
       >
         <div className="pointer-events-none mt-[-1px] text-nav uppercase leading-none">
@@ -215,7 +231,7 @@ const TicketCTA = ({ isHighlighted, isAboutPage }: Props) => {
         <motion.div
           className="pointer-events-none mt-[3px] flex flex-col text-nav-s leading-none tracking-wide"
           style={{
-            opacity: isHighlighted ? 1 : 0.7,
+            opacity: isHighlighted && !isAboutPage ? 1 : 0.7,
           }}
         >
           $5 off presale
