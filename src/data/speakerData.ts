@@ -43,7 +43,7 @@ const speakers = [
   {
     name: "Janice Bannister",
     pronouns: "they/them",
-    talkTitle: "Unmask Poetry",
+    talkTitle: "Unmask Comedy",
     title: "Psychiatric Nurse & Stand Up Comedian",
     portraits: ["/speaker-section/speaker-janice.jpg"],
     blurHash:
@@ -52,7 +52,7 @@ const speakers = [
   {
     name: "Sumaiya Tufail",
     pronouns: "they/them",
-    talkTitle: "Unmask Comedy",
+    talkTitle: "Unmask Poetry",
     title: "Slam Poet & Consultant",
     portraits: ["/speaker-section/speaker-sumaiya.jpg"],
     blurHash:
