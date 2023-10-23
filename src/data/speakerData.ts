@@ -61,7 +61,7 @@ const speakers = [
   {
     name: "Tiara Cash",
     pronouns: "they/them",
-    talkTitle: "Unmask Radical Rest",
+    talkTitle: "Unmask Mindfulness",
     title: "Mindfulness Practitioner & PhD Student",
     portraits: ["/speaker-section/speaker-tiara.jpg"],
     blurHash:
