@@ -13,7 +13,7 @@ export const handler = schedule("0 0,12 * * *", async (event) => {
     const page = await browser.newPage();
 
     // Navigate the page to a URL
-    await page.goto("https://developer.chrome.com/");
+    await page.goto("https://www.ticketmaster.ca/event/11005F2D0FDD4B2A");
 
     // Set screen size
     await page.setViewport({ width: 1080, height: 1024 });
