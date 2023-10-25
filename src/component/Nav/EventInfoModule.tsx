@@ -98,7 +98,7 @@ export const EventInfoModule = ({
           <StaggerTransition staggerIndex={0} secondary isActive={isActive}>
             <EventInfoLink
               label={atBreakpointSM ? "Calendar" : ""}
-              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
+              href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T163000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
             >
               <div className="flex flex-row-reverse max-sm:items-end max-sm:gap-x-1 sm:flex-row">
                 <span className="text-[34px] font-light uppercase leading-[32px]">

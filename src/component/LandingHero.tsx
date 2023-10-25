@@ -132,7 +132,7 @@ export const LandingHero = () => {
               <EventInfoLink
                 centerAlign
                 label={"Calendar"}
-                href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T160000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
+                href="http://www.google.com/calendar/event?action=TEMPLATE&text=TEDxSFU%202023:%20Unmask%20the%20Magic&dates=20231111T163000Z/20231112T020000Z&details=Event%20Details%20Here&location=777%20Homer%20St%2C%20Vancouver%2C%20BC"
                 className="sm:items-center"
               >
                 <span className="uppercase sm:whitespace-nowrap sm:text-center">
