@@ -220,5 +220,16 @@ const teams = [
       },
     ],
   },
+  {
+    name: "License Holder",
+    members: [
+      {
+        name: "Bernhard Riecke",
+        position: "TEDxSFU license holder",
+        linkedin: "https://www.linkedin.com/in/bernhard-riecke-6745042b/",
+        image: "profilePictures/bernhardRiecke.jpeg",
+      },
+    ],
+  },
 ];
 export { directors, teams };
