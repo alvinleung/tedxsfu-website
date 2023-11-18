@@ -8,15 +8,6 @@ const directors = [
     description:
       " designer at Reap, previously at Live Nation and Ticketmaster.",
   },
-  // {
-  //   name: "Josh Ralla",
-  //   pronouns: "he/him",
-  //   position: "Executive director",
-  //   stroke: "about/team-josh.png",
-  //   fill: "about/team-josh-fill.svg",
-  //   description:
-  //     " coordinator at Vancouver Ultimate League, design and production editor at The Peak.",
-  // },
   {
     name: "Kayla You",
     pronouns: "she/her",
@@ -65,37 +56,48 @@ const directors = [
 
 const teams = [
   {
-    name: "Events",
+    name: "Executive",
     members: [
-      // {
-      //   name: "Josh Ralla",
-      //   position: "Event director",
-      //   linkedin: "https://linkedin.com/in/joshralla",
-      //   image: "profilePictures/joshrProfile.jpeg",
-      // },
       {
-        name: "Andrea Choi",
-        position: "Event coordinator",
-        linkedin: "https://linkedin.com/in/choiandrea",
-        image: "profilePictures/andreacProfile.jpeg",
+        name: "Yee Loong Tang",
+        position: "Executive director",
+        linkedin: "https://linkedin.com/in/yee-loong-tang",
+        image: "profilePictures/joshrProfile.jpeg",
       },
-      {
-        name: "Merry Chowdhury",
-        position: "Event coordinator",
-        linkedin: "https://linkedin.com/in/merrychowdhury",
-        image: "TEDxSFU_logo_black.svg",
-      },
-    ],
-  },
-  {
-    name: "Operations",
-    members: [
       {
         name: "Kayla You",
         position: "Executive operations director",
         linkedin: "https://linkedin.com/in/kayla-you",
         image: "profilePictures/kaylayProfile.jpeg",
       },
+            {
+        name: "Paul Falkowski",
+        position: "Executive producer",
+        linkedin: "https://linkedin.com/in/paulfa",
+        image: "profilePictures/paulfProfile.jpeg",
+      },
+    ],
+  },
+  {
+    name: "Events",
+    members: [
+      {
+        name: "Merry Chowdhury",
+        position: "Events director",
+        linkedin: "https://linkedin.com/in/merrychowdhury",
+        image: "TEDxSFU_logo_black.svg",
+      },
+      {
+        name: "Andrea Choi",
+        position: "Events coordinator",
+        linkedin: "https://linkedin.com/in/choiandrea",
+        image: "profilePictures/andreacProfile.jpeg",
+      },
+    ],
+  },
+  {
+    name: "Operations",
+    members: [
       {
         name: "Jessica Kan",
         position: "Internal coordinator",
@@ -178,12 +180,6 @@ const teams = [
     name: "Content",
     members: [
       {
-        name: "Paul Falkowski",
-        position: "Executive producer",
-        linkedin: "https://linkedin.com/in/paulfa",
-        image: "profilePictures/paulfProfile.jpeg",
-      },
-      {
         name: "Jerrica Zabala",
         position: "Content dev. producer",
         linkedin: "https://linkedin.com/in/jerricazabala",
@@ -221,11 +217,11 @@ const teams = [
     ],
   },
   {
-    name: "License Holder",
+    name: "Advisors",
     members: [
       {
         name: "Bernhard Riecke",
-        position: "TEDxSFU license holder",
+        position: "License holder",
         linkedin: "https://www.linkedin.com/in/bernhard-riecke-6745042b/",
         image: "profilePictures/bernhardRiecke.jpeg",
       },
