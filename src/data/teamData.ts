@@ -62,7 +62,7 @@ const teams = [
         name: "Yee Loong Tang",
         position: "Executive director",
         linkedin: "https://linkedin.com/in/yee-loong-tang",
-        image: "profilePictures/joshrProfile.jpeg",
+        image: "profilePictures/yeeloongtProfile.jpeg",
       },
       {
         name: "Kayla You",
@@ -70,7 +70,7 @@ const teams = [
         linkedin: "https://linkedin.com/in/kayla-you",
         image: "profilePictures/kaylayProfile.jpeg",
       },
-            {
+      {
         name: "Paul Falkowski",
         position: "Executive producer",
         linkedin: "https://linkedin.com/in/paulfa",
